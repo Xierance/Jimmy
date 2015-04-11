@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="40" height="23" tilewidth="32" tileheight="32" nextobjectid="41">
+ <tileset firstgid="1" name="tile" tilewidth="32" tileheight="32">
+  <image source="tile.png" width="64" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="player" value=""/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="block" value=""/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="butt" width="40" height="23">
+  <data encoding="base64" compression="zlib">
+   eJztlMEOwCAIQxn//9HLbsaDUBy2B1/CzdmG2bqZufXwbHzrw6ii7O1yyTC/Yfab/lN/7A+VLol6jekxq83wiGpG530x6L2VfVR3iPqtanX94479KeR6RtHTDqu8sDvrtH42c6o9yfKF6J70qNSPCB15jHKOzMcLhPEAtA==
+  </data>
+ </layer>
+</map>
