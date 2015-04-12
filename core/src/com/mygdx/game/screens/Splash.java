@@ -7,6 +7,7 @@ import aurelienribon.tweenengine.TweenManager;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -22,10 +23,14 @@ public class Splash implements Screen {
     private SpriteBatch batch; //Spritebatchs are like the page you draw the texture on
     private Sprite splash;
     private TweenManager tm;
+    private Music introMusic;
 
 
     @Override
     public void show() {
+        introMusic = new Gdx().audio.newMusic(Gdx.files.internal("music/introTheme.mp3"));
+        introMusic.play();
+
         Gdx.graphics.setVSync(settings.vSync());
 
         batch = new SpriteBatch();
