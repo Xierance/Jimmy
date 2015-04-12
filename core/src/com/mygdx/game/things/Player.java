@@ -81,7 +81,7 @@ public class Player {
         bodyDef.fixedRotation = true;
 
         PolygonShape blockShape = new PolygonShape();
-        blockShape.setAsBox(.5f, .75f);
+        blockShape.setAsBox(.5f, .1f);
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = blockShape;
@@ -92,7 +92,7 @@ public class Player {
         playerBody = world.createBody(bodyDef);
         playerBody.createFixture(fixtureDef);
         playerBody.setUserData(playerSprite);
-
+/*
         //wheel
         bodyDef.position.set(startLocation.x, startLocation.y);
         CircleShape wheelShape = new CircleShape();
@@ -103,7 +103,8 @@ public class Player {
         playerWheelBody.createFixture(fixtureDef);
         playerWheelBody.setUserData("playerWheel");
         wheelShape.dispose();
-
+        */
+/*
         //wheel joint
 
         WheelJointDef wheelJointDef = new WheelJointDef();
@@ -113,6 +114,7 @@ public class Player {
         wheelJointDef.localAnchorA.set(0, -.75f);
         wheelJointDef.frequencyHz = 100;
         wheelJoint = (WheelJoint) world.createJoint(wheelJointDef);
+        */
 
 
     }
