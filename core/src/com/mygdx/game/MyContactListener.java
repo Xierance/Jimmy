@@ -17,14 +17,14 @@ public class MyContactListener implements ContactListener {
  if(fa.getBody().getUserData() != null && fa.getBody().getUserData() instanceof Flame && fb.getBody().getUserData() != TestClass.playerSprite  && fa.isSensor() == false) {
      if(fb.getBody().getUserData() instanceof Flame){}else{
          TestClass.getToDestroy().add(fa.getBody());
-         fa.getBody().setUserData(new Explosion(fa.getBody().getPosition()));
+
      }
 
  }
  if(fb.getBody().getUserData() != null && fb.getBody().getUserData() instanceof Flame && fa.getBody().getUserData() != TestClass.playerSprite && fb.isSensor() == false){
      if(fa.getBody().getUserData() instanceof Flame){}else{
          TestClass.getToDestroy().add(fb.getBody());
-         fb.getBody().setUserData(new Explosion(fb.getBody().getPosition()));
+
      }
  }
 
