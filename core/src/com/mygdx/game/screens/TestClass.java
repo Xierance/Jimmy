@@ -29,52 +29,124 @@ import com.mygdx.game.things.rayCast;
  */
 public class TestClass extends InputAdapter implements Screen {
 
-    private World world;
-    private Box2DDebugRenderer debugRenderer;
-    private OrthographicCamera orthographicCamera;
-    private OrthographicCamera secondCamera;
-
-    private final float TIMESTEP = 1 / 60f;
-    private final int VELOCITYITERATIONS = 8;
-    private final int POSITIONITERATIONS = 3;
-
-    private SpriteBatch batch;
-    private SpriteBatch secondBatch;
-    private BitmapFont font;
-
-    private MouseJointDef jointDef;
-    private MouseJoint joint;
+    public static Vector2 temp = new Vector2();
+    public static Body tempBody;
+    public static Sprite playerSprite = new Sprite(new Texture("img/player.png"));
+    public static  Array<Body> toDestroy = new Array<Body>();
+    public static  Array<Flame> flames = new Array<Flame>();
+    public static TiledMap map;
+    //input keys
+    public static boolean Up;
+    public static boolean Down;
+    public static boolean Left;
+    public static boolean Right;
+    public static boolean Space;
+    public static boolean w;
 
     // Body playerBody;
 
     //public static Vector2 playerLocation = Player;
-
-    public static Vector2 temp = new Vector2();
-    public static Body tempBody;
+    public static boolean s;
+    public static boolean q;
+    public static boolean e;
+    public static boolean a;
+    public static boolean d;
+    public static boolean Ctrl_left;
+    public static boolean Ctrl_right;
+    private final float TIMESTEP = 1 / 60f;
+    private final int VELOCITYITERATIONS = 8;
+    private final int POSITIONITERATIONS = 3;
     public Player player = new Player();
-    public static Sprite playerSprite = new Sprite(new Texture("img/player.png"));
-
+    Sprite dick;
+    private World world;
+    private Box2DDebugRenderer debugRenderer;
+    private OrthographicCamera orthographicCamera;
+    private OrthographicCamera secondCamera;
+    private SpriteBatch batch;
+    private SpriteBatch secondBatch;
+    private BitmapFont font;
+    private MouseJointDef jointDef;
+    private MouseJoint joint;
     private TextureAtlas blocks = new TextureAtlas("tiles/block_pack.pack");
     private Sprite block1 = new Sprite();
 
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private Flame rainboom;
-    Sprite dick;
+    private MyContactListener cl;
+    private Array<Body> tmpBodies = new Array<Body>();
+    private Vector3 tmp = new Vector3();
+    private Vector2 tmp2 = new Vector2();
+    private QueryCallback queryCallbackMouse = new QueryCallback() {
+        @Override
+        public boolean reportFixture(Fixture fixture) {
+            if (!fixture.testPoint(tmp.x, tmp.y))
+                return true;
+
+            if (fixture.getBody().getType() != BodyDef.BodyType.KinematicBody) {
+                jointDef.bodyB = fixture.getBody();
+
+                jointDef.target.set(tmp.x, tmp.y);
+                joint = (MouseJoint) world.createJoint(jointDef);
+            }
+            return false;
+        }
+    };
 
     public static Array<Body> getToDestroy() {
         return toDestroy;
     }
 
-    public static  Array<Body> toDestroy = new Array<Body>();
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public static Array<Flame> getFlames() {
         return flames;
     }
 
-    public static  Array<Flame> flames = new Array<Flame>();
+    public static void mapToBox2d(TiledMap map, World world) {
+        map = new TmxMapLoader().load("maps/testMap.tmx");
+        TiledMapTileLayer tileLayer = (TiledMapTileLayer) map.getLayers().get("butt");
+        Sprite tileSprite = new Sprite(new Texture("jew.jpg"));
+        tileSprite.setSize(1f, 1f);
 
-    private MyContactListener cl;
+        for (int x = 0; x < tileLayer.getWidth(); x++) {
+            for (int y = 0; y < tileLayer.getHeight(); y++) {
+                TiledMapTileLayer.Cell tileCell = tileLayer.getCell(x, y);
+
+                if (tileCell != null && tileCell.getTile() != null) {
 
 
+                    Object property = tileCell.getTile().getProperties().get("playerBody");
+                    if (property != null) {
+                        temp = new Vector2(x, y);
+                    } else {
+
+                        BodyDef tileBodyDef = new BodyDef();
+                        tileBodyDef.type = BodyDef.BodyType.KinematicBody;
+                        tileBodyDef.gravityScale = 0;
+                        tileBodyDef.position.set(x, y);
+
+                        PolygonShape tileShape = new PolygonShape();
+                        tileShape.setAsBox(.5f, .5f);
+
+                        Body body = world.createBody(tileBodyDef);
+                        body.createFixture(tileShape, 0f);
+
+                        body.setUserData(tileSprite);
+
+                        tileShape.dispose();
+
+                    }
+
+
+                }
+            }
+
+        }
+
+
+    }
 
     @Override
     public void show() {
@@ -228,8 +300,6 @@ public class TestClass extends InputAdapter implements Screen {
 
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
     public void cameraFollow() {
         float lerp = .1f;
         if (!Ctrl_left) {
@@ -312,8 +382,6 @@ public class TestClass extends InputAdapter implements Screen {
 
     }
 
-    private Array<Body> tmpBodies = new Array<Body>();
-
     public void drawSprites() {
         world.getBodies(tmpBodies);
         for (Body body : tmpBodies) {
@@ -350,75 +418,6 @@ public class TestClass extends InputAdapter implements Screen {
 
     }
 
-    public static TiledMap map;
-
-    public static void mapToBox2d(TiledMap map, World world) {
-        map = new TmxMapLoader().load("maps/testMap.tmx");
-        TiledMapTileLayer tileLayer = (TiledMapTileLayer) map.getLayers().get("butt");
-        Sprite tileSprite = new Sprite(new Texture("jew.jpg"));
-        tileSprite.setSize(1f, 1f);
-
-        for (int x = 0; x < tileLayer.getWidth(); x++) {
-            for (int y = 0; y < tileLayer.getHeight(); y++) {
-                TiledMapTileLayer.Cell tileCell = tileLayer.getCell(x, y);
-
-                if (tileCell != null && tileCell.getTile() != null) {
-
-
-                    Object property = tileCell.getTile().getProperties().get("playerBody");
-                    if (property != null) {
-                        temp = new Vector2(x, y);
-                    } else {
-
-                        BodyDef tileBodyDef = new BodyDef();
-                        tileBodyDef.type = BodyDef.BodyType.KinematicBody;
-                        tileBodyDef.gravityScale = 0;
-                        tileBodyDef.position.set(x, y);
-
-                        PolygonShape tileShape = new PolygonShape();
-                        tileShape.setAsBox(.5f, .5f);
-
-                        Body body = world.createBody(tileBodyDef);
-                        body.createFixture(tileShape, 0f);
-
-                        body.setUserData(tileSprite);
-
-                        tileShape.dispose();
-
-                    }
-
-
-                }
-            }
-
-        }
-
-
-    }
-
-
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    private Vector3 tmp = new Vector3();
-    private Vector2 tmp2 = new Vector2();
-
-    private QueryCallback queryCallbackMouse = new QueryCallback() {
-        @Override
-        public boolean reportFixture(Fixture fixture) {
-            if (!fixture.testPoint(tmp.x, tmp.y))
-                return true;
-
-            if (fixture.getBody().getType() != BodyDef.BodyType.KinematicBody) {
-                jointDef.bodyB = fixture.getBody();
-
-                jointDef.target.set(tmp.x, tmp.y);
-                joint = (MouseJoint) world.createJoint(jointDef);
-            }
-            return false;
-        }
-    };
-
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         orthographicCamera.unproject(tmp.set(screenX, screenY, 0));
 
@@ -447,21 +446,6 @@ public class TestClass extends InputAdapter implements Screen {
         joint = null;
         return true;
     }
-
-    //input keys
-    public static boolean Up;
-    public static boolean Down;
-    public static boolean Left;
-    public static boolean Right;
-    public static boolean Space;
-    public static boolean w;
-    public static boolean s;
-    public static boolean q;
-    public static boolean e;
-    public static boolean a;
-    public static boolean d;
-    public static boolean Ctrl_left;
-    public static boolean Ctrl_right;
 
     public boolean keyDown(int keycode) {
         switch (keycode) {
