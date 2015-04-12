@@ -76,24 +76,13 @@ public class Player {
 
     ////////////////////////////////////////////////////////////////////////////////////////
 
-
-    public void setPlayerGrounded(boolean isPlayerGrounded) {
-        this.isPlayerGrounded = isPlayerGrounded;
-    }
-
-    //////////////////////////////////////////////////
-    private boolean isPlayerGrounded;
-
     public boolean isPlayerGrounded(World world,Player player) {
         Array<Contact> contactList = new Array<Contact>(world.getContactList());
 
-        for (int i = 0; i < contactList.size; i++) {
-            Contact contact = contactList.get(i);
+        for (Contact contact:contactList) {
             if (contact.isTouching() && (contact.getFixtureA() == player.playerSensorFixture || contact.getFixtureB() == playerSensorFixture))
-                this.isPlayerGrounded = true;
                 return true;
         }
-        this.isPlayerGrounded = false;
         return false;
 
     }
@@ -129,7 +118,7 @@ public class Player {
 
         //Sensor setup
         PolygonShape baseRectangle = new PolygonShape();
-        baseRectangle.setAsBox(.5f, .2f, new Vector2(0, -1f), 0);
+        baseRectangle.setAsBox(.5f, .1f, new Vector2(0, -1f), 0);
 
         fDef.shape = baseRectangle;
         fDef.friction = 0.1f;
