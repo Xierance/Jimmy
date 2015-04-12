@@ -13,7 +13,6 @@ import com.mygdx.game.screens.TestClass;
  * Created by for example John on 4/9/2015.
  */
 public class Player {
-
     public void setStartLocation(Vector2 startLocation) {
         this.startLocation = startLocation;
     }

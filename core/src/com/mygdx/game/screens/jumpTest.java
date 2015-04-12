@@ -138,6 +138,7 @@ public class jumpTest implements Screen {
         return false;
     }
 
+
     public void handleInput() {
 
         //move
