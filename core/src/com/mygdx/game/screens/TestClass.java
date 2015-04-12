@@ -18,6 +18,7 @@ import com.badlogic.gdx.physics.box2d.joints.MouseJoint;
 import com.badlogic.gdx.physics.box2d.joints.MouseJointDef;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyContactListener;
+import com.mygdx.game.Visuals.gameParticles.Explosion;
 import com.mygdx.game.Visuals.gameParticles.Flame;
 import com.mygdx.game.things.Player;
 import com.mygdx.game.things.b2dStructures;
@@ -33,7 +34,7 @@ public class TestClass extends InputAdapter implements Screen {
     public static Body tempBody;
     public static Sprite playerSprite = new Sprite(new Texture("img/player.png"));
     public static  Array<Body> toDestroy = new Array<Body>();
-    public static  Array<Flame> flames = new Array<Flame>();
+    public static  Array<ParticleEffect> flames = new Array<ParticleEffect>();
     public static TiledMap map;
     //input keys
 
@@ -63,11 +64,16 @@ public class TestClass extends InputAdapter implements Screen {
     public static boolean Ctrl_left;
     public static boolean Ctrl_right;
     private static boolean Q;
+
+
     private final float TIMESTEP = 1 / 60f;
     private final int VELOCITYITERATIONS = 8;
     private final int POSITIONITERATIONS = 3;
+
     public Player player = new Player();
+
     Sprite dick;
+
     private World world;
     private Box2DDebugRenderer debugRenderer;
     private OrthographicCamera orthographicCamera;
@@ -86,6 +92,7 @@ public class TestClass extends InputAdapter implements Screen {
     private Array<Body> tmpBodies = new Array<Body>();
     private Vector3 tmp = new Vector3();
     private Vector2 tmp2 = new Vector2();
+
     private QueryCallback queryCallbackMouse = new QueryCallback() {
         @Override
         public boolean reportFixture(Fixture fixture) {
@@ -106,11 +113,7 @@ public class TestClass extends InputAdapter implements Screen {
         return toDestroy;
     }
 
-
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    public static Array<Flame> getFlames() {
+    public static Array<ParticleEffect> getFlames() {
         return flames;
     }
 
@@ -227,6 +230,7 @@ public class TestClass extends InputAdapter implements Screen {
         batch.begin();
         drawSprites();
         drawFlames(delta);
+        Explosion.drawExplosions(batch,delta);
 
         /*if (Ctrl_left) {
             rainboom.getFlame().start();
@@ -283,7 +287,7 @@ public class TestClass extends InputAdapter implements Screen {
         secondBatch.dispose();
         player.getPlayerSPrite().getTexture().dispose();
         rainboom.getFlame().dispose();
-        for (Flame flame :flames)flame.getFlame().dispose();
+        for (ParticleEffect effect :flames)effect.dispose();
 
     }
 
@@ -524,6 +528,7 @@ public class TestClass extends InputAdapter implements Screen {
                 break;
             case 45:
                 Q = true;
+                break;
 
 
         }
@@ -596,7 +601,8 @@ public class TestClass extends InputAdapter implements Screen {
                 Ctrl_right = false;
                 break;
             case 45:
-                A = false;
+                Q = false;
+
         }
 
         return true;

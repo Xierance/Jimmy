@@ -3,6 +3,7 @@ package com.mygdx.game.things;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.mygdx.game.Visuals.gameParticles.Explosion;
 import com.mygdx.game.Visuals.gameParticles.Flame;
 import com.mygdx.game.screens.TestClass;
 
@@ -83,7 +84,13 @@ public class projectiles {
         flame.getFlame().start();
         fireBallBody.setUserData(flame);
 
-        TestClass.getFlames().add(flame);
+
+    }
+
+    public static void explode(Vector2 location){
+        Explosion explosion = new Explosion(location);
+        explosion.getExplosion().start();
+        Explosion.Explosions.add(explosion);
 
     }
 }
