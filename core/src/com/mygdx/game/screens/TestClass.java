@@ -36,23 +36,33 @@ public class TestClass extends InputAdapter implements Screen {
     public static  Array<Flame> flames = new Array<Flame>();
     public static TiledMap map;
     //input keys
+
+
+    // Body playerBody;
+
+    //public static Vector2 playerLocation = Player;
     public static boolean Up;
     public static boolean Down;
     public static boolean Left;
     public static boolean Right;
     public static boolean Space;
-    public static boolean w;
-
-    // Body playerBody;
-
-    //public static Vector2 playerLocation = Player;
-    public static boolean s;
-    public static boolean q;
-    public static boolean e;
-    public static boolean a;
-    public static boolean d;
+    public static boolean Escape;
+    public static boolean M;
+    public static boolean O;
+    public static boolean R;
+    public static boolean E;
+    public static boolean S;
+    public static boolean A;
+    public static boolean N;
+    public static boolean I;
+    public static boolean C;
+    public static boolean P;
+    public static boolean L;
+    public static boolean W;
+    public static boolean D;
     public static boolean Ctrl_left;
     public static boolean Ctrl_right;
+    private static boolean Q;
     private final float TIMESTEP = 1 / 60f;
     private final int VELOCITYITERATIONS = 8;
     private final int POSITIONITERATIONS = 3;
@@ -312,22 +322,22 @@ public class TestClass extends InputAdapter implements Screen {
             orthographicCamera.update();
         }
 
-        if (q) {
+        if (Q) {
             orthographicCamera.zoom += .010f;
             orthographicCamera.update();
         }
-        if (e) {
+        if (E) {
             orthographicCamera.zoom -= .010f;
             orthographicCamera.update();
 
         }
-        if (w) orthographicCamera.position.y += 0.5;
+        if (Up) orthographicCamera.position.y += 0.5;
         orthographicCamera.update();
-        if (a) orthographicCamera.position.x -= .5;
+        if (Left) orthographicCamera.position.x -= .5;
         orthographicCamera.update();
-        if (s) orthographicCamera.position.y -= .5;
+        if (Down) orthographicCamera.position.y -= .5;
         orthographicCamera.update();
-        if (d) orthographicCamera.position.x += .5;
+        if (Left) orthographicCamera.position.x += .5;
         orthographicCamera.update();
 
     }
@@ -340,20 +350,20 @@ public class TestClass extends InputAdapter implements Screen {
                 new Vector2(getmouseCoords().x, getmouseCoords().y)).getBody());
 
         //move
-        if (this.Up && player.isPlayerGrounded(world,player)) {
-            player.getPlayerBody().applyLinearImpulse(new Vector2(0, 20), new Vector2(),true);
+        if (this.Space && player.isPlayerGrounded(world,player)) {
+            player.getPlayerBody().applyLinearImpulse(new Vector2(0, 20), new Vector2(), true);
         }
 
-        if (this.Down) {
+        if (this.S) {
             player.getPlayerBody().applyForceToCenter(new Vector2(0, -20), true);
         }
 
-        if (this.Left) {
+        if (this.A) {
             player.getPlayerBody().applyForceToCenter(new Vector2(-20, 0), true);
 
         }
 
-        if (this.Right) {
+        if (this.D) {
             player.getPlayerBody().applyForceToCenter(new Vector2(20, 0), true);
         }
 
@@ -464,23 +474,47 @@ public class TestClass extends InputAdapter implements Screen {
             case 62:
                 Space = true;
                 break;
-            case 51:
-                w = true;
+            case 41:
+                M = true;
                 break;
-            case 47:
-                s = true;
+            case 43:
+                O = true;
                 break;
-            case 45:
-                q = true;
+            case 46:
+                R = true;
                 break;
             case 33:
-                e = true;
+                E = true;
+                break;
+            case 47:
+                S = true;
                 break;
             case 29:
-                a = true;
+                A = true;
+                break;
+            case 42:
+                N = true;
+                break;
+            case 37:
+                I = true;
+                break;
+            case 31:
+                C = true;
+                break;
+            case 44:
+                P = true;
+                break;
+            case 40:
+                L = true;
+                break;
+            case 131:
+                Escape = true;
+                break;
+            case 51:
+                W = true;
                 break;
             case 32:
-                d = true;
+                D = true;
                 break;
             case 129:
                 Ctrl_left = true;
@@ -488,6 +522,8 @@ public class TestClass extends InputAdapter implements Screen {
             case 130:
                 Ctrl_right = true;
                 break;
+            case 45:
+                Q = true;
 
 
         }
@@ -512,30 +548,55 @@ public class TestClass extends InputAdapter implements Screen {
             case 62:
                 Space = false;
                 break;
-            case 51:
-                w = false;
+            case 41:
+                M = false;
                 break;
-            case 47:
-                s = false;
+            case 43:
+                O = false;
                 break;
-            case 45:
-                q = false;
+            case 46:
+                R = false;
                 break;
             case 33:
-                e = false;
+                E = false;
+                break;
+            case 47:
+                S = false;
                 break;
             case 29:
-                a = false;
+                A = false;
+                break;
+            case 42:
+                N = false;
+                break;
+            case 37:
+                I = false;
+                break;
+            case 31:
+                C = false;
+                break;
+            case 44:
+                P = false;
+                break;
+            case 40:
+                L = false;
+                break;
+            case 131:
+                Escape = false;
+                break;
+            case 51:
+                W = false;
                 break;
             case 32:
-                d = false;
-                break;
+                D = false;
             case 129:
                 Ctrl_left = false;
                 break;
             case 130:
                 Ctrl_right = false;
                 break;
+            case 45:
+                A = false;
         }
 
         return true;
