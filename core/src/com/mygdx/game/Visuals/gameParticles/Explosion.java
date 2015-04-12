@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.Array;
  */
 public class Explosion {
 
+
     private ParticleEffect explosion;
 
     public Explosion(Vector2 location) {
