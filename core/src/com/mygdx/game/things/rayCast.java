@@ -3,6 +3,7 @@ package com.mygdx.game.things;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
+import com.mygdx.game.screens.TestClass;
 
 /**
  * Created by for example John on 4/11/2015.
@@ -14,7 +15,7 @@ public class rayCast {
         RayCastCallback rayCastCallback = new RayCastCallback() {
             @Override
             public float reportRayFixture(Fixture fixture, Vector2 point, Vector2 normal, float fraction) {
-                if(fixture.getBody().getUserData() != "playerWheel" && fixture.getBody().getType() != BodyDef.BodyType.StaticBody)rayfixture = fixture;
+                if( fixture.getBody().getType() != BodyDef.BodyType.StaticBody )rayfixture = fixture;
                 return 1;
             }
         };
@@ -24,7 +25,7 @@ public class rayCast {
     }
 
     public static void clearBodies(Array<Body> toDestroy,World world){
-        for(Body b : toDestroy)if(world.isLocked() == false && b.getType()!= BodyDef.BodyType.StaticBody && b.getUserData() != "playerWheel" && b.getUserData() != "playerWheel")world.destroyBody(b);
+        for(Body b : toDestroy)if(world.isLocked() == false && b.getType()!= BodyDef.BodyType.StaticBody && b.getUserData() != TestClass.playerSprite)world.destroyBody(b);
         toDestroy.clear();
 
     }
