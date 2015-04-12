@@ -20,8 +20,6 @@ public class MyContactListener implements ContactListener {
      if(fa.getBody().getUserData() instanceof Flame){}else{TestClass.getToDestroy().add(fb.getBody());}
  }
 
-
-
  }
 
  public void endContact(Contact c) {
