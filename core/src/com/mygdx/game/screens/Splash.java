@@ -96,6 +96,7 @@ public class Splash implements Screen {
     public void dispose() {
         batch.dispose();
         splash.getTexture().dispose();
+        introMusic.dispose();
 
     }
 }
