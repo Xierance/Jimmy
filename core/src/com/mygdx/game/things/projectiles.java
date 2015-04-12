@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mygdx.game.Visuals.gameParticles.Flame;
-import com.mygdx.game.screens.play;
+import com.mygdx.game.screens.TestClass;
 
 /**
  * Created by for example John on 4/11/2015.
@@ -83,7 +83,7 @@ public class projectiles {
         flame.getFlame().start();
         fireBallBody.setUserData(flame);
 
-        play.getFlames().add(flame);
+        TestClass.getFlames().add(flame);
 
     }
 }

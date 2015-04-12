@@ -2,7 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.physics.box2d.*;
 import com.mygdx.game.Visuals.gameParticles.Flame;
-import com.mygdx.game.screens.play;
+import com.mygdx.game.screens.TestClass;
 
 public class MyContactListener implements ContactListener {
 
@@ -12,10 +12,10 @@ public class MyContactListener implements ContactListener {
  Fixture fb = c.getFixtureB();
 
  if(fa.getBody().getUserData() != null && fa.getBody().getUserData() instanceof Flame) {
-     play.getToDestroy().add(fa.getBody());
+     TestClass.getToDestroy().add(fa.getBody());
  }
  if(fb.getBody().getUserData() != null && fb.getBody().getUserData() instanceof Flame){
-     play.getToDestroy().add(fb.getBody());
+     TestClass.getToDestroy().add(fb.getBody());
  }
 
 
