@@ -15,7 +15,7 @@ public class rayCast {
             @Override
             public float reportRayFixture(Fixture fixture, Vector2 point, Vector2 normal, float fraction) {
                 if(fixture.getBody().getUserData() != "playerWheel" && fixture.getBody().getType() != BodyDef.BodyType.StaticBody)rayfixture = fixture;
-                return 0;
+                return 1;
             }
         };
         world.rayCast(rayCastCallback,point1,point2);
