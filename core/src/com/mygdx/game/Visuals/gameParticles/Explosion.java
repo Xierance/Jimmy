@@ -13,10 +13,10 @@ public class Explosion {
 
     private ParticleEffect explosion;
 
-    public  Explosion(Vector2 location){
+    public Explosion(Vector2 location) {
         explosion = new ParticleEffect();
         explosion.load(Gdx.files.local("effects/Explosion.p"), Gdx.files.local("effects"));
-        explosion.setPosition(location.x,location.y);
+        explosion.setPosition(location.x, location.y);
         explosion.scaleEffect(0.0069f);
         explosion.start();
     }
@@ -30,19 +30,19 @@ public class Explosion {
     }
 
 
-
-    public void update(SpriteBatch batch,Float delta,Vector2 position){
-        explosion.setPosition(position.x,position.y);
-        explosion.draw(batch,delta);
+    public void update(SpriteBatch batch, Float delta, Vector2 position) {
+        explosion.setPosition(position.x, position.y);
+        explosion.draw(batch, delta);
 
     }
-    public void setPosition(Vector2 position){
-        explosion.setPosition(position.x,position.y);
+
+    public void setPosition(Vector2 position) {
+        explosion.setPosition(position.x, position.y);
     }
 
     public static Array<Explosion> Explosions = new Array<Explosion>();
 
-    public static void drawExplosions(SpriteBatch batch, Float delta){
-        for(Explosion explosion : Explosions)explosion.getExplosion().draw(batch,delta);
+    public static void drawExplosions(SpriteBatch batch, Float delta) {
+        for (Explosion explosion : Explosions) explosion.getExplosion().draw(batch, delta);
     }
 }

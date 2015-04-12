@@ -19,7 +19,6 @@ public class MyContactListener implements ContactListener {
             } else {
                 TestClass.getToDestroy().add(fa.getBody());
             }
-
         }
         if (fb.getBody().getUserData() != null && fb.getBody().getUserData() instanceof Flame && fa.getBody().getUserData() != TestClass.playerSprite && fb.isSensor() == false) {
             if (fa.getBody().getUserData() instanceof Flame) {
@@ -27,7 +26,6 @@ public class MyContactListener implements ContactListener {
                 TestClass.getToDestroy().add(fb.getBody());
             }
         }
-
     }
 
     public void endContact(Contact c) {
