@@ -81,7 +81,7 @@ public class Player {
         bodyDef.fixedRotation = true;
 
         PolygonShape blockShape = new PolygonShape();
-        blockShape.setAsBox(.5f, .1f);
+        blockShape.setAsBox(.5f, 1f);
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = blockShape;
