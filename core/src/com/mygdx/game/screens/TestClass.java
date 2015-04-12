@@ -340,8 +340,8 @@ public class TestClass extends InputAdapter implements Screen {
                 new Vector2(getmouseCoords().x, getmouseCoords().y)).getBody());
 
         //move
-        if (this.Up) {
-            player.getPlayerBody().applyForceToCenter(new Vector2(0, 20), true);
+        if (this.Up && player.isPlayerGrounded(world,player)) {
+            player.getPlayerBody().applyLinearImpulse(new Vector2(0, 20), new Vector2(),true);
         }
 
         if (this.Down) {
