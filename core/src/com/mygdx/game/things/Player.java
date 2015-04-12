@@ -90,9 +90,12 @@ public class Player {
         for (int i = 0; i < contactList.size; i++) {
             Contact contact = contactList.get(i);
             if (contact.isTouching() && (contact.getFixtureA() == player.playerSensorFixture || contact.getFixtureB() == playerSensorFixture))
+                this.isPlayerGrounded = true;
                 return true;
         }
+        this.isPlayerGrounded = false;
         return false;
+
     }
 
     public void createPLayer(World world,Vector2 startLocation,Sprite playerSprite){
