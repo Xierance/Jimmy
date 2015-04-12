@@ -312,7 +312,7 @@ public class TestClass extends InputAdapter implements Screen {
 
     public void cameraFollow() {
         float lerp = .1f;
-        if (!Ctrl_left) {
+        if (!Ctrl_right) {
             if (orthographicCamera.position.x != player.getPlayerBody().getPosition().x) {
                 orthographicCamera.position.x += (player.getPlayerBody().getPosition().x - orthographicCamera.position.x) * lerp;
             }
@@ -344,13 +344,13 @@ public class TestClass extends InputAdapter implements Screen {
 
     public void handleInput() {
 
-        if(Ctrl_right)shootFire(player.getPlayerBody().getPosition(),angle2(player.getPlayerBody().getPosition(), getmouseCoords()));
+        if(Ctrl_left)shootFire(player.getPlayerBody().getPosition(),angle2(player.getPlayerBody().getPosition(), getmouseCoords()));
         if(Space)if(rayCast.rayFixture(world, player.getPlayerBody().getPosition(), new Vector2(getmouseCoords().x, getmouseCoords().y ))!= null)toDestroy.add(rayCast.rayFixture(world,
                 player.getPlayerBody().getPosition(),
                 new Vector2(getmouseCoords().x, getmouseCoords().y)).getBody());
 
         //move
-        if (this.Space && player.isPlayerGrounded(world,player)) {
+        if (this.W && player.isPlayerGrounded(world,player)) {
             player.getPlayerBody().applyLinearImpulse(new Vector2(0, 20), new Vector2(), true);
         }
 
@@ -431,13 +431,13 @@ public class TestClass extends InputAdapter implements Screen {
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         orthographicCamera.unproject(tmp.set(screenX, screenY, 0));
 
-        if (!Ctrl_left){
-            if(!Ctrl_right)shootDick(player.getPlayerBody().getPosition(), angle2(player.getPlayerBody().getPosition(), new Vector2(tmp.x, tmp.y)));
+        if (!Ctrl_right){
+            if(!Ctrl_left)shootDick(player.getPlayerBody().getPosition(), angle2(player.getPlayerBody().getPosition(), new Vector2(tmp.x, tmp.y)));
 
         }
 
 
-        if (Ctrl_left) world.QueryAABB(queryCallbackMouse, tmp.x, tmp.y, tmp.x, tmp.y);
+        if (Ctrl_right) world.QueryAABB(queryCallbackMouse, tmp.x, tmp.y, tmp.x, tmp.y);
         return false;
     }
 
