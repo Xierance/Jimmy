@@ -288,6 +288,7 @@ public class TestClass extends InputAdapter implements Screen {
         player.getPlayerSPrite().getTexture().dispose();
         rainboom.getFlame().dispose();
         for (ParticleEffect effect :flames)effect.dispose();
+        for (Explosion explosion:Explosion.Explosions)explosion.getExplosion().dispose();
 
     }
 
