@@ -27,7 +27,7 @@ import com.mygdx.game.things.rayCast;
 /**
  * Created by for example John on 3/14/2015.
  */
-public class play extends InputAdapter implements Screen {
+public class TestClass extends InputAdapter implements Screen {
 
     private World world;
     private Box2DDebugRenderer debugRenderer;
