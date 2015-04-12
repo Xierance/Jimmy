@@ -181,6 +181,7 @@ public class levelThree extends InputAdapter implements Screen {
         player.setUserData(playerSprite);
 
         blockShape.dispose();
+        playerSensor();
         ////////////////////////////////////
 
         castle(new Vector2(12, -10), 25, 1f);
