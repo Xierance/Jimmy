@@ -350,7 +350,7 @@ public class TestClass extends InputAdapter implements Screen {
     public void handleInput() {
 
         if(Ctrl_right)shootFire(player.getPlayerBody().getPosition(),angle2(player.getPlayerBody().getPosition(), getmouseCoords()));
-        if(Space)if(rayCast.rayFixture(world, player.getPlayerBody().getPosition(), new Vector2(getmouseCoords().x, getmouseCoords().y ))!= null)toDestroy.add(rayCast.rayFixture(world,
+        if(Ctrl_left)if(rayCast.rayFixture(world, player.getPlayerBody().getPosition(), new Vector2(getmouseCoords().x, getmouseCoords().y ))!= null)toDestroy.add(rayCast.rayFixture(world,
                 player.getPlayerBody().getPosition(),
                 new Vector2(getmouseCoords().x, getmouseCoords().y)).getBody());
 
