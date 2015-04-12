@@ -64,12 +64,36 @@ public class Player {
 
     private WheelJoint wheelJoint;
 
+    public Fixture getPlayerSensorFixture() {
+        return playerSensorFixture;
+    }
+
+    public void setPlayerSensorFixture(Fixture playerSensorFixture) {
+        this.playerSensorFixture = playerSensorFixture;
+    }
+
     private Fixture playerSensorFixture;
+
+    ////////////////////////////////////////////////////////////////////////////////////////
+
+
+    public void setPlayerGrounded(boolean isPlayerGrounded) {
+        this.isPlayerGrounded = isPlayerGrounded;
+    }
+
     //////////////////////////////////////////////////
+    private boolean isPlayerGrounded;
 
+    public boolean isPlayerGrounded(World world,Player player) {
+        Array<Contact> contactList = new Array<Contact>(world.getContactList());
 
-
-
+        for (int i = 0; i < contactList.size; i++) {
+            Contact contact = contactList.get(i);
+            if (contact.isTouching() && (contact.getFixtureA() == player.playerSensorFixture || contact.getFixtureB() == playerSensorFixture))
+                return true;
+        }
+        return false;
+    }
 
     public void createPLayer(World world,Vector2 startLocation,Sprite playerSprite){
         //playerBody/////////////////////////////////
@@ -112,30 +136,6 @@ public class Player {
         playerSensorFixture.setSensor(true);
 
         baseRectangle.dispose();
-/*
-        //wheel
-        bodyDef.position.set(startLocation.x, startLocation.y);
-        CircleShape wheelShape = new CircleShape();
-        wheelShape.setRadius(.5f);
-        fixtureDef.shape = wheelShape;
-        fixtureDef.friction = .10f;
-        playerWheelBody = world.createBody(bodyDef);
-        playerWheelBody.createFixture(fixtureDef);
-        playerWheelBody.setUserData("playerWheel");
-        wheelShape.dispose();
-        */
-        /*
-        //wheel joint
-
-        WheelJointDef wheelJointDef = new WheelJointDef();
-        wheelJointDef.enableMotor = true;
-        wheelJointDef.bodyA = playerBody;
-        wheelJointDef.bodyB = playerWheelBody;
-        wheelJointDef.localAnchorA.set(0, -.75f);
-        wheelJointDef.frequencyHz = 100;
-        wheelJoint = (WheelJoint) world.createJoint(wheelJointDef);
-        */
-
 
     }
 }
