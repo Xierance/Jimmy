@@ -11,6 +11,7 @@ import com.badlogic.gdx.physics.box2d.joints.WheelJointDef;
  * Created by for example John on 4/9/2015.
  */
 public class Player {
+
     public void setStartLocation(Vector2 startLocation) {
         this.startLocation = startLocation;
     }
