@@ -12,11 +12,12 @@ public class MyContactListener implements ContactListener {
  Fixture fa = c.getFixtureA();
  Fixture fb = c.getFixtureB();
 
- if(fa.getBody().getUserData() != null && fa.getBody().getUserData() instanceof Flame && fb.getBody().getUserData() != TestClass.playerSprite) {
-     TestClass.getToDestroy().add(fa.getBody());
+ if(fa.getBody().getUserData() != null && fa.getBody().getUserData() instanceof Flame && fb.getBody().getUserData() != TestClass.playerSprite ) {
+     if(fb.getBody().getUserData() instanceof Flame){}else{TestClass.getToDestroy().add(fa.getBody());}
+
  }
  if(fb.getBody().getUserData() != null && fb.getBody().getUserData() instanceof Flame && fa.getBody().getUserData() != TestClass.playerSprite){
-     TestClass.getToDestroy().add(fb.getBody());
+     if(fa.getBody().getUserData() instanceof Flame){}else{TestClass.getToDestroy().add(fb.getBody());}
  }
 
 
