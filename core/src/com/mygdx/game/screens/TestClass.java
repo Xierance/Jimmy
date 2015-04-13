@@ -20,10 +20,7 @@ import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyContactListener;
 import com.mygdx.game.Visuals.gameParticles.Explosion;
 import com.mygdx.game.Visuals.gameParticles.Flame;
-import com.mygdx.game.things.Player;
-import com.mygdx.game.things.b2dStructures;
-import com.mygdx.game.things.projectiles;
-import com.mygdx.game.things.rayCast;
+import com.mygdx.game.things.*;
 
 /**
  * Created by for example John on 3/14/2015.
@@ -209,6 +206,8 @@ public class TestClass extends InputAdapter implements Screen {
 
     @Override
     public void render(float delta) {
+
+
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -282,6 +281,7 @@ public class TestClass extends InputAdapter implements Screen {
         player.getPlayerSPrite().getTexture().dispose();
         for (ParticleEffect effect :flames)effect.dispose();
         for (Explosion explosion:Explosion.Explosions)explosion.getExplosion().dispose();
+        for(ParticleEffectPool.PooledEffect effect:FireBallPool.TestPool.pooledEffects)effect.dispose();
 
     }
 
@@ -349,7 +349,7 @@ public class TestClass extends InputAdapter implements Screen {
 
         //move
         if (this.Space && player.isPlayerGrounded(world,player)) {
-            player.getPlayerBody().applyLinearImpulse(new Vector2(0, 20), new Vector2(), true);
+            player.getPlayerBody().applyLinearImpulse(new Vector2(0, 3), new Vector2(), true);
         }
 
         if (this.S) {
@@ -414,16 +414,12 @@ public class TestClass extends InputAdapter implements Screen {
 
         world.getBodies(tmpBodies);
         for (Body body : tmpBodies) {
+            if (body.getUserData() != null && body.getUserData() instanceof ParticleEffectPool.PooledEffect) {
+                ((ParticleEffectPool.PooledEffect) body.getUserData()).setPosition(body.getPosition().x,body.getPosition().y);
+                ((ParticleEffectPool.PooledEffect) body.getUserData()).draw(batch,delta);
 
-            if (body.getUserData() != null && body.getUserData() instanceof Flame) {
-
-                Flame flame = (Flame) body.getUserData();
-                flame.setPosition(new Vector2(body.getPosition().x , body.getPosition().y));
-
-                flame.getFlame().draw(batch,delta);
             }
         }
-
     }
 
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
@@ -523,10 +519,7 @@ public class TestClass extends InputAdapter implements Screen {
             case 45:
                 Q = true;
                 break;
-
-
         }
-
         return true;
     }
 
@@ -607,7 +600,6 @@ public class TestClass extends InputAdapter implements Screen {
         orthographicCamera.unproject(temp.set(Gdx.input.getX(), Gdx.input.getY(), 0));
         return new Vector2(temp.x,temp.y);
     }
-
 
 }
 

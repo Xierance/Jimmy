@@ -11,7 +11,7 @@ import com.mygdx.game.screens.TestClass;
  */
 public class Flame {
 
-    private ParticleEffect flame;
+    private static ParticleEffect flame;
 
     public  Flame(Vector2 location){
         flame = new ParticleEffect();
@@ -24,22 +24,4 @@ public class Flame {
         return flame;
     }
 
-    public void setFlame(ParticleEffect Flame) {
-        this.flame = Flame;
-    }
-
-    public void update(SpriteBatch batch,Float delta,Vector2 position){
-        flame.setPosition(position.x,position.y);
-        flame.draw(batch,delta);
-        flame.start();
-        TestClass.getFlames().add(flame);
-    }
-
-    public void setPosition(Vector2 position){
-        flame.setPosition(position.x,position.y);
-    }
-    public Vector2 getPosition(){
-        return new Vector2(flame.getBoundingBox().getCenterX(),flame.getBoundingBox().getCenterY());
-
-    }
 }

@@ -1,11 +1,10 @@
 package com.mygdx.game.things;
 
+import com.badlogic.gdx.graphics.g2d.ParticleEffectPool;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mygdx.game.Visuals.gameParticles.Explosion;
-import com.mygdx.game.Visuals.gameParticles.Flame;
-import com.mygdx.game.screens.TestClass;
 
 /**
  * Created by for example John on 4/11/2015.
@@ -80,12 +79,10 @@ public class projectiles {
         fireBallBody.setLinearVelocity(velocity);
         fireBallBall.dispose();
 
-
-
-        Flame flame = new Flame(location);
-        flame.getFlame().start();
+        ParticleEffectPool.PooledEffect flame = FireBallPool.TestPool.flamePoolTest.obtain();
         fireBallBody.setUserData(flame);
-
+        FireBallPool.TestPool.pooledEffects.add(flame);
+        flame.dispose();
 
     }
 

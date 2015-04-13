@@ -1,5 +1,6 @@
 package com.mygdx.game.things;
 
+import com.badlogic.gdx.graphics.g2d.ParticleEffectPool;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
@@ -27,7 +28,7 @@ public class rayCast {
 
     public static void clearBodies(Array<Body> toDestroy,World world){
         for(Body b : toDestroy)if(world.isLocked() == false && b.getType()!= BodyDef.BodyType.StaticBody && b.getUserData() != TestClass.playerSprite){
-            if(b.getUserData() instanceof Flame)projectiles.explode(b.getPosition());
+            if(b.getUserData() instanceof ParticleEffectPool.PooledEffect)projectiles.explode(b.getPosition());
             world.destroyBody(b);
 
         }
