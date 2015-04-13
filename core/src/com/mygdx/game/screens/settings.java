@@ -89,7 +89,7 @@ public class settings implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
 
-                if (event.getListenerActor() == checkFPS) {
+                if(event.getListenerActor() == checkFPS) {
                     Gdx.app.getPreferences(MyGdxGame.title).putBoolean("fps", checkFPS.isChecked()); //Sets "fps" boolean to what the check box says
                     fpsOn++;
 
@@ -153,7 +153,7 @@ public class settings implements Screen {
         table.row();
         table.add().height(350);
         table.row();
-        table.add();
+        table.add(); 
         table.add().height(150);
         table.add(back).bottom().right();
 
