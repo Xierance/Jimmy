@@ -16,14 +16,16 @@ public class MyContactListener implements ContactListener {
             if (fb.getBody().getUserData() instanceof ParticleEffectPool.PooledEffect) {
             } else {
                 TestClass.getToDestroy().add(fa.getBody());
-                FireBallPool.pooledEffects.removeValue((ParticleEffectPool.PooledEffect) fa.getBody().getUserData(), true);
+                FireBallPool.TestPool.pooledEffects.removeValue((ParticleEffectPool.PooledEffect) fa.getBody().getUserData(), true);
+                ((ParticleEffectPool.PooledEffect) fa.getBody().getUserData()).free();
             }
         }
         if (fb.getBody().getUserData() != null && fb.getBody().getUserData() instanceof ParticleEffectPool.PooledEffect && fa.getBody().getUserData() != TestClass.playerSprite && fb.isSensor() == false) {
             if (fa.getBody().getUserData() instanceof ParticleEffectPool.PooledEffect) {
             } else {
                 TestClass.getToDestroy().add(fb.getBody());
-                FireBallPool.pooledEffects.removeValue((ParticleEffectPool.PooledEffect) fb.getBody().getUserData(), true);
+                FireBallPool.TestPool.pooledEffects.removeValue((ParticleEffectPool.PooledEffect) fb.getBody().getUserData(), true);
+                ((ParticleEffectPool.PooledEffect) fb.getBody().getUserData()).free();
             }
         }
     }

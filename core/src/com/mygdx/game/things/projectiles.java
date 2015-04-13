@@ -81,9 +81,9 @@ public class projectiles {
 
 
 
-        ParticleEffectPool.PooledEffect flame = FireBallPool.flamePoolTest.obtain();
+        ParticleEffectPool.PooledEffect flame = FireBallPool.TestPool.flamePoolTest.obtain();
         fireBallBody.setUserData(flame);
-        FireBallPool.pooledEffects.add(flame);
+        FireBallPool.TestPool.pooledEffects.add(flame);
 
 
     }
