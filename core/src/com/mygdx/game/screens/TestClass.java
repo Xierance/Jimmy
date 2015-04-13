@@ -38,10 +38,6 @@ public class TestClass extends InputAdapter implements Screen {
     public static TiledMap map;
     //input keys
 
-
-    // Body playerBody;
-
-    //public static Vector2 playerLocation = Player;
     public static boolean Up;
     public static boolean Down;
     public static boolean Left;
@@ -65,7 +61,6 @@ public class TestClass extends InputAdapter implements Screen {
     public static boolean Ctrl_right;
     private static boolean Q;
 
-
     private final float TIMESTEP = 1 / 60f;
     private final int VELOCITYITERATIONS = 8;
     private final int POSITIONITERATIONS = 3;
@@ -87,7 +82,6 @@ public class TestClass extends InputAdapter implements Screen {
     private Sprite block1 = new Sprite();
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    private Flame rainboom;
     private MyContactListener cl;
     private Array<Body> tmpBodies = new Array<Body>();
     private Vector3 tmp = new Vector3();
@@ -206,7 +200,6 @@ public class TestClass extends InputAdapter implements Screen {
         mapToBox2d(new TiledMap(), world);///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         player.createPLayer(world, temp, playerSprite);
-        rainboom = new Flame(player.getPlayerBody().getPosition());
 
         cl = new MyContactListener();
         world.setContactListener(cl);
@@ -287,7 +280,6 @@ public class TestClass extends InputAdapter implements Screen {
         font.dispose();
         secondBatch.dispose();
         player.getPlayerSPrite().getTexture().dispose();
-        rainboom.getFlame().dispose();
         for (ParticleEffect effect :flames)effect.dispose();
         for (Explosion explosion:Explosion.Explosions)explosion.getExplosion().dispose();
 
