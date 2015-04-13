@@ -18,6 +18,7 @@ import com.badlogic.gdx.physics.box2d.joints.MouseJoint;
 import com.badlogic.gdx.physics.box2d.joints.MouseJointDef;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyContactListener;
+import com.mygdx.game.Visuals.gameParticles.Explosion;
 import com.mygdx.game.Visuals.gameParticles.Flame;
 import com.mygdx.game.things.Player;
 import com.mygdx.game.things.b2dStructures;
@@ -33,7 +34,7 @@ public class TestClass extends InputAdapter implements Screen {
     public static Body tempBody;
     public static Sprite playerSprite = new Sprite(new Texture("img/player.png"));
     public static  Array<Body> toDestroy = new Array<Body>();
-    public static  Array<Flame> flames = new Array<Flame>();
+    public static  Array<ParticleEffect> flames = new Array<ParticleEffect>();
     public static TiledMap map;
     //input keys
 
@@ -63,11 +64,16 @@ public class TestClass extends InputAdapter implements Screen {
     public static boolean Ctrl_left;
     public static boolean Ctrl_right;
     private static boolean Q;
+
+
     private final float TIMESTEP = 1 / 60f;
     private final int VELOCITYITERATIONS = 8;
     private final int POSITIONITERATIONS = 3;
+
     public Player player = new Player();
+
     Sprite dick;
+
     private World world;
     private Box2DDebugRenderer debugRenderer;
     private OrthographicCamera orthographicCamera;
@@ -86,6 +92,7 @@ public class TestClass extends InputAdapter implements Screen {
     private Array<Body> tmpBodies = new Array<Body>();
     private Vector3 tmp = new Vector3();
     private Vector2 tmp2 = new Vector2();
+
     private QueryCallback queryCallbackMouse = new QueryCallback() {
         @Override
         public boolean reportFixture(Fixture fixture) {
@@ -106,11 +113,7 @@ public class TestClass extends InputAdapter implements Screen {
         return toDestroy;
     }
 
-
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    public static Array<Flame> getFlames() {
+    public static Array<ParticleEffect> getFlames() {
         return flames;
     }
 
@@ -227,6 +230,7 @@ public class TestClass extends InputAdapter implements Screen {
         batch.begin();
         drawSprites();
         drawFlames(delta);
+        Explosion.drawExplosions(batch,delta);
 
         /*if (Ctrl_left) {
             rainboom.getFlame().start();
@@ -283,7 +287,8 @@ public class TestClass extends InputAdapter implements Screen {
         secondBatch.dispose();
         player.getPlayerSPrite().getTexture().dispose();
         rainboom.getFlame().dispose();
-        for (Flame flame :flames)flame.getFlame().dispose();
+        for (ParticleEffect effect :flames)effect.dispose();
+        for (Explosion explosion:Explosion.Explosions)explosion.getExplosion().dispose();
 
     }
 
@@ -312,7 +317,7 @@ public class TestClass extends InputAdapter implements Screen {
 
     public void cameraFollow() {
         float lerp = .1f;
-        if (!Ctrl_right) {
+        if (!Ctrl_left) {
             if (orthographicCamera.position.x != player.getPlayerBody().getPosition().x) {
                 orthographicCamera.position.x += (player.getPlayerBody().getPosition().x - orthographicCamera.position.x) * lerp;
             }
@@ -344,13 +349,13 @@ public class TestClass extends InputAdapter implements Screen {
 
     public void handleInput() {
 
-        if(Ctrl_left)shootFire(player.getPlayerBody().getPosition(),angle2(player.getPlayerBody().getPosition(), getmouseCoords()));
-        if(Space)if(rayCast.rayFixture(world, player.getPlayerBody().getPosition(), new Vector2(getmouseCoords().x, getmouseCoords().y ))!= null)toDestroy.add(rayCast.rayFixture(world,
+        if(Ctrl_right)shootFire(player.getPlayerBody().getPosition(),angle2(player.getPlayerBody().getPosition(), getmouseCoords()));
+        if(Ctrl_left)if(rayCast.rayFixture(world, player.getPlayerBody().getPosition(), new Vector2(getmouseCoords().x, getmouseCoords().y ))!= null)toDestroy.add(rayCast.rayFixture(world,
                 player.getPlayerBody().getPosition(),
                 new Vector2(getmouseCoords().x, getmouseCoords().y)).getBody());
 
         //move
-        if (this.W && player.isPlayerGrounded(world,player)) {
+        if (this.Space && player.isPlayerGrounded(world,player)) {
             player.getPlayerBody().applyLinearImpulse(new Vector2(0, 20), new Vector2(), true);
         }
 
@@ -431,13 +436,13 @@ public class TestClass extends InputAdapter implements Screen {
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         orthographicCamera.unproject(tmp.set(screenX, screenY, 0));
 
-        if (!Ctrl_right){
-            if(!Ctrl_left)shootDick(player.getPlayerBody().getPosition(), angle2(player.getPlayerBody().getPosition(), new Vector2(tmp.x, tmp.y)));
+        if (!Ctrl_left){
+            if(!Ctrl_right)shootDick(player.getPlayerBody().getPosition(), angle2(player.getPlayerBody().getPosition(), new Vector2(tmp.x, tmp.y)));
 
         }
 
 
-        if (Ctrl_right) world.QueryAABB(queryCallbackMouse, tmp.x, tmp.y, tmp.x, tmp.y);
+        if (Ctrl_left) world.QueryAABB(queryCallbackMouse, tmp.x, tmp.y, tmp.x, tmp.y);
         return false;
     }
 
@@ -524,6 +529,7 @@ public class TestClass extends InputAdapter implements Screen {
                 break;
             case 45:
                 Q = true;
+                break;
 
 
         }
@@ -596,7 +602,8 @@ public class TestClass extends InputAdapter implements Screen {
                 Ctrl_right = false;
                 break;
             case 45:
-                A = false;
+                Q = false;
+
         }
 
         return true;

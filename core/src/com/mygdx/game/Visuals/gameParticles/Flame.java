@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.screens.TestClass;
 
 /**
  * Created by for example John on 4/9/2015.
@@ -31,6 +32,7 @@ public class Flame {
         flame.setPosition(position.x,position.y);
         flame.draw(batch,delta);
         flame.start();
+        TestClass.getFlames().add(flame);
     }
 
     public void setPosition(Vector2 position){
