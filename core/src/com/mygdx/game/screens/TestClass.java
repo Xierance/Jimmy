@@ -20,10 +20,7 @@ import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyContactListener;
 import com.mygdx.game.Visuals.gameParticles.Explosion;
 import com.mygdx.game.Visuals.gameParticles.Flame;
-import com.mygdx.game.things.Player;
-import com.mygdx.game.things.b2dStructures;
-import com.mygdx.game.things.projectiles;
-import com.mygdx.game.things.rayCast;
+import com.mygdx.game.things.*;
 
 /**
  * Created by for example John on 3/14/2015.
@@ -417,7 +414,7 @@ public class TestClass extends InputAdapter implements Screen {
 
             if (body.getUserData() != null && body.getUserData() instanceof Flame) {
 
-                Flame flame = (Flame) body.getUserData();
+                Flame flame = Flame.flamePoolTest.obtain();
                 flame.setPosition(new Vector2(body.getPosition().x , body.getPosition().y));
 
                 flame.getFlame().draw(batch,delta);

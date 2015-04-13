@@ -18,6 +18,7 @@ public class MyContactListener implements ContactListener {
             if (fb.getBody().getUserData() instanceof Flame) {
             } else {
                 TestClass.getToDestroy().add(fa.getBody());
+                Flame.flamePoolTest.free((Flame)fa.getBody().getUserData());
             }
         }
         if (fb.getBody().getUserData() != null && fb.getBody().getUserData() instanceof Flame && fa.getBody().getUserData() != TestClass.playerSprite && fb.isSensor() == false) {

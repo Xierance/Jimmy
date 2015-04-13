@@ -82,7 +82,7 @@ public class projectiles {
 
 
 
-        Flame flame = new Flame(location);
+        Flame flame = Flame.flamePoolTest.obtain();
         flame.getFlame().start();
         fireBallBody.setUserData(flame);
 
