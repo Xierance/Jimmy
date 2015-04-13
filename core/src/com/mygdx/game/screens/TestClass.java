@@ -164,7 +164,8 @@ public class TestClass extends InputAdapter implements Screen {
     @Override
     public void show() {
 
-        dick = new Sprite(new Texture("dick.png"));
+
+        dick = new Sprite(new Texture("textures/dick.png"));
 
         jointDef = new MouseJointDef();
 
@@ -230,7 +231,7 @@ public class TestClass extends InputAdapter implements Screen {
         batch.begin();
         drawSprites();
         drawFlames(delta);
-        Explosion.drawExplosions(batch,delta);
+        Explosion.drawExplosions(batch, delta);
 
         /*if (Ctrl_left) {
             rainboom.getFlame().start();

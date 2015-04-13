@@ -80,6 +80,8 @@ public class projectiles {
         fireBallBody.setLinearVelocity(velocity);
         fireBallBall.dispose();
 
+
+
         Flame flame = new Flame(location);
         flame.getFlame().start();
         fireBallBody.setUserData(flame);
