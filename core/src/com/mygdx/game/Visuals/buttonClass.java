@@ -23,14 +23,14 @@ public class buttonClass {
     TextureAtlas buttonAtlas;
     Table table;
 
-    public void createButton(BitmapFont font){
+    public void createButton(BitmapFont font) {
 
         stage = new Stage();
 
         skin = new Skin();
 
         table = new Table(skin);
-        table.setBounds(0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         buttonAtlas = new TextureAtlas("ui/button-pack.pack");
         skin.addRegions(buttonAtlas);
@@ -42,7 +42,7 @@ public class buttonClass {
         textButtonStyle.pressedOffsetX = 1;
         textButtonStyle.pressedOffsetY = -1;
 
-        button = new TextButton("Text",textButtonStyle);
+        button = new TextButton("Text", textButtonStyle);
         button.pad(20);
         table.add(button);
         table.debug();
@@ -50,9 +50,9 @@ public class buttonClass {
 
     }
 
-    public void drawButton(Stage stage,float delta){
+    public void drawButton(Stage stage, float delta) {
         //Gdx.gl.glClearColor(0, 0, 0, 1);
-       // Gdx.gl.glClear((GL20.GL_COLOR_BUFFER_BIT));
+        // Gdx.gl.glClear((GL20.GL_COLOR_BUFFER_BIT));
 
         stage.act(delta);
         stage.draw();

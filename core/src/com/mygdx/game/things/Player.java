@@ -22,7 +22,8 @@ public class Player {
     }
 
     private Vector2 startLocation;
-////////////////////////////////////////////////
+
+    ////////////////////////////////////////////////
     public Body getPlayerBody() {
         return playerBody;
     }
@@ -32,6 +33,7 @@ public class Player {
     }
 
     private Body playerBody;
+
     //////////////////////////////////////////////////
     public Sprite getPlayerSPrite() {
         return playerSprite;
@@ -76,10 +78,10 @@ public class Player {
 
     ////////////////////////////////////////////////////////////////////////////////////////
 
-    public boolean isPlayerGrounded(World world,Player player) {
+    public boolean isPlayerGrounded(World world, Player player) {
         Array<Contact> contactList = new Array<Contact>(world.getContactList());
 
-        for (Contact contact:contactList) {
+        for (Contact contact : contactList) {
             if (contact.isTouching() && (contact.getFixtureA() == player.playerSensorFixture || contact.getFixtureB() == playerSensorFixture))
                 return true;
         }
@@ -87,7 +89,7 @@ public class Player {
 
     }
 
-    public void createPLayer(World world,Vector2 startLocation,Sprite playerSprite){
+    public void createPLayer(World world, Vector2 startLocation, Sprite playerSprite) {
         //playerBody/////////////////////////////////
 
         //sprite

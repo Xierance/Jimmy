@@ -63,7 +63,7 @@ public class Input implements InputProcessor {
     public static boolean Z;
 
     public boolean keyDown(int keycode) {
-        switch(keycode) {
+        switch (keycode) {
             case 19:
                 Up = true;
                 break;
@@ -200,18 +200,13 @@ public class Input implements InputProcessor {
                 Tab = true;
 
 
-
-
-
-
-
         }
 
         return true;
     }
 
     public boolean keyUp(int keycode) {
-        switch(keycode) {
+        switch (keycode) {
             case 19:
                 Up = false;
                 break;
@@ -345,9 +340,6 @@ public class Input implements InputProcessor {
                 Num_9 = false;
             case 61:
                 Tab = false;
-
-
-
 
 
         }

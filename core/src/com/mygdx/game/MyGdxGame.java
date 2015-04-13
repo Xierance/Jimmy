@@ -12,7 +12,6 @@ public class MyGdxGame extends Game {
     public static final String title = "Jimmy 2: Electric Shoe";
 
 
-
     @Override
     public void create() {
         setScreen(new Splash());
