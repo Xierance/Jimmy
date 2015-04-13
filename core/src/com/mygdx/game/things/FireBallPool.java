@@ -14,7 +14,7 @@ public class FireBallPool {
 
     public static Array<ParticleEffectPool.PooledEffect> pooledEffects = new Array<ParticleEffectPool.PooledEffect>();
 
-    public static ParticleEffectPool flamePoolTest = new ParticleEffectPool(new Flame(new Vector2()).getFlame(),0,50);
+    public static ParticleEffectPool flamePoolTest = new ParticleEffectPool(new Flame(new Vector2()).getFlame(),0,500);
 
 }
     }
