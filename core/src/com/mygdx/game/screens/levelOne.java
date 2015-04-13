@@ -91,7 +91,7 @@ public class levelOne extends InputAdapter implements Screen {
         //player/////////////////////////////////
         //sprite
         playerSprite = new Sprite(new Texture("Texture.png"));
-        playerSprite.setSize(1f,1f);
+        playerSprite.setSize(1f, 1f);
         playerSprite.setOrigin(.5f, .5f);
 //body
         BodyDef bodyDef = new BodyDef();
@@ -99,7 +99,7 @@ public class levelOne extends InputAdapter implements Screen {
         bodyDef.position.set(15, -3);
 
         PolygonShape blockShape = new PolygonShape();
-        blockShape.setAsBox(.5f,.5f);
+        blockShape.setAsBox(.5f, .5f);
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = blockShape;
@@ -114,10 +114,10 @@ public class levelOne extends InputAdapter implements Screen {
         player.createFixture(fixtureDef);
         CircleShape circleshape = new CircleShape();
         circleshape.setRadius(.5f);
-        circleshape.setPosition(new Vector2(0,.5f));
+        circleshape.setPosition(new Vector2(0, .5f));
         fixtureDef.shape = circleshape;
         fixtureDef.density = 0;
-        fixtureDef.restitution =.5f;
+        fixtureDef.restitution = .5f;
         player.createFixture(fixtureDef);
 //sprite
         player.setUserData(playerSprite);
@@ -155,7 +155,7 @@ public class levelOne extends InputAdapter implements Screen {
         batch.end();
 
 
-        if(Gdx.input.isKeyPressed(com.badlogic.gdx.Input.Keys.ESCAPE)){
+        if (Gdx.input.isKeyPressed(com.badlogic.gdx.Input.Keys.ESCAPE)) {
             ((Game) Gdx.app.getApplicationListener()).setScreen(new levelMenu());
 
         }
@@ -164,12 +164,7 @@ public class levelOne extends InputAdapter implements Screen {
         cameraFollow();
 
 
-
-
         world.step(TIMESTEP, VELOCITYITERATIONS, POSITIONITERATIONS);
-
-
-
 
 
     }
@@ -185,8 +180,6 @@ public class levelOne extends InputAdapter implements Screen {
     public void pause() {
 
     }
-
-
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -209,7 +202,6 @@ public class levelOne extends InputAdapter implements Screen {
         debugRenderer.dispose();
         batch.dispose();
         font.dispose();
-
 
 
     }
@@ -342,22 +334,22 @@ public class levelOne extends InputAdapter implements Screen {
         isosceles(new Vector2(location.x - (blockheight) / 2 + gap / 2 + size / 2, location.y + oldHeight), blockheight, blockheight * 1.5f, 0.25f, 0.75f);
     }
 
-    public float angle2(Vector2 vector1,Vector2 vector2){
+    public float angle2(Vector2 vector1, Vector2 vector2) {
         float angle = ((float) Math.atan2(vector2.y - vector1.y, vector2.x - vector1.x));
         return angle;
     }
 
-    public void shoot( Vector2 location,float angleRad){
-        float i = (float)Math.cos(angleRad);
-        float j = (float)Math.sin(angleRad);
-        Vector2 newLocation = new Vector2(location.x + i,location.y + j);
+    public void shoot(Vector2 location, float angleRad) {
+        float i = (float) Math.cos(angleRad);
+        float j = (float) Math.sin(angleRad);
+        Vector2 newLocation = new Vector2(location.x + i, location.y + j);
         bullet(newLocation, 0.2f, 0.5f, 0, new Vector2(100 * i, 100 * j));
 
     }
 
     public void cameraFollow() {
         float lerp = .1f;
-        if(!Ctrl_left) {
+        if (!Ctrl_left) {
             if (orthographicCamera.position.x != player.getPosition().x) {
                 orthographicCamera.position.x += (player.getPosition().x - orthographicCamera.position.x) * lerp;
             }
@@ -376,13 +368,13 @@ public class levelOne extends InputAdapter implements Screen {
             orthographicCamera.update();
 
         }
-        if(w)orthographicCamera.position.y += 0.5 ;
+        if (w) orthographicCamera.position.y += 0.5;
         orthographicCamera.update();
-        if(a)orthographicCamera.position.x -= .5 ;
+        if (a) orthographicCamera.position.x -= .5;
         orthographicCamera.update();
-        if(s)orthographicCamera.position.y -= .5 ;
+        if (s) orthographicCamera.position.y -= .5;
         orthographicCamera.update();
-        if(d)orthographicCamera.position.x += .5 ;
+        if (d) orthographicCamera.position.x += .5;
         orthographicCamera.update();
 
     }
@@ -405,7 +397,7 @@ public class levelOne extends InputAdapter implements Screen {
         if (this.Right) {
             player.applyForceToCenter(new Vector2(5, 0), true);
         }
-        if (Input.Escape){
+        if (Input.Escape) {
             ((Game) Gdx.app.getApplicationListener()).setScreen(new levelMenu());
         }
 
@@ -417,13 +409,13 @@ public class levelOne extends InputAdapter implements Screen {
 
     }
 
-    public void drawSprites(){
+    public void drawSprites() {
         world.getBodies(tmpBodies);
         for (Body body : tmpBodies) {
 
-            if(body.getUserData() != null && body.getUserData() instanceof Sprite) {
-                Sprite sprite = (Sprite)body.getUserData();
-                sprite.setPosition(body.getPosition().x - sprite.getWidth() /2,body.getPosition().y- sprite.getHeight()/2);
+            if (body.getUserData() != null && body.getUserData() instanceof Sprite) {
+                Sprite sprite = (Sprite) body.getUserData();
+                sprite.setPosition(body.getPosition().x - sprite.getWidth() / 2, body.getPosition().y - sprite.getHeight() / 2);
                 sprite.setRotation(body.getAngle() * MathUtils.radiansToDegrees);
 
                 sprite.draw(batch);
@@ -434,7 +426,7 @@ public class levelOne extends InputAdapter implements Screen {
 
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         orthographicCamera.unproject(tmp.set(screenX, screenY, 0));
-        shoot(player.getPosition(), angle2(player.getPosition(), new Vector2(tmp.x,tmp.y)));
+        shoot(player.getPosition(), angle2(player.getPosition(), new Vector2(tmp.x, tmp.y)));
         world.QueryAABB(queryCallback, tmp.x, tmp.y, tmp.x, tmp.y);
         return false;
     }

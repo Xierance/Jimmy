@@ -62,7 +62,7 @@ public class levelTwo extends InputAdapter implements Screen {
             if (!fixture.testPoint(tmp.x, tmp.y))
                 return true;
 
-            if(fixture.getBody().getType() != BodyDef.BodyType.KinematicBody) {
+            if (fixture.getBody().getType() != BodyDef.BodyType.KinematicBody) {
                 jointDef.bodyB = fixture.getBody();
 
                 jointDef.target.set(tmp.x, tmp.y);
@@ -133,13 +133,12 @@ public class levelTwo extends InputAdapter implements Screen {
         castle2(new Vector2(5, -10), 15, 1, 2);
         castle2(new Vector2(5, -10), 12, 2, 3.5f);
         isosceles(new Vector2(30, 0), 1, 1.5f, 0.2f, 0.25f);
-        castle2(new Vector2(30,-10),30,1,9);
+        castle2(new Vector2(30, -10), 30, 1, 9);
 
         //////////////////////mouse joint
         jointDef.bodyA = ground;
         jointDef.collideConnected = true;
         jointDef.maxForce = 50;
-
 
 
     }
@@ -148,7 +147,6 @@ public class levelTwo extends InputAdapter implements Screen {
         font2.draw(batch, "Fps: " + Gdx.graphics.getFramesPerSecond(), 10.0F, 700.0F);
 
     }
-
 
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -171,7 +169,7 @@ public class levelTwo extends InputAdapter implements Screen {
         secondBatch.setProjectionMatrix(secondCamera.combined);
         secondCamera.update();
         secondBatch.begin();
-        if ((Gdx.app.getPreferences(MyGdxGame.title).getBoolean("fps")) == true  ){
+        if ((Gdx.app.getPreferences(MyGdxGame.title).getBoolean("fps")) == true) {
             displayFps(batch, font);
         }
         secondBatch.end();
@@ -179,9 +177,9 @@ public class levelTwo extends InputAdapter implements Screen {
         handleInput();
         cameraFollow();
 
-    world.step(TIMESTEP, VELOCITYITERATIONS, POSITIONITERATIONS);
+        world.step(TIMESTEP, VELOCITYITERATIONS, POSITIONITERATIONS);
 
-}
+    }
 
     @Override
     public void resize(int width, int height) {
@@ -199,9 +197,6 @@ public class levelTwo extends InputAdapter implements Screen {
     public void resume() {
 
     }
-
-
-
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -254,7 +249,7 @@ public class levelTwo extends InputAdapter implements Screen {
         bodyDef.bullet = true;
         bodyDef.gravityScale = 0f;
         PolygonShape shape = new PolygonShape();
-        shape.set(new Vector2[]{new Vector2( -1.f,0 ),new Vector2(0.1f, -0.05f ),new Vector2(  0.4f,     0 ),new Vector2(     0.1f,  0.05f )});
+        shape.set(new Vector2[]{new Vector2(-1.f, 0), new Vector2(0.1f, -0.05f), new Vector2(0.4f, 0), new Vector2(0.1f, 0.05f)});
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
         fixtureDef.density = density;
@@ -262,7 +257,7 @@ public class levelTwo extends InputAdapter implements Screen {
         fixtureDef.restitution = 0.75f;
         bulletBody = world.createBody(bodyDef);
         bulletBody.createFixture(fixtureDef);
-        bulletBody.setTransform(bulletBody.getPosition().x,bulletBody.getPosition().y,(float)Math.atan2((double)(velocity.y),(double)(velocity.x)));
+        bulletBody.setTransform(bulletBody.getPosition().x, bulletBody.getPosition().y, (float) Math.atan2((double) (velocity.y), (double) (velocity.x)));
 
         shape.dispose();
     }
@@ -370,7 +365,7 @@ public class levelTwo extends InputAdapter implements Screen {
 
     }
 
-    public void explode(Body body){
+    public void explode(Body body) {
 
 //do later
     }
@@ -425,7 +420,7 @@ public class levelTwo extends InputAdapter implements Screen {
         if (this.Right) {
             player.applyForceToCenter(new Vector2(10, 0), true);
         }
-        if (Input.Escape){
+        if (Input.Escape) {
             ((Game) Gdx.app.getApplicationListener()).setScreen(new levelMenu());
         }
 
@@ -457,7 +452,7 @@ public class levelTwo extends InputAdapter implements Screen {
 
         if (!Ctrl_left) shoot(player.getPosition(), angle2(player.getPosition(), new Vector2(tmp.x, tmp.y)));
 
-        if(Ctrl_left)world.QueryAABB(queryCallbackMouse, tmp.x, tmp.y, tmp.x, tmp.y);
+        if (Ctrl_left) world.QueryAABB(queryCallbackMouse, tmp.x, tmp.y, tmp.x, tmp.y);
         return false;
     }
 

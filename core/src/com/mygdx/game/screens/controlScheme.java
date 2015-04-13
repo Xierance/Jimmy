@@ -117,7 +117,7 @@ public class controlScheme extends InputAdapter implements Screen {
 
                 if (event.getListenerActor() == forwardInput) {
                     Gdx.app.log(MyGdxGame.title, "Apparently it's working" + key);
-                    switch (key){
+                    switch (key) {
                         case 19:
                             bindForward();
                             break;
@@ -259,23 +259,19 @@ public class controlScheme extends InputAdapter implements Screen {
                 }
 
 
-                if (event.getListenerActor() == backwardInput)
-                {
+                if (event.getListenerActor() == backwardInput) {
 
                 }
 
-                if (event.getListenerActor() == jumpInput)
-                {
+                if (event.getListenerActor() == jumpInput) {
 
                 }
 
-                if (event.getListenerActor() == weaponInput)
-                {
+                if (event.getListenerActor() == weaponInput) {
 
                 }
 
-                if (event.getListenerActor() == back)
-                {
+                if (event.getListenerActor() == back) {
 
                     String newForwardBind = moveForwardInput.getText().trim().equals("") ? "d" : moveForwardInput.getText().trim();
                     Gdx.app.getPreferences(MyGdxGame.title).putString("forwardBind", newForwardBind);
@@ -311,7 +307,7 @@ public class controlScheme extends InputAdapter implements Screen {
         stage.addActor(table);
     }
 
-    public void bindForward(){
+    public void bindForward() {
         int newForwardBind = key;
         Gdx.app.getPreferences(MyGdxGame.title).putInteger("forwardBind", newForwardBind);
     }

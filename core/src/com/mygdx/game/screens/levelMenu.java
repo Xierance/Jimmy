@@ -38,7 +38,7 @@ public class levelMenu implements Screen {
         table.setFillParent(true);
 
         list = new List(skin);
-        list.setItems("one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten","Dank");
+        list.setItems("one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "Dank");
         sp = new ScrollPane(list, skin);
 
 
@@ -46,23 +46,23 @@ public class levelMenu implements Screen {
         play.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-             //   ((Game) Gdx.app.getApplicationListener()).setScreen(new levelTwo());
-                if (list.getSelected() == "one"){
+                //   ((Game) Gdx.app.getApplicationListener()).setScreen(new levelTwo());
+                if (list.getSelected() == "one") {
                     ((Game) Gdx.app.getApplicationListener()).setScreen(new jumpTest());
                 }
-                if (list.getSelected() == "two"){
+                if (list.getSelected() == "two") {
                     ((Game) Gdx.app.getApplicationListener()).setScreen(new levelTest());
                 }
-                if (list.getSelected() == "three"){
+                if (list.getSelected() == "three") {
                     ((Game) Gdx.app.getApplicationListener()).setScreen(new levelOne());
                 }
-                if (list.getSelected() == "four"){
+                if (list.getSelected() == "four") {
                     ((Game) Gdx.app.getApplicationListener()).setScreen(new levelTwo());
                 }
-                if (list.getSelected() == "five"){
+                if (list.getSelected() == "five") {
                     ((Game) Gdx.app.getApplicationListener()).setScreen(new levelThree());
                 }
-                if (list.getSelected() == "Dank"){
+                if (list.getSelected() == "Dank") {
                     ((Game) Gdx.app.getApplicationListener()).setScreen(new TestClass());
                 }
 
@@ -74,7 +74,7 @@ public class levelMenu implements Screen {
 
         //Back button
         back = new TextButton("Back", skin, "small");
-        back.addListener(new ClickListener(){
+        back.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 ((Game) Gdx.app.getApplicationListener()).setScreen(new mainMenu());
@@ -84,8 +84,8 @@ public class levelMenu implements Screen {
 
 
         table.add().width(table.getWidth() / 3);
-        table.add("       Select Level").width(table.getWidth()/3); // colspan means the cell will span itself over 2 collums
-        table.add().width(table.getWidth()/3).row();
+        table.add("       Select Level").width(table.getWidth() / 3); // colspan means the cell will span itself over 2 collums
+        table.add().width(table.getWidth() / 3).row();
         table.add(sp).left().expandY();
         table.add(play);
         table.add(back).bottom().right();

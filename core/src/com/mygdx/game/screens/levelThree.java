@@ -228,7 +228,6 @@ public class levelThree extends InputAdapter implements Screen {
         world.step(TIMESTEP, VELOCITYITERATIONS, POSITIONITERATIONS);
 
 
-
     }
 
     @Override
@@ -286,7 +285,7 @@ public class levelThree extends InputAdapter implements Screen {
         blockShape.dispose();
     }
 
-    public void bullet(Vector2 location,  float density, float friction, Vector2 velocity) {
+    public void bullet(Vector2 location, float density, float friction, Vector2 velocity) {
         //ball
 
         Body bulletBody;
@@ -299,21 +298,21 @@ public class levelThree extends InputAdapter implements Screen {
 
         PolygonShape bulletShaft = new PolygonShape();
         bulletShaft.set(new Vector2[]{
-                new Vector2(-.8f, -.3f), new Vector2(-.6f, -0.3f), new Vector2(-.6f, -.2f), new Vector2(0.5f, -.2f),new Vector2(.5f,.2f),new Vector2(-.6f,.2f),new Vector2(-.6f,.3f),new Vector2(-.8f,.3f)
+                new Vector2(-.8f, -.3f), new Vector2(-.6f, -0.3f), new Vector2(-.6f, -.2f), new Vector2(0.5f, -.2f), new Vector2(.5f, .2f), new Vector2(-.6f, .2f), new Vector2(-.6f, .3f), new Vector2(-.8f, .3f)
         });
         FixtureDef shaftFixDef = new FixtureDef();
         shaftFixDef.shape = bulletShaft;
 
         bulletBody = world.createBody(bodyDef);
 
-        shaftFixDef.density = density/3;
+        shaftFixDef.density = density / 3;
         shaftFixDef.friction = friction;
         shaftFixDef.restitution = 0.25f;
         bulletBody.createFixture(shaftFixDef);
 
         PolygonShape bulletHead = new PolygonShape();
         bulletHead.set(new Vector2[]{
-                new Vector2(.5f,-0.2f),new Vector2(.9f,-.2f),new Vector2(.9f,.2f),new Vector2(.5f,.2f)
+                new Vector2(.5f, -0.2f), new Vector2(.9f, -.2f), new Vector2(.9f, .2f), new Vector2(.5f, .2f)
         });
         FixtureDef headFixDef = new FixtureDef();
         headFixDef.shape = bulletHead;
@@ -324,8 +323,8 @@ public class levelThree extends InputAdapter implements Screen {
         bulletBody.createFixture(headFixDef);
 
         Sprite dick = new Sprite(new Texture("textures/dick.png"));
-        dick.setSize(1.69f,.69f);
-        dick.setOrigin((float)1.69/2,(float).69/2);
+        dick.setSize(1.69f, .69f);
+        dick.setOrigin((float) 1.69 / 2, (float) .69 / 2);
 
         bulletBody.setUserData(dick);
 
@@ -470,7 +469,7 @@ public class levelThree extends InputAdapter implements Screen {
 
     }
 
-    private void playerSensor(){
+    private void playerSensor() {
         FixtureDef fDef = new FixtureDef();
 
         //Sensor setup
@@ -516,10 +515,10 @@ public class levelThree extends InputAdapter implements Screen {
         if (this.Right) {
             player.applyForceToCenter(new Vector2(20, 0), true);
         }
-        if (this.Escape){
+        if (this.Escape) {
             ((Game) Gdx.app.getApplicationListener()).setScreen(new levelMenu());
             Gdx.app.log(MyGdxGame.title, "finally!");
-            }
+        }
 
         if (player.getLinearVelocity().x > 12f) player.setLinearVelocity(12, player.getLinearVelocity().y);
         if (player.getLinearVelocity().x < -12f) player.setLinearVelocity(-12, player.getLinearVelocity().y);
@@ -535,9 +534,9 @@ public class levelThree extends InputAdapter implements Screen {
 
             if (body.getUserData() != null && body.getUserData() instanceof Sprite) {
                 //rotating player sprite
-                if (Left && !((Sprite) body.getUserData()).isFlipX() && (Sprite)body.getUserData() == playerSprite)
+                if (Left && !((Sprite) body.getUserData()).isFlipX() && (Sprite) body.getUserData() == playerSprite)
                     ((Sprite) body.getUserData()).setFlip(true, false);
-                if (Right && ((Sprite) body.getUserData() ).isFlipX() && (Sprite)body.getUserData() == playerSprite)
+                if (Right && ((Sprite) body.getUserData()).isFlipX() && (Sprite) body.getUserData() == playerSprite)
                     ((Sprite) body.getUserData()).setFlip(false, false);
 
                 Sprite sprite = (Sprite) body.getUserData();
