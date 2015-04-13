@@ -342,7 +342,7 @@ public class TestClass extends InputAdapter implements Screen {
         orthographicCamera.update();
         if (Down) orthographicCamera.position.y -= .5;
         orthographicCamera.update();
-        if (Left) orthographicCamera.position.x += .5;
+        if (Right) orthographicCamera.position.x += .5;
         orthographicCamera.update();
 
     }
