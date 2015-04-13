@@ -1,11 +1,9 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.graphics.g2d.ParticleEffectPool;
 import com.badlogic.gdx.physics.box2d.*;
-import com.mygdx.game.Visuals.gameParticles.Explosion;
-import com.mygdx.game.Visuals.gameParticles.Flame;
 import com.mygdx.game.screens.TestClass;
-import com.mygdx.game.things.Player;
-import com.mygdx.game.things.projectiles;
+import com.mygdx.game.things.FireBallPool;
 
 public class MyContactListener implements ContactListener {
 
@@ -14,18 +12,18 @@ public class MyContactListener implements ContactListener {
         Fixture fa = c.getFixtureA();
         Fixture fb = c.getFixtureB();
 
-        if (fa.getBody().getUserData() != null && fa.getBody().getUserData() instanceof Flame && fb.getBody().getUserData() != TestClass.playerSprite && fa.isSensor() == false) {
-            if (fb.getBody().getUserData() instanceof Flame) {
+        if (fa.getBody().getUserData() != null && fa.getBody().getUserData() instanceof ParticleEffectPool.PooledEffect && fb.getBody().getUserData() != TestClass.playerSprite && fa.isSensor() == false) {
+            if (fb.getBody().getUserData() instanceof ParticleEffectPool.PooledEffect) {
             } else {
                 TestClass.getToDestroy().add(fa.getBody());
-                Flame.flamePoolTest.free((Flame)fa.getBody().getUserData());
+                FireBallPool.pooledEffects.removeValue((ParticleEffectPool.PooledEffect) fa.getBody().getUserData(), true);
             }
         }
-        if (fb.getBody().getUserData() != null && fb.getBody().getUserData() instanceof Flame && fa.getBody().getUserData() != TestClass.playerSprite && fb.isSensor() == false) {
-            if (fa.getBody().getUserData() instanceof Flame) {
+        if (fb.getBody().getUserData() != null && fb.getBody().getUserData() instanceof ParticleEffectPool.PooledEffect && fa.getBody().getUserData() != TestClass.playerSprite && fb.isSensor() == false) {
+            if (fa.getBody().getUserData() instanceof ParticleEffectPool.PooledEffect) {
             } else {
                 TestClass.getToDestroy().add(fb.getBody());
-                Flame.flamePoolTest.free((Flame)fb.getBody().getUserData());
+                FireBallPool.pooledEffects.removeValue((ParticleEffectPool.PooledEffect) fb.getBody().getUserData(), true);
             }
         }
     }

@@ -411,13 +411,12 @@ public class TestClass extends InputAdapter implements Screen {
 
         world.getBodies(tmpBodies);
         for (Body body : tmpBodies) {
+            if (body.getUserData() != null && body.getUserData() instanceof ParticleEffectPool.PooledEffect) {
 
-            if (body.getUserData() != null && body.getUserData() instanceof Flame) {
+                ParticleEffectPool.PooledEffect flame = (ParticleEffectPool.PooledEffect)body.getUserData();
+                flame.setPosition(body.getPosition().x,body.getPosition().y);
+                flame.draw(batch,delta);
 
-                Flame flame = Flame.flamePoolTest.obtain();
-                flame.setPosition(new Vector2(body.getPosition().x , body.getPosition().y));
-
-                flame.getFlame().draw(batch,delta);
             }
         }
     }

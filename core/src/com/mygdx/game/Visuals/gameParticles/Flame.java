@@ -5,15 +5,13 @@ import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.screens.TestClass;
-import com.mygdx.game.things.PoolTest;
 
 /**
  * Created by for example John on 4/9/2015.
  */
 public class Flame {
 
-    private ParticleEffect flame;
-    public static PoolTest flamePoolTest = new PoolTest();
+    private static ParticleEffect flame;
 
     public  Flame(Vector2 location){
         flame = new ParticleEffect();
