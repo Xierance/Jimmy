@@ -420,7 +420,6 @@ public class TestClass extends InputAdapter implements Screen {
                 flame.getFlame().draw(batch,delta);
             }
         }
-
     }
 
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
@@ -520,10 +519,7 @@ public class TestClass extends InputAdapter implements Screen {
             case 45:
                 Q = true;
                 break;
-
-
         }
-
         return true;
     }
 
