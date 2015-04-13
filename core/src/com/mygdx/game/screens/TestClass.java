@@ -335,8 +335,8 @@ public class TestClass extends InputAdapter implements Screen {
         if (E) {
             orthographicCamera.zoom -= .010f;
             orthographicCamera.update();
-
         }
+
         if (Up) orthographicCamera.position.y += 0.5;
         orthographicCamera.update();
         if (Left) orthographicCamera.position.x -= .5;
