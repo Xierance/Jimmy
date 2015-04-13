@@ -301,10 +301,9 @@ public class controlScheme extends InputAdapter implements Screen {
                         }
                     })));
                 }
-
-
             }
         };
+
         table.add(forwardInput);
         table.add(back);
 
