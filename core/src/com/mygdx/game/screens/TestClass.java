@@ -599,7 +599,6 @@ public class TestClass extends InputAdapter implements Screen {
         return new Vector2(temp.x,temp.y);
     }
 
-
 }
 
 
