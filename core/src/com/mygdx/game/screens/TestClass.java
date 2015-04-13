@@ -279,6 +279,7 @@ public class TestClass extends InputAdapter implements Screen {
         player.getPlayerSPrite().getTexture().dispose();
         for (ParticleEffect effect :flames)effect.dispose();
         for (Explosion explosion:Explosion.Explosions)explosion.getExplosion().dispose();
+        for(ParticleEffectPool.PooledEffect effect:FireBallPool.TestPool.pooledEffects)effect.dispose();
 
     }
 
@@ -415,7 +416,7 @@ public class TestClass extends InputAdapter implements Screen {
 
                 ParticleEffectPool.PooledEffect flame = (ParticleEffectPool.PooledEffect)body.getUserData();
                 flame.setPosition(body.getPosition().x,body.getPosition().y);
-                flame.draw(batch,delta);
+                flame.draw(batch, delta);
 
             }
         }
