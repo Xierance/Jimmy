@@ -349,7 +349,7 @@ public class TestClass extends InputAdapter implements Screen {
 
         //move
         if (this.Space && player.isPlayerGrounded(world,player)) {
-            player.getPlayerBody().applyLinearImpulse(new Vector2(0, 3a), new Vector2(), true);
+            player.getPlayerBody().applyLinearImpulse(new Vector2(0, 3), new Vector2(), true);
         }
 
         if (this.S) {
