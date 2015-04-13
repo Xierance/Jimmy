@@ -413,8 +413,6 @@ public class TestClass extends InputAdapter implements Screen {
         world.getBodies(tmpBodies);
         for (Body body : tmpBodies) {
             if (body.getUserData() != null && body.getUserData() instanceof ParticleEffectPool.PooledEffect) {
-
-
                 ((ParticleEffectPool.PooledEffect) body.getUserData()).setPosition(body.getPosition().x,body.getPosition().y);
                 ((ParticleEffectPool.PooledEffect) body.getUserData()).draw(batch,delta);
 
