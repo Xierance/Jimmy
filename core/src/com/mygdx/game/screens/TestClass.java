@@ -109,7 +109,7 @@ public class TestClass extends InputAdapter implements Screen {
     }
 
     public static void mapToBox2d(TiledMap map, World world) {
-        map = new TmxMapLoader().load("maps/testMap.tmx");
+        map = new TmxMapLoader().load("maps/testTileMap.tmx");
         TiledMapTileLayer tileLayer = (TiledMapTileLayer) map.getLayers().get("butt");
         Sprite tileSprite = new Sprite(new Texture("jew.jpg"));
 
