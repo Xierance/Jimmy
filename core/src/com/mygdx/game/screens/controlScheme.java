@@ -15,6 +15,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game.Input;
 import com.mygdx.game.MyGdxGame;
 
+import javax.print.DocFlavor;
+
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.moveTo;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.run;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
@@ -105,22 +107,28 @@ public class controlScheme extends InputAdapter implements Screen {
                 if (event.getListenerActor() == forwardInput) {
                     toggleControl++;
 
+
+
                     while (toggleControl % 2 == 0) {
 
                         Gdx.app.log(MyGdxGame.title, "Controls can now be bound" + toggleControl);
+                        Gdx.app.log(MyGdxGame.title, String.valueOf(Input.currentKey));
 
                         int newForwardBind = Input.currentKey;
                         Gdx.app.getPreferences(MyGdxGame.title).putInteger("forwardBind", newForwardBind);
 
-
                         if (Input.currentKey > 0 && Input.currentKey == newForwardBind) {
                             toggleControl2 = newForwardBind;
+                            Gdx.app.log(MyGdxGame.title, String.valueOf(newForwardBind));
 
                             if (toggleControl2 == newForwardBind && toggleControl == 0){
                                 toggleControl++;
+                                Gdx.app.log(MyGdxGame.title, "First time only: " + toggleControl + toggleControl2);
 
-                            } else if (Input.currentKey > 0 && Input.currentKey != toggleControl2) {
+
+                            } else /*(Input.currentKey > 0 && Input.currentKey != toggleControl2)*/ {
                                 toggleControl++;
+                                Gdx.app.log(MyGdxGame.title, "Should be working from now on: " + toggleControl);
                             }
                         }
 
