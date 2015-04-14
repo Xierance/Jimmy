@@ -12,10 +12,10 @@ public class Rainboom {
 
     private ParticleEffect rainboom;
 
-    public  Rainboom(Vector2 location){
+    public Rainboom(Vector2 location) {
         rainboom = new ParticleEffect();
         rainboom.load(Gdx.files.local("effects/rainboom.p"), Gdx.files.local("effects"));
-        rainboom.setPosition(location.x,location.y);
+        rainboom.setPosition(location.x, location.y);
         rainboom.scaleEffect(0.0069f);
         rainboom.start();
     }
@@ -28,13 +28,13 @@ public class Rainboom {
         this.rainboom = rainboom;
     }
 
-    public void update(SpriteBatch batch,Float delta,Vector2 position){
-        rainboom.setPosition(position.x,position.y);
-        rainboom.draw(batch,delta);
+    public void update(SpriteBatch batch, Float delta, Vector2 position) {
+        rainboom.setPosition(position.x, position.y);
+        rainboom.draw(batch, delta);
 
     }
 
-    public void setPosition(Vector2 position){
-        rainboom.setPosition(position.x,position.y);
+    public void setPosition(Vector2 position) {
+        rainboom.setPosition(position.x, position.y);
     }
 }

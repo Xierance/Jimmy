@@ -12,7 +12,7 @@ public class ActorAccessor implements TweenAccessor<Actor> {
 
     @Override
     public int getValues(Actor target, int tweenType, float[] returnValues) {
-        switch(tweenType){
+        switch (tweenType) {
             case Y:
                 returnValues[0] = target.getY();
                 return 1;
@@ -26,26 +26,26 @@ public class ActorAccessor implements TweenAccessor<Actor> {
                 return 1;
             default:
                 assert false;
-                return - 1;
+                return -1;
         }
     }
 
     @Override
     public void setValues(Actor target, int tweenType, float[] newValues) {
 
-        switch(tweenType) {
+        switch (tweenType) {
             case Y:
                 target.setY(newValues[0]);
                 break;
             case RGB:
-                target.setColor( newValues[0],  newValues[1],  newValues[2], target.getColor().a);
-               break;
+                target.setColor(newValues[0], newValues[1], newValues[2], target.getColor().a);
+                break;
             case ALPHA:
-                target.setColor( target.getColor().r,  target.getColor().g,  target.getColor().b, newValues[0]);
+                target.setColor(target.getColor().r, target.getColor().g, target.getColor().b, newValues[0]);
                 break;
             default:
                 assert false;
 
-    }
+        }
     }
 }

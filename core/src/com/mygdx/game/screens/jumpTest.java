@@ -29,7 +29,7 @@ public class jumpTest implements Screen {
     public void show() {
         world = new World(new Vector2(0, -9.807f), true);  //Contructor takes Vector2 (An X and Y value) and if the body is allowed to sleep (inactive bodies no longer need to be calculated)
         debugRenderer = new Box2DDebugRenderer();
-        camera = new OrthographicCamera(Gdx.graphics.getWidth()/50, Gdx.graphics.getHeight()/50);
+        camera = new OrthographicCamera(Gdx.graphics.getWidth() / 50, Gdx.graphics.getHeight() / 50);
 
         Gdx.input.setInputProcessor(new Input());
 
@@ -41,7 +41,7 @@ public class jumpTest implements Screen {
 
     }
 
-    private void createBall(){
+    private void createBall() {
         BodyDef bodyDef = new BodyDef();
         FixtureDef fDef = new FixtureDef(); //Takes the physical properties of the the fixture
 
@@ -62,7 +62,7 @@ public class jumpTest implements Screen {
         fDef.friction = 0.1f;
         fDef.restitution = 0.999999f; //coefficient of restitution
 
-        box= world.createBody(bodyDef);
+        box = world.createBody(bodyDef);
 
         box.createFixture(fDef);  //World create a body, create fixture on that body
         cs.dispose();
@@ -70,7 +70,7 @@ public class jumpTest implements Screen {
 
     }
 
-    private void createPlayer(){
+    private void createPlayer() {
 
         BodyDef bodyDef = new BodyDef();
         FixtureDef fDef = new FixtureDef(); //Takes the physical properties of the the fixture
@@ -92,7 +92,7 @@ public class jumpTest implements Screen {
 
     }
 
-    private void createGround(){
+    private void createGround() {
 
         BodyDef bodyDef = new BodyDef();
         FixtureDef fDef = new FixtureDef();
@@ -110,7 +110,7 @@ public class jumpTest implements Screen {
 
     }
 
-    private void createPlayerSensor(){
+    private void createPlayerSensor() {
         FixtureDef fDef = new FixtureDef();
 
         //Sensor setup
@@ -157,13 +157,13 @@ public class jumpTest implements Screen {
         if (Input.Right) {
             box.applyForceToCenter(new Vector2(50, 0), true);
         }
-        if (Input.Escape && tempb){
+        if (Input.Escape && tempb) {
             ((Game) Gdx.app.getApplicationListener()).setScreen(new levelMenu());
             tempb = false;
         }
     }
 
-    public Body lineAlt(Vector2 location, float angle, float length, float friction,Body body) {
+    public Body lineAlt(Vector2 location, float angle, float length, float friction, Body body) {
         //ground
         BodyDef bodyDef = new BodyDef();
         FixtureDef fixtureDef = new FixtureDef();
@@ -190,7 +190,7 @@ public class jumpTest implements Screen {
 
     public void cameraFollow() {
         float lerp = .1f;
-        if(!Ctrl_left) {
+        if (!Ctrl_left) {
             if (camera.position.x != box.getPosition().x) {
                 camera.position.x += (box.getPosition().x - camera.position.x) * lerp;
             }
@@ -209,13 +209,13 @@ public class jumpTest implements Screen {
             camera.update();
 
         }
-        if(Input.W)camera.position.y += .5 ;
+        if (Input.W) camera.position.y += .5;
         camera.update();
-        if(Input.A)camera.position.x -= .5 ;
+        if (Input.A) camera.position.x -= .5;
         camera.update();
-        if(Input.D)camera.position.y -= .5 ;
+        if (Input.D) camera.position.y -= .5;
         camera.update();
-        if(Input.S)camera.position.x += .5 ;
+        if (Input.S) camera.position.x += .5;
         camera.update();
 
     }
@@ -226,7 +226,7 @@ public class jumpTest implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 
-      Gdx.app.log(MyGdxGame.title, String.valueOf(isPlayerGrounded()));
+        Gdx.app.log(MyGdxGame.title, String.valueOf(isPlayerGrounded()));
 
         debugRenderer.render(world, camera.combined); // Projection matrices values are taken from the camera (combined takes everything we need and puts it together)
         world.step((1 / 60f), 8, 3); //Velocity iterations and position iterations determines the quality/accuracy of the simulation

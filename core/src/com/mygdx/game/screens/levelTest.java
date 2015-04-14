@@ -42,12 +42,12 @@ public class levelTest extends InputAdapter implements Screen {
     private QueryCallback queryCallback = new QueryCallback() {
         @Override
         public boolean reportFixture(Fixture fixture) {
-            if(!fixture.testPoint(tmp.x,tmp.y))
+            if (!fixture.testPoint(tmp.x, tmp.y))
                 return true;
 
-            jointDef.bodyB  = fixture.getBody();
-            jointDef.target.set(tmp.x,tmp.y);
-            joint = (MouseJoint)world.createJoint(jointDef);
+            jointDef.bodyB = fixture.getBody();
+            jointDef.target.set(tmp.x, tmp.y);
+            joint = (MouseJoint) world.createJoint(jointDef);
 
             return false;
         }
@@ -71,7 +71,7 @@ public class levelTest extends InputAdapter implements Screen {
         //ground
         BodyDef tempdef = new BodyDef();
         Body ground = world.createBody(tempdef);
-        ground =  lineAlt(new Vector2(-300f, -10f), 0, 3000, 0.25f,ground);
+        ground = lineAlt(new Vector2(-300f, -10f), 0, 3000, 0.25f, ground);
 
 
         //ball/////////////////////////////////
@@ -91,16 +91,16 @@ public class levelTest extends InputAdapter implements Screen {
         shape.dispose();
         ////////////////////////////////////
 
-        castle(new Vector2(12, -10), 25,1f);
-        castle(new Vector2(20, -10), 25,2);
-        castle2(new Vector2(5,-10),15,1,2);
-        castle2(new Vector2(5,-10),12,2,3.5f);
-        line(new Vector2(-30,-10),90,100,0.5f);
-        isosceles(new Vector2(30,0),1,1.5f,0.2f,0.25f);
+        castle(new Vector2(12, -10), 25, 1f);
+        castle(new Vector2(20, -10), 25, 2);
+        castle2(new Vector2(5, -10), 15, 1, 2);
+        castle2(new Vector2(5, -10), 12, 2, 3.5f);
+        line(new Vector2(-30, -10), 90, 100, 0.5f);
+        isosceles(new Vector2(30, 0), 1, 1.5f, 0.2f, 0.25f);
 
         //////////////////////mouse joint
         jointDef.bodyA = ground;
-        jointDef.collideConnected  = true;
+        jointDef.collideConnected = true;
         jointDef.maxForce = 500;
 
 
@@ -123,7 +123,7 @@ public class levelTest extends InputAdapter implements Screen {
         cameraFollow();
 
 
-        if(Gdx.input.isKeyPressed(com.badlogic.gdx.Input.Keys.ESCAPE)){
+        if (Gdx.input.isKeyPressed(com.badlogic.gdx.Input.Keys.ESCAPE)) {
             ((Game) Gdx.app.getApplicationListener()).setScreen(new levelMenu());
 
         }
@@ -131,7 +131,7 @@ public class levelTest extends InputAdapter implements Screen {
         world.step(TIMESTEP, VELOCITYITERATIONS, POSITIONITERATIONS);
 
         batch.begin();
-        if ((Gdx.app.getPreferences(MyGdxGame.title).getBoolean("fps")) == true  ){
+        if ((Gdx.app.getPreferences(MyGdxGame.title).getBoolean("fps")) == true) {
             displayFps(batch, font);
         }
         batch.end();
@@ -189,7 +189,6 @@ public class levelTest extends InputAdapter implements Screen {
     }
 
 
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void circle(Vector2 location, float radius, float density, float friction) {
@@ -209,13 +208,13 @@ public class levelTest extends InputAdapter implements Screen {
         shape.dispose();
     }
 
-    public void isosceles(Vector2 location,float width,float height,float density,float friction){
+    public void isosceles(Vector2 location, float width, float height, float density, float friction) {
         BodyDef bodyDef = new BodyDef();
         FixtureDef fixtureDef = new FixtureDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         bodyDef.position.set(location.x, location.y);
         PolygonShape blockShape = new PolygonShape();
-        blockShape.set(new Vector2[]{new Vector2(0, 0), new Vector2(width, 0), new Vector2(width/2, height)});
+        blockShape.set(new Vector2[]{new Vector2(0, 0), new Vector2(width, 0), new Vector2(width / 2, height)});
         fixtureDef.shape = blockShape;
         fixtureDef.friction = friction;
         fixtureDef.restitution = 0.5f;
@@ -246,7 +245,7 @@ public class levelTest extends InputAdapter implements Screen {
         lineShape.dispose();
     }
 
-    public Body lineAlt(Vector2 location, float angle, float length, float friction,Body body) {
+    public Body lineAlt(Vector2 location, float angle, float length, float friction, Body body) {
         //ground
         BodyDef bodyDef = new BodyDef();
         FixtureDef fixtureDef = new FixtureDef();
@@ -272,96 +271,95 @@ public class levelTest extends InputAdapter implements Screen {
     public void handleInput() {
 
         //move
-            if (this.Up) {
-                circle.applyForceToCenter(new Vector2(0, 5), true);
-            }
+        if (this.Up) {
+            circle.applyForceToCenter(new Vector2(0, 5), true);
+        }
 
-            if (this.Down) {
-                circle.applyForceToCenter(new Vector2(0, -5), true);
-            }
+        if (this.Down) {
+            circle.applyForceToCenter(new Vector2(0, -5), true);
+        }
 
-            if (this.Left) {
-                circle.applyForceToCenter(new Vector2(-5, 0), true);
-            }
+        if (this.Left) {
+            circle.applyForceToCenter(new Vector2(-5, 0), true);
+        }
 
-            if (this.Right) {
-                circle.applyForceToCenter(new Vector2(5, 0), true);
-            }
+        if (this.Right) {
+            circle.applyForceToCenter(new Vector2(5, 0), true);
+        }
 
-        if (circle.getLinearVelocity().x > 12f)circle.setLinearVelocity(12,circle.getLinearVelocity().y);
-        if (circle.getLinearVelocity().x < -12f)circle.setLinearVelocity(-12,circle.getLinearVelocity().y);
-        if (circle.getLinearVelocity().y > 12f)circle.setLinearVelocity(circle.getLinearVelocity().x,12);
-        if (circle.getLinearVelocity().y > 12f)circle.setLinearVelocity(circle.getLinearVelocity().x,-12f);
+        if (circle.getLinearVelocity().x > 12f) circle.setLinearVelocity(12, circle.getLinearVelocity().y);
+        if (circle.getLinearVelocity().x < -12f) circle.setLinearVelocity(-12, circle.getLinearVelocity().y);
+        if (circle.getLinearVelocity().y > 12f) circle.setLinearVelocity(circle.getLinearVelocity().x, 12);
+        if (circle.getLinearVelocity().y > 12f) circle.setLinearVelocity(circle.getLinearVelocity().x, -12f);
     }
 
-    public void castle(Vector2 location, int height,float size) {
-        if (size  > 25)size = 25;
-        float  oldHeight = 0;
+    public void castle(Vector2 location, int height, float size) {
+        if (size > 25) size = 25;
+        float oldHeight = 0;
         float blockheight = size;
-        for (int i =  0; i <= height ; i++) {
-            square(new Vector2(location.x - (blockheight *0.9f)/2,location.y + oldHeight), blockheight*0.9f, 0.2f, 0.75f);
+        for (int i = 0; i <= height; i++) {
+            square(new Vector2(location.x - (blockheight * 0.9f) / 2, location.y + oldHeight), blockheight * 0.9f, 0.2f, 0.75f);
             blockheight *= 0.9;
             oldHeight += blockheight;
         }
 
     }
 
-    public void castle2(Vector2 location, int height,float size,float gap) {
-        if (height  > 25)height = 25;
-        if(size < 1)size = 1;
-        float  oldHeight = 0;
+    public void castle2(Vector2 location, int height, float size, float gap) {
+        if (height > 25) height = 25;
+        if (size < 1) size = 1;
+        float oldHeight = 0;
         float blockheight = size;
-        for (int i =  0; i <= height ; i++) {
-            square(new Vector2(location.x - (blockheight *0.9f)/2 - gap/2 -size/2,location.y + oldHeight), blockheight*0.9f, 0.2f, 0.75f);
+        for (int i = 0; i <= height; i++) {
+            square(new Vector2(location.x - (blockheight * 0.9f) / 2 - gap / 2 - size / 2, location.y + oldHeight), blockheight * 0.9f, 0.2f, 0.75f);
 
-            square(new Vector2(location.x - (blockheight *0.9f)/2 + gap/2 + size/2,location.y + oldHeight), blockheight*0.9f, 0.2f, 0.75f);
+            square(new Vector2(location.x - (blockheight * 0.9f) / 2 + gap / 2 + size / 2, location.y + oldHeight), blockheight * 0.9f, 0.2f, 0.75f);
 
             blockheight *= 0.9;
             oldHeight += blockheight;
         }
-        isosceles(new Vector2(location.x - (blockheight)/2 - gap/2 -size/2,location.y + oldHeight),blockheight,blockheight*1.5f,0.25f,0.75f);
-        isosceles(new Vector2(location.x - (blockheight)/2 + gap/2 + size/2,location.y + oldHeight),blockheight,blockheight*1.5f,0.25f,0.75f);
+        isosceles(new Vector2(location.x - (blockheight) / 2 - gap / 2 - size / 2, location.y + oldHeight), blockheight, blockheight * 1.5f, 0.25f, 0.75f);
+        isosceles(new Vector2(location.x - (blockheight) / 2 + gap / 2 + size / 2, location.y + oldHeight), blockheight, blockheight * 1.5f, 0.25f, 0.75f);
     }
 
     public void cameraFollow() {
         float lerp = 0.1f;
         if (orthographicCamera.position.x != circle.getPosition().x) {
-            orthographicCamera.position.x += (circle.getPosition().x - orthographicCamera.position.x)*lerp;
+            orthographicCamera.position.x += (circle.getPosition().x - orthographicCamera.position.x) * lerp;
         }
         if (orthographicCamera.position.y != circle.getPosition().y) {
-            orthographicCamera.position.y += (circle.getPosition().y - orthographicCamera.position.y)*lerp;
+            orthographicCamera.position.y += (circle.getPosition().y - orthographicCamera.position.y) * lerp;
         }
         orthographicCamera.update();
     }
 
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        orthographicCamera.unproject(tmp.set(screenX,screenY,0));
-        world.QueryAABB(queryCallback,tmp.x,tmp.y,tmp.x,tmp.y);
+        orthographicCamera.unproject(tmp.set(screenX, screenY, 0));
+        world.QueryAABB(queryCallback, tmp.x, tmp.y, tmp.x, tmp.y);
         return false;
     }
 
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        if(joint == null)return false;
+        if (joint == null) return false;
 
-        orthographicCamera.unproject(tmp.set(screenX,screenY,0));
+        orthographicCamera.unproject(tmp.set(screenX, screenY, 0));
 
 
-        joint.setTarget(tmp2.set(tmp.x,tmp.y));
+        joint.setTarget(tmp2.set(tmp.x, tmp.y));
         return false;
     }
 
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        if(joint == null)
-        return false;
+        if (joint == null)
+            return false;
         world.destroyJoint(joint);
         joint = null;
         return true;
     }
 
 
-
     public boolean keyDown(int keycode) {
-        switch(keycode) {
+        switch (keycode) {
             case 19:
                 Up = true;
                 break;
@@ -383,7 +381,7 @@ public class levelTest extends InputAdapter implements Screen {
     }
 
     public boolean keyUp(int keycode) {
-        switch(keycode) {
+        switch (keycode) {
             case 19:
                 Up = false;
                 break;

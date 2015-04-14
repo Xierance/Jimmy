@@ -22,16 +22,20 @@ public class settings implements Screen {
     private Table table;
     private Skin skin;
 
-    /** @return the directory the levels will be saved to and read from */
+    /**
+     * @return the directory the levels will be saved to and read from
+     */
     public static FileHandle levelDirectory() {
         String prefsDir = Gdx.app.getPreferences(MyGdxGame.title).getString("leveldirectory").trim();
-        if(prefsDir != null && !prefsDir.equals(""))
+        if (prefsDir != null && !prefsDir.equals(""))
             return Gdx.files.absolute(prefsDir);
         else
             return Gdx.files.absolute(Gdx.files.external(MyGdxGame.title + "/levels").path()); // return default level directory
     }
 
-    /** @return if vSync is enabled */
+    /**
+     * @return if vSync is enabled
+     */
     public static boolean vSync() {
 
         return Gdx.app.getPreferences(MyGdxGame.title).getBoolean("vsync");
@@ -57,7 +61,6 @@ public class settings implements Screen {
         table.setSize(width, height);
 
     }
-
 
 
     @Override
@@ -89,7 +92,7 @@ public class settings implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
 
-                if(event.getListenerActor() == checkFPS) {
+                if (event.getListenerActor() == checkFPS) {
                     Gdx.app.getPreferences(MyGdxGame.title).putBoolean("fps", checkFPS.isChecked()); //Sets "fps" boolean to what the check box says
                     fpsOn++;
 
@@ -99,7 +102,7 @@ public class settings implements Screen {
 
 
                 // event.getListenerActor() returns the source of the event, e.g. a button that was clicked
-                if(event.getListenerActor() == vSyncCheckBox) {
+                if (event.getListenerActor() == vSyncCheckBox) {
                     // save vSync
                     Gdx.app.getPreferences(MyGdxGame.title).putBoolean("vsync", vSyncCheckBox.isChecked());
 
@@ -108,9 +111,7 @@ public class settings implements Screen {
 
                     Gdx.app.log(MyGdxGame.title, "vSync " + (vSync() ? "enabled" : "disabled"));
 
-                }
-
-                 else if(event.getListenerActor() == back) {
+                } else if (event.getListenerActor() == back) {
                     // save level directory
                     String actualLevelDirectory = levelDirectoryInput.getText().trim().equals("") ? Gdx.files.getExternalStoragePath() + MyGdxGame.title + "/levels" : levelDirectoryInput.getText().trim(); // shortened form of an if-statement: [boolean] ? [if true] : [else] // String#trim() removes spaces on both sides of the string
                     Gdx.app.getPreferences(MyGdxGame.title).putString("leveldirectory", actualLevelDirectory);
@@ -128,8 +129,6 @@ public class settings implements Screen {
                         }
                     })));
                 }
-
-
 
 
             }

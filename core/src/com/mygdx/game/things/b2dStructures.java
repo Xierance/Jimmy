@@ -12,7 +12,7 @@ import com.mygdx.game.Visuals.gameParticles.Rainboom;
  */
 public class b2dStructures {
 
-    public static void square(Vector2 location, float size, float density, float friction,TextureAtlas blocks,World world) {
+    public static void square(Vector2 location, float size, float density, float friction, TextureAtlas blocks, World world) {
 
         //blocks
 
@@ -21,7 +21,7 @@ public class b2dStructures {
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         bodyDef.position.set(location.x, location.y);
         PolygonShape blockShape = new PolygonShape();
-        blockShape.setAsBox(size/2,size/2);
+        blockShape.setAsBox(size / 2, size / 2);
         fixtureDef.shape = blockShape;
         fixtureDef.friction = friction;
         fixtureDef.restitution = 0.5f;
@@ -29,8 +29,8 @@ public class b2dStructures {
 
         Sprite blockSprite = new Sprite(blocks.createSprite("Block Four"));
 
-        blockSprite.setSize(size,size);
-        blockSprite.setOrigin(size/2,size/2);
+        blockSprite.setSize(size, size);
+        blockSprite.setOrigin(size / 2, size / 2);
 
         Body body = world.createBody(bodyDef);
         body.createFixture(fixtureDef);
@@ -39,7 +39,7 @@ public class b2dStructures {
         blockShape.dispose();
     }
 
-    public static  void isosceles(Vector2 location, float width, float height, float density, float friction,World world) {
+    public static void isosceles(Vector2 location, float width, float height, float density, float friction, World world) {
         BodyDef bodyDef = new BodyDef();
         FixtureDef fixtureDef = new FixtureDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
@@ -56,7 +56,7 @@ public class b2dStructures {
 
     }
 
-    public static void line(Vector2 location, float angle, float length, float friction,World world) {
+    public static void line(Vector2 location, float angle, float length, float friction, World world) {
         //ground
         BodyDef bodyDef = new BodyDef();
         FixtureDef fixtureDef = new FixtureDef();
@@ -76,7 +76,7 @@ public class b2dStructures {
         lineShape.dispose();
     }
 
-    public static Body lineAlt(Vector2 location, float angle, float length, float friction, Body body,World world) {
+    public static Body lineAlt(Vector2 location, float angle, float length, float friction, Body body, World world) {
         //ground
         BodyDef bodyDef = new BodyDef();
         FixtureDef fixtureDef = new FixtureDef();
@@ -99,34 +99,34 @@ public class b2dStructures {
         return body;
     }
 
-    public static void castle(Vector2 location, int height, float size,TextureAtlas blocks,World world) {
+    public static void castle(Vector2 location, int height, float size, TextureAtlas blocks, World world) {
 
         if (size > 25) size = 25;
         float oldHeight = 0;
         float blockheight = size;
         for (int i = 0; i <= height; i++) {
-            b2dStructures.square(new Vector2(location.x - (blockheight * 0.9f) / 2, location.y + oldHeight), blockheight * 0.9f, 0.2f, 0.75f,blocks,world);
+            b2dStructures.square(new Vector2(location.x - (blockheight * 0.9f) / 2, location.y + oldHeight), blockheight * 0.9f, 0.2f, 0.75f, blocks, world);
             blockheight *= 0.9;
             oldHeight += blockheight;
         }
 
     }
 
-    public static void castle2(Vector2 location, int height, float size, float gap,TextureAtlas blocks,World world) {
+    public static void castle2(Vector2 location, int height, float size, float gap, TextureAtlas blocks, World world) {
         if (height > 25) height = 25;
         if (size < 1) size = 1;
         float oldHeight = 0;
         float blockheight = size;
         for (int i = 0; i <= height; i++) {
-            square(new Vector2(location.x - (blockheight * 0.9f) / 2 - gap / 2 - size / 2, location.y + oldHeight), blockheight * 0.9f, 0.2f, 0.75f,blocks,world);
+            square(new Vector2(location.x - (blockheight * 0.9f) / 2 - gap / 2 - size / 2, location.y + oldHeight), blockheight * 0.9f, 0.2f, 0.75f, blocks, world);
 
-            square(new Vector2(location.x - (blockheight * 0.9f) / 2 + gap / 2 + size / 2, location.y + oldHeight), blockheight * 0.9f, 0.2f, 0.75f,blocks,world);
+            square(new Vector2(location.x - (blockheight * 0.9f) / 2 + gap / 2 + size / 2, location.y + oldHeight), blockheight * 0.9f, 0.2f, 0.75f, blocks, world);
 
             blockheight *= 0.9;
             oldHeight += blockheight;
         }
-        isosceles(new Vector2(location.x - (blockheight) / 2 - gap / 2 - size / 2, location.y + oldHeight), blockheight, blockheight * 1.5f, 0.25f, 0.75f,world );
-        isosceles(new Vector2(location.x - (blockheight) / 2 + gap / 2 + size / 2, location.y + oldHeight), blockheight, blockheight * 1.5f, 0.25f, 0.75f,world);
+        isosceles(new Vector2(location.x - (blockheight) / 2 - gap / 2 - size / 2, location.y + oldHeight), blockheight, blockheight * 1.5f, 0.25f, 0.75f, world);
+        isosceles(new Vector2(location.x - (blockheight) / 2 + gap / 2 + size / 2, location.y + oldHeight), blockheight, blockheight * 1.5f, 0.25f, 0.75f, world);
     }
 
 }

@@ -10,11 +10,11 @@ import com.mygdx.game.Visuals.gameParticles.Flame;
  * Created by for example John on 4/13/2015.
  */
 public class FireBallPool {
-    public static class TestPool{
+    public static class TestPool {
 
-    public static Array<ParticleEffectPool.PooledEffect> pooledEffects = new Array<ParticleEffectPool.PooledEffect>();
+        public static Array<ParticleEffectPool.PooledEffect> pooledEffects = new Array<ParticleEffectPool.PooledEffect>();
 
-    public static ParticleEffectPool flamePoolTest = new ParticleEffectPool(new Flame(new Vector2()).getFlame(),0,300);
+        public static ParticleEffectPool flamePoolTest = new ParticleEffectPool(new Flame(new Vector2()).getFlame(), 0, 300);
 
-}
     }
+}

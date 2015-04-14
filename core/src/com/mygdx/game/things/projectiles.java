@@ -10,7 +10,7 @@ import com.mygdx.game.Visuals.gameParticles.Explosion;
  * Created by for example John on 4/11/2015.
  */
 public class projectiles {
-    public static void bullet(Vector2 location,  float density, float friction, Vector2 velocity,World world,Sprite dick) {
+    public static void bullet(Vector2 location, float density, float friction, Vector2 velocity, World world, Sprite dick) {
         //ball
 
         Body bulletBody;
@@ -25,23 +25,23 @@ public class projectiles {
         bulletShaft.set(new Vector2[]{
                 new Vector2(-.8f, -.3f), new Vector2(-.6f, -0.3f),
                 new Vector2(-.6f, -.2f),
-                new Vector2(0.5f, -.2f),new Vector2(.5f,.2f),
-                new Vector2(-.6f,.2f),new Vector2(-.6f,.3f),
-                new Vector2(-.8f,.3f)
+                new Vector2(0.5f, -.2f), new Vector2(.5f, .2f),
+                new Vector2(-.6f, .2f), new Vector2(-.6f, .3f),
+                new Vector2(-.8f, .3f)
         });
         FixtureDef shaftFixDef = new FixtureDef();
         shaftFixDef.shape = bulletShaft;
 
         bulletBody = world.createBody(bodyDef);
 
-        shaftFixDef.density = density/3;
+        shaftFixDef.density = density / 3;
         shaftFixDef.friction = friction;
         shaftFixDef.restitution = .25f;
         bulletBody.createFixture(shaftFixDef);
 
         PolygonShape bulletHead = new PolygonShape();
         bulletHead.set(new Vector2[]{
-                new Vector2(.5f,-0.2f),new Vector2(.9f,-.2f),new Vector2(.9f,.2f),new Vector2(.5f,.2f)
+                new Vector2(.5f, -0.2f), new Vector2(.9f, -.2f), new Vector2(.9f, .2f), new Vector2(.5f, .2f)
         });
         FixtureDef headFixDef = new FixtureDef();
         headFixDef.shape = bulletHead;
@@ -52,8 +52,8 @@ public class projectiles {
         bulletBody.createFixture(headFixDef);
 
 
-        dick.setSize(1.69f,.69f);
-        dick.setOrigin((float)1.69/2,(float).69/2);
+        dick.setSize(1.69f, .69f);
+        dick.setOrigin((float) 1.69 / 2, (float) .69 / 2);
 
         bulletBody.setUserData(dick);
 
@@ -64,7 +64,7 @@ public class projectiles {
         bulletHead.dispose();
     }
 
-    public static void fireBall(Vector2 location,Vector2 velocity,World world){
+    public static void fireBall(Vector2 location, Vector2 velocity, World world) {
         Body fireBallBody;
         BodyDef fireBallDef = new BodyDef();
         fireBallDef.bullet = true;
@@ -75,7 +75,7 @@ public class projectiles {
         fireBallFixDef.shape = fireBallBall;
         fireBallBody = world.createBody(fireBallDef);
         fireBallBody.createFixture(fireBallFixDef);
-        fireBallBody.setTransform(location,0);
+        fireBallBody.setTransform(location, 0);
         fireBallBody.setLinearVelocity(velocity);
         fireBallBall.dispose();
 
@@ -86,7 +86,7 @@ public class projectiles {
 
     }
 
-    public static void explode(Vector2 location){
+    public static void explode(Vector2 location) {
         Explosion explosion = new Explosion(location);
         explosion.getExplosion().start();
         Explosion.Explosions.add(explosion);

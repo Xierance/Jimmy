@@ -53,9 +53,9 @@ public class mainMenu implements Screen {
         secretDankMusic = new Gdx().audio.newMusic(Gdx.files.internal("music/dankMusic.mp3"));
         // secretDankMusic.setOnCompletionListener(musicPlayer.menuMusic);
 
-       //Stage and Table set up
+        //Stage and Table set up
         stage = new Stage();
-       // Gdx.input.setInputProcessor(stage);
+        // Gdx.input.setInputProcessor(stage);
         skin = new Skin(Gdx.files.internal("ui/menuSkin.json"), new TextureAtlas("ui/atlas.pack"));
         table = new Table(skin);
         table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -158,9 +158,7 @@ public class mainMenu implements Screen {
         tm.update(Gdx.graphics.getDeltaTime());
 
 
-
     }
-
 
 
     public void displayFps(SpriteBatch batch, BitmapFont font2) {
@@ -181,17 +179,16 @@ public class mainMenu implements Screen {
         stage.draw(); //Things are visibly rendered onto the screen
 
 
-        if(Gdx.input.isKeyPressed(com.badlogic.gdx.Input.Keys.ESCAPE)){
+        if (Gdx.input.isKeyPressed(com.badlogic.gdx.Input.Keys.ESCAPE)) {
             ((Game) Gdx.app.getApplicationListener()).setScreen(new levelMenu());
 
         }
 
         batch.begin();
-        if ((Gdx.app.getPreferences(MyGdxGame.title).getBoolean("fps")) == true  ){
+        if ((Gdx.app.getPreferences(MyGdxGame.title).getBoolean("fps")) == true) {
             displayFps(batch, font);
         }
         batch.end();
-
 
 
         boolean testBoolean = false;
@@ -201,18 +198,14 @@ public class mainMenu implements Screen {
         int loopControl = 0;
 
 
+        if (Input.Space && counter == 0) {
+            counter++;
 
-
-
-
-       if (Input.Space && counter == 0) {
-           counter++;
-
-           while (loopControl < 1) {
-               playMusic();
-               loopControl++;
-           }
-       }
+            while (loopControl < 1) {
+                playMusic();
+                loopControl++;
+            }
+        }
       /*  if (Input.Space && counter == 1){
             counter++;
 
@@ -237,9 +230,9 @@ public class mainMenu implements Screen {
 */
 
 
-
     }
-    public void playMusic(){
+
+    public void playMusic() {
 
         musicPlayer.menuMusicPause();
         secretDankMusic.play();

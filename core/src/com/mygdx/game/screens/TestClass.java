@@ -30,8 +30,8 @@ public class TestClass extends InputAdapter implements Screen {
     public static Vector2 temp = new Vector2();
     public static Body tempBody;
     public static Sprite playerSprite = new Sprite(new Texture("img/player.png"));
-    public static  Array<Body> toDestroy = new Array<Body>();
-    public static  Array<ParticleEffect> flames = new Array<ParticleEffect>();
+    public static Array<Body> toDestroy = new Array<Body>();
+    public static Array<ParticleEffect> flames = new Array<ParticleEffect>();
     public static TiledMap map;
     //input keys
 
@@ -217,8 +217,7 @@ public class TestClass extends InputAdapter implements Screen {
         batch.setProjectionMatrix(orthographicCamera.combined);
 
 
-
-        if(world.isLocked() == false)rayCast.clearBodies(toDestroy, world);
+        if (world.isLocked() == false) rayCast.clearBodies(toDestroy, world);
 
         batch.begin();
         drawSprites();
@@ -279,9 +278,9 @@ public class TestClass extends InputAdapter implements Screen {
         font.dispose();
         secondBatch.dispose();
         player.getPlayerSPrite().getTexture().dispose();
-        for (ParticleEffect effect :flames)effect.dispose();
-        for (Explosion explosion:Explosion.Explosions)explosion.getExplosion().dispose();
-        for(ParticleEffectPool.PooledEffect effect:FireBallPool.TestPool.pooledEffects)effect.dispose();
+        for (ParticleEffect effect : flames) effect.dispose();
+        for (Explosion explosion : Explosion.Explosions) explosion.getExplosion().dispose();
+        for (ParticleEffectPool.PooledEffect effect : FireBallPool.TestPool.pooledEffects) effect.dispose();
 
     }
 
@@ -299,12 +298,12 @@ public class TestClass extends InputAdapter implements Screen {
 
     }
 
-    public void shootFire(Vector2 location, float angleRad){
+    public void shootFire(Vector2 location, float angleRad) {
 
         float i = (float) Math.cos(angleRad);
-        float j = (float)Math.sin(angleRad);
-        Vector2 newLoacation= new Vector2(location.x + i,location.y + j);
-        projectiles.fireBall(newLoacation,new Vector2(15 * i, 15 * j),world);
+        float j = (float) Math.sin(angleRad);
+        Vector2 newLoacation = new Vector2(location.x + i, location.y + j);
+        projectiles.fireBall(newLoacation, new Vector2(15 * i, 15 * j), world);
 
     }
 
@@ -342,13 +341,16 @@ public class TestClass extends InputAdapter implements Screen {
 
     public void handleInput() {
 
-        if(Ctrl_right)shootFire(player.getPlayerBody().getPosition(),angle2(player.getPlayerBody().getPosition(), getmouseCoords()));
-        if(Ctrl_left)if(rayCast.rayFixture(world, player.getPlayerBody().getPosition(), new Vector2(getmouseCoords().x, getmouseCoords().y ))!= null)toDestroy.add(rayCast.rayFixture(world,
-                player.getPlayerBody().getPosition(),
-                new Vector2(getmouseCoords().x, getmouseCoords().y)).getBody());
+        if (Ctrl_right)
+            shootFire(player.getPlayerBody().getPosition(), angle2(player.getPlayerBody().getPosition(), getmouseCoords()));
+        if (Ctrl_left)
+            if (rayCast.rayFixture(world, player.getPlayerBody().getPosition(), new Vector2(getmouseCoords().x, getmouseCoords().y)) != null)
+                toDestroy.add(rayCast.rayFixture(world,
+                        player.getPlayerBody().getPosition(),
+                        new Vector2(getmouseCoords().x, getmouseCoords().y)).getBody());
 
         //move
-        if (this.Space && player.isPlayerGrounded(world,player)) {
+        if (this.Space && player.isPlayerGrounded(world, player)) {
             player.getPlayerBody().applyLinearImpulse(new Vector2(0, 3), new Vector2(), true);
         }
 
@@ -410,13 +412,13 @@ public class TestClass extends InputAdapter implements Screen {
         }
     }
 
-    public void drawFlames(float delta){
+    public void drawFlames(float delta) {
 
         world.getBodies(tmpBodies);
         for (Body body : tmpBodies) {
             if (body.getUserData() != null && body.getUserData() instanceof ParticleEffectPool.PooledEffect) {
-                ((ParticleEffectPool.PooledEffect) body.getUserData()).setPosition(body.getPosition().x,body.getPosition().y);
-                ((ParticleEffectPool.PooledEffect) body.getUserData()).draw(batch,delta);
+                ((ParticleEffectPool.PooledEffect) body.getUserData()).setPosition(body.getPosition().x, body.getPosition().y);
+                ((ParticleEffectPool.PooledEffect) body.getUserData()).draw(batch, delta);
 
             }
         }
@@ -425,8 +427,9 @@ public class TestClass extends InputAdapter implements Screen {
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         orthographicCamera.unproject(tmp.set(screenX, screenY, 0));
 
-        if (!Ctrl_left){
-            if(!Ctrl_right)shootDick(player.getPlayerBody().getPosition(), angle2(player.getPlayerBody().getPosition(), new Vector2(tmp.x, tmp.y)));
+        if (!Ctrl_left) {
+            if (!Ctrl_right)
+                shootDick(player.getPlayerBody().getPosition(), angle2(player.getPlayerBody().getPosition(), new Vector2(tmp.x, tmp.y)));
 
         }
 
@@ -598,7 +601,7 @@ public class TestClass extends InputAdapter implements Screen {
     public Vector2 getmouseCoords() {
         Vector3 temp = new Vector3();
         orthographicCamera.unproject(temp.set(Gdx.input.getX(), Gdx.input.getY(), 0));
-        return new Vector2(temp.x,temp.y);
+        return new Vector2(temp.x, temp.y);
     }
 
 }
