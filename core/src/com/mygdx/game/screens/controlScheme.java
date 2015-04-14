@@ -28,7 +28,8 @@ public class controlScheme extends InputAdapter implements Screen {
     private Stage stage;
     private Table table;
     private Skin skin;
-    private int key = 0;
+    private int toggleControl = -1;
+
 
 
 
@@ -67,10 +68,8 @@ public class controlScheme extends InputAdapter implements Screen {
 
 
     @Override
-    public void show() {
+    public void show(){
         stage = new Stage();
-
-
 
         Input input = new Input();
         InputMultiplexer inputMultiplexer = new InputMultiplexer();
@@ -78,18 +77,11 @@ public class controlScheme extends InputAdapter implements Screen {
         inputMultiplexer.addProcessor(input);
         Gdx.input.setInputProcessor(inputMultiplexer);
 
-
         skin = new Skin(Gdx.files.internal("ui/menuSkin.json"), new TextureAtlas("ui/atlas.pack"));
-
         table = new Table(skin);
         table.setFillParent(true);
 
-        final TextField moveForwardInput = new TextField(moveForward(), skin);
-        moveForwardInput.setMessageText("Move Right:");
-
-        final TextField moveBackwardInput = new TextField(moveBackward(), skin);
-        moveBackwardInput.setMessageText("Move Left:");
-
+        //Button set up
         final TextButton back = new TextButton("Back", skin);
         back.pad(10);
         final TextButton forwardInput = new TextButton("Move Right", skin);
@@ -102,16 +94,41 @@ public class controlScheme extends InputAdapter implements Screen {
         back.pad(10);
 
 
+        //Input handling and setting controls
         ClickListener settingsHandler = new ClickListener() {
 
             @Override
             public void clicked(InputEvent event, float x, float y) {
 
+                int toggleControl2 = 0;
 
                 if (event.getListenerActor() == forwardInput) {
-                    int newForwardBind = Input.currentKey;
-                    Gdx.app.getPreferences(MyGdxGame.title).putInteger("forwardBind", newForwardBind);
+                    toggleControl++;
+
+                    while (toggleControl % 2 == 0) {
+
+                        Gdx.app.log(MyGdxGame.title, "Controls can now be bound" + toggleControl);
+
+                        int newForwardBind = Input.currentKey;
+                        Gdx.app.getPreferences(MyGdxGame.title).putInteger("forwardBind", newForwardBind);
+
+
+                        if (Input.currentKey > 0 && Input.currentKey == newForwardBind) {
+                            toggleControl2 = newForwardBind;
+
+                            if (toggleControl2 == newForwardBind && toggleControl == 0){
+                                toggleControl++;
+
+                            } else if (Input.currentKey > 0 && Input.currentKey != toggleControl2) {
+                                toggleControl++;
+                            }
+                        }
+
+
+                    }
+
                 }
+
                 if (event.getListenerActor() == backwardInput) {
 
                     int newBackwardBind = Input.currentKey;
@@ -143,7 +160,16 @@ public class controlScheme extends InputAdapter implements Screen {
 
 
 
+        back.addListener(settingsHandler);
+        forwardInput.addListener(settingsHandler);
+        backwardInput.addListener(settingsHandler);
+        jumpInput.addListener(settingsHandler);
+        weaponInput.addListener(settingsHandler);
+
         table.add(forwardInput);
+        table.add(backwardInput);
+        table.add(jumpInput);
+        table.add(weaponInput);
         table.add(back);
 
         stage.addActor(table);
@@ -154,7 +180,6 @@ public class controlScheme extends InputAdapter implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         stage.act(delta);
         stage.draw();
     }

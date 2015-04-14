@@ -100,9 +100,7 @@ public class settings implements Screen {
                     fpsOn++;
 
                     Gdx.app.log(MyGdxGame.title, "fps " + (FPS() ? "enabled" : "disabled"));
-
                 }
-
 
                 // event.getListenerActor() returns the source of the event, e.g. a button that was clicked
                 if (event.getListenerActor() == vSyncCheckBox) {
@@ -113,8 +111,9 @@ public class settings implements Screen {
                     Gdx.graphics.setVSync(vSync());
 
                     Gdx.app.log(MyGdxGame.title, "vSync " + (vSync() ? "enabled" : "disabled"));
+                }
 
-                } else if (event.getListenerActor() == back) {
+                if (event.getListenerActor() == back) {
                     // save level directory
                     String actualLevelDirectory = levelDirectoryInput.getText().trim().equals("") ? Gdx.files.getExternalStoragePath() + MyGdxGame.title + "/levels" : levelDirectoryInput.getText().trim(); // shortened form of an if-statement: [boolean] ? [if true] : [else] // String#trim() removes spaces on both sides of the string
                     Gdx.app.getPreferences(MyGdxGame.title).putString("leveldirectory", actualLevelDirectory);
