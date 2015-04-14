@@ -79,9 +79,9 @@ public class projectiles {
         fireBallBody.setLinearVelocity(velocity);
         fireBallBall.dispose();
 
-        ParticleEffectPool.PooledEffect flame = FireBallPool.TestPool.flamePoolTest.obtain();
+        ParticleEffectPool.PooledEffect flame = FireBallPool.FireTestPool.flamePoolTest.obtain();
         fireBallBody.setUserData(flame);
-        FireBallPool.TestPool.pooledEffects.add(flame);
+        FireBallPool.FireTestPool.pooledEffects.add(flame);
         flame.dispose();
 
     }

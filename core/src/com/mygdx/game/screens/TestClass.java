@@ -19,7 +19,6 @@ import com.badlogic.gdx.physics.box2d.joints.MouseJointDef;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyContactListener;
 import com.mygdx.game.Visuals.gameParticles.Explosion;
-import com.mygdx.game.Visuals.gameParticles.Flame;
 import com.mygdx.game.things.*;
 
 /**
@@ -280,7 +279,7 @@ public class TestClass extends InputAdapter implements Screen {
         player.getPlayerSPrite().getTexture().dispose();
         for (ParticleEffect effect : flames) effect.dispose();
         for (Explosion explosion : Explosion.Explosions) explosion.getExplosion().dispose();
-        for (ParticleEffectPool.PooledEffect effect : FireBallPool.TestPool.pooledEffects) effect.dispose();
+        for (ParticleEffectPool.PooledEffect effect : FireBallPool.FireTestPool.pooledEffects) effect.dispose();
 
     }
 

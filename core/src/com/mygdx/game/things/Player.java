@@ -120,7 +120,7 @@ public class Player {
 
         //Sensor setup
         PolygonShape baseRectangle = new PolygonShape();
-        baseRectangle.setAsBox(.5f, .1f, new Vector2(0, -1f), 0);
+        baseRectangle.setAsBox(.49f, .1f, new Vector2(0, -1f), 0);
 
         fDef.shape = baseRectangle;
         fDef.friction = 0.1f;
