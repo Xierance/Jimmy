@@ -31,6 +31,8 @@ public class controlScheme extends InputAdapter implements Screen {
     private int key = 0;
 
 
+
+
     public String moveForward() {
         String prefsForward = Gdx.app.getPreferences(MyGdxGame.title).getString("forwardBind").trim();
         if (prefsForward != null && !prefsForward.equals(""))
@@ -63,19 +65,17 @@ public class controlScheme extends InputAdapter implements Screen {
             return "ctrl_left";
     }
 
-    public boolean keyDown(int keycode) {
-        keycode = key;
-        return false;
-    }
 
     @Override
     public void show() {
         stage = new Stage();
 
 
+
+        Input input = new Input();
         InputMultiplexer inputMultiplexer = new InputMultiplexer();
         inputMultiplexer.addProcessor(stage);
-        inputMultiplexer.addProcessor(this);
+        inputMultiplexer.addProcessor(input);
         Gdx.input.setInputProcessor(inputMultiplexer);
 
 
@@ -89,13 +89,6 @@ public class controlScheme extends InputAdapter implements Screen {
 
         final TextField moveBackwardInput = new TextField(moveBackward(), skin);
         moveBackwardInput.setMessageText("Move Left:");
-
-        /*final TextField jumpInput = new TextField(jumpUp().path(), skin);
-        jumpInput.setMessageText("Jump:");
-
-        final TextField weaponInput = new TextField(jumpUp().path(), skin);
-        weaponInput.setMessageText("Weapon:");*/
-
 
         final TextButton back = new TextButton("Back", skin);
         back.pad(10);
@@ -116,181 +109,29 @@ public class controlScheme extends InputAdapter implements Screen {
 
 
                 if (event.getListenerActor() == forwardInput) {
-                    Gdx.app.log(MyGdxGame.title, "Apparently it's working" + key);
-                    switch (key) {
-                        case 19:
-                            bindForward();
-                            break;
-                        case 20:
-                            bindForward();
-                            break;
-                        case 21:
-                            bindForward();
-                            break;
-                        case 22:
-                            bindForward();
-                            break;
-                        case 57:
-                            bindForward();
-                            break;
-                        case 58:
-                            bindForward();
-                            break;
-                        case 62:
-                            bindForward();
-                            break;
-                        case 131:
-                            bindForward();
-                            break;
-                        case 41:
-                            bindForward();
-                            break;
-                        case 43:
-                            bindForward();
-                            break;
-                        case 46:
-                            bindForward();
-                            break;
-                        case 33:
-                            bindForward();
-                            break;
-                        case 47:
-                            bindForward();
-                            break;
-                        case 29:
-                            bindForward();
-                            break;
-                        case 42:
-                            bindForward();
-                            break;
-                        case 37:
-                            bindForward();
-                            break;
-                        case 31:
-                            bindForward();
-                            break;
-                        case 44:
-                            bindForward();
-                            break;
-                        case 40:
-                            bindForward();
-                            break;
-                        case 51:
-                            bindForward();
-                            break;
-                        case 32:
-                            bindForward();
-                            break;
-                        case 30:
-                            bindForward();
-                            break;
-                        case 34:
-                            bindForward();
-                            break;
-                        case 35:
-                            bindForward();
-                            break;
-                        case 36:
-                            bindForward();
-                            break;
-                        case 38:
-                            bindForward();
-                            break;
-                        case 39:
-                            bindForward();
-                            break;
-                        case 45:
-                            bindForward();
-                            break;
-                        case 48:
-                            bindForward();
-                            break;
-                        case 49:
-                            bindForward();
-                            break;
-                        case 50:
-                            bindForward();
-                            break;
-                        case 52:
-                            bindForward();
-                            break;
-                        case 53:
-                            bindForward();
-                            break;
-                        case 54:
-                            bindForward();
-                            break;
-                        case 7:
-                            bindForward();
-                            break;
-                        case 8:
-                            bindForward();
-                            break;
-                        case 9:
-                            bindForward();
-                            break;
-                        case 10:
-                            bindForward();
-                            break;
-                        case 11:
-                            bindForward();
-                            break;
-                        case 12:
-                            bindForward();
-                            break;
-                        case 13:
-                            bindForward();
-                            break;
-                        case 14:
-                            bindForward();
-                            break;
-                        case 15:
-                            bindForward();
-                            break;
-                        case 16:
-                            bindForward();
-                            break;
-                        case 61:
-                            bindForward();
-
-                    }
-
-
+                    int newForwardBind = Input.currentKey;
+                    Gdx.app.getPreferences(MyGdxGame.title).putInteger("forwardBind", newForwardBind);
                 }
-
-
                 if (event.getListenerActor() == backwardInput) {
 
+                    int newBackwardBind = Input.currentKey;
+                    Gdx.app.getPreferences(MyGdxGame.title).putInteger("forwardBind", newBackwardBind);
                 }
-
                 if (event.getListenerActor() == jumpInput) {
-
+                    int newJumpBind = Input.currentKey;
+                    Gdx.app.getPreferences(MyGdxGame.title).putInteger("forwardBind", newJumpBind);
                 }
 
                 if (event.getListenerActor() == weaponInput) {
-
+                    int newFireBind = Input.currentKey;
+                    Gdx.app.getPreferences(MyGdxGame.title).putInteger("forwardBind", newFireBind);
                 }
 
                 if (event.getListenerActor() == back) {
 
-                    String newForwardBind = moveForwardInput.getText().trim().equals("") ? "d" : moveForwardInput.getText().trim();
-                    Gdx.app.getPreferences(MyGdxGame.title).putString("forwardBind", newForwardBind);
-
-                    String newBackwardBind = moveBackwardInput.getText().trim().equals("") ? "a" : moveBackwardInput.getText().trim();
-                    Gdx.app.getPreferences(MyGdxGame.title).putString("backwardBind", newBackwardBind);
-
-                    /*String newJumpBind = jumpInput.getText().trim().equals("") ? "w" : jumpInput.getText().trim();
-                    Gdx.app.getPreferences(MyGdxGame.title).putString("jumpBind", newJumpBind);
-
-                    String newWeaponBind = jumpInput.getText().trim().equals("") ? "left_ctrl" : jumpInput.getText().trim();
-                    Gdx.app.getPreferences(MyGdxGame.title).putString("jumpBind", newJumpBind);*/
-
                     Gdx.app.getPreferences(MyGdxGame.title).flush();
-
                     Gdx.app.log(MyGdxGame.title, "settings saved");
-
                     stage.addAction(sequence(moveTo(0, stage.getHeight(), .5f), run(new Runnable() {
-
                         @Override
                         public void run() {
                             ((Game) Gdx.app.getApplicationListener()).setScreen(new mainMenu());
@@ -300,17 +141,14 @@ public class controlScheme extends InputAdapter implements Screen {
             }
         };
 
+
+
         table.add(forwardInput);
         table.add(back);
-
 
         stage.addActor(table);
     }
 
-    public void bindForward() {
-        int newForwardBind = key;
-        Gdx.app.getPreferences(MyGdxGame.title).putInteger("forwardBind", newForwardBind);
-    }
 
     @Override
     public void render(float delta) {
@@ -335,7 +173,6 @@ public class controlScheme extends InputAdapter implements Screen {
     public void resume() {
 
     }
-
     @Override
     public void hide() {
 

@@ -80,6 +80,9 @@ public class settings implements Screen {
         final TextField levelDirectoryInput = new TextField(levelDirectory().path(), skin); // creating a new TextField with the current level directory already written in it
         levelDirectoryInput.setMessageText("level directory"); // set the text to be shown when nothing is in the TextField
 
+        final TextButton controlRebind = new TextButton("Rebind Controls", skin);
+        controlRebind.pad(10);
+
         final CheckBox checkFPS = new CheckBox("Show FPS", skin);
         checkFPS.setChecked(FPS());
         //checkFPS.setChecked(FPS());

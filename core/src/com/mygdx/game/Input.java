@@ -61,8 +61,10 @@ public class Input implements InputProcessor {
     public static boolean X;
     public static boolean Y;
     public static boolean Z;
+    public static int currentKey;
 
     public boolean keyDown(int keycode) {
+        currentKey = keycode;
         switch (keycode) {
             case 19:
                 Up = true;
@@ -204,6 +206,7 @@ public class Input implements InputProcessor {
 
         return true;
     }
+
 
     public boolean keyUp(int keycode) {
         switch (keycode) {
