@@ -112,7 +112,9 @@ public class settings implements Screen {
 
                     Gdx.app.log(MyGdxGame.title, "vSync " + (vSync() ? "enabled" : "disabled"));
                 }
-
+                if (event.getListenerActor() == controlRebind){
+                    ((Game) Gdx.app.getApplicationListener()).setScreen(new controlScheme());
+                }
                 if (event.getListenerActor() == back) {
                     // save level directory
                     String actualLevelDirectory = levelDirectoryInput.getText().trim().equals("") ? Gdx.files.getExternalStoragePath() + MyGdxGame.title + "/levels" : levelDirectoryInput.getText().trim(); // shortened form of an if-statement: [boolean] ? [if true] : [else] // String#trim() removes spaces on both sides of the string
@@ -138,7 +140,7 @@ public class settings implements Screen {
 
         vSyncCheckBox.addListener(buttonHandler);
         checkFPS.addListener(buttonHandler);
-
+        controlRebind.addListener(buttonHandler);
         back.addListener(buttonHandler);
 
         // putting everything in the table
@@ -150,7 +152,7 @@ public class settings implements Screen {
         table.add(levelDirectoryInput).top().fillX();
         table.row();
         table.add(checkFPS).left();
-        table.add();
+        table.add(controlRebind);
         table.row();
         table.add().height(350);
         table.row();
