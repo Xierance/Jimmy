@@ -36,7 +36,7 @@ public class musicPlayer {
         menuMusic = new Gdx().audio.newMusic(Gdx.files.internal("music/Jimmy-theme.mp3"));
         menuMusic.play();
         menuMusic.setLooping(true);
-        // menuMusic.isLooping();
+        menuMusic.isLooping();
 
     }
 
