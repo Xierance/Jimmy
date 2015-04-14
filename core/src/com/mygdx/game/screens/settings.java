@@ -153,7 +153,7 @@ public class settings implements Screen {
         table.row();
         table.add().height(350);
         table.row();
-        table.add(); 
+        table.add();
         table.add().height(150);
         table.add(back).bottom().right();
 
