@@ -278,8 +278,8 @@ public class TestClass extends InputAdapter implements Screen {
         secondBatch.dispose();
         player.getPlayerSPrite().getTexture().dispose();
         for (ParticleEffect effect : flames) effect.dispose();
-        for (Explosion explosion : Explosion.Explosions) explosion.getExplosion().dispose();
-        for (ParticleEffectPool.PooledEffect effect : FireBallPool.FireTestPool.pooledEffects) effect.dispose();
+        for (ParticleEffectPool.PooledEffect effect : EffectPools.ExplosionTestPool.pooledEffects)effect.dispose();
+        for (ParticleEffectPool.PooledEffect effect : EffectPools.FireTestPool.pooledEffects) effect.dispose();
 
     }
 

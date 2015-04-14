@@ -3,7 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.graphics.g2d.ParticleEffectPool;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mygdx.game.screens.TestClass;
-import com.mygdx.game.things.FireBallPool;
+import com.mygdx.game.things.EffectPools;
 
 public class MyContactListener implements ContactListener {
 
@@ -16,7 +16,7 @@ public class MyContactListener implements ContactListener {
             if (fb.getBody().getUserData() instanceof ParticleEffectPool.PooledEffect) {
             } else {
                 TestClass.getToDestroy().add(fa.getBody());
-                FireBallPool.FireTestPool.pooledEffects.removeValue((ParticleEffectPool.PooledEffect) fa.getBody().getUserData(), true);
+                EffectPools.FireTestPool.pooledEffects.removeValue((ParticleEffectPool.PooledEffect) fa.getBody().getUserData(), true);
                 ((ParticleEffectPool.PooledEffect) fa.getBody().getUserData()).free();
             }
         }
@@ -24,7 +24,7 @@ public class MyContactListener implements ContactListener {
             if (fa.getBody().getUserData() instanceof ParticleEffectPool.PooledEffect) {
             } else {
                 TestClass.getToDestroy().add(fb.getBody());
-                FireBallPool.FireTestPool.pooledEffects.removeValue((ParticleEffectPool.PooledEffect) fb.getBody().getUserData(), true);
+                EffectPools.FireTestPool.pooledEffects.removeValue((ParticleEffectPool.PooledEffect) fb.getBody().getUserData(), true);
                 ((ParticleEffectPool.PooledEffect) fb.getBody().getUserData()).free();
             }
         }

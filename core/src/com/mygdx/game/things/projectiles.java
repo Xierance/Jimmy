@@ -79,17 +79,16 @@ public class projectiles {
         fireBallBody.setLinearVelocity(velocity);
         fireBallBall.dispose();
 
-        ParticleEffectPool.PooledEffect flame = FireBallPool.FireTestPool.flamePoolTest.obtain();
+        ParticleEffectPool.PooledEffect flame = EffectPools.FireTestPool.flamePoolTest.obtain();
         fireBallBody.setUserData(flame);
-        FireBallPool.FireTestPool.pooledEffects.add(flame);
+        EffectPools.FireTestPool.pooledEffects.add(flame);
         flame.dispose();
 
     }
 
     public static void explode(Vector2 location) {
-        Explosion explosion = new Explosion(location);
-        explosion.getExplosion().start();
-        Explosion.Explosions.add(explosion);
+        ParticleEffectPool.PooledEffect explosion = EffectPools.ExplosionTestPool.explosionPoolTest.obtain();
+        explosion.start();
 
     }
 }
