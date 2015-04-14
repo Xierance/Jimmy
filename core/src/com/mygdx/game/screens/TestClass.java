@@ -75,7 +75,7 @@ public class TestClass extends InputAdapter implements Screen {
     private MouseJointDef jointDef;
     private MouseJoint joint;
     private TextureAtlas blocks = new TextureAtlas("tiles/block_pack.pack");
-    public static TextureAtlas hellBlocks = new TextureAtlas("tiles/hellBlocks.pack");
+    public static TextureAtlas hellBlocks = new TextureAtlas("maps/hellBlocks.pack");
     private Sprite block1 = new Sprite();
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -109,7 +109,7 @@ public class TestClass extends InputAdapter implements Screen {
     }
 
     public static void mapToBox2d(TiledMap map, World world) {
-        map = new TmxMapLoader().load("maps/testTileMap.tmx");
+        map = new TmxMapLoader().load("maps/testMap.tmx");
         TiledMapTileLayer tileLayer = (TiledMapTileLayer) map.getLayers().get("butt");
         Sprite tileSprite = new Sprite(new Texture("jew.jpg"));
 
