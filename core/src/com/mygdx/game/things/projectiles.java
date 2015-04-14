@@ -88,6 +88,8 @@ public class projectiles {
 
     public static void explode(Vector2 location) {
         ParticleEffectPool.PooledEffect explosion = EffectPools.ExplosionTestPool.explosionPoolTest.obtain();
+        EffectPools.ExplosionTestPool.pooledEffects.add(explosion);
+        explosion.setPosition(location.x,location.y);
         explosion.start();
 
     }
