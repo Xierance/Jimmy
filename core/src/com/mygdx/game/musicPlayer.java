@@ -28,14 +28,12 @@ public class musicPlayer {
             } else sdmPlayer();
 
         }
-
-
     }
 
     public static void menuMusicPlayer() {
         menuMusic = new Gdx().audio.newMusic(Gdx.files.internal("music/Jimmy-theme.mp3"));
         menuMusic.play();
-        menuMusic.setLooping(true);
+       // menuMusic.setLooping(true);
         menuMusic.isLooping();
 
     }
