@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game.Input;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.things.keyCodes;
 
 import javax.print.DocFlavor;
 
@@ -31,6 +32,10 @@ public class controlScheme extends InputAdapter implements Screen {
     private Table table;
     private Skin skin;
     private int toggleControl = -1;
+    private int newForwardBind;
+    private int newBackwardBind;
+    private int newJumpBind;
+    private int newFireBind;
 
 
 
@@ -71,10 +76,18 @@ public class controlScheme extends InputAdapter implements Screen {
 
     @Override
     public void show(){
-        stage = new Stage();
+        newForwardBind = Gdx.app.getPreferences(MyGdxGame.title).getInteger("forwardBind");
+        newBackwardBind = Gdx.app.getPreferences(MyGdxGame.title).getInteger("backwardBind");
+        newJumpBind = Gdx.app.getPreferences(MyGdxGame.title).getInteger("jumpBind");
+        newFireBind = Gdx.app.getPreferences(MyGdxGame.title).getInteger("fireBind");
 
-        Input input = new Input();
-        InputMultiplexer inputMultiplexer = new InputMultiplexer();
+
+
+
+                stage = new Stage();
+
+        final Input input = new Input();
+        final InputMultiplexer inputMultiplexer = new InputMultiplexer();
         inputMultiplexer.addProcessor(stage);
         inputMultiplexer.addProcessor(input);
         Gdx.input.setInputProcessor(inputMultiplexer);
@@ -86,13 +99,13 @@ public class controlScheme extends InputAdapter implements Screen {
         //Button set up
         final TextButton back = new TextButton("Back", skin);
         back.pad(10);
-        final TextButton forwardInput = new TextButton("Move Right", skin);
+        final TextButton forwardInput = new TextButton(keyCodes.keycodeNames.get(newForwardBind), skin);
         back.pad(10);
-        final TextButton backwardInput = new TextButton("Move Left", skin);
+        final TextButton backwardInput = new TextButton(keyCodes.keycodeNames.get(newBackwardBind), skin);
         back.pad(10);
-        final TextButton jumpInput = new TextButton("Jump", skin);
+        final TextButton jumpInput = new TextButton(keyCodes.keycodeNames.get(newJumpBind), skin);
         back.pad(10);
-        final TextButton weaponInput = new TextButton("Fire Weapon", skin);
+        final TextButton weaponInput = new TextButton(keyCodes.keycodeNames.get(newFireBind), skin);
         back.pad(10);
 
 
@@ -103,32 +116,33 @@ public class controlScheme extends InputAdapter implements Screen {
             public void clicked(InputEvent event, float x, float y) {
 
                 int toggleControl2 = 0;
+                int toggleControl3 = -1;
 
                 if (event.getListenerActor() == forwardInput) {
                     toggleControl++;
-
-
 
                     while (toggleControl % 2 == 0) {
 
                         Gdx.app.log(MyGdxGame.title, "Controls can now be bound" + toggleControl);
                         Gdx.app.log(MyGdxGame.title, String.valueOf(Input.currentKey));
 
-                        int newForwardBind = Input.currentKey;
+                        newForwardBind = Input.currentKey;
                         Gdx.app.getPreferences(MyGdxGame.title).putInteger("forwardBind", newForwardBind);
 
-                        if (Input.currentKey > 0 && Input.currentKey == newForwardBind) {
+                        if (newForwardBind > 0 /*&& Input.currentKey == newForwardBind*/) {
                             toggleControl2 = newForwardBind;
                             Gdx.app.log(MyGdxGame.title, String.valueOf(newForwardBind));
 
                             if (toggleControl2 == newForwardBind && toggleControl == 0){
                                 toggleControl++;
                                 Gdx.app.log(MyGdxGame.title, "First time only: " + toggleControl + toggleControl2);
+                                break;
 
 
                             } else /*(Input.currentKey > 0 && Input.currentKey != toggleControl2)*/ {
                                 toggleControl++;
                                 Gdx.app.log(MyGdxGame.title, "Should be working from now on: " + toggleControl);
+                                break;
                             }
                         }
 
@@ -139,17 +153,30 @@ public class controlScheme extends InputAdapter implements Screen {
 
                 if (event.getListenerActor() == backwardInput) {
 
-                    int newBackwardBind = Input.currentKey;
-                    Gdx.app.getPreferences(MyGdxGame.title).putInteger("forwardBind", newBackwardBind);
+                    toggleControl3++;
+
+                    newBackwardBind = Input.currentKey;
+                    Gdx.app.getPreferences(MyGdxGame.title).putInteger("backwardBind", newBackwardBind);
+
+                    while (toggleControl3 % 2 == 0 ) {
+                        Gdx.app.log(MyGdxGame.title, String.valueOf(newBackwardBind));
+                        if (Gdx.input.isKeyJustPressed(newBackwardBind)) {
+                            toggleControl3++;
+                            Gdx.app.log(MyGdxGame.title, String.valueOf(toggleControl3));
+                            break;
+
+
+                        }
+                    }
                 }
                 if (event.getListenerActor() == jumpInput) {
-                    int newJumpBind = Input.currentKey;
-                    Gdx.app.getPreferences(MyGdxGame.title).putInteger("forwardBind", newJumpBind);
+                    newJumpBind = Input.currentKey;
+                    Gdx.app.getPreferences(MyGdxGame.title).putInteger("jumpBind", newJumpBind);
                 }
 
                 if (event.getListenerActor() == weaponInput) {
-                    int newFireBind = Input.currentKey;
-                    Gdx.app.getPreferences(MyGdxGame.title).putInteger("forwardBind", newFireBind);
+                    newFireBind = Input.currentKey;
+                    Gdx.app.getPreferences(MyGdxGame.title).putInteger("fireBind", newFireBind);
                 }
 
                 if (event.getListenerActor() == back) {
@@ -190,6 +217,7 @@ public class controlScheme extends InputAdapter implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(delta);
         stage.draw();
+
     }
 
     @Override
