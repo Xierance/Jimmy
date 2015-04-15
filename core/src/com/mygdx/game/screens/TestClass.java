@@ -411,9 +411,9 @@ public class TestClass extends InputAdapter implements Screen {
 
             if (body.getUserData() != null && body.getUserData() instanceof Sprite) {
                 //rotating playerBody sprite
-                if (Left && !((Sprite) body.getUserData()).isFlipX() && (Sprite) body.getUserData() == player.getPlayerSPrite())
+                if (A && !((Sprite) body.getUserData()).isFlipX() && (Sprite) body.getUserData() == player.getPlayerSPrite())
                     ((Sprite) body.getUserData()).setFlip(true, false);
-                if (Right && ((Sprite) body.getUserData()).isFlipX() && (Sprite) body.getUserData() == player.getPlayerSPrite())
+                if (D && ((Sprite) body.getUserData()).isFlipX() && (Sprite) body.getUserData() == player.getPlayerSPrite())
                     ((Sprite) body.getUserData()).setFlip(false, false);
 
                 Sprite sprite = (Sprite) body.getUserData();
