@@ -13,9 +13,32 @@
    </properties>
   </tile>
  </tileset>
+ <tileset firstgid="3" name="hellBlocks" tilewidth="32" tileheight="32">
+  <image source="hellBlocks.png" width="128" height="32"/>
+  <tile id="0">
+   <properties>
+    <property name="center" value="center"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="left" value="left"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="right" value="right"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="top" value="top"/>
+   </properties>
+  </tile>
+ </tileset>
  <layer name="butt" width="40" height="23">
   <data encoding="base64" compression="zlib">
-   eJztlMEOwCAIQxn//9HLbsaDUBy2B1/CzdmG2bqZufXwbHzrw6ii7O1yyTC/Yfab/lN/7A+VLol6jekxq83wiGpG530x6L2VfVR3iPqtanX94479KeR6RtHTDqu8sDvrtH42c6o9yfKF6J70qNSPCB15jHKOzMcLhPEAtA==
+   eJzNlkEOwCAIBKnV/v/JjbcelGUtKJPsTeME0SASx/Vjb/kkK5ndPHmInPJi1kdzqh4Wsnp1drtVcv2q261Eg/FDtWvAa4TF0Qqq3cwP4eWHaDJ2ROzy66w47vTrNLF7ov5j3683nu83AlQ7xq+I/o+tRvOzeu2ewyxup2ZXy71GeWnnVuF6LsKxgjBkmf3LJFl4AdgEAcg=
   </data>
  </layer>
 </map>

@@ -114,9 +114,13 @@ public class TestClass extends InputAdapter implements Screen {
         Sprite tileSprite = new Sprite(new Texture("jew.jpg"));
 
         Sprite leftTile = new Sprite(hellBlocks.createSprite("Left"));
+        leftTile.setSize(1f,1f);
         Sprite rightTile = new Sprite(hellBlocks.createSprite("Right"));
+        rightTile.setSize(1f,1f);
         Sprite centerTile = new Sprite(hellBlocks.createSprite("Center"));
+        centerTile.setSize(1f,1f);
         Sprite topTile = new Sprite(hellBlocks.createSprite("Top"));
+        topTile.setSize(1f,1f);
 
         tileSprite.setSize(1f, 1f);
 

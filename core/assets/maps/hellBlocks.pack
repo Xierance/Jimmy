@@ -5,28 +5,28 @@ filter: Nearest,Nearest
 repeat: none
 Center
   rotate: false
-  xy: 1, 1
+  xy: 0, 0
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 Left
   rotate: false
-  xy: 35, 1
+  xy: 32, 0
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 Right
   rotate: false
-  xy: 69, 1
+  xy: 64, 0
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 Top
   rotate: false
-  xy: 103, 1
+  xy: 96, 0
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
