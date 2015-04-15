@@ -75,6 +75,7 @@ public class TestClass extends InputAdapter implements Screen {
     private MouseJointDef jointDef;
     private MouseJoint joint;
     private TextureAtlas blocks = new TextureAtlas("tiles/block_pack.pack");
+    public static TextureAtlas hellBlocks = new TextureAtlas("maps/hellBlocks.pack");
     private Sprite block1 = new Sprite();
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -111,6 +112,12 @@ public class TestClass extends InputAdapter implements Screen {
         map = new TmxMapLoader().load("maps/testMap.tmx");
         TiledMapTileLayer tileLayer = (TiledMapTileLayer) map.getLayers().get("butt");
         Sprite tileSprite = new Sprite(new Texture("jew.jpg"));
+
+        Sprite leftTile = new Sprite(hellBlocks.createSprite("Left"));
+        Sprite rightTile = new Sprite(hellBlocks.createSprite("Right"));
+        Sprite centerTile = new Sprite(hellBlocks.createSprite("Center"));
+        Sprite topTile = new Sprite(hellBlocks.createSprite("Top"));
+
         tileSprite.setSize(1f, 1f);
 
         for (int x = 0; x < tileLayer.getWidth(); x++) {
@@ -119,27 +126,31 @@ public class TestClass extends InputAdapter implements Screen {
 
                 if (tileCell != null && tileCell.getTile() != null) {
 
+                    BodyDef tileBodyDef = new BodyDef();
+                    tileBodyDef.type = BodyDef.BodyType.KinematicBody;
+                    tileBodyDef.gravityScale = 0;
+                    tileBodyDef.position.set(x, y);
+
+                    PolygonShape tileShape = new PolygonShape();
+                    tileShape.setAsBox(.5f, .5f);
+
+                    Body body = world.createBody(tileBodyDef);
+                    body.createFixture(tileShape, 0f);
+
+                    tileShape.dispose();
 
                     Object property = tileCell.getTile().getProperties().get("playerBody");
+
                     if (property != null) {
                         temp = new Vector2(x, y);
-                    } else {
-
-                        BodyDef tileBodyDef = new BodyDef();
-                        tileBodyDef.type = BodyDef.BodyType.KinematicBody;
-                        tileBodyDef.gravityScale = 0;
-                        tileBodyDef.position.set(x, y);
-
-                        PolygonShape tileShape = new PolygonShape();
-                        tileShape.setAsBox(.5f, .5f);
-
-                        Body body = world.createBody(tileBodyDef);
-                        body.createFixture(tileShape, 0f);
-
-                        body.setUserData(tileSprite);
-
-                        tileShape.dispose();
-
+                    } else if (tileCell.getTile().getProperties().get("left") == "left"){
+                        body.setUserData(leftTile);
+                    }else if(tileCell.getTile().getProperties().get("right") != null){
+                        body.setUserData(rightTile);
+                    }else if(tileCell.getTile().getProperties().get("center") != null){
+                        body.setUserData(centerTile);
+                    }else if(tileCell.getTile().getProperties().get("top") != null){
+                        body.setUserData(topTile);
                     }
 
 
@@ -153,7 +164,6 @@ public class TestClass extends InputAdapter implements Screen {
 
     @Override
     public void show() {
-
 
         dick = new Sprite(new Texture("textures/dick.png"));
 
