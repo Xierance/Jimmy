@@ -103,7 +103,7 @@ public class projectiles {
             Vector2 velocity = new Vector2();
             velocity.x = 30* MathUtils.cosDeg((360 / bits) * i);
             velocity.y = 30*MathUtils.sinDeg((360/bits)*i);
-            b2dStructures.explosionShard shard  = new b2dStructures.explosionShard(new Vector2(MathUtils.cosDeg((360 / bits) * i)/3 + location.x,MathUtils.sinDeg((360/bits)*i)/3 +location.y),0.01f,1000,0.5f,world,velocity,bodyDef,fixtureDef,circleShape);
+            b2dStructures.explosionShard shard  = new b2dStructures.explosionShard(new Vector2(MathUtils.cosDeg((360 / bits) * i)/10 + location.x,MathUtils.sinDeg((360/bits)*i)/10 +location.y),0.01f,1000,0.5f,world,velocity,bodyDef,fixtureDef,circleShape);
         }
         circleShape.dispose();
     }
