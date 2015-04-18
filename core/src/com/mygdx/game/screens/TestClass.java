@@ -298,12 +298,14 @@ public class TestClass extends InputAdapter implements Screen {
     }
 
     public void shootFire(Vector2 location, float angleRad) {
+        if(projectiles.fireBallCount < 5) {
 
-        float i = (float) Math.cos(angleRad);
-        float j = (float) Math.sin(angleRad);
-        Vector2 newLoacation = new Vector2(location.x + i, location.y + j);
-        projectiles.fireBall(newLoacation, new Vector2(20 * i, 20 * j), world);
+            float i = (float) Math.cos(angleRad);
+            float j = (float) Math.sin(angleRad);
+            Vector2 newLoacation = new Vector2(location.x + i, location.y + j);
+            projectiles.fireBall(newLoacation, new Vector2(20 * i, 20 * j), world);
 
+        }
     }
 
     public void cameraFollow() {

@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.ParticleEffectPool;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mygdx.game.screens.TestClass;
 import com.mygdx.game.things.EffectPools;
+import com.mygdx.game.things.projectiles;
 
 public class MyContactListener implements ContactListener {
 
@@ -18,6 +19,7 @@ public class MyContactListener implements ContactListener {
                 TestClass.getToDestroy().add(fa.getBody());
                 EffectPools.FireTestPool.pooledEffects.removeValue((ParticleEffectPool.PooledEffect) fa.getBody().getUserData(), true);
                 ((ParticleEffectPool.PooledEffect) fa.getBody().getUserData()).free();
+
             }
         }
         if (fb.getBody().getUserData() != null && fb.getBody().getUserData() instanceof ParticleEffectPool.PooledEffect && fa.getBody().getUserData() != TestClass.playerSprite && fb.isSensor() == false) {
@@ -26,6 +28,7 @@ public class MyContactListener implements ContactListener {
                 TestClass.getToDestroy().add(fb.getBody());
                 EffectPools.FireTestPool.pooledEffects.removeValue((ParticleEffectPool.PooledEffect) fb.getBody().getUserData(), true);
                 ((ParticleEffectPool.PooledEffect) fb.getBody().getUserData()).free();
+
             }
         }
     }

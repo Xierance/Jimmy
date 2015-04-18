@@ -12,6 +12,10 @@ import com.mygdx.game.screens.TestClass;
  * Created by for example John on 4/11/2015.
  */
 public class projectiles {
+
+    public static int fireBallCount = 0;
+
+
     public static void bullet(Vector2 location, float density, float friction, Vector2 velocity, World world, Sprite dick) {
         //ball
 
@@ -86,6 +90,8 @@ public class projectiles {
         EffectPools.FireTestPool.pooledEffects.add(flame);
         flame.dispose();
 
+        fireBallCount++;
+
     }
 
     public static void explode(Vector2 location) {
@@ -103,7 +109,7 @@ public class projectiles {
             Vector2 velocity = new Vector2();
             velocity.x = speed* MathUtils.cosDeg((360 / bits) * i);
             velocity.y = speed*MathUtils.sinDeg((360/bits)*i);
-            b2dStructures.explosionShard shard  = new b2dStructures.explosionShard(new Vector2(MathUtils.cosDeg((360 / bits) * i)/10 + location.x,MathUtils.sinDeg((360/bits)*i)/10 +location.y),0.01f,1000,0.5f,world,velocity,bodyDef,fixtureDef,circleShape);
+            b2dStructures.explosionShard shard  = new b2dStructures.explosionShard(new Vector2(MathUtils.cosDeg((360 / bits) * i)/10 + location.x,MathUtils.sinDeg((360/bits)*i)/10 +location.y),0.01f,1000,world,velocity,bodyDef,fixtureDef,circleShape);
         }
         circleShape.dispose();
     }

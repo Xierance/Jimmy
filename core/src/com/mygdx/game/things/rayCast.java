@@ -33,6 +33,7 @@ public class rayCast {
                 if (b.getUserData() instanceof ParticleEffectPool.PooledEffect){
                     projectiles.explode(b.getPosition());
                     projectiles.explode2(b.getPosition(),36,world,30);
+                    projectiles.fireBallCount--;
                 }
                 world.destroyBody(b);
 

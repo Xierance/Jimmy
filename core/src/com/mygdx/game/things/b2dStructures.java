@@ -42,19 +42,19 @@ public class b2dStructures {
     }
 
     public static class explosionShard {
-        public explosionShard(Vector2 location, float radius, float density, float restitution, World world, Vector2 velocity,BodyDef bodyDef,FixtureDef fixtureDef,CircleShape circleShape){
+        public explosionShard(Vector2 location, float radius, float density, World world, Vector2 velocity,BodyDef bodyDef,FixtureDef fixtureDef,CircleShape circleShape){
 
             bodyDef.type = BodyDef.BodyType.DynamicBody;
             bodyDef.position.set(location.x, location.y);
             circleShape.setRadius(radius);
             fixtureDef.shape = circleShape;
-            fixtureDef.restitution = restitution;
-            fixtureDef.restitution = 0.5f;
+            fixtureDef.restitution = 1f;
             fixtureDef.density = density;
 
             Body body = world.createBody(bodyDef);
             body.createFixture(fixtureDef);
             body.setUserData(location);
+            body.setGravityScale(0);
 
             body.setLinearVelocity(velocity);
 
