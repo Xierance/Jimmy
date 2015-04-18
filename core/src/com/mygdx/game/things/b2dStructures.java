@@ -39,6 +39,27 @@ public class b2dStructures {
         blockShape.dispose();
     }
 
+    public static class explosionShard {
+        public explosionShard(Vector2 location, float radius, float density, float restitution, World world, Vector2 velocity,BodyDef bodyDef,FixtureDef fixtureDef,CircleShape circleShape){
+
+            bodyDef.type = BodyDef.BodyType.DynamicBody;
+            bodyDef.position.set(location.x, location.y);
+            circleShape.setRadius(radius);
+            fixtureDef.shape = circleShape;
+            fixtureDef.restitution = restitution;
+            fixtureDef.restitution = 0.5f;
+            fixtureDef.density = density;
+
+            Body body = world.createBody(bodyDef);
+            body.createFixture(fixtureDef);
+            body.setUserData(location);
+
+            body.setLinearVelocity(velocity);
+
+        }
+    }
+
+
     public static void isosceles(Vector2 location, float width, float height, float density, float friction, World world) {
         BodyDef bodyDef = new BodyDef();
         FixtureDef fixtureDef = new FixtureDef();

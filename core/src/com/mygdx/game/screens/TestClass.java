@@ -220,7 +220,8 @@ public class TestClass extends InputAdapter implements Screen {
     @Override
     public void render(float delta) {
 
-
+        world.getBodies(tmpBodies);
+        for(Body body: tmpBodies)projectiles.clearShards(body);
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -316,7 +317,7 @@ public class TestClass extends InputAdapter implements Screen {
         float i = (float) Math.cos(angleRad);
         float j = (float) Math.sin(angleRad);
         Vector2 newLoacation = new Vector2(location.x + i, location.y + j);
-        projectiles.fireBall(newLoacation, new Vector2(15 * i, 15 * j), world);
+        projectiles.fireBall(newLoacation, new Vector2(20 * i, 20 * j), world);
 
     }
 
