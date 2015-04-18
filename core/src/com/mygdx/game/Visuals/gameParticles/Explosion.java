@@ -22,7 +22,7 @@ public class Explosion {
     public Explosion() {
         explosion = new ParticleEffect();
         explosion.load(Gdx.files.local("effects/Explosion.p"), Gdx.files.local("effects"));
-        explosion.scaleEffect(0.0069f);
+        explosion.scaleEffect(0.01f);
         explosion.start();
     }
 

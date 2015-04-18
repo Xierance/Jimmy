@@ -32,7 +32,7 @@ public class rayCast {
             if (world.isLocked() == false && b.getType() != BodyDef.BodyType.StaticBody && b.getUserData() != TestClass.playerSprite) {
                 if (b.getUserData() instanceof ParticleEffectPool.PooledEffect){
                     projectiles.explode(b.getPosition());
-                    projectiles.explode2(b.getPosition(),50,world);
+                    projectiles.explode2(b.getPosition(),36,world);
                 }
                 world.destroyBody(b);
 

@@ -4,7 +4,7 @@
   <image source="tile.png" width="64" height="32"/>
   <tile id="0">
    <properties>
-    <property name="player" value=""/>
+    <property name="playerBody" value="playerBody"/>
    </properties>
   </tile>
   <tile id="1">
@@ -38,7 +38,7 @@
  </tileset>
  <layer name="butt" width="40" height="23">
   <data encoding="base64" compression="zlib">
-   eJzNlkEOwCAIBKnV/v/JjbcelGUtKJPsTeME0SASx/Vjb/kkK5ndPHmInPJi1kdzqh4Wsnp1drtVcv2q261Eg/FDtWvAa4TF0Qqq3cwP4eWHaDJ2ROzy66w47vTrNLF7ov5j3683nu83AlQ7xq+I/o+tRvOzeu2ewyxup2ZXy71GeWnnVuF6LsKxgjBkmf3LJFl4AdgEAcg=
+   eJztlsEOwCAIQ13m/P9P3jh4UwtEKoc18TQiD1KYpcTpCrz7F0/1O01xnkNctzJe4hiMVi6mhC0jl4jN1ozxXrbZ/CAvWvKh3o1qRT7dOS+oltF3Tf0sv3h7wfSzh5G9CySf9l+BdmjdQuSXx9NMod5Z94vmDWA5q/xats7FlMZ3J7h6XtS7qLlZ1Wt9E0X0ru8eqxdnd2XQbC6z6AXrHAIg
   </data>
  </layer>
 </map>

@@ -128,7 +128,7 @@ public class TestClass extends InputAdapter implements Screen {
             for (int y = 0; y < tileLayer.getHeight(); y++) {
                 TiledMapTileLayer.Cell tileCell = tileLayer.getCell(x, y);
 
-                if (tileCell != null && tileCell.getTile() != null) {
+                if (tileCell != null && tileCell.getTile() != null && tileCell.getTile().getProperties().get("playerBody") == null) {
 
                     BodyDef tileBodyDef = new BodyDef();
                     tileBodyDef.type = BodyDef.BodyType.KinematicBody;
@@ -143,11 +143,9 @@ public class TestClass extends InputAdapter implements Screen {
 
                     tileShape.dispose();
 
-                    Object property = tileCell.getTile().getProperties().get("playerBody");
-
-                    if (property != null) {
+                    if (tileCell.getTile().getProperties().get("playerBody") != null) {
                         temp = new Vector2(x, y);
-                    } else if (tileCell.getTile().getProperties().get("left") == "left"){
+                    } else if (tileCell.getTile().getProperties().get("left") != null    ){
                         body.setUserData(leftTile);
                     }else if(tileCell.getTile().getProperties().get("right") != null){
                         body.setUserData(rightTile);
@@ -156,14 +154,9 @@ public class TestClass extends InputAdapter implements Screen {
                     }else if(tileCell.getTile().getProperties().get("top") != null){
                         body.setUserData(topTile);
                     }
-
-
                 }
             }
-
         }
-
-
     }
 
     @Override
