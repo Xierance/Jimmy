@@ -214,15 +214,14 @@ public class TestClass extends InputAdapter implements Screen {
     public void render(float delta) {
 
         world.getBodies(tmpBodies);
-        for(Body body: tmpBodies)projectiles.clearShards(body);
+        for(Body body: tmpBodies)projectiles.clearShards(body,4);
+
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
 
         debugRenderer.render(world, orthographicCamera.combined);
 
         batch.setProjectionMatrix(orthographicCamera.combined);
-
 
         if (world.isLocked() == false) rayCast.clearBodies(toDestroy, world);
 
@@ -230,13 +229,6 @@ public class TestClass extends InputAdapter implements Screen {
         drawSprites();
         drawFlames(delta);
         Explosion.drawExplosions(batch, delta);
-
-        /*if (Ctrl_left) {
-            rainboom.getFlame().start();
-            rainboom.update(batch, delta, new Vector2(getmouseCoords().x, getmouseCoords().y));
-        } else {
-            rainboom.getFlame().setDuration(0);
-        }*/
 
         batch.end();
 

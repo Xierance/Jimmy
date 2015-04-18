@@ -95,23 +95,23 @@ public class projectiles {
         explosion.start();
 
     }
-    public static void explode2(Vector2 location,int bits,World world){
+    public static void explode2(Vector2 location,int bits,World world,float speed){
         BodyDef bodyDef = new BodyDef();
         FixtureDef fixtureDef = new FixtureDef();
         CircleShape circleShape = new CircleShape();
         for (int i = 0;i <= bits;i++){
             Vector2 velocity = new Vector2();
-            velocity.x = 30* MathUtils.cosDeg((360 / bits) * i);
-            velocity.y = 30*MathUtils.sinDeg((360/bits)*i);
+            velocity.x = speed* MathUtils.cosDeg((360 / bits) * i);
+            velocity.y = speed*MathUtils.sinDeg((360/bits)*i);
             b2dStructures.explosionShard shard  = new b2dStructures.explosionShard(new Vector2(MathUtils.cosDeg((360 / bits) * i)/10 + location.x,MathUtils.sinDeg((360/bits)*i)/10 +location.y),0.01f,1000,0.5f,world,velocity,bodyDef,fixtureDef,circleShape);
         }
         circleShape.dispose();
     }
 
-    public static void clearShards(Body body){
+    public static void clearShards(Body body,float tolerance){
 
         if(body.getUserData() instanceof Vector2){
-            if((Math.pow((double)((Vector2) body.getUserData()).x - body.getPosition().x,2) + Math.pow((double)((Vector2) body.getUserData()).y - body.getPosition().y,2)>=5)){
+            if((Math.pow((double)((Vector2) body.getUserData()).x - body.getPosition().x,2) + Math.pow((double)((Vector2) body.getUserData()).y - body.getPosition().y,2)>=tolerance)){
                 TestClass.toDestroy.add(body);
             }
         }
