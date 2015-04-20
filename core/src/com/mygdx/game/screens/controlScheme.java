@@ -38,9 +38,6 @@ public class controlScheme extends InputAdapter implements Screen {
     private int newFireBind;
 
 
-
-
-
     public String moveForward() {
         String prefsForward = Gdx.app.getPreferences(MyGdxGame.title).getString("forwardBind").trim();
         if (prefsForward != null && !prefsForward.equals(""))
@@ -75,16 +72,14 @@ public class controlScheme extends InputAdapter implements Screen {
 
 
     @Override
-    public void show(){
+    public void show() {
         newForwardBind = Gdx.app.getPreferences(MyGdxGame.title).getInteger("forwardBind");
         newBackwardBind = Gdx.app.getPreferences(MyGdxGame.title).getInteger("backwardBind");
         newJumpBind = Gdx.app.getPreferences(MyGdxGame.title).getInteger("jumpBind");
         newFireBind = Gdx.app.getPreferences(MyGdxGame.title).getInteger("fireBind");
 
 
-
-
-                stage = new Stage();
+        stage = new Stage();
 
         final Input input = new Input();
         final InputMultiplexer inputMultiplexer = new InputMultiplexer();
@@ -133,7 +128,7 @@ public class controlScheme extends InputAdapter implements Screen {
                             toggleControl2 = newForwardBind;
                             Gdx.app.log(MyGdxGame.title, String.valueOf(newForwardBind));
 
-                            if (toggleControl2 == newForwardBind && toggleControl == 0){
+                            if (toggleControl2 == newForwardBind && toggleControl == 0) {
                                 toggleControl++;
                                 Gdx.app.log(MyGdxGame.title, "First time only: " + toggleControl + toggleControl2);
                                 break;
@@ -158,7 +153,7 @@ public class controlScheme extends InputAdapter implements Screen {
                     newBackwardBind = Input.currentKey;
                     Gdx.app.getPreferences(MyGdxGame.title).putInteger("backwardBind", newBackwardBind);
 
-                    while (toggleControl3 % 2 == 0 ) {
+                    while (toggleControl3 % 2 == 0) {
                         Gdx.app.log(MyGdxGame.title, String.valueOf(newBackwardBind));
                         if (Gdx.input.isKeyJustPressed(newBackwardBind)) {
                             toggleControl3++;
@@ -192,7 +187,6 @@ public class controlScheme extends InputAdapter implements Screen {
                 }
             }
         };
-
 
 
         back.addListener(settingsHandler);
@@ -234,6 +228,7 @@ public class controlScheme extends InputAdapter implements Screen {
     public void resume() {
 
     }
+
     @Override
     public void hide() {
 

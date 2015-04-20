@@ -593,6 +593,7 @@ public class TestClass extends InputAdapter implements Screen {
                 break;
             case 45:
                 Q = false;
+                break;
 
         }
 
