@@ -38,7 +38,7 @@ public class levelMenu implements Screen {
         table.setFillParent(true);
 
         list = new List(skin);
-        list.setItems("one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "Dank");
+        list.setItems("one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "Dank","controltest");
         sp = new ScrollPane(list, skin);
 
 
@@ -64,6 +64,9 @@ public class levelMenu implements Screen {
                 }
                 if (list.getSelected() == "Dank") {
                     ((Game) Gdx.app.getApplicationListener()).setScreen(new TestClass());
+                }
+                if (list.getSelected() == "controltest") {
+                    ((Game) Gdx.app.getApplicationListener()).setScreen(new controlScheme2());
                 }
 
             }
