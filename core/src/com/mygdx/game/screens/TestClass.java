@@ -188,7 +188,7 @@ public class TestClass extends InputAdapter implements Screen {
         ground = b2dStructures.lineAlt(new Vector2(-300f, -10f), 0, 3000, 0.25f, ground, world);
         b2dStructures.line(new Vector2(-30, -10), 90, 100, 0.5f, world);
 
-        b2dStructures.castle(new Vector2(12, -9), 25, 1f, blocks, world);
+        b2dStructures.castle(new Vector2(50, -9), 25, 5f, blocks, world);
         b2dStructures.castle(new Vector2(20, -9), 25, 2, blocks, world);
         b2dStructures.castle2(new Vector2(5, -9), 15, 1, 2, blocks, world);
         b2dStructures.castle2(new Vector2(5, -9), 12, 2, 3.5f, blocks, world);
@@ -214,7 +214,7 @@ public class TestClass extends InputAdapter implements Screen {
     public void render(float delta) {
 
         world.getBodies(tmpBodies);
-        for(Body body: tmpBodies)projectiles.clearShards(body,4);
+        for(Body body: tmpBodies)projectiles.clearShards(body,3);
 
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -298,7 +298,7 @@ public class TestClass extends InputAdapter implements Screen {
     }
 
     public void shootFire(Vector2 location, float angleRad) {
-        if(projectiles.fireBallCount < 5) {
+        if(projectiles.fireBallCount < 1) {
 
             float i = (float) Math.cos(angleRad);
             float j = (float) Math.sin(angleRad);

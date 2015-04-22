@@ -53,7 +53,7 @@ public class b2dStructures {
 
             Body body = world.createBody(bodyDef);
             body.createFixture(fixtureDef);
-            body.setUserData(location);
+            body.setUserData(new Vector2());
             body.setGravityScale(0);
 
             body.setLinearVelocity(velocity);
