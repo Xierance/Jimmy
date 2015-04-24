@@ -13,6 +13,7 @@ public class enemyPrototype {
     private boolean direction;
     Body enemyBody;
     public boolean alive;
+    private Fixture enemyFixture;
 
     public enemyPrototype(Vector2 startLocation){
         this.startlocation = startLocation;
@@ -41,6 +42,19 @@ public class enemyPrototype {
         enemyBody = world.createBody(bodyDef);
         enemyBody.createFixture(fixtureDef);
         //enemyBody.setUserData(Sprite);
+
+        //Sensor setup
+        PolygonShape baseRectangle = new PolygonShape();
+        baseRectangle.setAsBox(.49f, .1f, new Vector2(0, -1f), 0);
+
+        fixtureDef.shape = baseRectangle;
+        fixtureDef.friction = 0.1f;
+        fixtureDef.restitution = 0;
+        fixtureDef.density = .1f;
+        enemyFixture = enemyBody.createFixture(fixtureDef);
+        enemyFixture.setSensor(true);
+
+        baseRectangle.dispose();
 
         blockShape.dispose();
 
