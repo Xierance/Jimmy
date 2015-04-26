@@ -33,6 +33,7 @@ public class TestClass extends InputAdapter implements Screen {
     public static Array<ParticleEffect> flames = new Array<ParticleEffect>();
     public static TiledMap map;
     enemyPrototype test;
+    enemyPrototype test2;
     //input keys
 
     public static boolean Up;
@@ -212,6 +213,8 @@ public class TestClass extends InputAdapter implements Screen {
         //test stuff
         test = new enemyPrototype(new Vector2(60,-9));
         test.createEnemy(world);
+        test2 = new enemyPrototype(new Vector2(20,9));
+        test2.createEnemy(world);
 
 
     }
@@ -219,6 +222,7 @@ public class TestClass extends InputAdapter implements Screen {
     @Override
     public void render(float delta) {
         test.update();
+        test2.update();
 
         world.getBodies(tmpBodies);
         for(Body body: tmpBodies)projectiles.clearShards(body,3);
