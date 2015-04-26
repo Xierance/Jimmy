@@ -209,20 +209,18 @@ public class TestClass extends InputAdapter implements Screen {
         cl = new MyContactListener();
         world.setContactListener(cl);
 
-
         //test stuff
         test = new enemyPrototype(new Vector2(60,-9));
         test.createEnemy(world);
-        test2 = new enemyPrototype(new Vector2(20,9));
+        test2 = new enemyPrototype(new Vector2(20,12));
         test2.createEnemy(world);
-
 
     }
 
     @Override
     public void render(float delta) {
-        test.update();
-        test2.update();
+        test.update(world);
+        test2.update(world);
 
         world.getBodies(tmpBodies);
         for(Body body: tmpBodies)projectiles.clearShards(body,3);

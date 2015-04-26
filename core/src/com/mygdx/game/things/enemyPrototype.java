@@ -2,7 +2,7 @@ package com.mygdx.game.things;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.sun.xml.internal.ws.client.sei.ResponseBuilder;
+import com.badlogic.gdx.utils.Array;
 
 /**
  * Created by for example John on 4/23/2015.
@@ -13,16 +13,22 @@ public class enemyPrototype {
     private boolean direction;
     Body enemyBody;
     public boolean alive;
-    private Fixture enemyFixture;
 
-    public enemyPrototype(Vector2 startLocation){
+    private Fixture leftSensor;
+    private Fixture rightSensor;
+
+    private boolean leftGround = false;
+    private boolean rightGround = false;
+
+
+    public enemyPrototype(Vector2 startLocation) {
         this.startlocation = startLocation;
         direction = true;
 
 
     }
 
-    public void createEnemy(World world){
+    public void createEnemy(World world) {
         alive = true;
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
@@ -45,33 +51,49 @@ public class enemyPrototype {
 
         //Sensor setup
         PolygonShape baseRectangle = new PolygonShape();
-        baseRectangle.setAsBox(.49f, .1f, new Vector2(0, -1f), 0);
+        baseRectangle.setAsBox(.224f, .05f, new Vector2(-.25f, -1.06f), 0);
 
         fixtureDef.shape = baseRectangle;
-        fixtureDef.friction = 0.1f;
-        fixtureDef.restitution = 0;
-        fixtureDef.density = .1f;
-        enemyFixture = enemyBody.createFixture(fixtureDef);
-        enemyFixture.setSensor(true);
+        leftSensor = enemyBody.createFixture(fixtureDef);
+        leftSensor.setSensor(true);
+
+        baseRectangle.setAsBox(.224f, .05f, new Vector2(.26f, -1.06f), 0);
+        fixtureDef.shape = baseRectangle;
+        rightSensor = enemyBody.createFixture(fixtureDef);
+        rightSensor.setSensor(true);
 
         baseRectangle.dispose();
-
         blockShape.dispose();
 
     }
 
-    public void update(){
-        if(direction == true && enemyBody.getPosition().x - startlocation.x > 5)direction = false;
-        if(direction == false && startlocation.x - enemyBody.getPosition().x > 5)direction = true;
-        if(direction == true)
-            enemyBody.setLinearVelocity(new Vector2(5f  , 0));
-        if(direction == false)
-            enemyBody.setLinearVelocity(new Vector2( -5f,0));
+    public void update(World world) {
+
+        leftGround = false;
+        rightGround = false;
+
+        Array<Contact> contactList = new Array<Contact>(world.getContactList());
+
+        for (Contact contact : contactList) {
+            if (contact.isTouching() && (contact.getFixtureA() == leftSensor || contact.getFixtureB() == leftSensor))
+            leftGround = true;
+
+            if (contact.isTouching() && (contact.getFixtureA() == rightSensor || contact.getFixtureB() == rightSensor))
+
+            rightGround = true;
         }
 
+        if (direction == true && enemyBody.getPosition().x - startlocation.x > 5 && rightGround) direction = false;
+        if (direction == false && startlocation.x - enemyBody.getPosition().x > 5 && leftGround) direction = true;
 
 
-
+        if (direction == true)
+            enemyBody.setLinearVelocity(new Vector2(5f, enemyBody.getLinearVelocity().y));
+        if (direction == false)
+            enemyBody.setLinearVelocity(new Vector2(-5f, enemyBody.getLinearVelocity().y));
     }
+
+
+}
 
 
