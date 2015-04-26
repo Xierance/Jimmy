@@ -75,25 +75,36 @@ public class enemyPrototype {
         Array<Contact> contactList = new Array<Contact>(world.getContactList());
 
         for (Contact contact : contactList) {
-            if (contact.isTouching() && (contact.getFixtureA() == leftSensor || contact.getFixtureB() == leftSensor))
-            leftGround = true;
+            if (contact.isTouching() && (contact.getFixtureA() == leftSensor && contact.getFixtureB().getBody() != contact.getFixtureA().getBody() || contact.getFixtureB().getBody() != contact.getFixtureA().getBody() && contact.getFixtureB() == leftSensor)) {
+                leftGround = true;
+            }
 
-            if (contact.isTouching() && (contact.getFixtureA() == rightSensor || contact.getFixtureB() == rightSensor))
-
-            rightGround = true;
+            if (contact.isTouching() && (contact.getFixtureA() == rightSensor && contact.getFixtureB().getBody() != contact.getFixtureA().getBody() || contact.getFixtureB().getBody() != contact.getFixtureA().getBody() && contact.getFixtureB() == rightSensor)) {
+                rightGround = true;
+            }
         }
 
         if (direction == true && enemyBody.getPosition().x - startlocation.x > 5 && rightGround) direction = false;
         if (direction == false && startlocation.x - enemyBody.getPosition().x > 5 && leftGround) direction = true;
 
 
-        if (direction == true)
+        if (direction == true && rightGround)
             enemyBody.setLinearVelocity(new Vector2(5f, enemyBody.getLinearVelocity().y));
-        if (direction == false)
+        else if (direction == false && leftGround)
             enemyBody.setLinearVelocity(new Vector2(-5f, enemyBody.getLinearVelocity().y));
+        else if (leftGround) {
+            enemyBody.setLinearVelocity(new Vector2(-5f, enemyBody.getLinearVelocity().y));
+            direction = false;
+        } else if (rightGround) {
+            enemyBody.setLinearVelocity(new Vector2(5f, enemyBody.getLinearVelocity().y));
+            direction = true;
+        }
     }
 
 
 }
+
+
+
 
 
