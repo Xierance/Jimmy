@@ -84,8 +84,8 @@ public class enemyPrototype {
             }
         }
 
-        if (direction == true && enemyBody.getPosition().x - startlocation.x > 5 && rightGround) direction = false;
-        if (direction == false && startlocation.x - enemyBody.getPosition().x > 5 && leftGround) direction = true;
+        //if (direction == true && enemyBody.getPosition().x - startlocation.x > 5 && rightGround) direction = false;
+        //if (direction == false && startlocation.x - enemyBody.getPosition().x > 5 && leftGround) direction = true;
 
 
         if (direction == true && rightGround)
