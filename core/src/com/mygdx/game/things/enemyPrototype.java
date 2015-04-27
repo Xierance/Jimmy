@@ -33,6 +33,7 @@ public class enemyPrototype {
     }
 
     public void createEnemy(World world) {
+        direction = true;
         alive = true;
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
@@ -69,12 +70,12 @@ public class enemyPrototype {
         //side sensors
         PolygonShape sideRectangle = new PolygonShape();
 
-        sideRectangle.setAsBox(.05f, 1f, new Vector2(-.6f, 0), 0);
+        sideRectangle.setAsBox(.05f, 0.9f, new Vector2(-.6f, 0), 0);
         fixtureDef.shape = sideRectangle;
         leftSideSensor = enemyBody.createFixture(fixtureDef);
         leftSideSensor.setSensor(true);
 
-        sideRectangle.setAsBox(.05f, 1f, new Vector2(.6f, -0), 0);
+        sideRectangle.setAsBox(.05f, 0.9f, new Vector2(.6f, -0), 0);
         fixtureDef.shape = sideRectangle;
         rightSideSensor = enemyBody.createFixture(fixtureDef);
         rightSideSensor.setSensor(true);
@@ -98,18 +99,22 @@ public class enemyPrototype {
         for (Contact contact : contactList) {
             if (contact.isTouching() && (contact.getFixtureA() == leftSensor && contact.getFixtureB().getBody() != contact.getFixtureA().getBody() || contact.getFixtureB().getBody() != contact.getFixtureA().getBody() && contact.getFixtureB() == leftSensor)) {
                 leftGround = true;
+
             }
 
             if (contact.isTouching() && (contact.getFixtureA() == rightSensor && contact.getFixtureB().getBody() != contact.getFixtureA().getBody() || contact.getFixtureB().getBody() != contact.getFixtureA().getBody() && contact.getFixtureB() == rightSensor)) {
                 rightGround = true;
+
             }
 
             if (contact.isTouching() && (contact.getFixtureA() == leftSideSensor && contact.getFixtureB().getBody() != contact.getFixtureA().getBody() || contact.getFixtureB().getBody() != contact.getFixtureA().getBody() && contact.getFixtureB() == leftSideSensor)) {
                 leftSide = false;
+                System.out.println("that one");
             }
 
             if (contact.isTouching() && (contact.getFixtureA() == rightSideSensor && contact.getFixtureB().getBody() != contact.getFixtureA().getBody() || contact.getFixtureB().getBody() != contact.getFixtureA().getBody() && contact.getFixtureB() == rightSideSensor)) {
                 rightSide = false;
+                System.out.println("that ");
             }
 
         }
@@ -138,7 +143,8 @@ public class enemyPrototype {
             enemyBody.setLinearVelocity(5f,enemyBody.getLinearVelocity().y);
 
         }else if (!direction && leftSide && leftGround){
-            enemyBody.setLinearVelocity(-5f,enemyBody.getLinearVelocity().y);
+            enemyBody.setLinearVelocity(-5f, enemyBody.getLinearVelocity().y);
+
 
         }else if(rightSide && rightGround){
             direction = true;
@@ -146,30 +152,27 @@ public class enemyPrototype {
 
         }else if (leftSide && leftGround){
             direction = false;
-            enemyBody.setLinearVelocity(-5f,enemyBody.getLinearVelocity().y);
+            enemyBody.setLinearVelocity(-5f, enemyBody.getLinearVelocity().y);
 
-        } else if (rightSide) {
-            enemyBody.setLinearVelocity(new Vector2(5f, enemyBody.getLinearVelocity().y));
-            direction = true;
 
-        }else if (leftSide) {
+        } else if (!rightSide || !rightGround) {
             enemyBody.setLinearVelocity(new Vector2(-5f, enemyBody.getLinearVelocity().y));
             direction = false;
 
-        }else if (direction && rightGround){
-            enemyBody.setLinearVelocity(5f,enemyBody.getLinearVelocity().y);
 
-        }else if (!direction && leftGround){
-            enemyBody.setLinearVelocity(-5f,enemyBody.getLinearVelocity().y);
+        }else if (!leftSide || !leftGround) {
+            enemyBody.setLinearVelocity(new Vector2(5f, enemyBody.getLinearVelocity().y));
+            direction = true;
+
+//
+//        }else if (direction && rightGround){
+//            enemyBody.setLinearVelocity(5f,enemyBody.getLinearVelocity().y);
+//
+//        }else if (!direction && leftGround){
+//            enemyBody.setLinearVelocity(-5f,enemyBody.getLinearVelocity().y);
         }
 
-
-
-
-
-
     }
-
 
 }
 
