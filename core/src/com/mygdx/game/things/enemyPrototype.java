@@ -8,6 +8,13 @@ import com.badlogic.gdx.utils.Array;
  * Created by for example John on 4/23/2015.
  */
 public class enemyPrototype {
+    public static  Array<enemyPrototype>  enemies = new Array<enemyPrototype>();
+    public static  void updateenemies(World world){
+        for(enemyPrototype enemy:enemies){
+            enemy.update(world);
+        }
+
+    }
 
     private Vector2 startlocation;
     private boolean direction;
@@ -85,6 +92,8 @@ public class enemyPrototype {
         baseRectangle.dispose();
         blockShape.dispose();
 
+        enemyPrototype.enemies.add(this);
+
     }
 
     public void update(World world) {
@@ -117,25 +126,6 @@ public class enemyPrototype {
 
         }
 
-
-//        if (direction == true && rightGround && rightSide)
-//            enemyBody.setLinearVelocity(new Vector2(5f, enemyBody.getLinearVelocity().y));
-//        else if (direction == false && leftGround && leftSide)
-//            enemyBody.setLinearVelocity(new Vector2(-5f, enemyBody.getLinearVelocity().y));
-//        else if (leftGround && leftSide) {
-//            enemyBody.setLinearVelocity(new Vector2(-5f, enemyBody.getLinearVelocity().y));
-//            direction = false;
-//        } else if (rightGround && rightSide) {
-//            enemyBody.setLinearVelocity(new Vector2(5f, enemyBody.getLinearVelocity().y));
-//            direction = true;
-//        }
-//        else if (leftGround) {
-//            enemyBody.setLinearVelocity(new Vector2(-5f, enemyBody.getLinearVelocity().y));
-//            direction = false;
-//        } else if (rightGround) {
-//            enemyBody.setLinearVelocity(new Vector2(5f, enemyBody.getLinearVelocity().y));
-//            direction = true;
-//        }
 
         if(direction && rightSide && rightGround){
             enemyBody.setLinearVelocity(5f,enemyBody.getLinearVelocity().y);

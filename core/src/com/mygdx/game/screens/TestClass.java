@@ -219,8 +219,9 @@ public class TestClass extends InputAdapter implements Screen {
 
     @Override
     public void render(float delta) {
-        test.update(world);
-        test2.update(world);
+        //test.update(world);
+        //test2.update(world);
+        enemyPrototype.updateenemies(world);
 
         world.getBodies(tmpBodies);
         for(Body body: tmpBodies)projectiles.clearShards(body,3);
