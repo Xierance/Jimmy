@@ -211,9 +211,9 @@ public class TestClass extends InputAdapter implements Screen {
 
         //test stuff
         test = new enemyPrototype(new Vector2(60,-9));
-        test.createEnemy(world);
+        test.createEnemy(world,1f,2f);
         test2 = new enemyPrototype(new Vector2(20,12));
-        test2.createEnemy(world);
+        test2.createEnemy(world,2f,2f);
 
     }
 

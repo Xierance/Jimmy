@@ -32,7 +32,7 @@ public class enemyPrototype {
 
     }
 
-    public void createEnemy(World world) {
+    public void createEnemy(World world,Float Width, float Height) {
         direction = true;
         alive = true;
         BodyDef bodyDef = new BodyDef();
@@ -41,7 +41,7 @@ public class enemyPrototype {
         bodyDef.fixedRotation = true;
 
         PolygonShape blockShape = new PolygonShape();
-        blockShape.setAsBox(.5f, 1f);
+        blockShape.setAsBox(Width/2, Height/2);
 
 
         FixtureDef fixtureDef = new FixtureDef();
@@ -56,13 +56,13 @@ public class enemyPrototype {
 
         //Sensor setup
         PolygonShape baseRectangle = new PolygonShape();
-        baseRectangle.setAsBox(.224f, .05f, new Vector2(-.25f, -1.06f), 0);
+        baseRectangle.setAsBox((Width - 0.01f)/4 , .05f, new Vector2(-Width/4  - 0.01f, -Height/2 - 0.05f), 0);
 
         fixtureDef.shape = baseRectangle;
         leftSensor = enemyBody.createFixture(fixtureDef);
         leftSensor.setSensor(true);
 
-        baseRectangle.setAsBox(.224f, .05f, new Vector2(.26f, -1.06f), 0);
+        baseRectangle.setAsBox((Width- 0.01f )/ 4 , .05f, new Vector2(Width/4 + 0.01f, -Height/2 - 0.05f), 0);
         fixtureDef.shape = baseRectangle;
         rightSensor = enemyBody.createFixture(fixtureDef);
         rightSensor.setSensor(true);
@@ -70,12 +70,12 @@ public class enemyPrototype {
         //side sensors
         PolygonShape sideRectangle = new PolygonShape();
 
-        sideRectangle.setAsBox(.05f, 0.9f, new Vector2(-.6f, 0), 0);
+        sideRectangle.setAsBox(.05f, Height/2 - 0.05f, new Vector2(-Width/2 -0.02f, 0), 0);
         fixtureDef.shape = sideRectangle;
         leftSideSensor = enemyBody.createFixture(fixtureDef);
         leftSideSensor.setSensor(true);
 
-        sideRectangle.setAsBox(.05f, 0.9f, new Vector2(.6f, -0), 0);
+        sideRectangle.setAsBox(.05f, Height/2 - 0.05f, new Vector2(Width/2 +0.02f, -0), 0);
         fixtureDef.shape = sideRectangle;
         rightSideSensor = enemyBody.createFixture(fixtureDef);
         rightSideSensor.setSensor(true);
@@ -109,12 +109,10 @@ public class enemyPrototype {
 
             if (contact.isTouching() && (contact.getFixtureA() == leftSideSensor && contact.getFixtureB().getBody() != contact.getFixtureA().getBody() || contact.getFixtureB().getBody() != contact.getFixtureA().getBody() && contact.getFixtureB() == leftSideSensor)) {
                 leftSide = false;
-                System.out.println("that one");
             }
 
             if (contact.isTouching() && (contact.getFixtureA() == rightSideSensor && contact.getFixtureB().getBody() != contact.getFixtureA().getBody() || contact.getFixtureB().getBody() != contact.getFixtureA().getBody() && contact.getFixtureB() == rightSideSensor)) {
                 rightSide = false;
-                System.out.println("that ");
             }
 
         }

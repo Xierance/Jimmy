@@ -43,7 +43,6 @@ public class Player {
         this.playerSprite = playerSPrite;
     }
 
-
     private Sprite playerSprite;
 
     public Body getPlayerWheelBody() {
