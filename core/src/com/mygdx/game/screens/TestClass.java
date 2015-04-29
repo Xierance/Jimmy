@@ -20,6 +20,7 @@ import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyContactListener;
 import com.mygdx.game.Visuals.gameParticles.Explosion;
 import com.mygdx.game.things.*;
+import com.mygdx.game.worldHandler;
 
 /**
  * Created by for example John on 3/14/2015.
@@ -65,7 +66,6 @@ public class TestClass extends InputAdapter implements Screen {
 
     public Player player = new Player();
 
-    Sprite dick;
 
     private World world;
     private Box2DDebugRenderer debugRenderer;
@@ -104,10 +104,6 @@ public class TestClass extends InputAdapter implements Screen {
 
     public static Array<Body> getToDestroy() {
         return toDestroy;
-    }
-
-    public static Array<ParticleEffect> getFlames() {
-        return flames;
     }
 
     public static void mapToBox2d(TiledMap map, World world) {
@@ -164,8 +160,6 @@ public class TestClass extends InputAdapter implements Screen {
     @Override
     public void show() {
 
-        dick = new Sprite(new Texture("textures/dick.png"));
-
         jointDef = new MouseJointDef();
 
         batch = new SpriteBatch();
@@ -216,11 +210,8 @@ public class TestClass extends InputAdapter implements Screen {
         test2.createEnemy(world,2f,2f);
 
     }
-
     @Override
     public void render(float delta) {
-        //test.update(world);
-        //test2.update(world);
         enemyPrototype.updateenemies(world);
 
         world.getBodies(tmpBodies);
@@ -236,8 +227,7 @@ public class TestClass extends InputAdapter implements Screen {
         if (world.isLocked() == false) rayCast.clearBodies(toDestroy, world);
 
         batch.begin();
-        drawSprites();
-        drawFlames(delta);
+        drawSprites(delta);
         Explosion.drawExplosions(batch, delta);
 
         batch.end();
@@ -293,31 +283,6 @@ public class TestClass extends InputAdapter implements Screen {
 
     }
 
-    public float angle2(Vector2 vector1, Vector2 vector2) {
-        float angle = ((float) Math.atan2(vector2.y - vector1.y, vector2.x - vector1.x));
-        return angle;
-    }
-
-    public void shootDick(Vector2 location, float angleRad) {
-
-        float i = (float) Math.cos(angleRad);
-        float j = (float) Math.sin(angleRad);
-        Vector2 newLocation = new Vector2(location.x + i, location.y + j);
-        projectiles.bullet(newLocation, 10f, 0.75f, new Vector2(69 * i, 69 * j), world, dick);
-
-    }
-
-    public void shootFire(Vector2 location, float angleRad) {
-        if(projectiles.fireBallCount < 1) {
-
-            float i = (float) Math.cos(angleRad);
-            float j = (float) Math.sin(angleRad);
-            Vector2 newLoacation = new Vector2(location.x + i, location.y + j);
-            projectiles.fireBall(newLoacation, new Vector2(20 * i, 20 * j), world);
-
-        }
-    }
-
     public void cameraFollow() {
         float lerp = .1f;
         if (!Ctrl_left) {
@@ -353,7 +318,7 @@ public class TestClass extends InputAdapter implements Screen {
     public void handleInput() {
 
         if (Ctrl_right)
-            shootFire(player.getPlayerBody().getPosition(), angle2(player.getPlayerBody().getPosition(), getmouseCoords()));
+            projectiles.shootFire(player.getPlayerBody().getPosition(), projectiles.angle2(player.getPlayerBody().getPosition(), getmouseCoords()),world);
         if (Ctrl_left)
             if (rayCast.rayFixture(world, player.getPlayerBody().getPosition(), new Vector2(getmouseCoords().x, getmouseCoords().y)) != null)
                 toDestroy.add(rayCast.rayFixture(world,
@@ -403,9 +368,15 @@ public class TestClass extends InputAdapter implements Screen {
 
     }
 
-    public void drawSprites() {
+    public void drawSprites(float delta) {
         world.getBodies(tmpBodies);
         for (Body body : tmpBodies) {
+
+            if (body.getUserData() != null && body.getUserData() instanceof ParticleEffectPool.PooledEffect) {
+                ((ParticleEffectPool.PooledEffect) body.getUserData()).setPosition(body.getPosition().x, body.getPosition().y);
+                ((ParticleEffectPool.PooledEffect) body.getUserData()).draw(batch, delta);
+
+            }
 
             if (body.getUserData() != null && body.getUserData() instanceof Sprite) {
                 //rotating playerBody sprite
@@ -423,24 +394,12 @@ public class TestClass extends InputAdapter implements Screen {
         }
     }
 
-    public void drawFlames(float delta) {
-
-        world.getBodies(tmpBodies);
-        for (Body body : tmpBodies) {
-            if (body.getUserData() != null && body.getUserData() instanceof ParticleEffectPool.PooledEffect) {
-                ((ParticleEffectPool.PooledEffect) body.getUserData()).setPosition(body.getPosition().x, body.getPosition().y);
-                ((ParticleEffectPool.PooledEffect) body.getUserData()).draw(batch, delta);
-
-            }
-        }
-    }
-
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         orthographicCamera.unproject(tmp.set(screenX, screenY, 0));
 
         if (!Ctrl_left) {
             if (!Ctrl_right)
-                shootDick(player.getPlayerBody().getPosition(), angle2(player.getPlayerBody().getPosition(), new Vector2(tmp.x, tmp.y)));
+                projectiles.shootDick(player.getPlayerBody().getPosition(), projectiles.angle2(player.getPlayerBody().getPosition(), new Vector2(tmp.x, tmp.y)),world);
 
         }
 
@@ -617,6 +576,3 @@ public class TestClass extends InputAdapter implements Screen {
     }
 
 }
-
-
-

@@ -1,22 +1,23 @@
 package com.mygdx.game.things;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.ParticleEffectPool;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.mygdx.game.Visuals.gameParticles.Explosion;
 import com.mygdx.game.screens.TestClass;
+import com.mygdx.game.worldHandler;
 
 /**
  * Created by for example John on 4/11/2015.
  */
 public class projectiles {
 
-    public static int fireBallCount = 0;
 
 
-    public static void bullet(Vector2 location, float density, float friction, Vector2 velocity, World world, Sprite dick) {
+
+    public static void dickBullet(Vector2 location, float density, float friction, Vector2 velocity, World world, Sprite dick) {
         //ball
 
         Body bulletBody;
@@ -90,7 +91,7 @@ public class projectiles {
         EffectPools.FireTestPool.pooledEffects.add(flame);
         flame.dispose();
 
-        fireBallCount++;
+        worldHandler.fireBallCount++;
 
     }
 
@@ -124,5 +125,31 @@ public class projectiles {
                 body.setUserData(new Vector2(((Vector2) body.getUserData()).x + 1, ((Vector2) body.getUserData()).y));
             }
         }
+    }
+
+    public static void shootDick(Vector2 location, float angleRad,World world) {
+
+        float i = (float) Math.cos(angleRad);
+        float j = (float) Math.sin(angleRad);
+        Vector2 newLocation = new Vector2(location.x + i, location.y + j);
+        projectiles.dickBullet(newLocation, 10f, 0.75f, new Vector2(69 * i, 69 * j), world, new Sprite(new Texture("textures/dick.png")));
+
+    }
+
+
+    public static void shootFire(Vector2 location, float angleRad,World world) {
+        if(worldHandler.fireBallCount < 1) {
+
+            float i = (float) Math.cos(angleRad);
+            float j = (float) Math.sin(angleRad);
+            Vector2 newLocation = new Vector2(location.x + i, location.y + j);
+            projectiles.fireBall(newLocation, new Vector2(20 * i, 20 * j), world);
+
+        }
+    }
+
+    public static float angle2(Vector2 vector1, Vector2 vector2) {
+        float angle = ((float) Math.atan2(vector2.y - vector1.y, vector2.x - vector1.x));
+        return angle;
     }
 }

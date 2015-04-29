@@ -6,6 +6,7 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.Visuals.gameParticles.Flame;
 import com.mygdx.game.screens.TestClass;
+import com.mygdx.game.worldHandler;
 
 /**
  * Created by for example John on 4/11/2015.
@@ -33,7 +34,7 @@ public class rayCast {
                 if (b.getUserData() instanceof ParticleEffectPool.PooledEffect){
                     projectiles.explode(b.getPosition());
                     projectiles.explode2(b.getPosition(),36,world,30);
-                    projectiles.fireBallCount--;
+                    worldHandler.fireBallCount--;
                 }
                 world.destroyBody(b);
 
