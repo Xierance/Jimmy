@@ -36,8 +36,8 @@ public class ui {
         }
         locationControl = 0;
 
-        for (int i = 0; i < worldHandler.maxHealth; i++) {
-            this.tendysilhouette.setCenter((-((Gdx.graphics.getWidth() / 2) * 0.9f) + ((tendysilhouette.getWidth() / 2) * locationControl)), ((Gdx.graphics.getHeight() / 2) * 0.9f));
+        for (int i = 0; i < worldHandler.currentHealth; i++) {
+            this.tendysilhouette.setCenter((-((Gdx.graphics.getWidth() / 2) * 0.9f) + ((tendysilhouette.getWidth() / 2) * locationControl))+10, ((Gdx.graphics.getHeight() / 2) * 0.9f +10));
             this.tendysilhouette.draw(secondBatch);
             locationControl++;
         }
