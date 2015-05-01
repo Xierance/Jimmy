@@ -4,12 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.ParticleEffectPool;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.utils.Array;
-import com.mygdx.game.things.EffectPools;
-import com.mygdx.game.things.b2dStructures;
+import com.mygdx.game.resources.EffectPools;
 
 /**
  * Created by for example John on 4/12/2015.
@@ -26,6 +22,16 @@ public class Explosion {
         explosion.start();
     }
 
+    public static void drawExplosions(SpriteBatch batch, Float delta) {
+        for (ParticleEffectPool.PooledEffect effect : EffectPools.ExplosionTestPool.pooledEffects){
+            effect.draw(batch, delta);
+            if(effect.isComplete()){
+                EffectPools.ExplosionTestPool.pooledEffects.removeValue(effect,true);
+                effect.free();
+            }
+        }
+    }
+
     public ParticleEffect getExplosion() {
         return explosion;
     }
@@ -33,7 +39,6 @@ public class Explosion {
     public void setExplosion(ParticleEffect explsoion) {
         this.explosion = explosion;
     }
-
 
     public void update(SpriteBatch batch, Float delta, Vector2 position) {
         explosion.setPosition(position.x, position.y);
@@ -43,17 +48,6 @@ public class Explosion {
 
     public void setPosition(Vector2 position) {
         explosion.setPosition(position.x, position.y);
-    }
-
-
-    public static void drawExplosions(SpriteBatch batch, Float delta) {
-        for (ParticleEffectPool.PooledEffect effect : EffectPools.ExplosionTestPool.pooledEffects){
-            effect.draw(batch, delta);
-            if(effect.isComplete()){
-                EffectPools.ExplosionTestPool.pooledEffects.removeValue(effect,true);
-                effect.free();
-            }
-        }
     }
 
 

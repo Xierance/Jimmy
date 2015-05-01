@@ -1,7 +1,6 @@
 package com.mygdx.game.screens;
 
 import com.badlogic.gdx.*;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -10,13 +9,10 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game.Input;
 import com.mygdx.game.MyGdxGame;
-import com.mygdx.game.things.keyCodes;
-
-import javax.print.DocFlavor;
+import com.mygdx.game.resources.keyCodes;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.moveTo;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.run;
@@ -32,10 +28,14 @@ public class controlScheme extends InputAdapter implements Screen {
     private Table table;
     private Skin skin;
     private int toggleControl = -1;
-    private int newForwardBind;
-    private int newBackwardBind;
-    private int newJumpBind;
-    private int newFireBind;
+    private int newForwardBind = Gdx.app.getPreferences(MyGdxGame.title).getInteger("forwardBind");
+    private int newBackwardBind = Gdx.app.getPreferences(MyGdxGame.title).getInteger("backwardBind");
+    private int newJumpBind = Gdx.app.getPreferences(MyGdxGame.title).getInteger("jumpBind");
+    private int newFireBind = Gdx.app.getPreferences(MyGdxGame.title).getInteger("fireBind");
+    private int toggleControl6 = 0;
+
+
+
 
 
     public String moveForward() {
@@ -72,14 +72,16 @@ public class controlScheme extends InputAdapter implements Screen {
 
 
     @Override
-    public void show() {
+    public void show(){
         newForwardBind = Gdx.app.getPreferences(MyGdxGame.title).getInteger("forwardBind");
         newBackwardBind = Gdx.app.getPreferences(MyGdxGame.title).getInteger("backwardBind");
         newJumpBind = Gdx.app.getPreferences(MyGdxGame.title).getInteger("jumpBind");
         newFireBind = Gdx.app.getPreferences(MyGdxGame.title).getInteger("fireBind");
 
 
-        stage = new Stage();
+
+
+                stage = new Stage();
 
         final Input input = new Input();
         final InputMultiplexer inputMultiplexer = new InputMultiplexer();
@@ -128,7 +130,7 @@ public class controlScheme extends InputAdapter implements Screen {
                             toggleControl2 = newForwardBind;
                             Gdx.app.log(MyGdxGame.title, String.valueOf(newForwardBind));
 
-                            if (toggleControl2 == newForwardBind && toggleControl == 0) {
+                            if (toggleControl2 == newForwardBind && toggleControl == 0){
                                 toggleControl++;
                                 Gdx.app.log(MyGdxGame.title, "First time only: " + toggleControl + toggleControl2);
                                 break;
@@ -153,7 +155,7 @@ public class controlScheme extends InputAdapter implements Screen {
                     newBackwardBind = Input.currentKey;
                     Gdx.app.getPreferences(MyGdxGame.title).putInteger("backwardBind", newBackwardBind);
 
-                    while (toggleControl3 % 2 == 0) {
+                    while (toggleControl3 % 2 == 0 ) {
                         Gdx.app.log(MyGdxGame.title, String.valueOf(newBackwardBind));
                         if (Gdx.input.isKeyJustPressed(newBackwardBind)) {
                             toggleControl3++;
@@ -187,6 +189,7 @@ public class controlScheme extends InputAdapter implements Screen {
                 }
             }
         };
+
 
 
         back.addListener(settingsHandler);
@@ -228,7 +231,6 @@ public class controlScheme extends InputAdapter implements Screen {
     public void resume() {
 
     }
-
     @Override
     public void hide() {
 

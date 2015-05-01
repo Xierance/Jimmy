@@ -1,4 +1,4 @@
-package com.mygdx.game.things;
+package com.mygdx.game.resources;
 
 import java.util.HashMap;
 

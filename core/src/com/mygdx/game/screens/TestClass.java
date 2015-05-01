@@ -19,8 +19,7 @@ import com.badlogic.gdx.physics.box2d.joints.MouseJointDef;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyContactListener;
 import com.mygdx.game.Visuals.gameParticles.Explosion;
-import com.mygdx.game.things.*;
-import com.mygdx.game.worldHandler;
+import com.mygdx.game.resources.*;
 
 /**
  * Created by for example John on 3/14/2015.
@@ -33,12 +32,9 @@ public class TestClass extends InputAdapter implements Screen {
     public static Array<Body> toDestroy = new Array<Body>();
     public static Array<ParticleEffect> flames = new Array<ParticleEffect>();
     public static TiledMap map;
-    enemyPrototype test;
-    enemyPrototype test2;
-    //input keys
-
     public static boolean Up;
     public static boolean Down;
+    //input keys
     public static boolean Left;
     public static boolean Right;
     public static boolean Space;
@@ -58,15 +54,14 @@ public class TestClass extends InputAdapter implements Screen {
     public static boolean D;
     public static boolean Ctrl_left;
     public static boolean Ctrl_right;
+    public static TextureAtlas hellBlocks = new TextureAtlas("maps/hellBlocks.pack");
     private static boolean Q;
-
     private final float TIMESTEP = 1 / 60f;
     private final int VELOCITYITERATIONS = 8;
     private final int POSITIONITERATIONS = 3;
-
     public Player player = new Player();
-
-
+    enemyPrototype test;
+    enemyPrototype test2;
     private World world;
     private Box2DDebugRenderer debugRenderer;
     private OrthographicCamera orthographicCamera;
@@ -77,7 +72,6 @@ public class TestClass extends InputAdapter implements Screen {
     private MouseJointDef jointDef;
     private MouseJoint joint;
     private TextureAtlas blocks = new TextureAtlas("tiles/block_pack.pack");
-    public static TextureAtlas hellBlocks = new TextureAtlas("maps/hellBlocks.pack");
     private Sprite block1 = new Sprite();
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

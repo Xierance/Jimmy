@@ -3,8 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.graphics.g2d.ParticleEffectPool;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mygdx.game.screens.TestClass;
-import com.mygdx.game.things.EffectPools;
-import com.mygdx.game.things.projectiles;
+import com.mygdx.game.resources.EffectPools;
 
 public class MyContactListener implements ContactListener {
 

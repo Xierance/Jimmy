@@ -1,13 +1,9 @@
-package com.mygdx.game.things;
+package com.mygdx.game.resources;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.mygdx.game.Visuals.gameParticles.Explosion;
-import com.mygdx.game.Visuals.gameParticles.Flame;
-import com.mygdx.game.Visuals.gameParticles.Rainboom;
 
 /**
  * Created by for example John on 4/7/2015.
@@ -40,27 +36,6 @@ public class b2dStructures {
 
         blockShape.dispose();
     }
-
-    public static class explosionShard {
-        public explosionShard(Vector2 location, float radius, float density, World world, Vector2 velocity,BodyDef bodyDef,FixtureDef fixtureDef,CircleShape circleShape){
-
-            bodyDef.type = BodyDef.BodyType.DynamicBody;
-            bodyDef.position.set(location.x, location.y);
-            circleShape.setRadius(radius);
-            fixtureDef.shape = circleShape;
-            fixtureDef.restitution = 1f;
-            fixtureDef.density = density;
-
-            Body body = world.createBody(bodyDef);
-            body.createFixture(fixtureDef);
-            body.setUserData(new Vector2());
-            body.setGravityScale(0);
-
-            body.setLinearVelocity(velocity);
-
-        }
-    }
-
 
     public static void isosceles(Vector2 location, float width, float height, float density, float friction, World world) {
         BodyDef bodyDef = new BodyDef();
@@ -150,6 +125,26 @@ public class b2dStructures {
         }
         isosceles(new Vector2(location.x - (blockheight) / 2 - gap / 2 - size / 2, location.y + oldHeight), blockheight, blockheight * 1.5f, 0.25f, 0.75f, world);
         isosceles(new Vector2(location.x - (blockheight) / 2 + gap / 2 + size / 2, location.y + oldHeight), blockheight, blockheight * 1.5f, 0.25f, 0.75f, world);
+    }
+
+    public static class explosionShard {
+        public explosionShard(Vector2 location, float radius, float density, World world, Vector2 velocity,BodyDef bodyDef,FixtureDef fixtureDef,CircleShape circleShape){
+
+            bodyDef.type = BodyDef.BodyType.DynamicBody;
+            bodyDef.position.set(location.x, location.y);
+            circleShape.setRadius(radius);
+            fixtureDef.shape = circleShape;
+            fixtureDef.restitution = 1f;
+            fixtureDef.density = density;
+
+            Body body = world.createBody(bodyDef);
+            body.createFixture(fixtureDef);
+            body.setUserData(new Vector2());
+            body.setGravityScale(0);
+
+            body.setLinearVelocity(velocity);
+
+        }
     }
 
 }

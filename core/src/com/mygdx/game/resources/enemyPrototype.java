@@ -1,4 +1,4 @@
-package com.mygdx.game.things;
+package com.mygdx.game.resources;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
@@ -9,33 +9,29 @@ import com.badlogic.gdx.utils.Array;
  */
 public class enemyPrototype {
     public static  Array<enemyPrototype>  enemies = new Array<enemyPrototype>();
-    public static  void updateenemies(World world){
-        for(enemyPrototype enemy:enemies){
-            enemy.update(world);
-        }
-
-    }
-
+    public boolean alive;
+    Body enemyBody;
     private Vector2 startlocation;
     private boolean direction;
-    Body enemyBody;
-    public boolean alive;
-
     private Fixture leftSensor;
     private Fixture rightSensor;
     private Fixture leftSideSensor;
     private Fixture rightSideSensor;
-
     private boolean leftGround = false;
     private boolean rightGround = false;
     private boolean leftSide = false;
     private boolean rightSide = false;
-
-
     public enemyPrototype(Vector2 startLocation) {
         this.startlocation = startLocation;
         direction = true;
 
+
+    }
+
+    public static  void updateenemies(World world){
+        for(enemyPrototype enemy:enemies){
+            enemy.update(world);
+        }
 
     }
 

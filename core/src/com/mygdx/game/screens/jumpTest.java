@@ -21,7 +21,7 @@ public class jumpTest implements Screen {
     public World world;
     boolean tempb = true;
     private Box2DDebugRenderer debugRenderer;
-    private OrthographicCamera camera; //Camera deals with perspective, where things are drawn (camera can move without object movement)
+    private OrthographicCamera camera; //Camera deals with perspective, where resources are drawn (camera can move without object movement)
     private Body box;
     private Fixture playerSensorFixture;
 

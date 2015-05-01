@@ -1,27 +1,29 @@
-package com.mygdx.game.things;
+package com.mygdx.game.resources;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.physics.box2d.joints.WheelJoint;
-import com.badlogic.gdx.physics.box2d.joints.WheelJointDef;
 import com.badlogic.gdx.utils.Array;
-import com.mygdx.game.screens.TestClass;
 
 /**
  * Created by for example John on 4/9/2015.
  */
 public class Player {
-    public void setStartLocation(Vector2 startLocation) {
-        this.startLocation = startLocation;
-    }
+    private Vector2 startLocation;
+    private Body playerBody;
+    private Sprite playerSprite;
+    private Body playerWheelBody;
+    private WheelJoint wheelJoint;
+    private Fixture playerSensorFixture;
 
     public Vector2 getStartLocation() {
         return startLocation;
     }
 
-    private Vector2 startLocation;
+    public void setStartLocation(Vector2 startLocation) {
+        this.startLocation = startLocation;
+    }
 
     ////////////////////////////////////////////////
     public Body getPlayerBody() {
@@ -32,8 +34,6 @@ public class Player {
         this.playerBody = playerBody;
     }
 
-    private Body playerBody;
-
     //////////////////////////////////////////////////
     public Sprite getPlayerSPrite() {
         return playerSprite;
@@ -43,8 +43,6 @@ public class Player {
         this.playerSprite = playerSPrite;
     }
 
-    private Sprite playerSprite;
-
     public Body getPlayerWheelBody() {
         return playerWheelBody;
     }
@@ -52,8 +50,6 @@ public class Player {
     public void setPlayerWheelBody(Body playerWheelBody) {
         this.playerWheelBody = playerWheelBody;
     }
-
-    private Body playerWheelBody;
 
     public WheelJoint getWheelJoint() {
         return wheelJoint;
@@ -63,8 +59,6 @@ public class Player {
         this.wheelJoint = wheelJoint;
     }
 
-    private WheelJoint wheelJoint;
-
     public Fixture getPlayerSensorFixture() {
         return playerSensorFixture;
     }
@@ -72,8 +66,6 @@ public class Player {
     public void setPlayerSensorFixture(Fixture playerSensorFixture) {
         this.playerSensorFixture = playerSensorFixture;
     }
-
-    private Fixture playerSensorFixture;
 
     ////////////////////////////////////////////////////////////////////////////////////////
 
