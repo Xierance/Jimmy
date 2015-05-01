@@ -312,7 +312,7 @@ public class TestClass extends InputAdapter implements Screen {
     public void handleInput() {
 
         if (Ctrl_right)
-            projectiles.shootFire(player.getPlayerBody().getPosition(), projectiles.angle2(player.getPlayerBody().getPosition(), getmouseCoords()),world);
+            projectiles.shootDick(player.getPlayerBody().getPosition(), projectiles.angle2(player.getPlayerBody().getPosition(), new Vector2(tmp.x, tmp.y)), world);
         if (Ctrl_left)
             if (rayCast.rayFixture(world, player.getPlayerBody().getPosition(), new Vector2(getmouseCoords().x, getmouseCoords().y)) != null)
                 toDestroy.add(rayCast.rayFixture(world,
@@ -393,8 +393,8 @@ public class TestClass extends InputAdapter implements Screen {
 
         if (!Ctrl_left) {
             if (!Ctrl_right)
-                projectiles.shootDick(player.getPlayerBody().getPosition(), projectiles.angle2(player.getPlayerBody().getPosition(), new Vector2(tmp.x, tmp.y)),world);
 
+                projectiles.shootFire(player.getPlayerBody().getPosition(), projectiles.angle2(player.getPlayerBody().getPosition(), getmouseCoords()), world);
         }
 
 
