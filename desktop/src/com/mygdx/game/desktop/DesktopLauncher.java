@@ -1,5 +1,6 @@
 package com.mygdx.game.desktop;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.mygdx.game.MyGdxGame;
@@ -14,6 +15,7 @@ public class DesktopLauncher {
         config.height = 768;
         config.width = 1280;
         config.title = "Jimmy 2";
+        config.fullscreen = Gdx.app.getPreferences(MyGdxGame.title).getBoolean("fullscreen");
 
 	}
 }

@@ -44,6 +44,9 @@ public class settings implements Screen {
     public static boolean FPS() {
         return Gdx.app.getPreferences(MyGdxGame.title).getBoolean("fps");
     }
+    public static boolean fullscreen(){
+        return Gdx.app.getPreferences(MyGdxGame.title).getBoolean("fullscreen");
+    }
 
     @Override
     public void render(float delta) {
@@ -85,10 +88,13 @@ public class settings implements Screen {
 
         final CheckBox checkFPS = new CheckBox("Show FPS", skin);
         checkFPS.setChecked(FPS());
-        //checkFPS.setChecked(FPS());
 
         final TextButton back = new TextButton("Back", skin);
         back.pad(10);
+
+        final CheckBox fullScreenCheck = new CheckBox("Fullscreen", skin);
+        fullScreenCheck.setChecked(fullscreen());
+
 
         ClickListener buttonHandler = new ClickListener() {
 
@@ -114,6 +120,9 @@ public class settings implements Screen {
                 }
                 if (event.getListenerActor() == controlRebind){
                     ((Game) Gdx.app.getApplicationListener()).setScreen(new controlScheme());
+                }
+                if (event.getListenerActor() == fullScreenCheck){
+                    Gdx.app.getPreferences(MyGdxGame.title).putBoolean("fullscreen", fullScreenCheck.isChecked());
                 }
                 if (event.getListenerActor() == back) {
                     // save level directory
@@ -142,6 +151,7 @@ public class settings implements Screen {
         checkFPS.addListener(buttonHandler);
         controlRebind.addListener(buttonHandler);
         back.addListener(buttonHandler);
+        fullScreenCheck.addListener(buttonHandler);
 
         // putting everything in the table
         table.add(new Label("SETTINGS", skin, "big")).spaceBottom(50).colspan(3).expandX().row();
@@ -152,6 +162,7 @@ public class settings implements Screen {
         table.add(levelDirectoryInput).top().fillX();
         table.row();
         table.add(checkFPS).left();
+        table.add(fullScreenCheck);
         table.add(controlRebind);
         table.row();
         table.add().height(350);
