@@ -20,7 +20,7 @@ import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyContactListener;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Visuals.gameParticles.Explosion;
-import com.mygdx.game.Visuals.health;
+import com.mygdx.game.Visuals.ui;
 import com.mygdx.game.resources.*;
 
 /**
@@ -70,7 +70,6 @@ public class TestClass extends InputAdapter implements Screen {
     private OrthographicCamera secondCamera;
     private SpriteBatch batch;
     private SpriteBatch secondBatch;
-    private BitmapFont font;
     private MouseJointDef jointDef;
     private MouseJoint joint;
     private TextureAtlas blocks = new TextureAtlas("tiles/block_pack.pack");
@@ -161,7 +160,7 @@ public class TestClass extends InputAdapter implements Screen {
         batch = new SpriteBatch();
         secondBatch = new SpriteBatch();
 
-        font = new BitmapFont(false);
+
 
         world = new World(new Vector2(0f, -9.8f), true);
         debugRenderer = new Box2DDebugRenderer();
@@ -225,17 +224,13 @@ public class TestClass extends InputAdapter implements Screen {
         batch.begin();
         drawSprites(delta);
         Explosion.drawExplosions(batch, delta);
-
         batch.end();
 
         secondBatch.setProjectionMatrix(secondCamera.combined);
         secondCamera.update();
         secondBatch.begin();
-        if ((Gdx.app.getPreferences(MyGdxGame.title).getBoolean("fps"))) {
-            font.draw(secondBatch, "Fps" + Gdx.graphics.getFramesPerSecond(), -590, 350);
-        }{
-        }
-        health.displayMax(secondBatch);
+        ui.displayMax(secondBatch);
+        ui.displayFps(secondBatch);
         secondBatch.end();
 
         handleInput();
@@ -277,7 +272,6 @@ public class TestClass extends InputAdapter implements Screen {
         world.dispose();
         debugRenderer.dispose();
         batch.dispose();
-        font.dispose();
         secondBatch.dispose();
         player.getPlayerSPrite().getTexture().dispose();
         for (ParticleEffect effect : flames) effect.dispose();
