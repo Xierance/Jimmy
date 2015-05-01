@@ -233,8 +233,8 @@ public class TestClass extends InputAdapter implements Screen {
         secondBatch.begin();
         if ((Gdx.app.getPreferences(MyGdxGame.title).getBoolean("fps"))) {
             font.draw(secondBatch, "Fps" + Gdx.graphics.getFramesPerSecond(), -590, 350);
+        }{
         }
-
         health.displayMax(secondBatch);
         secondBatch.end();
 
@@ -249,8 +249,9 @@ public class TestClass extends InputAdapter implements Screen {
     public void resize(int width, int height) {
         orthographicCamera.viewportWidth = width / 32;
         orthographicCamera.viewportHeight = height / 32;
-        secondCamera.viewportHeight = height / 32;
-        secondCamera.viewportWidth = width / 32;
+
+        secondCamera.viewportHeight = height ;
+        secondCamera.viewportWidth = width ;
 
     }
 
