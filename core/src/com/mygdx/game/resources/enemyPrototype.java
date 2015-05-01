@@ -28,6 +28,11 @@ public class enemyPrototype {
 
     }
 
+    public Vector2 getPosition(){
+        return enemyBody.getPosition();
+
+    }
+
     public static  void updateenemies(World world){
         for(enemyPrototype enemy:enemies){
             enemy.update(world);
@@ -156,6 +161,33 @@ public class enemyPrototype {
 //            enemyBody.setLinearVelocity(-5f,enemyBody.getLinearVelocity().y);
         }
 
+
+
+        }
+
+    public static enemyPrototype getClosestEnemy(Array<enemyPrototype> enemies, Player player){
+        Array<enemyPrototype> newEnemies = new Array<enemyPrototype>();
+        float[] enemyDistance = new float[enemies.size];
+        int i = 0;
+        for(enemyPrototype enemy:enemies){
+            float x  = enemy.getPosition().x - player.getPlayerBody().getPosition().x;
+            float y  = enemy.getPosition().y - player.getPlayerBody().getPosition().y;
+            enemyDistance[i] = (x*x + y*y);
+            i++;
+        }
+
+        float shortest = 1000000000;
+        int index = 0;
+        i = 0;
+        for(float f : enemyDistance){
+            if(f < shortest){
+                shortest = f;
+                index = i;
+            }
+            i++;
+        }
+
+        return  enemies.get(index);
     }
 
 }
