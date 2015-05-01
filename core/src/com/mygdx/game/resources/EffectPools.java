@@ -17,7 +17,6 @@ public class EffectPools {
         public static ParticleEffectPool flamePoolTest = new ParticleEffectPool(new Flame(new Vector2()).getFlame(), 0, 300);
 
     }
-
     public static class ExplosionTestPool {
 
         public static Array<ParticleEffectPool.PooledEffect> pooledEffects = new Array<ParticleEffectPool.PooledEffect>();

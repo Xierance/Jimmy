@@ -18,7 +18,9 @@ import com.badlogic.gdx.physics.box2d.joints.MouseJoint;
 import com.badlogic.gdx.physics.box2d.joints.MouseJointDef;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyContactListener;
+import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Visuals.gameParticles.Explosion;
+import com.mygdx.game.Visuals.health;
 import com.mygdx.game.resources.*;
 
 /**
@@ -229,7 +231,11 @@ public class TestClass extends InputAdapter implements Screen {
         secondBatch.setProjectionMatrix(secondCamera.combined);
         secondCamera.update();
         secondBatch.begin();
-        font.draw(secondBatch, "Fps" + Gdx.graphics.getFramesPerSecond(), -590, 350);
+        if ((Gdx.app.getPreferences(MyGdxGame.title).getBoolean("fps"))) {
+            font.draw(secondBatch, "Fps" + Gdx.graphics.getFramesPerSecond(), -590, 350);
+        }{
+        }
+        health.displayMax(secondBatch);
         secondBatch.end();
 
         handleInput();

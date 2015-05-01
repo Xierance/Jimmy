@@ -17,6 +17,7 @@ public class Player {
     private WheelJoint wheelJoint;
     private Fixture playerSensorFixture;
 
+
     public Vector2 getStartLocation() {
         return startLocation;
     }
