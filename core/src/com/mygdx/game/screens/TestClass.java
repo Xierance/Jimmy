@@ -22,6 +22,7 @@ import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Visuals.gameParticles.Explosion;
 import com.mygdx.game.Visuals.ui;
 import com.mygdx.game.resources.*;
+import com.mygdx.game.worldHandler;
 
 /**
  * Created by for example John on 3/14/2015.
@@ -109,13 +110,13 @@ public class TestClass extends InputAdapter implements Screen {
         Sprite tileSprite = new Sprite(new Texture("jew.jpg"));
 
         Sprite leftTile = new Sprite(hellBlocks.createSprite("Left"));
-        leftTile.setSize(1f,1f);
+        leftTile.setSize(1f, 1f);
         Sprite rightTile = new Sprite(hellBlocks.createSprite("Right"));
-        rightTile.setSize(1f,1f);
+        rightTile.setSize(1f, 1f);
         Sprite centerTile = new Sprite(hellBlocks.createSprite("Center"));
-        centerTile.setSize(1f,1f);
+        centerTile.setSize(1f, 1f);
         Sprite topTile = new Sprite(hellBlocks.createSprite("Top"));
-        topTile.setSize(1f,1f);
+        topTile.setSize(1f, 1f);
 
         tileSprite.setSize(1f, 1f);
 
@@ -140,13 +141,13 @@ public class TestClass extends InputAdapter implements Screen {
 
                     if (tileCell.getTile().getProperties().get("playerBody") != null) {
                         temp = new Vector2(x, y);
-                    } else if (tileCell.getTile().getProperties().get("left") != null    ){
+                    } else if (tileCell.getTile().getProperties().get("left") != null) {
                         body.setUserData(leftTile);
-                    }else if(tileCell.getTile().getProperties().get("right") != null){
+                    } else if (tileCell.getTile().getProperties().get("right") != null) {
                         body.setUserData(rightTile);
-                    }else if(tileCell.getTile().getProperties().get("center") != null){
+                    } else if (tileCell.getTile().getProperties().get("center") != null) {
                         body.setUserData(centerTile);
-                    }else if(tileCell.getTile().getProperties().get("top") != null){
+                    } else if (tileCell.getTile().getProperties().get("top") != null) {
                         body.setUserData(topTile);
                     }
                 }
@@ -162,7 +163,6 @@ public class TestClass extends InputAdapter implements Screen {
 
         batch = new SpriteBatch();
         secondBatch = new SpriteBatch();
-
 
 
         world = new World(new Vector2(0f, -9.8f), true);
@@ -202,18 +202,25 @@ public class TestClass extends InputAdapter implements Screen {
         world.setContactListener(cl);
 
         //test stuff
-        test = new enemyPrototype(new Vector2(60,-9));
-        test.createEnemy(world,1f,2f);
-        test2 = new enemyPrototype(new Vector2(20,12));
-        test2.createEnemy(world,2f,2f);
+        test = new enemyPrototype(new Vector2(60, -9));
+        test.createEnemy(world, 1f, 2f);
+        test2 = new enemyPrototype(new Vector2(20, 12));
+        test2.createEnemy(world, 2f, 2f);
+
+        healthDrop test3 = new healthDrop();
+        test3.createHealthDrop(world,new Vector2(10,10));
+
+
 
     }
+
     @Override
     public void render(float delta) {
+        System.out.println(worldHandler.currentHealth);
         enemyPrototype.updateenemies(world);
 
         world.getBodies(tmpBodies);
-        for(Body body: tmpBodies)projectiles.clearShards(body,3);
+        for (Body body : tmpBodies) projectiles.clearShards(body, 3);
 
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -278,7 +285,7 @@ public class TestClass extends InputAdapter implements Screen {
         secondBatch.dispose();
         player.getPlayerSPrite().getTexture().dispose();
         for (ParticleEffect effect : flames) effect.dispose();
-        for (ParticleEffectPool.PooledEffect effect : EffectPools.ExplosionTestPool.pooledEffects)effect.dispose();
+        for (ParticleEffectPool.PooledEffect effect : EffectPools.ExplosionTestPool.pooledEffects) effect.dispose();
         for (ParticleEffectPool.PooledEffect effect : EffectPools.FireTestPool.pooledEffects) effect.dispose();
 
     }
@@ -574,5 +581,4 @@ public class TestClass extends InputAdapter implements Screen {
         orthographicCamera.unproject(temp.set(Gdx.input.getX(), Gdx.input.getY(), 0));
         return new Vector2(temp.x, temp.y);
     }
-
 }

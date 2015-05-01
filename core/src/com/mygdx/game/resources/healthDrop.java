@@ -14,12 +14,12 @@ import com.mygdx.game.Visuals.gameParticles.Explosion;
  */
 
 
-public class drops {
+public class healthDrop {
 
 
-    public static Sprite healthSprite = new Sprite(new Texture("img/player.png"));
+        public static Sprite healthSprite = new Sprite(new Texture("img/player.png"));
 
-    public class healthDrop {
+
         public healthDrop(){
 
 
@@ -29,6 +29,7 @@ public class drops {
         public void createHealthDrop(World world,Vector2 position){
 
 
+            healthSprite.setSize(1,1);
 
             CircleShape shape = new CircleShape();
             FixtureDef fixtureDef = new FixtureDef();
@@ -38,7 +39,7 @@ public class drops {
             shape.setRadius(0.5f);
             fixtureDef.shape = shape;
             Fixture fixture = body.createFixture(fixtureDef);
-            fixture.setSensor(true);
+            body.setType(BodyDef.BodyType.KinematicBody);
 
             body.setTransform(position,0);
             shape.dispose();
@@ -48,4 +49,4 @@ public class drops {
         }
 
     }
-}
+

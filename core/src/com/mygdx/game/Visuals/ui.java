@@ -35,6 +35,13 @@ public class ui {
             locationControl++;
         }
         locationControl = 0;
+
+        for (int i = 0; i < worldHandler.maxHealth; i++) {
+            this.tendysilhouette.setCenter((-((Gdx.graphics.getWidth() / 2) * 0.9f) + ((tendysilhouette.getWidth() / 2) * locationControl)), ((Gdx.graphics.getHeight() / 2) * 0.9f));
+            this.tendysilhouette.draw(secondBatch);
+            locationControl++;
+        }
+        locationControl = 0;
     }
 
     public  void displayFps(SpriteBatch secondBatch) {
