@@ -28,6 +28,8 @@ import com.mygdx.game.resources.*;
  */
 public class TestClass extends InputAdapter implements Screen {
 
+
+    ui UI = new ui();
     public static Vector2 temp = new Vector2();
     public static Body tempBody;
     public static Sprite playerSprite = new Sprite(new Texture("img/player.png"));
@@ -155,6 +157,7 @@ public class TestClass extends InputAdapter implements Screen {
     @Override
     public void show() {
 
+
         jointDef = new MouseJointDef();
 
         batch = new SpriteBatch();
@@ -229,8 +232,8 @@ public class TestClass extends InputAdapter implements Screen {
         secondBatch.setProjectionMatrix(secondCamera.combined);
         secondCamera.update();
         secondBatch.begin();
-        ui.displayMax(secondBatch);
-        ui.displayFps(secondBatch);
+        UI.displayMax(secondBatch);
+        UI.displayFps(secondBatch);
         secondBatch.end();
 
         handleInput();

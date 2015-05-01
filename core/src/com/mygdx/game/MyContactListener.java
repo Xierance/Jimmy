@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.g2d.ParticleEffectPool;
 import com.badlogic.gdx.physics.box2d.*;
+import com.mygdx.game.resources.drops;
 import com.mygdx.game.screens.TestClass;
 import com.mygdx.game.resources.EffectPools;
 
@@ -29,6 +30,16 @@ public class MyContactListener implements ContactListener {
                 ((ParticleEffectPool.PooledEffect) fb.getBody().getUserData()).free();
 
             }
+        }
+        if(fa.getBody().getUserData()!= null && fa.getBody().getUserData() == drops.healthSprite){
+            worldHandler.currentHealth++;
+            TestClass.toDestroy.add(fa.getBody());
+        }
+
+        if(fb.getBody().getUserData()!= null && fb.getBody().getUserData() == drops.healthSprite){
+            worldHandler.currentHealth++;
+            TestClass.toDestroy.add(fb.getBody());
+
         }
     }
 

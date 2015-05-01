@@ -26,7 +26,7 @@ public class ui {
     private static int locationControl = 0;
 
 
-    public static void displayMax(SpriteBatch secondBatch){
+    public  void displayMax(SpriteBatch secondBatch){
        // worldHandler.currentHealth
 
         for (int i = 0; i < worldHandler.maxHealth; i++) {
@@ -36,7 +36,7 @@ public class ui {
         }
     }
 
-    public static void displayFps(SpriteBatch secondBatch) {
+    public  void displayFps(SpriteBatch secondBatch) {
 
         if ((Gdx.app.getPreferences(MyGdxGame.title).getBoolean("fps"))) {
             font.draw(secondBatch, "Fps" + Gdx.graphics.getFramesPerSecond(), Gdx.graphics.getWidth(), Gdx.graphics.getHeight());

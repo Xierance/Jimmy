@@ -5,6 +5,6 @@ package com.mygdx.game;
  */
 public class worldHandler {
     public static int fireBallCount = 0;
-    public static int currentHealth;
+    public static int currentHealth = 0;
     public static int maxHealth = 3;
 }
