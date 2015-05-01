@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.ParticleEffectPool;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mygdx.game.resources.drops;
@@ -34,11 +35,13 @@ public class MyContactListener implements ContactListener {
         if(fa.getBody().getUserData()!= null && fa.getBody().getUserData() == drops.healthSprite){
             worldHandler.currentHealth++;
             TestClass.toDestroy.add(fa.getBody());
+            ((Texture)(fa.getBody().getUserData())).dispose();
         }
 
         if(fb.getBody().getUserData()!= null && fb.getBody().getUserData() == drops.healthSprite){
             worldHandler.currentHealth++;
             TestClass.toDestroy.add(fb.getBody());
+            ((Texture)(fb.getBody().getUserData())).dispose();
 
         }
     }
