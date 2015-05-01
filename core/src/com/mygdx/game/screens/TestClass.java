@@ -245,8 +245,8 @@ public class TestClass extends InputAdapter implements Screen {
         orthographicCamera.viewportWidth = width / 32;
         orthographicCamera.viewportHeight = height / 32;
 
-        secondCamera.viewportHeight = height ;
-        secondCamera.viewportWidth = width ;
+        secondCamera.viewportHeight = height;
+        secondCamera.viewportWidth = width;
 
     }
 
