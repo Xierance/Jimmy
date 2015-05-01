@@ -279,7 +279,7 @@ public class TestClass extends InputAdapter implements Screen {
 
     public void cameraFollow() {
         float lerp = .1f;
-        if (!Ctrl_left) {
+        if (!M) {
             if (orthographicCamera.position.x != player.getPlayerBody().getPosition().x) {
                 orthographicCamera.position.x += (player.getPlayerBody().getPosition().x - orthographicCamera.position.x) * lerp;
             }
