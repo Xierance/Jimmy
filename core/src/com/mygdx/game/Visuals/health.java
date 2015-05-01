@@ -28,7 +28,6 @@ public class health{
         tendysilhouette.draw(secondBatch);
 
 
-        Gdx.app.log(MyGdxGame.title, String.valueOf(Gdx.graphics.getWidth()));
     }
 
 }
