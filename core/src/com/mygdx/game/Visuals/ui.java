@@ -29,7 +29,7 @@ public class ui {
     public static void displayMax(SpriteBatch secondBatch){
        // worldHandler.currentHealth
 
-        for (int i = 0; i > worldHandler.currentHealth; i++) {
+        for (int i = 0; i < worldHandler.currentHealth; i++) {
             tendysilhouette.setCenter(-(((Gdx.graphics.getWidth() / 2) * 0.9f) + ((tendysilhouette.getWidth() / 2) * locationControl)), ((Gdx.graphics.getHeight() / 2) * 0.9f));
             tendysilhouette.draw(secondBatch);
         }
