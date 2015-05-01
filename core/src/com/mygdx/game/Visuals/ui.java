@@ -20,26 +20,27 @@ import com.mygdx.game.worldHandler;
 public class ui {
 
 
-    public static Sprite tendysilhouette = new Sprite(new Texture("textures/dick.png"));
-    public static Sprite tendy = new Sprite(new Texture("tiles/block_pack.png"));
-    private static BitmapFont font = new BitmapFont(false);
-    private static int locationControl = 0;
+    public  Sprite tendysilhouette = new Sprite(new Texture("textures/dick.png"));
+    public  Sprite tendy = new Sprite(new Texture("tiles/block_pack.png"));
+    private  BitmapFont font = new BitmapFont(false);
+    private  int locationControl = 0;
 
 
     public  void displayMax(SpriteBatch secondBatch){
        // worldHandler.currentHealth
 
         for (int i = 0; i < worldHandler.maxHealth; i++) {
-            tendysilhouette.setCenter(-(((Gdx.graphics.getWidth() / 2) * 0.9f) + ((tendysilhouette.getWidth() / 2) * locationControl)), ((Gdx.graphics.getHeight() / 2) * 0.9f));
-            tendysilhouette.draw(secondBatch);
+            this.tendysilhouette.setCenter(-(((Gdx.graphics.getWidth() / 2) * 0.9f) + ((tendysilhouette.getWidth() / 2) * locationControl)), ((Gdx.graphics.getHeight() / 2) * 0.9f));
+            this.tendysilhouette.draw(secondBatch);
             locationControl++;
         }
+        locationControl = 0;
     }
 
     public  void displayFps(SpriteBatch secondBatch) {
 
         if ((Gdx.app.getPreferences(MyGdxGame.title).getBoolean("fps"))) {
-            font.draw(secondBatch, "Fps" + Gdx.graphics.getFramesPerSecond(), Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+            this.font.draw(secondBatch, "Fps" + Gdx.graphics.getFramesPerSecond(), Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         }
 
     }
