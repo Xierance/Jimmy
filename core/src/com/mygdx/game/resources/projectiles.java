@@ -89,9 +89,7 @@ public class projectiles {
         ParticleEffectPool.PooledEffect flame = EffectPools.FireTestPool.flamePoolTest.obtain();
         fireBallBody.setUserData(flame);
         EffectPools.FireTestPool.pooledEffects.add(flame);
-        flame.dispose();
 
-        worldHandler.fireBallCount++;
 
     }
 
@@ -138,14 +136,12 @@ public class projectiles {
 
 
     public static void shootFire(Vector2 location, float angleRad,World world) {
-        if(worldHandler.fireBallCount < 1) {
 
             float i = (float) Math.cos(angleRad);
             float j = (float) Math.sin(angleRad);
             Vector2 newLocation = new Vector2(location.x + i, location.y + j);
             projectiles.fireBall(newLocation, new Vector2(20 * i, 20 * j), world);
 
-        }
     }
 
     public static float angle2(Vector2 vector1, Vector2 vector2) {

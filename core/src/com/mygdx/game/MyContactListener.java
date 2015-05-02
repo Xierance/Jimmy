@@ -19,7 +19,6 @@ public class MyContactListener implements ContactListener {
             } else {
                 TestClass.getToDestroy().add(fa.getBody());
                 EffectPools.FireTestPool.pooledEffects.removeValue((ParticleEffectPool.PooledEffect) fa.getBody().getUserData(), true);
-                ((ParticleEffectPool.PooledEffect) fa.getBody().getUserData()).free();
 
             }
         }
@@ -28,7 +27,6 @@ public class MyContactListener implements ContactListener {
             } else {
                 TestClass.getToDestroy().add(fb.getBody());
                 EffectPools.FireTestPool.pooledEffects.removeValue((ParticleEffectPool.PooledEffect) fb.getBody().getUserData(), true);
-                ((ParticleEffectPool.PooledEffect) fb.getBody().getUserData()).free();
 
             }
         }
