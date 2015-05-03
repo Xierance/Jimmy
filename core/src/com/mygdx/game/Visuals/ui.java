@@ -1,6 +1,8 @@
 package com.mygdx.game.Visuals;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -61,20 +63,30 @@ public class ui {
 
     }
     public void hotBar(SpriteBatch secondBatch){
-        hotBar.setSize(64, 64);
-        hotBar.setCenter(-6-(hotBar.getWidth()*1.5f), ((-Gdx.graphics.getHeight()/2)+ 35));
-        hotBar.draw(secondBatch);
+        switch (com.mygdx.game.Input.currentScrollValue){
+            case 0:
+                hotBar.setSize(64, 64);
+                hotBarSelected.setSize(64, 64);
+                hotBar.setCenter(-6-(hotBar.getWidth()*1.5f), ((-Gdx.graphics.getHeight()/2)+ 35));
+                hotBar.draw(secondBatch);
 
-        //hotBar.scale(2);
-        hotBar.setCenter(-2-(hotBar.getWidth()/2), ((-Gdx.graphics.getHeight()/2)+ 35));
-        hotBar.draw(secondBatch);
+                hotBar.setCenter(-2-(hotBar.getWidth()/2), ((-Gdx.graphics.getHeight()/2)+ 35));
+                hotBar.draw(secondBatch);
 
-       // hotBar.scale(2);
-        hotBar.setCenter(2+(hotBar.getWidth()/2), ((-Gdx.graphics.getHeight()/2)+ 35));
-        hotBar.draw(secondBatch);
+                hotBar.setCenter(2+(hotBar.getWidth()/2), ((-Gdx.graphics.getHeight()/2)+ 35));
+                hotBar.draw(secondBatch);
 
-       // hotBar.scale(2);
-        hotBar.setCenter(6+(hotBar.getWidth()*1.5f), ((-Gdx.graphics.getHeight()/2)+ 35));
-        hotBar.draw(secondBatch);
+                hotBar.setCenter(6+(hotBar.getWidth()*1.5f), ((-Gdx.graphics.getHeight()/2)+ 35));
+                hotBar.draw(secondBatch);
+                break;
+
+
+
+
+
+
+        }
+
+        Gdx.app.log(MyGdxGame.title, String.valueOf(com.mygdx.game.Input.currentScrollValue));
     }
 }

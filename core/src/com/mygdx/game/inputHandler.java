@@ -62,6 +62,7 @@ public class inputHandler implements InputProcessor {
     public static boolean Y;
     public static boolean Z;
     public static int currentKey;
+    public static int currentScrollValue;
 
     public boolean keyDown(int keycode) {
         currentKey = keycode;
@@ -371,6 +372,7 @@ public class inputHandler implements InputProcessor {
     }
 
     public boolean scrolled(int amount) {
+        currentScrollValue = amount;
         return false;
     }
 } 
