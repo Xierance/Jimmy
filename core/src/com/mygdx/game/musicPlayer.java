@@ -17,7 +17,7 @@ public class musicPlayer {
 
         int spaceCounter = 0;
 
-        if (Input.Space) {
+        if (inputHandler.Space) {
 
             spaceCounter++;
             Gdx.app.log(MyGdxGame.title, String.valueOf(spaceCounter));

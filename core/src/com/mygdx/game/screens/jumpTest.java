@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
-import com.mygdx.game.Input;
+import com.mygdx.game.inputHandler;
 import com.mygdx.game.MyGdxGame;
 
 
@@ -31,7 +31,7 @@ public class jumpTest implements Screen {
         debugRenderer = new Box2DDebugRenderer();
         camera = new OrthographicCamera(Gdx.graphics.getWidth() / 50, Gdx.graphics.getHeight() / 50);
 
-        Gdx.input.setInputProcessor(new Input());
+        Gdx.input.setInputProcessor(new inputHandler());
 
         createBall();
         createPlayer();
@@ -142,22 +142,22 @@ public class jumpTest implements Screen {
     public void handleInput() {
 
         //move
-        if (Input.Space && isPlayerGrounded()) {
+        if (inputHandler.Space && isPlayerGrounded()) {
             box.applyForceToCenter(new Vector2(0, 50), true);
         }
 
-        if (Input.Down) {
+        if (inputHandler.Down) {
             box.applyForceToCenter(new Vector2(0, -50), true);
         }
 
-        if (Input.Left) {
+        if (inputHandler.Left) {
             box.applyForceToCenter(new Vector2(-50, 0), true);
         }
 
-        if (Input.Right) {
+        if (inputHandler.Right) {
             box.applyForceToCenter(new Vector2(50, 0), true);
         }
-        if (Input.Escape && tempb) {
+        if (inputHandler.Escape && tempb) {
             ((Game) Gdx.app.getApplicationListener()).setScreen(new levelMenu());
             tempb = false;
         }
@@ -200,22 +200,22 @@ public class jumpTest implements Screen {
             camera.update();
         }
 
-        if (Input.O) {
+        if (inputHandler.O) {
             camera.zoom += .010f;
             camera.update();
         }
-        if (Input.M) {
+        if (inputHandler.M) {
             camera.zoom -= .010f;
             camera.update();
 
         }
-        if (Input.W) camera.position.y += .5;
+        if (inputHandler.W) camera.position.y += .5;
         camera.update();
-        if (Input.A) camera.position.x -= .5;
+        if (inputHandler.A) camera.position.x -= .5;
         camera.update();
-        if (Input.D) camera.position.y -= .5;
+        if (inputHandler.D) camera.position.y -= .5;
         camera.update();
-        if (Input.S) camera.position.x += .5;
+        if (inputHandler.S) camera.position.x += .5;
         camera.update();
 
     }

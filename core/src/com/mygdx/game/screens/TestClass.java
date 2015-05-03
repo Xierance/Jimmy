@@ -172,7 +172,6 @@ public class TestClass extends InputAdapter implements Screen {
         assetLoader.loadAssets();
 
         UI = new ui();
-        worldHandler.fps = Gdx.app.getPreferences(MyGdxGame.title).getBoolean("fps");
 
         jointDef = new MouseJointDef();
 

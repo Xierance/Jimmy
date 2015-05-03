@@ -9,7 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.mygdx.game.Input;
+import com.mygdx.game.inputHandler;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.resources.keyCodes;
 
@@ -42,10 +42,10 @@ public class controlScheme2 implements Screen {
 
         stage = new Stage();
 
-        final Input input = new Input();
+        final inputHandler inputHandler = new inputHandler();
         final InputMultiplexer inputMultiplexer = new InputMultiplexer();
         inputMultiplexer.addProcessor(stage);
-        inputMultiplexer.addProcessor(input);
+        inputMultiplexer.addProcessor(inputHandler);
         Gdx.input.setInputProcessor(inputMultiplexer);
 
         skin = new Skin(Gdx.files.internal("ui/menuSkin.json"), new TextureAtlas("ui/atlas.pack"));
@@ -68,26 +68,26 @@ public class controlScheme2 implements Screen {
         back.pad(10);
 
 
-        //Input handling and setting controls
+        //inputHandler handling and setting controls
         ClickListener settingsHandler = new ClickListener() {
 
             @Override
             public void clicked(InputEvent event, float x, float y) {
 
                 if (event.getListenerActor() == forwardInput) {
-                    System.out.println(input.currentKey);
-                    newForwardBind = input.currentKey;
+                    System.out.println(inputHandler.currentKey);
+                    newForwardBind = inputHandler.currentKey;
                     Gdx.app.getPreferences(MyGdxGame.title).putInteger("forwardBind", newForwardBind);
                 }
 
                 if (event.getListenerActor() == backwardInput) {
 
-                    newBackwardBind = input.currentKey;
+                    newBackwardBind = inputHandler.currentKey;
 
                 }
                 if (event.getListenerActor() == jumpInput) {
 
-                    newJumpBind = input.currentKey;
+                    newJumpBind = inputHandler.currentKey;
                 }
 
                 if (event.getListenerActor() == weaponInput) {

@@ -17,7 +17,7 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.physics.box2d.joints.MouseJoint;
 import com.badlogic.gdx.physics.box2d.joints.MouseJointDef;
 import com.badlogic.gdx.utils.Array;
-import com.mygdx.game.Input;
+import com.mygdx.game.inputHandler;
 
 /**
  * Created by for example John on 3/14/2015.
@@ -397,7 +397,7 @@ public class levelOne extends InputAdapter implements Screen {
         if (this.Right) {
             player.applyForceToCenter(new Vector2(5, 0), true);
         }
-        if (Input.Escape) {
+        if (inputHandler.Escape) {
             ((Game) Gdx.app.getApplicationListener()).setScreen(new levelMenu());
         }
 

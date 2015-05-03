@@ -1,8 +1,11 @@
 package com.mygdx.game.resources;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.worldHandler;
 
 /**
  * Created by forexamplejohn on 03/05/15.
@@ -24,6 +27,9 @@ public class assetLoader {
         tendy = new Sprite(new Texture("tiles/block_pack.png"));
         hotBar = new Sprite(new Texture("ui/hotbar.png"));
         hotBarSelected = new Sprite(new Texture("ui/hotbar.selected.png"));
+
+        //loadPref
+        worldHandler.fps = Gdx.app.getPreferences(MyGdxGame.title).getBoolean("fps");
 
     }
 }

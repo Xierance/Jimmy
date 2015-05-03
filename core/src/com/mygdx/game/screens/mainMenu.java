@@ -22,9 +22,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Secrets;
+import com.mygdx.game.inputHandler;
 import com.mygdx.game.musicPlayer;
 import com.mygdx.game.tween.ActorAccessor;
-import com.mygdx.game.Input;
 
 
 /**
@@ -55,15 +55,15 @@ public class mainMenu implements Screen {
 
         //Stage and Table set up
         stage = new Stage();
-        // Gdx.input.setInputProcessor(stage);
+        // Gdx.inputHandler.setInputProcessor(stage);
         skin = new Skin(Gdx.files.internal("ui/menuSkin.json"), new TextureAtlas("ui/atlas.pack"));
         table = new Table(skin);
         table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-        Input input = new Input();
+        inputHandler inputHandler = new inputHandler();
         InputMultiplexer inputMultiplexer = new InputMultiplexer();
         inputMultiplexer.addProcessor(stage);
-        inputMultiplexer.addProcessor(input);
+        inputMultiplexer.addProcessor(inputHandler);
         Gdx.input.setInputProcessor(inputMultiplexer);
 
         //fps attempt
@@ -199,7 +199,7 @@ public class mainMenu implements Screen {
         int loopControl = 0;
 
 
-        if (Input.Space && counter == 0) {
+        if (inputHandler.Space && counter == 0) {
             counter++;
 
             while (loopControl < 1) {
@@ -207,7 +207,7 @@ public class mainMenu implements Screen {
                 loopControl++;
             }
         }
-      /*  if (Input.Space && counter == 1){
+      /*  if (inputHandler.Space && counter == 1){
             counter++;
 
             while (loopControl < 2){
@@ -215,11 +215,11 @@ public class mainMenu implements Screen {
             }
        }
 
-        if (Input.Space || testBoolean){
+        if (inputHandler.Space || testBoolean){
             testBoolean = true;
             playMusic();
 
-            if (Input.Space){
+            if (inputHandler.Space){
                 restartMusic();
 
             }

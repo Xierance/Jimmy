@@ -2,7 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.InputProcessor;
 
-public class Input implements InputProcessor {
+public class inputHandler implements InputProcessor {
 
     public static boolean Up;
     public static boolean Down;

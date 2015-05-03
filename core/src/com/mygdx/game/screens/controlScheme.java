@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.mygdx.game.Input;
+import com.mygdx.game.inputHandler;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.resources.keyCodes;
 
@@ -83,10 +83,10 @@ public class controlScheme extends InputAdapter implements Screen {
 
                 stage = new Stage();
 
-        final Input input = new Input();
+        final inputHandler inputHandler = new inputHandler();
         final InputMultiplexer inputMultiplexer = new InputMultiplexer();
         inputMultiplexer.addProcessor(stage);
-        inputMultiplexer.addProcessor(input);
+        inputMultiplexer.addProcessor(inputHandler);
         Gdx.input.setInputProcessor(inputMultiplexer);
 
         skin = new Skin(Gdx.files.internal("ui/menuSkin.json"), new TextureAtlas("ui/atlas.pack"));
@@ -106,7 +106,7 @@ public class controlScheme extends InputAdapter implements Screen {
         back.pad(10);
 
 
-        //Input handling and setting controls
+        //inputHandler handling and setting controls
         ClickListener settingsHandler = new ClickListener() {
 
             @Override
@@ -121,12 +121,12 @@ public class controlScheme extends InputAdapter implements Screen {
                     while (toggleControl % 2 == 0) {
 
                         Gdx.app.log(MyGdxGame.title, "Controls can now be bound" + toggleControl);
-                        Gdx.app.log(MyGdxGame.title, String.valueOf(Input.currentKey));
+                        Gdx.app.log(MyGdxGame.title, String.valueOf(inputHandler.currentKey));
 
-                        newForwardBind = Input.currentKey;
+                        newForwardBind = inputHandler.currentKey;
                         Gdx.app.getPreferences(MyGdxGame.title).putInteger("forwardBind", newForwardBind);
 
-                        if (newForwardBind > 0 /*&& Input.currentKey == newForwardBind*/) {
+                        if (newForwardBind > 0 /*&& inputHandler.currentKey == newForwardBind*/) {
                             toggleControl2 = newForwardBind;
                             Gdx.app.log(MyGdxGame.title, String.valueOf(newForwardBind));
 
@@ -136,7 +136,7 @@ public class controlScheme extends InputAdapter implements Screen {
                                 break;
 
 
-                            } else /*(Input.currentKey > 0 && Input.currentKey != toggleControl2)*/ {
+                            } else /*(inputHandler.currentKey > 0 && inputHandler.currentKey != toggleControl2)*/ {
                                 toggleControl++;
                                 Gdx.app.log(MyGdxGame.title, "Should be working from now on: " + toggleControl);
                                 break;
@@ -152,7 +152,7 @@ public class controlScheme extends InputAdapter implements Screen {
 
                     toggleControl3++;
 
-                    newBackwardBind = Input.currentKey;
+                    newBackwardBind = inputHandler.currentKey;
                     Gdx.app.getPreferences(MyGdxGame.title).putInteger("backwardBind", newBackwardBind);
 
                     while (toggleControl3 % 2 == 0 ) {
@@ -167,12 +167,12 @@ public class controlScheme extends InputAdapter implements Screen {
                     }
                 }
                 if (event.getListenerActor() == jumpInput) {
-                    newJumpBind = Input.currentKey;
+                    newJumpBind = inputHandler.currentKey;
                     Gdx.app.getPreferences(MyGdxGame.title).putInteger("jumpBind", newJumpBind);
                 }
 
                 if (event.getListenerActor() == weaponInput) {
-                    newFireBind = Input.currentKey;
+                    newFireBind = inputHandler.currentKey;
                     Gdx.app.getPreferences(MyGdxGame.title).putInteger("fireBind", newFireBind);
                 }
 
