@@ -29,7 +29,7 @@ public class rayCast {
 
     public static void clearBodies(Array<Body> toDestroy, World world) {
         for (Body b : toDestroy)
-            if (world.isLocked() == false && b.getType() != BodyDef.BodyType.StaticBody && b.getUserData() != TestClass.playerSprite) {
+            if (world.isLocked() == false && b.getType() != BodyDef.BodyType.StaticBody && b.getUserData() != assetLoader.playerSprite) {
                 if (b.getUserData() instanceof ParticleEffectPool.PooledEffect){
                     projectiles.explode(b.getPosition());
                     projectiles.explode2(b.getPosition(), 36, world, 30);

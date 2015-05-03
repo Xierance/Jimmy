@@ -3,6 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.ParticleEffectPool;
 import com.badlogic.gdx.physics.box2d.*;
+import com.mygdx.game.resources.assetLoader;
 import com.mygdx.game.resources.healthDrop;
 import com.mygdx.game.screens.TestClass;
 import com.mygdx.game.resources.EffectPools;
@@ -14,7 +15,7 @@ public class MyContactListener implements ContactListener {
         Fixture fa = c.getFixtureA();
         Fixture fb = c.getFixtureB();
 
-        if (fa.getBody().getUserData() != null && fa.getBody().getUserData() instanceof ParticleEffectPool.PooledEffect && fb.getBody().getUserData() != TestClass.playerSprite && fa.isSensor() == false) {
+        if (fa.getBody().getUserData() != null && fa.getBody().getUserData() instanceof ParticleEffectPool.PooledEffect && fb.getBody().getUserData() != assetLoader.playerSprite && fa.isSensor() == false) {
             if (fb.getBody().getUserData() instanceof ParticleEffectPool.PooledEffect) {
             } else {
                 TestClass.getToDestroy().add(fa.getBody());
@@ -22,7 +23,7 @@ public class MyContactListener implements ContactListener {
 
             }
         }
-        if (fb.getBody().getUserData() != null && fb.getBody().getUserData() instanceof ParticleEffectPool.PooledEffect && fa.getBody().getUserData() != TestClass.playerSprite && fb.isSensor() == false) {
+        if (fb.getBody().getUserData() != null && fb.getBody().getUserData() instanceof ParticleEffectPool.PooledEffect && fa.getBody().getUserData() != assetLoader.playerSprite && fb.isSensor() == false) {
             if (fa.getBody().getUserData() instanceof ParticleEffectPool.PooledEffect) {
             } else {
                 TestClass.getToDestroy().add(fb.getBody());
@@ -33,12 +34,12 @@ public class MyContactListener implements ContactListener {
 
 
         //health stuff
-        if(fa.getBody().getUserData()!= null && fa.getBody().getUserData() == healthDrop.healthSprite){
+        if(fa.getBody().getUserData()!= null && fa.getBody().getUserData() == healthDrop.healthSprite && fb.getBody().getUserData() == assetLoader.playerSprite){
             worldHandler.currentHealth++;
             TestClass.toDestroy.add(fa.getBody());
         }
 
-        if(fb.getBody().getUserData()!= null && fb.getBody().getUserData() == healthDrop.healthSprite){
+        if(fb.getBody().getUserData()!= null && fb.getBody().getUserData() == healthDrop.healthSprite && fa .getBody().getUserData() == assetLoader.playerSprite){
             worldHandler.currentHealth++;
             TestClass.toDestroy.add(fb.getBody());
 

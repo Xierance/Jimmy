@@ -6,4 +6,5 @@ package com.mygdx.game;
 public class worldHandler {
     public static int currentHealth = 0;
     public static int maxHealth = 3;
+    public static boolean fps = false;
 }

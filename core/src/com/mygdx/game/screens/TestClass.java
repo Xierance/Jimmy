@@ -30,10 +30,12 @@ import com.mygdx.game.worldHandler;
 public class TestClass extends InputAdapter implements Screen {
 
 
-    ui UI = new ui();
+
+
+    private ui UI;
     public static Vector2 temp = new Vector2();
     public static Body tempBody;
-    public static Sprite playerSprite = new Sprite(new Texture("img/player.png"));
+
     public static Array<Body> toDestroy = new Array<Body>();
     public static Array<ParticleEffect> flames = new Array<ParticleEffect>();
     public static TiledMap map;
@@ -59,7 +61,7 @@ public class TestClass extends InputAdapter implements Screen {
     public static boolean D;
     public static boolean Ctrl_left;
     public static boolean Ctrl_right;
-    public static TextureAtlas hellBlocks = new TextureAtlas("maps/hellBlocks.pack");
+
     private static boolean Q;
     private final float TIMESTEP = 1 / 60f;
     private final int VELOCITYITERATIONS = 8;
@@ -74,7 +76,7 @@ public class TestClass extends InputAdapter implements Screen {
     private SpriteBatch secondBatch;
     private MouseJointDef jointDef;
     private MouseJoint joint;
-    private TextureAtlas blocks = new TextureAtlas("tiles/block_pack.pack");
+
     private Sprite block1 = new Sprite();
 
     private enemyPrototype test;
@@ -113,13 +115,13 @@ public class TestClass extends InputAdapter implements Screen {
         TiledMapTileLayer tileLayer = (TiledMapTileLayer) map.getLayers().get("butt");
         Sprite tileSprite = new Sprite(new Texture("jew.jpg"));
 
-        Sprite leftTile = new Sprite(hellBlocks.createSprite("Left"));
+        Sprite leftTile = new Sprite(assetLoader.hellBlocks.createSprite("Left"));
         leftTile.setSize(1f, 1f);
-        Sprite rightTile = new Sprite(hellBlocks.createSprite("Right"));
+        Sprite rightTile = new Sprite(assetLoader.hellBlocks.createSprite("Right"));
         rightTile.setSize(1f, 1f);
-        Sprite centerTile = new Sprite(hellBlocks.createSprite("Center"));
+        Sprite centerTile = new Sprite(assetLoader.hellBlocks.createSprite("Center"));
         centerTile.setSize(1f, 1f);
-        Sprite topTile = new Sprite(hellBlocks.createSprite("Top"));
+        Sprite topTile = new Sprite(assetLoader.hellBlocks.createSprite("Top"));
         topTile.setSize(1f, 1f);
 
         tileSprite.setSize(1f, 1f);
@@ -173,6 +175,10 @@ public class TestClass extends InputAdapter implements Screen {
     @Override
     public void show() {
 
+        assetLoader.loadAssets();
+
+        UI = new ui();
+        worldHandler.fps = Gdx.app.getPreferences(MyGdxGame.title).getBoolean("fps");
 
         jointDef = new MouseJointDef();
 
@@ -197,11 +203,11 @@ public class TestClass extends InputAdapter implements Screen {
         ground = b2dStructures.lineAlt(new Vector2(-300f, -10f), 0, 3000, 0.25f, ground, world);
         b2dStructures.line(new Vector2(-30, -10), 90, 100, 0.5f, world);
 
-        b2dStructures.castle(new Vector2(50, -9), 25, 5f, blocks, world);
-        b2dStructures.castle(new Vector2(20, -9), 25, 2, blocks, world);
-        b2dStructures.castle2(new Vector2(5, -9), 15, 1, 2, blocks, world);
-        b2dStructures.castle2(new Vector2(5, -9), 12, 2, 3.5f, blocks, world);
-        b2dStructures.castle2(new Vector2(30, -9), 30, 1, 9, blocks, world);
+        b2dStructures.castle(new Vector2(50, -9), 25, 5f, assetLoader.blocks, world);
+        b2dStructures.castle(new Vector2(20, -9), 25, 2, assetLoader.blocks, world);
+        b2dStructures.castle2(new Vector2(5, -9), 15, 1, 2, assetLoader.blocks, world);
+        b2dStructures.castle2(new Vector2(5, -9), 12, 2, 3.5f, assetLoader.blocks, world);
+        b2dStructures.castle2(new Vector2(30, -9), 30, 1, 9, assetLoader.blocks, world);
         b2dStructures.isosceles(new Vector2(30, 0), 1, 1.5f, 0.2f, 0.25f, world);
 
         //////////////////////mouse joint
@@ -211,7 +217,7 @@ public class TestClass extends InputAdapter implements Screen {
 
         mapToBox2d(new TiledMap(), world);///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        player.createPLayer(world, temp, playerSprite);
+        player.createPLayer(world, temp, assetLoader.playerSprite);
 
         cl = new MyContactListener();
         world.setContactListener(cl);
