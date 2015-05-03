@@ -65,8 +65,7 @@ public class TestClass extends InputAdapter implements Screen {
     private final int VELOCITYITERATIONS = 8;
     private final int POSITIONITERATIONS = 3;
     public Player player = new Player();
-    enemyPrototype test;
-    enemyPrototype test2;
+
     private World world;
     private Box2DDebugRenderer debugRenderer;
     private OrthographicCamera orthographicCamera;
@@ -77,6 +76,11 @@ public class TestClass extends InputAdapter implements Screen {
     private MouseJoint joint;
     private TextureAtlas blocks = new TextureAtlas("tiles/block_pack.pack");
     private Sprite block1 = new Sprite();
+
+    enemyPrototype test;
+    enemyPrototype test2;
+    healthDrop test3;
+    healthDrop test4;
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private MyContactListener cl;
@@ -207,8 +211,15 @@ public class TestClass extends InputAdapter implements Screen {
         test2 = new enemyPrototype(new Vector2(20, 12));
         test2.createEnemy(world, 2f, 2f);
 
-        healthDrop test3 = new healthDrop();
+        test3 = new healthDrop();
         test3.createHealthDrop(world,new Vector2(10,10));
+        test4 = new healthDrop();
+        test4.createHealthDrop(world,new Vector2(10,30));
+        healthDrop test5 = new healthDrop();
+        test5.createHealthDrop(world,new Vector2(11,30));
+        healthDrop test6 = new healthDrop();
+        test6.createHealthDrop(world,new Vector2(12,30));
+
 
 
 

@@ -36,6 +36,8 @@ public class ui {
         }
         locationControl = 0;
 
+        if(worldHandler.currentHealth > worldHandler.maxHealth)worldHandler.currentHealth = worldHandler.maxHealth;
+
         for (int i = 0; i < worldHandler.currentHealth; i++) {
             this.tendysilhouette.setCenter((-((Gdx.graphics.getWidth() / 2) * 0.9f) + ((tendysilhouette.getWidth() / 2) * locationControl))+10, ((Gdx.graphics.getHeight() / 2) * 0.9f +10));
             this.tendysilhouette.draw(secondBatch);
@@ -46,6 +48,7 @@ public class ui {
 
     public  void displayFps(SpriteBatch secondBatch) {
 
+        //GG 10/10 not silly way to do this \/
         if ((Gdx.app.getPreferences(MyGdxGame.title).getBoolean("fps"))) {
             this.font.draw(secondBatch, "Fps" + Gdx.graphics.getFramesPerSecond(), Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         }

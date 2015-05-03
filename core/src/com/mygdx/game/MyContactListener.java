@@ -30,6 +30,9 @@ public class MyContactListener implements ContactListener {
 
             }
         }
+
+
+        //health stuff
         if(fa.getBody().getUserData()!= null && fa.getBody().getUserData() == healthDrop.healthSprite){
             worldHandler.currentHealth++;
             TestClass.toDestroy.add(fa.getBody());
