@@ -245,9 +245,6 @@ public class TestClass extends InputAdapter implements Screen {
         System.out.println(worldHandler.currentHealth);
         enemyPrototype.updateenemies(world);
 
-        world.getBodies(tmpBodies);
-        for (Body body : tmpBodies) projectiles.clearShards(body, 3);
-
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -255,7 +252,12 @@ public class TestClass extends InputAdapter implements Screen {
 
         batch.setProjectionMatrix(orthographicCamera.combined);
 
-        if (world.isLocked() == false) rayCast.clearBodies(toDestroy, world);
+        if (world.isLocked() == false) {
+            world.getBodies(tmpBodies);
+            for (Body body : tmpBodies) projectiles.clearShards(body, 3);
+
+            rayCast.clearBodies(toDestroy, world);
+        }
 
         batch.begin();
         drawSprites(delta);
