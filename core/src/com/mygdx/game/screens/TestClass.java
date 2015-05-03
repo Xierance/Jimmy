@@ -77,7 +77,7 @@ public class TestClass extends InputAdapter implements Screen {
     private TextureAtlas blocks = new TextureAtlas("tiles/block_pack.pack");
     private Sprite block1 = new Sprite();
 
-    enemyPrototype test;
+    private enemyPrototype test;
     enemyPrototype test2;
     healthDrop test3;
     healthDrop test4;
@@ -128,36 +128,47 @@ public class TestClass extends InputAdapter implements Screen {
             for (int y = 0; y < tileLayer.getHeight(); y++) {
                 TiledMapTileLayer.Cell tileCell = tileLayer.getCell(x, y);
 
-                if (tileCell != null && tileCell.getTile() != null && tileCell.getTile().getProperties().get("playerBody") == null) {
-
-                    BodyDef tileBodyDef = new BodyDef();
-                    tileBodyDef.type = BodyDef.BodyType.KinematicBody;
-                    tileBodyDef.gravityScale = 0;
-                    tileBodyDef.position.set(x, y);
-
-                    PolygonShape tileShape = new PolygonShape();
-                    tileShape.setAsBox(.5f, .5f);
-
-                    Body body = world.createBody(tileBodyDef);
-                    body.createFixture(tileShape, 0f);
-
-                    tileShape.dispose();
-
+                if (tileCell != null && tileCell.getTile() != null ){
                     if (tileCell.getTile().getProperties().get("playerBody") != null) {
                         temp = new Vector2(x, y);
-                    } else if (tileCell.getTile().getProperties().get("left") != null) {
-                        body.setUserData(leftTile);
-                    } else if (tileCell.getTile().getProperties().get("right") != null) {
-                        body.setUserData(rightTile);
-                    } else if (tileCell.getTile().getProperties().get("center") != null) {
-                        body.setUserData(centerTile);
-                    } else if (tileCell.getTile().getProperties().get("top") != null) {
-                        body.setUserData(topTile);
+                    }
+
+                    if (tileCell.getTile().getProperties().get("enemy") != null) {
+                        enemyPrototype test = new enemyPrototype(new Vector2(x, y));
+                        test.createEnemy(world, 32f, 32f);
+                    }
+
+
+                    if (tileCell.getTile().getProperties().get("block") != null) {
+                        BodyDef tileBodyDef = new BodyDef();
+                        tileBodyDef.type = BodyDef.BodyType.KinematicBody;
+                        tileBodyDef.gravityScale = 0;
+                        tileBodyDef.position.set(x, y);
+
+                        PolygonShape tileShape = new PolygonShape();
+                        tileShape.setAsBox(.5f, .5f);
+
+                        Body body = world.createBody(tileBodyDef);
+                        body.createFixture(tileShape, 0f);
+
+                        tileShape.dispose();
+
+
+                        if (tileCell.getTile().getProperties().get("left") != null) {
+                            body.setUserData(leftTile);
+                        } else if (tileCell.getTile().getProperties().get("right") != null) {
+                            body.setUserData(rightTile);
+                        } else if (tileCell.getTile().getProperties().get("center") != null) {
+                            body.setUserData(centerTile);
+                        } else if (tileCell.getTile().getProperties().get("top") != null) {
+                            body.setUserData(topTile);
+                        }
                     }
                 }
             }
         }
     }
+
 
     @Override
     public void show() {
@@ -212,15 +223,13 @@ public class TestClass extends InputAdapter implements Screen {
         test2.createEnemy(world, 2f, 2f);
 
         test3 = new healthDrop();
-        test3.createHealthDrop(world,new Vector2(10,10));
+        test3.createHealthDrop(world, new Vector2(10, 10));
         test4 = new healthDrop();
-        test4.createHealthDrop(world,new Vector2(10,30));
+        test4.createHealthDrop(world, new Vector2(10, 30));
         healthDrop test5 = new healthDrop();
-        test5.createHealthDrop(world,new Vector2(11,30));
+        test5.createHealthDrop(world, new Vector2(11, 30));
         healthDrop test6 = new healthDrop();
-        test6.createHealthDrop(world,new Vector2(12,30));
-
-
+        test6.createHealthDrop(world, new Vector2(12, 30));
 
 
     }
