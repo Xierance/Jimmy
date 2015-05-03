@@ -33,7 +33,7 @@ public class ui {
     private Sprite tendy = assetLoader.tendy;
     private Sprite hotBar = assetLoader.hotBar;
     private Sprite hotBarSelected = assetLoader.hotBarSelected;
-    private int scrollLocation = 0;
+    private int scrollLocation = 1;
 
 
 
@@ -82,15 +82,15 @@ public class ui {
             hotBar.draw(secondBatch);
             inputHandler.currentScrollValue = 0;
         }
-        if (inputHandler.currentScrollValue == 1 && scrollLocation == 0){
+        if (inputHandler.currentScrollValue == 1 && scrollLocation == 1){
             inputHandler.currentScrollValue = 0;
-            scrollLocation = 3;
+            scrollLocation = 4;
         }
-        if (inputHandler.currentScrollValue == -1 && scrollLocation == 0){
+        if (inputHandler.currentScrollValue == -1 && scrollLocation == 1){
             inputHandler.currentScrollValue = 0;
-            scrollLocation = 1;
+            scrollLocation = 2;
         }
-        if (scrollLocation == 1){
+        if (scrollLocation == 2){
             hotBar.setSize(64, 64);
             hotBarSelected.setSize(64, 64);
             hotBar.setCenter(-6-(hotBar.getWidth()*1.5f), ((-Gdx.graphics.getHeight()/2)+ 35));
@@ -105,15 +105,15 @@ public class ui {
             hotBar.setCenter(6+(hotBar.getWidth()*1.5f), ((-Gdx.graphics.getHeight()/2)+ 35));
             hotBar.draw(secondBatch);
         }
-        if (inputHandler.currentScrollValue == 1 && scrollLocation == 1){
+        if (inputHandler.currentScrollValue == 1 && scrollLocation == 2){
             inputHandler.currentScrollValue = 0;
-            scrollLocation = 0;
+            scrollLocation = 1;
         }
-        if (inputHandler.currentScrollValue == -1 && scrollLocation == 1) {
+        if (inputHandler.currentScrollValue == -1 && scrollLocation == 2) {
             inputHandler.currentScrollValue = 0;
-            scrollLocation = 2;
+            scrollLocation = 3;
         }
-        if (scrollLocation == 2){
+        if (scrollLocation == 3){
             hotBar.setSize(64, 64);
             hotBarSelected.setSize(64, 64);
             hotBar.setCenter(-6-(hotBar.getWidth()*1.5f), ((-Gdx.graphics.getHeight()/2)+ 35));
@@ -128,15 +128,15 @@ public class ui {
             hotBarSelected.setCenter(6+(hotBar.getWidth()*1.5f), ((-Gdx.graphics.getHeight()/2)+ 35));
             hotBar.draw(secondBatch);
         }
-        if (inputHandler.currentScrollValue == 1 && scrollLocation == 2){
+        if (inputHandler.currentScrollValue == 1 && scrollLocation == 3){
             inputHandler.currentScrollValue = 0;
-            scrollLocation = 1;
+            scrollLocation = 2;
         }
-        if (inputHandler.currentScrollValue == -1 && scrollLocation == 2){
+        if (inputHandler.currentScrollValue == -1 && scrollLocation == 3){
             inputHandler.currentScrollValue = 0;
-            scrollLocation = 3;
+            scrollLocation = 4;
         }
-        if (scrollLocation == 3){
+        if (scrollLocation == 4){
             hotBar.setSize(64, 64);
             hotBarSelected.setSize(64, 64);
             hotBar.setCenter(-6-(hotBar.getWidth()*1.5f), ((-Gdx.graphics.getHeight()/2)+ 35));
@@ -151,13 +151,13 @@ public class ui {
             hotBarSelected.setCenter(6+(hotBar.getWidth()*1.5f), ((-Gdx.graphics.getHeight()/2)+ 35));
             hotBarSelected.draw(secondBatch);
         }
-        if (inputHandler.currentScrollValue == 1 && scrollLocation == 3){
+        if (inputHandler.currentScrollValue == 1 && scrollLocation == 4){
             inputHandler.currentScrollValue = 0;
-            scrollLocation = 2;
+            scrollLocation = 3;
         }
-        if (inputHandler.currentScrollValue == -1 && scrollLocation == 3){
+        if (inputHandler.currentScrollValue == -1 && scrollLocation == 4){
             inputHandler.currentScrollValue = 0;
-            scrollLocation = 0;
+            scrollLocation = 1;
         }
 
         /*if (inputHandler.betterScrolled(50)){
