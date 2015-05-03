@@ -67,8 +67,21 @@ public class inputHandler implements InputProcessor {
     public static int currentScrollValue;
     public static boolean Ctrl_left;
     public static boolean Ctrl_right;
+    public static long timeElapsed;
 
+    public static boolean betterScrolled(int scrollValue){
+        long millis = System.currentTimeMillis();
+        while (currentScrollValue == 1 || currentScrollValue == -1){
+            timeElapsed = System.currentTimeMillis() - millis;
 
+        }
+
+        if (timeElapsed < scrollValue){
+            return true;
+        }
+
+        return false;
+    }
 
     public boolean keyDown(int keycode) {
         currentKey = keycode;
@@ -219,7 +232,6 @@ public class inputHandler implements InputProcessor {
 
         return true;
     }
-
 
     public boolean keyUp(int keycode) {
         switch (keycode) {
@@ -384,6 +396,7 @@ public class inputHandler implements InputProcessor {
 
         return false;
     }
+
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         return false;
     }

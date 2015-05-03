@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.inputHandler;
 import com.mygdx.game.resources.assetLoader;
 import com.mygdx.game.worldHandler;
 
@@ -85,8 +86,14 @@ public class ui {
 
 
 
+
+
         }
 
-        Gdx.app.log(MyGdxGame.title, String.valueOf(com.mygdx.game.inputHandler.currentScrollValue));
+        if (inputHandler.betterScrolled(50)){
+            Gdx.app.log(MyGdxGame.title, String.valueOf(com.mygdx.game.inputHandler.currentScrollValue));
+        }
+
+
     }
 }
