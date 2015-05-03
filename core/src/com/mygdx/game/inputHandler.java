@@ -68,18 +68,17 @@ public class inputHandler implements InputProcessor {
     public static boolean Ctrl_left;
     public static boolean Ctrl_right;
     public static long timeElapsed;
+    public static int actualScroll = 0;
 
     public static boolean betterScrolled(int scrollValue){
-        long millis = System.currentTimeMillis();
-        while (currentScrollValue == 1 || currentScrollValue == -1){
-            timeElapsed = System.currentTimeMillis() - millis;
 
-        }
+       /* long millis = System.currentTimeMillis();
 
-        if (timeElapsed < scrollValue){
+
+        if (actualScroll < scrollValue){
             return true;
         }
-
+        else*/
         return false;
     }
 
@@ -411,6 +410,14 @@ public class inputHandler implements InputProcessor {
 
     public boolean scrolled(int amount) {
         currentScrollValue = amount;
+
+
+       /* while (currentScrollValue == 1 || currentScrollValue == -1){
+           // timeElapsed = System.currentTimeMillis() - millis;
+            actualScroll++;
+            currentScrollValue = 0;
+            System.out.println(String.valueOf(actualScroll));
+        }*/
         return false;
     }
 } 
