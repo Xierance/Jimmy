@@ -106,6 +106,7 @@ public class controlScheme extends InputAdapter implements Screen {
         back.pad(10);
 
 
+
         //inputHandler handling and setting controls
         ClickListener settingsHandler = new ClickListener() {
 
@@ -153,7 +154,7 @@ public class controlScheme extends InputAdapter implements Screen {
                     toggleControl3++;
 
                     newBackwardBind = inputHandler.currentKey;
-                    Gdx.app.getPreferences(MyGdxGame.title).putInteger("backwardBind", newBackwardBind);
+
 
                     while (toggleControl3 % 2 == 0 ) {
                         Gdx.app.log(MyGdxGame.title, String.valueOf(newBackwardBind));
@@ -165,10 +166,24 @@ public class controlScheme extends InputAdapter implements Screen {
 
                         }
                     }
+                    int timmy = inputHandler.currentKey;
+                    Gdx.app.getPreferences(MyGdxGame.title).putInteger("backwardBind", timmy);
                 }
                 if (event.getListenerActor() == jumpInput) {
-                    newJumpBind = inputHandler.currentKey;
+                    long millis = System.currentTimeMillis();
+
+
+
+                    long timeDif = 0;
+                    while (timeDif<200){
+                        timeDif = System.currentTimeMillis()-millis;
+                        System.out.println("TESt");
+
+                        newJumpBind = inputHandler.currentKey;
+                    }
+
                     Gdx.app.getPreferences(MyGdxGame.title).putInteger("jumpBind", newJumpBind);
+                    table.invalidateHierarchy();
                 }
 
                 if (event.getListenerActor() == weaponInput) {
@@ -183,7 +198,7 @@ public class controlScheme extends InputAdapter implements Screen {
                     stage.addAction(sequence(moveTo(0, stage.getHeight(), .5f), run(new Runnable() {
                         @Override
                         public void run() {
-                            ((Game) Gdx.app.getApplicationListener()).setScreen(new mainMenu());
+                            ((Game) Gdx.app.getApplicationListener()).setScreen(new settings());
                         }
                     })));
                 }
@@ -197,12 +212,20 @@ public class controlScheme extends InputAdapter implements Screen {
         backwardInput.addListener(settingsHandler);
         jumpInput.addListener(settingsHandler);
         weaponInput.addListener(settingsHandler);
+        table.debug();
 
-        table.add(forwardInput);
-        table.add(backwardInput);
-        table.add(jumpInput);
-        table.add(weaponInput);
-        table.add(back);
+        table.add("Move Forward:").left();
+        table.add(forwardInput).left();
+        table.row();
+        table.add("Move Backward:").left();
+        table.add(backwardInput).left();
+        table.row();
+        table.add("Jump:").left();
+        table.add(jumpInput).left();
+        table.row();
+        table.add("Fire Weapon:").left();
+        table.add(weaponInput).left();
+        table.add(back).bottom().right();
 
         stage.addActor(table);
     }

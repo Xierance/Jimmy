@@ -41,7 +41,8 @@ public class ui {
        // worldHandler.currentHealth
 
         for (int i = 0; i < worldHandler.maxHealth; i++) {
-            tendysilhouette.setCenter((-((Gdx.graphics.getWidth() / 2) * 0.9f) + ((tendysilhouette.getWidth() / 2) * locationControl)), ((Gdx.graphics.getHeight() / 2) * 0.9f));
+            tendysilhouette.setSize(32, 32);
+            tendysilhouette.setCenter((-((Gdx.graphics.getWidth() / 2) * 0.9f) + (6 * locationControl)+ ((tendysilhouette.getWidth()) * locationControl)), ((Gdx.graphics.getHeight() / 2) * 0.9f));
             tendysilhouette.draw(secondBatch);
             locationControl++;
         }
@@ -50,7 +51,8 @@ public class ui {
         if(worldHandler.currentHealth > worldHandler.maxHealth)worldHandler.currentHealth = worldHandler.maxHealth;
 
         for (int i = 0; i < worldHandler.currentHealth; i++) {
-            tendy.setCenter((-((Gdx.graphics.getWidth() / 2) * 0.9f) + ((tendysilhouette.getWidth() / 2) * locationControl)) + 10, ((Gdx.graphics.getHeight() / 2) * 0.9f + 10));
+            tendy.setSize(32, 32);
+            tendy.setCenter((-((Gdx.graphics.getWidth() / 2) * 0.9f) + (6 * locationControl)+ ((tendysilhouette.getWidth()) * locationControl)), ((Gdx.graphics.getHeight() / 2) * 0.9f));
             tendy.draw(secondBatch);
             locationControl++;
         }

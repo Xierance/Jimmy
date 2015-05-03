@@ -23,8 +23,8 @@ public class assetLoader {
         hellBlocks = new TextureAtlas("maps/hellBlocks.pack");
         blocks = new TextureAtlas("tiles/block_pack.pack");
         playerSprite = new Sprite(new Texture("img/player.png"));
-        tendysilhouette = new Sprite(new Texture("textures/dick.png"));
-        tendy = new Sprite(new Texture("tiles/block_pack.png"));
+        tendysilhouette = new Sprite(new Texture("ui/heart.empty.png"));
+        tendy = new Sprite(new Texture("ui/heart.full.png"));
         hotBar = new Sprite(new Texture("ui/hotbar.png"));
         hotBarSelected = new Sprite(new Texture("ui/hotbar.selected.png"));
 

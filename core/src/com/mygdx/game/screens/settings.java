@@ -154,6 +154,7 @@ public class settings implements Screen {
         fullScreenCheck.addListener(buttonHandler);
 
         // putting everything in the table
+        table.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         table.add(new Label("SETTINGS", skin, "big")).spaceBottom(50).colspan(3).expandX().row();
         table.add();
         table.add("Level directory:").height(100).bottom();
@@ -162,7 +163,8 @@ public class settings implements Screen {
         table.add(levelDirectoryInput).top().fillX();
         table.row();
         table.add(checkFPS).left();
-        table.add(fullScreenCheck);
+        table.row();
+        table.add(fullScreenCheck).left().top();
         table.add(controlRebind);
         table.row();
         table.add().height(350);

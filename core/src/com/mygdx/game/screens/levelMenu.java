@@ -48,7 +48,7 @@ public class levelMenu implements Screen {
             public void changed(ChangeEvent event, Actor actor) {
                 //   ((Game) Gdx.app.getApplicationListener()).setScreen(new levelTwo());
                 if (list.getSelected() == "one") {
-                    ((Game) Gdx.app.getApplicationListener()).setScreen(new jumpTest());
+                    ((Game) Gdx.app.getApplicationListener()).setScreen(new TestClass());
                 }
                 if (list.getSelected() == "two") {
                     ((Game) Gdx.app.getApplicationListener()).setScreen(new levelTest());
@@ -61,9 +61,6 @@ public class levelMenu implements Screen {
                 }
                 if (list.getSelected() == "five") {
                     ((Game) Gdx.app.getApplicationListener()).setScreen(new levelThree());
-                }
-                if (list.getSelected() == "Dank") {
-                    ((Game) Gdx.app.getApplicationListener()).setScreen(new TestClass());
                 }
                 if (list.getSelected() == "controltest") {
                     ((Game) Gdx.app.getApplicationListener()).setScreen(new controlScheme2());

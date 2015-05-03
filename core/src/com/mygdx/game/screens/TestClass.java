@@ -56,6 +56,7 @@ public class TestClass implements Screen {
     private MyContactListener cl;
     private Array<Body> tmpBodies = new Array<Body>();
     private Vector2 tmp2 = new Vector2();
+    private boolean tempb = true;
 
     public static Array<Body> getToDestroy() {
         return toDestroy;
@@ -339,7 +340,10 @@ public class TestClass implements Screen {
         if (inputHandler.D) {
             player.getPlayerBody().applyForceToCenter(new Vector2(20, 0), true);
         }
-
+        if (inputHandler.Escape && tempb) {
+            ((Game) Gdx.app.getApplicationListener()).setScreen(new levelMenu());
+            tempb = false;
+        }
         if (player.getPlayerBody().getLinearVelocity().x > 12f) {
             tempBody = player.getPlayerBody();
             tempBody.setLinearVelocity(12, player.getPlayerBody().getLinearVelocity().y);
