@@ -32,6 +32,8 @@ import com.mygdx.game.worldHandler;
 public class TestClass implements Screen {
 
 
+    public static OrthographicCamera orthographicCamera;
+    public static Vector3 tmp = new Vector3();
     public static Vector2 temp = new Vector2();
     public static Body tempBody;
     public static Array<Body> toDestroy = new Array<Body>();
@@ -47,7 +49,7 @@ public class TestClass implements Screen {
     private ui UI;
     public static  World world;
     private Box2DDebugRenderer debugRenderer;
-    public static OrthographicCamera orthographicCamera;
+
     private OrthographicCamera secondCamera;
     private SpriteBatch batch;
     private SpriteBatch secondBatch;
@@ -57,7 +59,7 @@ public class TestClass implements Screen {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private MyContactListener cl;
     private Array<Body> tmpBodies = new Array<Body>();
-    public static Vector3 tmp = new Vector3();
+
     private Vector2 tmp2 = new Vector2();
 
     public static Array<Body> getToDestroy() {
