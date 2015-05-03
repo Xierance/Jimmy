@@ -32,10 +32,8 @@ public class TestClass extends InputAdapter implements Screen {
 
 
 
-    private ui UI;
     public static Vector2 temp = new Vector2();
     public static Body tempBody;
-
     public static Array<Body> toDestroy = new Array<Body>();
     public static Array<ParticleEffect> flames = new Array<ParticleEffect>();
     public static TiledMap map;
@@ -61,13 +59,15 @@ public class TestClass extends InputAdapter implements Screen {
     public static boolean D;
     public static boolean Ctrl_left;
     public static boolean Ctrl_right;
-
     private static boolean Q;
     private final float TIMESTEP = 1 / 60f;
     private final int VELOCITYITERATIONS = 8;
     private final int POSITIONITERATIONS = 3;
     public Player player = new Player();
-
+    enemyPrototype test2;
+    healthDrop test3;
+    healthDrop test4;
+    private ui UI;
     private World world;
     private Box2DDebugRenderer debugRenderer;
     private OrthographicCamera orthographicCamera;
@@ -76,14 +76,8 @@ public class TestClass extends InputAdapter implements Screen {
     private SpriteBatch secondBatch;
     private MouseJointDef jointDef;
     private MouseJoint joint;
-
     private Sprite block1 = new Sprite();
-
     private enemyPrototype test;
-    enemyPrototype test2;
-    healthDrop test3;
-    healthDrop test4;
-
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private MyContactListener cl;
     private Array<Body> tmpBodies = new Array<Body>();
@@ -269,6 +263,7 @@ public class TestClass extends InputAdapter implements Screen {
         secondBatch.begin();
         UI.displayMax(secondBatch);
         UI.displayFps(secondBatch);
+        UI.hotBar(secondBatch);
         secondBatch.end();
 
         handleInput();

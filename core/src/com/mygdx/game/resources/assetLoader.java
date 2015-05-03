@@ -13,6 +13,8 @@ public class assetLoader {
     public static Sprite playerSprite;
     public static Sprite tendy;
     public static Sprite tendysilhouette;
+    public static Sprite hotBar;
+    public static Sprite hotBarSelected;
 
     public static void loadAssets(){
         hellBlocks = new TextureAtlas("maps/hellBlocks.pack");
@@ -20,6 +22,8 @@ public class assetLoader {
         playerSprite = new Sprite(new Texture("img/player.png"));
         tendysilhouette = new Sprite(new Texture("textures/dick.png"));
         tendy = new Sprite(new Texture("tiles/block_pack.png"));
+        hotBar = new Sprite(new Texture("ui/hotbar.png"));
+        hotBarSelected = new Sprite(new Texture("ui/hotbar.selected.png"));
 
     }
 }

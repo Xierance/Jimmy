@@ -13,6 +13,8 @@ import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.resources.assetLoader;
 import com.mygdx.game.worldHandler;
 
+import java.nio.channels.spi.SelectorProvider;
+
 /**
  * Created by Cian on 01/05/2015.
  */
@@ -25,6 +27,9 @@ public class ui {
     private BitmapFont font = new BitmapFont(false);
     private int locationControl = 0;
     private Sprite tendysilhouette = assetLoader.tendysilhouette;
+    private Sprite tendy = assetLoader.tendy;
+    private Sprite hotBar = assetLoader.hotBar;
+    private Sprite hotBarSelected = assetLoader.hotBarSelected;
 
 
 
@@ -41,19 +46,35 @@ public class ui {
         if(worldHandler.currentHealth > worldHandler.maxHealth)worldHandler.currentHealth = worldHandler.maxHealth;
 
         for (int i = 0; i < worldHandler.currentHealth; i++) {
-            tendysilhouette.setCenter((-((Gdx.graphics.getWidth() / 2) * 0.9f) + ((tendysilhouette.getWidth() / 2) * locationControl)) + 10, ((Gdx.graphics.getHeight() / 2) * 0.9f + 10));
-            tendysilhouette.draw(secondBatch);
+            tendy.setCenter((-((Gdx.graphics.getWidth() / 2) * 0.9f) + ((tendysilhouette.getWidth() / 2) * locationControl)) + 10, ((Gdx.graphics.getHeight() / 2) * 0.9f + 10));
+            tendy.draw(secondBatch);
             locationControl++;
         }
         locationControl = 0;
     }
-
-    public  void displayFps(SpriteBatch secondBatch) {
+    public void displayFps(SpriteBatch secondBatch) {
 
         //GG 10/10 not silly way to do this \/
         if (worldHandler.fps) {
             this.font.draw(secondBatch, "Fps" + Gdx.graphics.getFramesPerSecond(), Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         }
 
+    }
+    public void hotBar(SpriteBatch secondBatch){
+        hotBar.setSize(64, 64);
+        hotBar.setCenter(-6-(hotBar.getWidth()*1.5f), ((-Gdx.graphics.getHeight()/2)+ 35));
+        hotBar.draw(secondBatch);
+
+        //hotBar.scale(2);
+        hotBar.setCenter(-2-(hotBar.getWidth()/2), ((-Gdx.graphics.getHeight()/2)+ 35));
+        hotBar.draw(secondBatch);
+
+       // hotBar.scale(2);
+        hotBar.setCenter(2+(hotBar.getWidth()/2), ((-Gdx.graphics.getHeight()/2)+ 35));
+        hotBar.draw(secondBatch);
+
+       // hotBar.scale(2);
+        hotBar.setCenter(6+(hotBar.getWidth()*1.5f), ((-Gdx.graphics.getHeight()/2)+ 35));
+        hotBar.draw(secondBatch);
     }
 }
