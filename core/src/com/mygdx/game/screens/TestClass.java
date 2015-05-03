@@ -18,89 +18,47 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.physics.box2d.joints.MouseJoint;
 import com.badlogic.gdx.physics.box2d.joints.MouseJointDef;
 import com.badlogic.gdx.utils.Array;
-import com.mygdx.game.Input;
 import com.mygdx.game.MyContactListener;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Visuals.gameParticles.Explosion;
 import com.mygdx.game.Visuals.ui;
+import com.mygdx.game.inputHandler;
 import com.mygdx.game.resources.*;
 import com.mygdx.game.worldHandler;
 
 /**
  * Created by for example John on 3/14/2015.
  */
-public class TestClass extends InputAdapter implements Screen {
-
-
+public class TestClass implements Screen {
 
 
     public static Vector2 temp = new Vector2();
     public static Body tempBody;
     public static Array<Body> toDestroy = new Array<Body>();
     public static Array<ParticleEffect> flames = new Array<ParticleEffect>();
-    public static TiledMap map;
-    public static boolean Up;
-    public static boolean Down;
-    //input keys
-    public static boolean Left;
-    public static boolean Right;
-    public static boolean Space;
-    public static boolean Escape;
-    public static boolean M;
-    public static boolean O;
-    public static boolean R;
-    public static boolean E;
-    public static boolean S;
-    public static boolean A;
-    public static boolean N;
-    public static boolean I;
-    public static boolean C;
-    public static boolean P;
-    public static boolean L;
-    public static boolean W;
-    public static boolean D;
-    public static boolean Ctrl_left;
-    public static boolean Ctrl_right;
     private static boolean Q;
     private final float TIMESTEP = 1 / 60f;
     private final int VELOCITYITERATIONS = 8;
     private final int POSITIONITERATIONS = 3;
-    public Player player = new Player();
+    public static Player player = new Player();
     enemyPrototype test2;
     healthDrop test3;
     healthDrop test4;
     private ui UI;
-    private World world;
+    public static  World world;
     private Box2DDebugRenderer debugRenderer;
-    private OrthographicCamera orthographicCamera;
+    public static OrthographicCamera orthographicCamera;
     private OrthographicCamera secondCamera;
     private SpriteBatch batch;
     private SpriteBatch secondBatch;
     private MouseJointDef jointDef;
-    private MouseJoint joint;
     private Sprite block1 = new Sprite();
     private enemyPrototype test;
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private MyContactListener cl;
     private Array<Body> tmpBodies = new Array<Body>();
-    private Vector3 tmp = new Vector3();
+    public static Vector3 tmp = new Vector3();
     private Vector2 tmp2 = new Vector2();
-
-    private QueryCallback queryCallbackMouse = new QueryCallback() {
-        @Override
-        public boolean reportFixture(Fixture fixture) {
-            if (!fixture.testPoint(tmp.x, tmp.y))
-                return true;
-
-            if (fixture.getBody().getType() != BodyDef.BodyType.KinematicBody) {
-                jointDef.bodyB = fixture.getBody();
-
-                jointDef.target.set(tmp.x, tmp.y);
-                joint = (MouseJoint) world.createJoint(jointDef);
-            }
-            return false;
-        }
-    };
 
     public static Array<Body> getToDestroy() {
         return toDestroy;
@@ -126,7 +84,7 @@ public class TestClass extends InputAdapter implements Screen {
             for (int y = 0; y < tileLayer.getHeight(); y++) {
                 TiledMapTileLayer.Cell tileCell = tileLayer.getCell(x, y);
 
-                if (tileCell != null && tileCell.getTile() != null ){
+                if (tileCell != null && tileCell.getTile() != null) {
                     if (tileCell.getTile().getProperties().get("playerBody") != null) {
                         temp = new Vector2(x, y);
                     }
@@ -191,9 +149,8 @@ public class TestClass extends InputAdapter implements Screen {
         //input
 
 
-        Input input = new Input();
+        inputHandler input = new inputHandler();
         InputMultiplexer inputMultiplexer = new InputMultiplexer();
-        inputMultiplexer.addProcessor(this);
         inputMultiplexer.addProcessor(input);
         Gdx.input.setInputProcessor(inputMultiplexer);
 
@@ -321,7 +278,7 @@ public class TestClass extends InputAdapter implements Screen {
 
     public void cameraFollow() {
         float lerp = .1f;
-        if (!M) {
+        if (!inputHandler.M) {
             if (orthographicCamera.position.x != player.getPlayerBody().getPosition().x) {
                 orthographicCamera.position.x += (player.getPlayerBody().getPosition().x - orthographicCamera.position.x) * lerp;
             }
@@ -331,51 +288,51 @@ public class TestClass extends InputAdapter implements Screen {
             orthographicCamera.update();
         }
 
-        if (Q) {
+        if (inputHandler.Q) {
             orthographicCamera.zoom += .010f;
             orthographicCamera.update();
         }
-        if (E) {
+        if (inputHandler.E) {
             orthographicCamera.zoom -= .010f;
             orthographicCamera.update();
         }
 
-        if (Up) orthographicCamera.position.y += 0.5;
+        if (inputHandler.Up) orthographicCamera.position.y += 0.5;
         orthographicCamera.update();
-        if (Left) orthographicCamera.position.x -= .5;
+        if (inputHandler.Left) orthographicCamera.position.x -= .5;
         orthographicCamera.update();
-        if (Down) orthographicCamera.position.y -= .5;
+        if (inputHandler.Down) orthographicCamera.position.y -= .5;
         orthographicCamera.update();
-        if (Right) orthographicCamera.position.x += .5;
+        if (inputHandler.Right) orthographicCamera.position.x += .5;
         orthographicCamera.update();
 
     }
 
     public void handleInput() {
 
-        if (Ctrl_right)
+        if (inputHandler.Ctrl_right)
             projectiles.shootDick(player.getPlayerBody().getPosition(), projectiles.angle2(player.getPlayerBody().getPosition(), new Vector2(tmp.x, tmp.y)), world);
-        if (Ctrl_left)
+        if (inputHandler.Ctrl_left)
             if (rayCast.rayFixture(world, player.getPlayerBody().getPosition(), new Vector2(getmouseCoords().x, getmouseCoords().y)) != null)
                 toDestroy.add(rayCast.rayFixture(world,
                         player.getPlayerBody().getPosition(),
                         new Vector2(getmouseCoords().x, getmouseCoords().y)).getBody());
 
         //move
-        if (Input.Space && player.isPlayerGrounded(world, player)) {
+        if (inputHandler.Space && player.isPlayerGrounded(world, player)) {
             player.getPlayerBody().applyLinearImpulse(new Vector2(0, 3), new Vector2(), true);
         }
 
-        if (Input.S) {
+        if (inputHandler.S) {
             player.getPlayerBody().applyForceToCenter(new Vector2(0, -20), true);
         }
 
-        if (Input.A) {
+        if (inputHandler.A) {
             player.getPlayerBody().applyForceToCenter(new Vector2(-20, 0), true);
 
         }
 
-        if (Input.D) {
+        if (inputHandler.D) {
             player.getPlayerBody().applyForceToCenter(new Vector2(20, 0), true);
         }
 
@@ -400,8 +357,6 @@ public class TestClass extends InputAdapter implements Screen {
             player.setPlayerBody(tempBody);
 
         }
-
-
     }
 
     public void drawSprites(float delta) {
@@ -416,9 +371,9 @@ public class TestClass extends InputAdapter implements Screen {
 
             if (body.getUserData() != null && body.getUserData() instanceof Sprite) {
                 //rotating playerBody sprite
-                if (A && !((Sprite) body.getUserData()).isFlipX() && (Sprite) body.getUserData() == player.getPlayerSPrite())
+                if (inputHandler.A && !((Sprite) body.getUserData()).isFlipX() && (Sprite) body.getUserData() == player.getPlayerSPrite())
                     ((Sprite) body.getUserData()).setFlip(true, false);
-                if (D && ((Sprite) body.getUserData()).isFlipX() && (Sprite) body.getUserData() == player.getPlayerSPrite())
+                if (inputHandler.D && ((Sprite) body.getUserData()).isFlipX() && (Sprite) body.getUserData() == player.getPlayerSPrite())
                     ((Sprite) body.getUserData()).setFlip(false, false);
 
                 Sprite sprite = (Sprite) body.getUserData();
@@ -430,38 +385,7 @@ public class TestClass extends InputAdapter implements Screen {
         }
     }
 
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        orthographicCamera.unproject(tmp.set(screenX, screenY, 0));
-
-        if (!Ctrl_left) {
-            if (!Ctrl_right)
-
-                projectiles.shootFire(player.getPlayerBody().getPosition(), projectiles.angle2(player.getPlayerBody().getPosition(), getmouseCoords()), world);
-        }
-
-
-        if (Ctrl_left) world.QueryAABB(queryCallbackMouse, tmp.x, tmp.y, tmp.x, tmp.y);
-        return false;
-    }
-
-    public boolean touchDragged(int screenX, int screenY, int pointer) {
-        if (joint == null) return false;
-        orthographicCamera.unproject(tmp.set(screenX, screenY, 0));
-        joint.setTarget(tmp2.set(tmp.x, tmp.y));
-
-        return false;
-    }
-
-    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        if (joint == null)
-            return false;
-        world.destroyJoint(joint);
-        joint = null;
-        return true;
-    }
-
-
-    public Vector2 getmouseCoords() {
+    public static Vector2 getmouseCoords() {
         Vector3 temp = new Vector3();
         orthographicCamera.unproject(temp.set(Gdx.input.getX(), Gdx.input.getY(), 0));
         return new Vector2(temp.x, temp.y);

@@ -63,7 +63,7 @@ public class ui {
 
     }
     public void hotBar(SpriteBatch secondBatch){
-        switch (com.mygdx.game.Input.currentScrollValue){
+        switch (com.mygdx.game.inputHandler.currentScrollValue){
             case 0:
                 hotBar.setSize(64, 64);
                 hotBarSelected.setSize(64, 64);
@@ -87,6 +87,6 @@ public class ui {
 
         }
 
-        Gdx.app.log(MyGdxGame.title, String.valueOf(com.mygdx.game.Input.currentScrollValue));
+        Gdx.app.log(MyGdxGame.title, String.valueOf(com.mygdx.game.inputHandler.currentScrollValue));
     }
 }

@@ -1,6 +1,8 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.InputProcessor;
+import com.mygdx.game.resources.projectiles;
+import com.mygdx.game.screens.TestClass;
 
 public class inputHandler implements InputProcessor {
 
@@ -63,6 +65,10 @@ public class inputHandler implements InputProcessor {
     public static boolean Z;
     public static int currentKey;
     public static int currentScrollValue;
+    public static boolean Ctrl_left;
+    public static boolean Ctrl_right;
+
+
 
     public boolean keyDown(int keycode) {
         currentKey = keycode;
@@ -201,6 +207,12 @@ public class inputHandler implements InputProcessor {
                 break;
             case 61:
                 Tab = true;
+            case 129:
+                Ctrl_left = true;
+                break;
+            case 130:
+                Ctrl_right = true;
+                break;
 
 
         }
@@ -344,6 +356,13 @@ public class inputHandler implements InputProcessor {
                 Num_9 = false;
             case 61:
                 Tab = false;
+            case 129:
+                Ctrl_left = false;
+                break;
+            case 130:
+                Ctrl_right = false;
+                break;
+
 
 
         }
@@ -356,9 +375,15 @@ public class inputHandler implements InputProcessor {
     }
 
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        TestClass.orthographicCamera.unproject(TestClass.tmp.set(screenX, screenY, 0));
+
+            if (!Ctrl_right)
+
+                projectiles.shootFire(TestClass.player.getPlayerBody().getPosition(), projectiles.angle2(TestClass.player.getPlayerBody().getPosition(), TestClass.getmouseCoords()), TestClass.world);
+
+
         return false;
     }
-
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         return false;
     }
