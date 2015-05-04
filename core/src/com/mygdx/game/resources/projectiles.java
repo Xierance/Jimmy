@@ -116,11 +116,11 @@ public class projectiles {
 
     public static void clearShards(Body body, float tolerance) {
 
-        if (body.getUserData() instanceof Vector2) {
-            if (((Vector2) (body.getUserData())).x > tolerance) {
+        if (body.getUserData() instanceof timer) {
+            if (((timer) body.getUserData()).getTime() > tolerance) {
                 TestClass.toDestroy.add(body);
             } else {
-                body.setUserData(new Vector2(((Vector2) body.getUserData()).x + 1, ((Vector2) body.getUserData()).y));
+                body.setUserData(new timer((((timer) body.getUserData()).getTime() + 1)));
             }
         }
     }

@@ -392,7 +392,6 @@ public class inputHandler implements InputProcessor {
 
                 projectiles.shootFire(TestClass.player.getPlayerBody().getPosition(), projectiles.angle2(TestClass.player.getPlayerBody().getPosition(), TestClass.getmouseCoords()), TestClass.world);
 
-
         return false;
     }
 
