@@ -386,11 +386,11 @@ public class inputHandler implements InputProcessor {
     }
 
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        TestClass.orthographicCamera.unproject(TestClass.tmp.set(screenX, screenY, 0));
+        if(TestClass.orthographicCamera != null)TestClass.orthographicCamera.unproject(TestClass.tmp.set(screenX, screenY, 0));
 
             if (!Ctrl_right)
 
-                projectiles.shootFire(TestClass.player.getPlayerBody().getPosition(), projectiles.angle2(TestClass.player.getPlayerBody().getPosition(), TestClass.getmouseCoords()), TestClass.world);
+                if(TestClass.player.getPlayerBody() != null)projectiles.shootFire(TestClass.player.getPlayerBody().getPosition(), projectiles.angle2(TestClass.player.getPlayerBody().getPosition(), TestClass.getmouseCoords()), TestClass.world);
 
         return false;
     }
