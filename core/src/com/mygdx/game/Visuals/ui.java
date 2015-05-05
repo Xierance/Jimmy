@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.inputHandler;
 import com.mygdx.game.resources.assetLoader;
@@ -34,6 +35,7 @@ public class ui {
     private Sprite hotBar = assetLoader.hotBar;
     private Sprite hotBarSelected = assetLoader.hotBarSelected;
     private int scrollLocation = 1;
+
 
 
 
@@ -167,6 +169,34 @@ public class ui {
         }*/
 
         //Gdx.app.log(MyGdxGame.title, String.valueOf(com.mygdx.game.inputHandler.currentScrollValue));
+
+    }
+    public void testHotbar(SpriteBatch batch){
+
+        if(inputHandler.currentScrollValue != 0)scrollLocation += inputHandler.currentScrollValue;
+        if(scrollLocation == 5)scrollLocation = 1;
+        if(scrollLocation == 0)scrollLocation = 4;
+        inputHandler.currentScrollValue = 0;
+
+        int[] hotBarNum = {1,2,3,4};
+
+        hotBar.setSize(64,64);
+        hotBar.setCenter(32,32);
+        hotBarSelected.setSize(64,64);
+        hotBarSelected.setCenter(32,32);
+
+        for(int i: hotBarNum){
+            if(i  != scrollLocation){
+                hotBar.setPosition(1 - (hotBarNum.length*64) + (i + 1)*64,((-Gdx.graphics.getHeight()/2)));
+                hotBar.draw(batch);
+
+            }else{
+                hotBarSelected.setPosition(1 - (hotBarNum.length*64) + (i +1)*64,((-Gdx.graphics.getHeight()/2)));
+                hotBarSelected.draw(batch);
+            }
+        }
+
+        System.out.println(scrollLocation);
 
     }
 }
