@@ -181,17 +181,15 @@ public class ui {
         inputHandler.currentScrollValue = 0;
 
         hotBar.setSize(64,64);
-        hotBar.setCenter(32,32);
         hotBarSelected.setSize(64,64);
-        hotBarSelected.setCenter(32,32);
 
         for(int i: hotBarNum){
             if(i  != scrollLocation){
-                hotBar.setPosition( - ((hotBarNum.length*64)) + (1+i )*64,((-Gdx.graphics.getHeight()/2)));
+                hotBar.setPosition( - ((hotBarNum.length*32)) + (1+i )*64,((-Gdx.graphics.getHeight()/2)));
                 hotBar.draw(batch);
 
             }else{
-                hotBarSelected.setPosition( - ((hotBarNum.length*64)) + (1+i )*64,((-Gdx.graphics.getHeight()/2)));
+                hotBarSelected.setPosition( - ((hotBarNum.length*32)) + (1+i )*64,((-Gdx.graphics.getHeight()/2)));
                 hotBarSelected.draw(batch);
             }
         }
