@@ -231,8 +231,8 @@ public class TestClass implements Screen {
         secondBatch.begin();
         UI.displayMax(secondBatch);
         UI.displayFps(secondBatch);
-        UI.hotBar(secondBatch);
-        //UI.testHotbar(secondBatch);
+        //UI.hotBar(secondBatch);
+        UI.testHotbar(secondBatch);
         secondBatch.end();
 
         handleInput();

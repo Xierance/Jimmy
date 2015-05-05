@@ -173,12 +173,12 @@ public class ui {
     }
     public void testHotbar(SpriteBatch batch){
 
-        if(inputHandler.currentScrollValue != 0)scrollLocation += inputHandler.currentScrollValue;
-        if(scrollLocation == 5)scrollLocation = 1;
-        if(scrollLocation == 0)scrollLocation = 4;
-        inputHandler.currentScrollValue = 0;
+        int[] hotBarNum = {1,2,3,4,5,6};
 
-        int[] hotBarNum = {1,2,3,4};
+        scrollLocation += inputHandler.currentScrollValue;
+        if(scrollLocation == hotBarNum.length + 1)scrollLocation = 1;
+        if(scrollLocation == 0)scrollLocation = hotBarNum.length;
+        inputHandler.currentScrollValue = 0;
 
         hotBar.setSize(64,64);
         hotBar.setCenter(32,32);
@@ -187,11 +187,11 @@ public class ui {
 
         for(int i: hotBarNum){
             if(i  != scrollLocation){
-                hotBar.setPosition(1 - (hotBarNum.length*64) + (i + 1)*64,((-Gdx.graphics.getHeight()/2)));
+                hotBar.setPosition( - ((hotBarNum.length*64)) + (1+i )*64,((-Gdx.graphics.getHeight()/2)));
                 hotBar.draw(batch);
 
             }else{
-                hotBarSelected.setPosition(1 - (hotBarNum.length*64) + (i +1)*64,((-Gdx.graphics.getHeight()/2)));
+                hotBarSelected.setPosition( - ((hotBarNum.length*64)) + (1+i )*64,((-Gdx.graphics.getHeight()/2)));
                 hotBarSelected.draw(batch);
             }
         }
