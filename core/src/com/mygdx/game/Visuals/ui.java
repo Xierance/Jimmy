@@ -181,6 +181,8 @@ public class ui {
         inputHandler.currentScrollValue = 0;
 
         hotBar.setSize(64,64);
+        hotBar.setCenter(32,32);
+        hotBarSelected.setCenter(32,32);
         hotBarSelected.setSize(64,64);
 
         for(int i: hotBarNum){
