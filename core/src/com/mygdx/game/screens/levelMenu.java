@@ -38,7 +38,7 @@ public class levelMenu implements Screen {
         table.setFillParent(true);
 
         list = new List(skin);
-        list.setItems("one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "Dank","controltest");
+        list.setItems("one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten");
         sp = new ScrollPane(list, skin);
 
 
@@ -46,7 +46,6 @@ public class levelMenu implements Screen {
         play.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                //   ((Game) Gdx.app.getApplicationListener()).setScreen(new levelTwo());
                 if (list.getSelected() == "one") {
                     ((Game) Gdx.app.getApplicationListener()).setScreen(new TestClass());
                 }
@@ -61,9 +60,6 @@ public class levelMenu implements Screen {
                 }
                 if (list.getSelected() == "five") {
                     ((Game) Gdx.app.getApplicationListener()).setScreen(new levelThree());
-                }
-                if (list.getSelected() == "controltest") {
-                    ((Game) Gdx.app.getApplicationListener()).setScreen(new controlScheme2());
                 }
 
             }

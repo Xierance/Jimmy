@@ -152,6 +152,7 @@ public class TestClass implements Screen {
         //input
 
 
+
         inputHandler input = new inputHandler();
         InputMultiplexer inputMultiplexer = new InputMultiplexer();
         inputMultiplexer.addProcessor(input);

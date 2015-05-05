@@ -130,15 +130,15 @@ public class controlScheme extends InputAdapter implements Screen {
                         if (newForwardBind > 0 /*&& inputHandler.currentKey == newForwardBind*/) {
                             toggleControl2 = newForwardBind;
                             Gdx.app.log(MyGdxGame.title, String.valueOf(newForwardBind));
-
+                            toggleControl++;
                             if (toggleControl2 == newForwardBind && toggleControl == 0){
-                                toggleControl++;
+                               // toggleControl++;
                                 Gdx.app.log(MyGdxGame.title, "First time only: " + toggleControl + toggleControl2);
                                 break;
 
 
                             } else /*(inputHandler.currentKey > 0 && inputHandler.currentKey != toggleControl2)*/ {
-                                toggleControl++;
+                               // toggleControl++;
                                 Gdx.app.log(MyGdxGame.title, "Should be working from now on: " + toggleControl);
                                 break;
                             }

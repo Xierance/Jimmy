@@ -175,15 +175,15 @@ public class ui {
 
         int[] hotBarNum = {1,2,3,4,5,6};
 
-        scrollLocation += inputHandler.currentScrollValue;
+        scrollLocation -= inputHandler.currentScrollValue;
         if(scrollLocation == hotBarNum.length + 1)scrollLocation = 1;
         if(scrollLocation == 0)scrollLocation = hotBarNum.length;
         inputHandler.currentScrollValue = 0;
 
         hotBar.setSize(64,64);
-        hotBarSelected.setSize(64,64);
+        hotBarSelected.setSize(64, 64);
 
-        for(int i: hotBarNum){
+             /*   for(int i: hotBarNum){
             if(i  != scrollLocation){
                 hotBar.setPosition( - ((hotBarNum.length*32)) + (1+i )*64,((-Gdx.graphics.getHeight()/2)));
                 hotBar.draw(batch);
@@ -192,9 +192,38 @@ public class ui {
                 hotBarSelected.setPosition( - ((hotBarNum.length*32)) + (1+i )*64,((-Gdx.graphics.getHeight()/2)));
                 hotBarSelected.draw(batch);
             }
-        }
+        }*/
 
         System.out.println(scrollLocation);
 
-    }
+
+        for(int i: hotBarNum){
+            if (hotBarNum.length % 2 == 0) {
+                if (i != scrollLocation) {
+                    hotBar.setCenter(-((hotBar.getWidth()+4)*i)+2, ((-Gdx.graphics.getHeight()/2)+ 35));
+                    hotBar.draw(batch);
+
+                    hotBar.setCenter(((hotBar.getWidth()+4)*i)-2, ((-Gdx.graphics.getHeight() / 2) + 35));
+                    hotBar.draw(batch);
+
+                } else {
+                    hotBarSelected.setCenter(-((hotBarNum.length * 32)) + (1 + i) * 64, ((-Gdx.graphics.getHeight() / 2) + 35));
+                    hotBarSelected.draw(batch);
+                }
+            }
+        /*  else {
+                if (i != scrollLocation) {
+                    hotBar.setPosition(-((hotBarNum.length * 32)) + (1 + i) * 64, ((-Gdx.graphics.getHeight() / 2)));
+                    hotBar.draw(batch);
+
+                } else {
+                    hotBarSelected.setPosition(-((hotBarNum.length * 32)) + (1 + i) * 64, ((-Gdx.graphics.getHeight() / 2)));
+                    hotBarSelected.draw(batch);
+                }
+            }*/
+            }
+
+        }
+
+
 }
