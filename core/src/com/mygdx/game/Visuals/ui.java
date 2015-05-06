@@ -184,11 +184,11 @@ public class ui {
 
         for(int i: hotBarNum){
             if(i  != scrollLocation){
-                hotBar.setCenter( - ((hotBarNum.length*hotBar.getWidth()/2)) + (i*hotBar.getWidth()) + (gap *i) -( gap *hotBarNum.length),((-Gdx.graphics.getHeight()/2)+hotBar.getWidth()/4));
+                hotBar.setCenter(-((hotBarNum.length*hotBar.getWidth()/2))+(i*hotBar.getWidth())+(gap*i)-(gap*hotBarNum.length),((-Gdx.graphics.getHeight()/2)+hotBar.getWidth()/4));
                 hotBar.draw(batch);
 
             }else{
-                hotBarSelected.setCenter( - ((hotBarNum.length*hotBar.getWidth()/2)) + (i*hotBar.getWidth()) + (gap * i) - (gap *hotBarNum.length),((-Gdx.graphics.getHeight()/2) +hotBar.getWidth()/2));
+                hotBarSelected.setCenter(-((hotBarNum.length*hotBar.getWidth()/2))+(i*hotBar.getWidth())+(gap*i)-(gap*hotBarNum.length),((-Gdx.graphics.getHeight()/2)+hotBar.getWidth()/2));
                 hotBarSelected.draw(batch);
             }
         }
