@@ -170,25 +170,25 @@ public class ui {
 
     public void testHotbar(SpriteBatch batch){
 
-        int[] hotBarNum = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
+        int[] hotBarNum = {1,2,3,4,5,6};
 
         scrollLocation -= inputHandler.currentScrollValue;
         if(scrollLocation == hotBarNum.length + 1)scrollLocation = 1;
         if(scrollLocation == 0)scrollLocation = hotBarNum.length;
         inputHandler.currentScrollValue = 0;
 
-        hotBar.setSize(64,64);
+        hotBar.setSize(64, 64);
         hotBar.setCenter(32,32);
-        hotBarSelected.setCenter(32,32);
+        hotBarSelected.setCenter(32, 32);
         hotBarSelected.setSize(64,64);
 
         for(int i: hotBarNum){
             if(i  != scrollLocation){
-                hotBar.setCenter(-((hotBarNum.length*hotBar.getWidth()/2))+(i*hotBar.getWidth())+(gap*i)-(gap*hotBarNum.length),((-Gdx.graphics.getHeight()/2)+hotBar.getWidth()/4));
+                hotBar.setCenter(-((hotBarNum.length*hotBar.getWidth()/2))+(i*hotBar.getWidth())+(gap*i)-(gap*hotBarNum.length),((-Gdx.graphics.getHeight()/2)+hotBar.getWidth()/2)+6);
                 hotBar.draw(batch);
 
             }else{
-                hotBarSelected.setCenter(-((hotBarNum.length*hotBar.getWidth()/2))+(i*hotBar.getWidth())+(gap*i)-(gap*hotBarNum.length),((-Gdx.graphics.getHeight()/2)+hotBar.getWidth()/2));
+                hotBarSelected.setCenter(-((hotBarNum.length*hotBar.getWidth()/2))+(i*hotBar.getWidth())+(gap*i)-(gap*hotBarNum.length),((-Gdx.graphics.getHeight()/2)+hotBar.getWidth()/1.5f));
                 hotBarSelected.draw(batch);
             }
         }
