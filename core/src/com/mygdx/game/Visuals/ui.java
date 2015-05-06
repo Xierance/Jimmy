@@ -193,7 +193,6 @@ public class ui {
             }
         }
 
-        System.out.println(scrollLocation);
 
     }
 }

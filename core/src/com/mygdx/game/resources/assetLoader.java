@@ -18,6 +18,8 @@ public class assetLoader {
     public static Sprite tendysilhouette;
     public static Sprite hotBar;
     public static Sprite hotBarSelected;
+    public static Sprite shrek;
+    public static Sprite dick;
 
     public static void loadAssets(){
         hellBlocks = new TextureAtlas("maps/hellBlocks.pack");
@@ -27,6 +29,8 @@ public class assetLoader {
         tendy = new Sprite(new Texture("ui/heart.full.png"));
         hotBar = new Sprite(new Texture("ui/hotbar.png"));
         hotBarSelected = new Sprite(new Texture("ui/hotbar.selected.png"));
+        shrek = new Sprite(new Texture("img/Shrek.png"));
+        dick = new Sprite(new Texture("textures/dick.png"));
 
         //loadPref
         worldHandler.fps = Gdx.app.getPreferences(MyGdxGame.title).getBoolean("fps");

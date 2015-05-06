@@ -93,6 +93,9 @@ public class enemyPrototype {
         baseRectangle.dispose();
         blockShape.dispose();
 
+        assetLoader.shrek.setSize(Width,Height);
+        enemyBody.setUserData(assetLoader.shrek);
+
         enemyPrototype.enemies.add(this);
 
     }
