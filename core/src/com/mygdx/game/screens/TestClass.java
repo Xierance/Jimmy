@@ -327,7 +327,7 @@ public class TestClass implements Screen {
 
         //move
         if (inputHandler.Space && player.isPlayerGrounded(world, player)) {
-            player.getPlayerBody().applyLinearImpulse(new Vector2(0, 3), new Vector2(), true);
+            player.getPlayerBody().applyLinearImpulse(new Vector2(0, 5), new Vector2(), true);
         }
 
         if (inputHandler.S) {
