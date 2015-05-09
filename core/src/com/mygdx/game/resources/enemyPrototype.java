@@ -54,7 +54,7 @@ public class enemyPrototype {
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = blockShape;
-        fixtureDef.density = 0.5f;
+        fixtureDef.density = 1f;
         fixtureDef.friction = .25f;
         fixtureDef.restitution = .25f;
 
@@ -112,12 +112,10 @@ public class enemyPrototype {
         for (Contact contact : contactList) {
             if (contact.isTouching() && (contact.getFixtureA() == leftSensor && contact.getFixtureB().getBody() != contact.getFixtureA().getBody() || contact.getFixtureB().getBody() != contact.getFixtureA().getBody() && contact.getFixtureB() == leftSensor)) {
                 leftGround = true;
-
             }
 
             if (contact.isTouching() && (contact.getFixtureA() == rightSensor && contact.getFixtureB().getBody() != contact.getFixtureA().getBody() || contact.getFixtureB().getBody() != contact.getFixtureA().getBody() && contact.getFixtureB() == rightSensor)) {
                 rightGround = true;
-
             }
 
             if (contact.isTouching() && (contact.getFixtureA() == leftSideSensor && contact.getFixtureB().getBody() != contact.getFixtureA().getBody() || contact.getFixtureB().getBody() != contact.getFixtureA().getBody() && contact.getFixtureB() == leftSideSensor)) {
@@ -130,13 +128,11 @@ public class enemyPrototype {
 
         }
 
-
         if(direction && rightSide && rightGround){
             enemyBody.setLinearVelocity(5f,enemyBody.getLinearVelocity().y);
 
         }else if (!direction && leftSide && leftGround){
             enemyBody.setLinearVelocity(-5f, enemyBody.getLinearVelocity().y);
-
 
         }else if(rightSide && rightGround){
             direction = true;
@@ -146,25 +142,16 @@ public class enemyPrototype {
             direction = false;
             enemyBody.setLinearVelocity(-5f, enemyBody.getLinearVelocity().y);
 
-
         } else if (!rightSide || !rightGround) {
             enemyBody.setLinearVelocity(new Vector2(-5f, enemyBody.getLinearVelocity().y));
             direction = false;
 
-
         }else if (!leftSide || !leftGround) {
             enemyBody.setLinearVelocity(new Vector2(5f, enemyBody.getLinearVelocity().y));
             direction = true;
-
-//
-//        }else if (direction && rightGround){
-//            enemyBody.setLinearVelocity(5f,enemyBody.getLinearVelocity().y);
-//
-//        }else if (!direction && leftGround){
-//            enemyBody.setLinearVelocity(-5f,enemyBody.getLinearVelocity().y);
         }
 
-
+        if(!leftGround && ! rightGround)enemyBody.applyLinearImpulse(new Vector2(0,-5),new Vector2(),true);
 
         }
 

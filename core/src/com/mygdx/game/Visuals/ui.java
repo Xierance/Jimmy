@@ -32,8 +32,9 @@ public class ui {
     private Sprite tendy = assetLoader.tendy;
     private Sprite hotBar = assetLoader.hotBar;
     private Sprite hotBarSelected = assetLoader.hotBarSelected;
-    private int scrollLocation = 1;
+    public int scrollLocation = 1;
     private int gap = 4;
+    private Sprite[] spriteArray = {assetLoader.dickMenu,assetLoader.shrekMenu,assetLoader.shrekMenu,assetLoader.shrekMenu};
 
     public  void displayMax(SpriteBatch secondBatch){
        // worldHandler.currentHealth
@@ -186,13 +187,19 @@ public class ui {
             if(i  != scrollLocation){
                 hotBar.setCenter(-((hotBarNum.length*hotBar.getWidth()/2))+(i*hotBar.getWidth())+(gap*i)-(gap*hotBarNum.length),((-Gdx.graphics.getHeight()/2)+hotBar.getWidth()/2)+6);
                 hotBar.draw(batch);
+                if(i <= spriteArray.length ){
+                    spriteArray[i-1].setCenter(-((hotBarNum.length*hotBar.getWidth()/2))+(i*hotBar.getWidth())+(gap*i)-(gap*hotBarNum.length),((-Gdx.graphics.getHeight()/2)+hotBar.getWidth()/2)+6);
+                    spriteArray[i-1].draw(batch);
+                }
 
             }else{
                 hotBarSelected.setCenter(-((hotBarNum.length*hotBar.getWidth()/2))+(i*hotBar.getWidth())+(gap*i)-(gap*hotBarNum.length),((-Gdx.graphics.getHeight()/2)+hotBar.getWidth()/1.5f));
                 hotBarSelected.draw(batch);
+                if(i <= spriteArray.length ){
+                    spriteArray[i-1].setCenter(-((hotBarNum.length * hotBar.getWidth() / 2)) + (i * hotBar.getWidth()) + (gap * i) - (gap * hotBarNum.length), ((-Gdx.graphics.getHeight() / 2) + hotBar.getWidth() / 1.5f));
+                    spriteArray[i-1].draw(batch);
+                }
             }
         }
-
-
     }
 }
