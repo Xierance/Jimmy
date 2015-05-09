@@ -230,7 +230,6 @@ public class mainMenu implements Screen {
         secretDankMusic.setOnCompletionListener(musicPlayer.menuMusicPlayer());
 */
 
-
     }
 
     public void playMusic() {

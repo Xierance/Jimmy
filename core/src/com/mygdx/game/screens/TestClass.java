@@ -1,9 +1,6 @@
 package com.mygdx.game.screens;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputAdapter;
-import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -32,24 +29,23 @@ import com.mygdx.game.worldHandler;
 public class TestClass implements Screen {
 
 
-    public static OrthographicCamera orthographicCamera;
-    public static Vector3 tmp = new Vector3();
     public static Vector2 temp = new Vector2();
     public static Body tempBody;
     public static Array<Body> toDestroy = new Array<Body>();
     public static Array<ParticleEffect> flames = new Array<ParticleEffect>();
+    public static Player player = new Player();
+    public static  World world;
+    public static OrthographicCamera orthographicCamera;
+    public static Vector3 tmp = new Vector3();
     private static boolean Q;
     private final float TIMESTEP = 1 / 60f;
     private final int VELOCITYITERATIONS = 8;
     private final int POSITIONITERATIONS = 3;
-    public static Player player = new Player();
     enemyPrototype test2;
     healthDrop test3;
     healthDrop test4;
     private ui UI;
-    public static  World world;
     private Box2DDebugRenderer debugRenderer;
-
     private OrthographicCamera secondCamera;
     private SpriteBatch batch;
     private SpriteBatch secondBatch;
@@ -59,8 +55,8 @@ public class TestClass implements Screen {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private MyContactListener cl;
     private Array<Body> tmpBodies = new Array<Body>();
-
     private Vector2 tmp2 = new Vector2();
+    private boolean tempb = true;
 
     public static Array<Body> getToDestroy() {
         return toDestroy;
@@ -127,6 +123,11 @@ public class TestClass implements Screen {
         }
     }
 
+    public static Vector2 getmouseCoords() {
+        Vector3 temp = new Vector3();
+        orthographicCamera.unproject(temp.set(Gdx.input.getX(), Gdx.input.getY(), 0));
+        return new Vector2(temp.x, temp.y);
+    }
 
     @Override
     public void show() {
@@ -151,10 +152,13 @@ public class TestClass implements Screen {
         //input
 
 
+
         inputHandler input = new inputHandler();
         InputMultiplexer inputMultiplexer = new InputMultiplexer();
         inputMultiplexer.addProcessor(input);
         Gdx.input.setInputProcessor(inputMultiplexer);
+
+
 
         //ground
         BodyDef tempdef = new BodyDef();
@@ -228,7 +232,8 @@ public class TestClass implements Screen {
         secondBatch.begin();
         UI.displayMax(secondBatch);
         UI.displayFps(secondBatch);
-        UI.hotBar(secondBatch);
+        //UI.hotBar(secondBatch);
+        UI.testHotbar(secondBatch);
         secondBatch.end();
 
         handleInput();
@@ -322,7 +327,7 @@ public class TestClass implements Screen {
 
         //move
         if (inputHandler.Space && player.isPlayerGrounded(world, player)) {
-            player.getPlayerBody().applyLinearImpulse(new Vector2(0, 3), new Vector2(), true);
+            player.getPlayerBody().applyLinearImpulse(new Vector2(0, 5), new Vector2(), true);
         }
 
         if (inputHandler.S) {
@@ -337,7 +342,10 @@ public class TestClass implements Screen {
         if (inputHandler.D) {
             player.getPlayerBody().applyForceToCenter(new Vector2(20, 0), true);
         }
-
+        if (inputHandler.Escape && tempb) {
+            ((Game) Gdx.app.getApplicationListener()).setScreen(new levelMenu());
+            tempb = false;
+        }
         if (player.getPlayerBody().getLinearVelocity().x > 12f) {
             tempBody = player.getPlayerBody();
             tempBody.setLinearVelocity(12, player.getPlayerBody().getLinearVelocity().y);
@@ -385,11 +393,5 @@ public class TestClass implements Screen {
                 sprite.draw(batch);
             }
         }
-    }
-
-    public static Vector2 getmouseCoords() {
-        Vector3 temp = new Vector3();
-        orthographicCamera.unproject(temp.set(Gdx.input.getX(), Gdx.input.getY(), 0));
-        return new Vector2(temp.x, temp.y);
     }
 }

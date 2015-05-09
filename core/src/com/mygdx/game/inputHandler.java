@@ -67,8 +67,20 @@ public class inputHandler implements InputProcessor {
     public static int currentScrollValue;
     public static boolean Ctrl_left;
     public static boolean Ctrl_right;
+    public static long timeElapsed;
+    public static int actualScroll = 0;
+
+    public static boolean betterScrolled(int scrollValue){
+
+       /* long millis = System.currentTimeMillis();
 
 
+        if (actualScroll < scrollValue){
+            return true;
+        }
+        else*/
+        return false;
+    }
 
     public boolean keyDown(int keycode) {
         currentKey = keycode;
@@ -219,7 +231,6 @@ public class inputHandler implements InputProcessor {
 
         return true;
     }
-
 
     public boolean keyUp(int keycode) {
         switch (keycode) {
@@ -375,15 +386,15 @@ public class inputHandler implements InputProcessor {
     }
 
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        TestClass.orthographicCamera.unproject(TestClass.tmp.set(screenX, screenY, 0));
+        if(TestClass.orthographicCamera != null)TestClass.orthographicCamera.unproject(TestClass.tmp.set(screenX, screenY, 0));
 
             if (!Ctrl_right)
 
-                projectiles.shootFire(TestClass.player.getPlayerBody().getPosition(), projectiles.angle2(TestClass.player.getPlayerBody().getPosition(), TestClass.getmouseCoords()), TestClass.world);
-
+                if(TestClass.player.getPlayerBody() != null)projectiles.shootFire(TestClass.player.getPlayerBody().getPosition(), projectiles.angle2(TestClass.player.getPlayerBody().getPosition(), TestClass.getmouseCoords()), TestClass.world);
 
         return false;
     }
+
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         return false;
     }
@@ -398,6 +409,15 @@ public class inputHandler implements InputProcessor {
 
     public boolean scrolled(int amount) {
         currentScrollValue = amount;
+
+
+       /* while (currentScrollValue == 1 || currentScrollValue == -1){
+           // timeElapsed = System.currentTimeMillis() - millis;
+            actualScroll++;
+            currentScrollValue = 0;
+            System.out.println(String.valueOf(actualScroll));
+        }*/
         return false;
     }
+
 } 

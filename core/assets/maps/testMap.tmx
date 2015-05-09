@@ -17,21 +17,25 @@
   <image source="hellBlocks.png" width="128" height="32"/>
   <tile id="0">
    <properties>
+    <property name="block" value="block"/>
     <property name="center" value="center"/>
    </properties>
   </tile>
   <tile id="1">
    <properties>
+    <property name="block" value="block"/>
     <property name="left" value="left"/>
    </properties>
   </tile>
   <tile id="2">
    <properties>
+    <property name="block" value="block"/>
     <property name="right" value="right"/>
    </properties>
   </tile>
   <tile id="3">
    <properties>
+    <property name="block" value="block"/>
     <property name="top" value="top"/>
    </properties>
   </tile>

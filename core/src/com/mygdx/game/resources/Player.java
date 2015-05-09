@@ -102,11 +102,12 @@ public class Player {
         fixtureDef.shape = blockShape;
         fixtureDef.density = 0.5f;
         fixtureDef.friction = .25f;
-        fixtureDef.restitution = .25f;
+        fixtureDef.restitution = 0f;
 
         playerBody = world.createBody(bodyDef);
         playerBody.createFixture(fixtureDef);
         playerBody.setUserData(playerSprite);
+        playerBody.setGravityScale(2);
 
         FixtureDef fDef = new FixtureDef();
 
