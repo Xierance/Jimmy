@@ -32,9 +32,9 @@ public class ui {
     private Sprite tendy = assetLoader.tendy;
     private Sprite hotBar = assetLoader.hotBar;
     private Sprite hotBarSelected = assetLoader.hotBarSelected;
-    public int scrollLocation = 1;
+    public static int scrollLocation = 1;
     private int gap = 4;
-    private Sprite[] spriteArray = {assetLoader.dickMenu,assetLoader.shrekMenu,assetLoader.shrekMenu,assetLoader.shrekMenu};
+    private Sprite[] spriteArray = {assetLoader.dickMenu,assetLoader.shrekMenu};
 
     public  void displayMax(SpriteBatch secondBatch){
        // worldHandler.currentHealth

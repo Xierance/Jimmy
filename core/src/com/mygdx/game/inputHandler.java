@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.InputProcessor;
+import com.mygdx.game.Visuals.ui;
 import com.mygdx.game.resources.projectiles;
 import com.mygdx.game.screens.TestClass;
 
@@ -390,8 +391,15 @@ public class inputHandler implements InputProcessor {
 
             if (!Ctrl_right)
 
-                if(TestClass.player.getPlayerBody() != null)projectiles.shootFire(TestClass.player.getPlayerBody().getPosition(), projectiles.angle2(TestClass.player.getPlayerBody().getPosition(), TestClass.getmouseCoords()), TestClass.world);
+                switch(ui.scrollLocation) {
+                    case 1:if (TestClass.player.getPlayerBody() != null)
+                        projectiles.shootDick(TestClass.player.getPlayerBody().getPosition(),projectiles.angle2(TestClass.player.getPlayerBody().getPosition(),TestClass.getmouseCoords()),TestClass.world);
+                        break;
+                    case 2:if (TestClass.player.getPlayerBody() != null)
+                        projectiles.shootFire(TestClass.player.getPlayerBody().getPosition(), projectiles.angle2(TestClass.player.getPlayerBody().getPosition(), TestClass.getmouseCoords()), TestClass.world);
+                        break;
 
+                }
         return false;
     }
 
