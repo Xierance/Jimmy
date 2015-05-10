@@ -215,12 +215,7 @@ public class TestClass implements Screen {
 
         batch.setProjectionMatrix(orthographicCamera.combined);
 
-        if (world.isLocked() == false) {
-            world.getBodies(tmpBodies);
-            for (Body body : tmpBodies) projectiles.clearShards(body, 3);
 
-            rayCast.clearBodies(toDestroy, world);
-        }
 
         batch.begin();
         drawSprites(delta);
@@ -240,6 +235,13 @@ public class TestClass implements Screen {
         cameraFollow();
 
         world.step(TIMESTEP, VELOCITYITERATIONS, POSITIONITERATIONS);
+
+        if (world.isLocked() == false) {
+            world.getBodies(tmpBodies);
+            for (Body body : tmpBodies) projectiles.clearShards(body, 3);
+
+            rayCast.clearBodies(toDestroy, world);
+        }
 
     }
 

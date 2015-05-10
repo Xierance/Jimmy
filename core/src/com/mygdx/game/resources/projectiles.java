@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mygdx.game.screens.TestClass;
+import com.mygdx.game.Visuals.ui;
 import com.mygdx.game.worldHandler;
 
 /**
@@ -141,7 +142,6 @@ public class projectiles {
             float j = (float) Math.sin(angleRad);
             Vector2 newLocation = new Vector2(location.x + i, location.y + j);
             projectiles.fireBall(newLocation, new Vector2(20 * i, 20 * j), world);
-
     }
 
     public static float angle2(Vector2 vector1, Vector2 vector2) {

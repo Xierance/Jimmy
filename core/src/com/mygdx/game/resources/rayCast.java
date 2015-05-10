@@ -35,6 +35,15 @@ public class rayCast {
                     projectiles.explode2(b.getPosition(), 36, world, 30);
                     ((ParticleEffectPool.PooledEffect) b.getUserData()).free();
                 }
+
+                final Array<JointEdge> list = b.getJointList();
+                while (list.size > 0) {
+                    world.destroyJoint(list.get(0).joint);
+                }
+                final Array<Fixture> fixtures = b.getFixtureList();
+                while(fixtures.size > 0){
+                    b.destroyFixture(fixtures.get(0));
+                }
                 world.destroyBody(b);
 
             }
