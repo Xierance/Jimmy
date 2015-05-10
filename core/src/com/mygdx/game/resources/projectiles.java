@@ -135,11 +135,11 @@ public class projectiles {
 
     }
 
-    public static void shootFire(Vector2 location, float angleRad,World world) {
+    public static void shootFire(Vector2 location, float angleRad,World world,float offset) {
 
             float i = (float) Math.cos(angleRad);
             float j = (float) Math.sin(angleRad);
-            Vector2 newLocation = new Vector2(location.x + i, location.y + j);
+            Vector2 newLocation = new Vector2(location.x + i*offset, location.y + j*offset);
             projectiles.fireBall(newLocation, new Vector2(20 * i, 20 * j), world);
     }
 

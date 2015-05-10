@@ -199,7 +199,7 @@ public class enemyPrototype {
             TestClass.toDestroy.add(enemyBody);
         }
         if (randomFire == 6){
-            projectiles.fireBall(new Vector2(enemyBody.getPosition().x+3, enemyBody.getPosition().y), TestClass.player.getPlayerBody().getPosition(), TestClass.world);
+            projectiles.shootFire(enemyBody.getPosition(), projectiles.angle2(enemyBody.getPosition(),TestClass.player.getPlayerBody().getPosition()), TestClass.world,2f);
         }
 
     }
