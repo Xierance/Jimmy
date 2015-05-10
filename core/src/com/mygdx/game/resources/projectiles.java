@@ -135,7 +135,6 @@ public class projectiles {
 
     }
 
-
     public static void shootFire(Vector2 location, float angleRad,World world) {
 
             float i = (float) Math.cos(angleRad);

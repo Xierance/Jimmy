@@ -6,11 +6,14 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.screens.TestClass;
 
+import java.util.Random;
+
 /**
  * Created by for example John on 4/23/2015.
  */
 public class enemyPrototype {
     public static Array<enemyPrototype> enemies = new Array<enemyPrototype>();
+    private static Random fireControl = new Random();
     public boolean alive;
     Body enemyBody;
     private Vector2 startlocation;
@@ -32,15 +35,45 @@ public class enemyPrototype {
 
     }
 
-    public Vector2 getPosition() {
-        return enemyBody.getPosition();
-
-    }
-
     public static void updateenemies(World world) {
         for (enemyPrototype enemy : enemies) {
             enemy.update(world);
         }
+
+    }
+
+    public static int randInt(int min, int max) {
+        int randomNum = fireControl.nextInt((max - min) + 1) + min;
+        return randomNum;
+    }
+
+    public static enemyPrototype getClosestEnemy(Array<enemyPrototype> enemies, Player player) {
+        Array<enemyPrototype> newEnemies = new Array<enemyPrototype>();
+        float[] enemyDistance = new float[enemies.size];
+        int i = 0;
+        for (enemyPrototype enemy : enemies) {
+            float x = enemy.getPosition().x - player.getPlayerBody().getPosition().x;
+            float y = enemy.getPosition().y - player.getPlayerBody().getPosition().y;
+            enemyDistance[i] = (x * x + y * y);
+            i++;
+        }
+
+        float shortest = 1000000000;
+        int index = 0;
+        i = 0;
+        for (float f : enemyDistance) {
+            if (f < shortest) {
+                shortest = f;
+                index = i;
+            }
+            i++;
+        }
+
+        return enemies.get(index);
+    }
+
+    public Vector2 getPosition() {
+        return enemyBody.getPosition();
 
     }
 
@@ -105,6 +138,7 @@ public class enemyPrototype {
     }
 
     public void update(World world) {
+        int randomFire = randInt(0, 60);
         if (alive) {
 
             leftGround = false;
@@ -164,32 +198,12 @@ public class enemyPrototype {
             rightSensor.setSensor(false);
             TestClass.toDestroy.add(enemyBody);
         }
-    }
-
-    public static enemyPrototype getClosestEnemy(Array<enemyPrototype> enemies, Player player) {
-        Array<enemyPrototype> newEnemies = new Array<enemyPrototype>();
-        float[] enemyDistance = new float[enemies.size];
-        int i = 0;
-        for (enemyPrototype enemy : enemies) {
-            float x = enemy.getPosition().x - player.getPlayerBody().getPosition().x;
-            float y = enemy.getPosition().y - player.getPlayerBody().getPosition().y;
-            enemyDistance[i] = (x * x + y * y);
-            i++;
+        if (randomFire == 6){
+            projectiles.fireBall(new Vector2(enemyBody.getPosition().x+3, enemyBody.getPosition().y), TestClass.player.getPlayerBody().getPosition(), TestClass.world);
         }
 
-        float shortest = 1000000000;
-        int index = 0;
-        i = 0;
-        for (float f : enemyDistance) {
-            if (f < shortest) {
-                shortest = f;
-                index = i;
-            }
-            i++;
-        }
-
-        return enemies.get(index);
     }
+
 
 }
 
