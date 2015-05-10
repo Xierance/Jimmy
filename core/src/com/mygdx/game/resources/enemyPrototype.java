@@ -29,6 +29,7 @@ public class enemyPrototype {
     private Sprite sprite = new Sprite(assetLoader.shrek);
     private int timer;
     private boolean fire;
+    private int frequency;
 
     public enemyPrototype(Vector2 startLocation) {
         this.startlocation = startLocation;
@@ -80,9 +81,10 @@ public class enemyPrototype {
 
     }
 
-    public void createEnemy(World world, Float Width, float Height) {
+    public void createEnemy(World world, Float Width, float Height, int Frequency) {
         timer = 0;
         fire = false;
+        frequency = Frequency;
         direction = true;
         alive = true;
         BodyDef bodyDef = new BodyDef();
@@ -144,7 +146,7 @@ public class enemyPrototype {
 
     public void update(World world) {
         timer ++;
-        if(timer >  100){
+        if(timer >  frequency){
             timer = 0;
             fire  = true;
         }
