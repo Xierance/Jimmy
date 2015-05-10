@@ -27,6 +27,8 @@ public class enemyPrototype {
     private boolean leftSide = false;
     private boolean rightSide = false;
     private Sprite sprite = new Sprite(assetLoader.shrek);
+    private int timer;
+    private boolean fire;
 
     public enemyPrototype(Vector2 startLocation) {
         this.startlocation = startLocation;
@@ -48,6 +50,7 @@ public class enemyPrototype {
     }
 
     public static enemyPrototype getClosestEnemy(Array<enemyPrototype> enemies, Player player) {
+
         Array<enemyPrototype> newEnemies = new Array<enemyPrototype>();
         float[] enemyDistance = new float[enemies.size];
         int i = 0;
@@ -78,6 +81,8 @@ public class enemyPrototype {
     }
 
     public void createEnemy(World world, Float Width, float Height) {
+        timer = 0;
+        fire = false;
         direction = true;
         alive = true;
         BodyDef bodyDef = new BodyDef();
@@ -138,6 +143,12 @@ public class enemyPrototype {
     }
 
     public void update(World world) {
+        timer ++;
+        if(timer >  100){
+            timer = 0;
+            fire  = true;
+        }
+
         int randomFire = randInt(0, 60);
         if (alive) {
 
@@ -198,8 +209,9 @@ public class enemyPrototype {
             rightSensor.setSensor(false);
             TestClass.toDestroy.add(enemyBody);
         }
-        if (randomFire == 6){
+        if (fire){
             projectiles.shootFire(enemyBody.getPosition(), projectiles.angle2(enemyBody.getPosition(),TestClass.player.getPlayerBody().getPosition()), TestClass.world,2f);
+            fire = false;
         }
 
     }
