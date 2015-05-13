@@ -119,7 +119,7 @@ public class projectiles {
 
         if (body.getUserData() instanceof timer) {
             if (((timer) body.getUserData()).getTime() > tolerance) {
-                TestClass.toDestroy.add(body);
+                body.setUserData("destroyed");
             } else {
                 body.setUserData(new timer((((timer) body.getUserData()).getTime() + 1)));
             }

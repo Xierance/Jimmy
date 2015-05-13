@@ -15,7 +15,7 @@ public class changeScreen {
         Array<Body> bodies = new Array<Body>();
         world.getBodies(bodies);
         for(Body body: bodies){
-            if(body.getUserData() != assetLoader.playerSprite && body.getType() != BodyDef.BodyType.StaticBody) TestClass.toDestroy.add(body);
+            if(body.getUserData() != assetLoader.playerSprite && body.getType() != BodyDef.BodyType.StaticBody) body.setUserData("destroyed");
         }
 
     }

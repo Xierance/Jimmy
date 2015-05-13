@@ -18,16 +18,18 @@ public class MyContactListener implements ContactListener {
         if (fa.getBody().getUserData() != null && fa.getBody().getUserData() instanceof ParticleEffectPool.PooledEffect && fb.getBody().getUserData() != assetLoader.playerSprite && fa.isSensor() == false) {
             if (fb.getBody().getUserData() instanceof ParticleEffectPool.PooledEffect) {
             } else {
-                TestClass.getToDestroy().add(fa.getBody());
+                //((ParticleEffectPool.PooledEffect) fa.getUserData()).free();
                 EffectPools.FireTestPool.pooledEffects.removeValue((ParticleEffectPool.PooledEffect) fa.getBody().getUserData(), true);
+                fa.setUserData("explode");
 
             }
         }
         if (fb.getBody().getUserData() != null && fb.getBody().getUserData() instanceof ParticleEffectPool.PooledEffect && fa.getBody().getUserData() != assetLoader.playerSprite && fb.isSensor() == false) {
             if (fa.getBody().getUserData() instanceof ParticleEffectPool.PooledEffect) {
             } else {
-                TestClass.getToDestroy().add(fb.getBody());
+                //((ParticleEffectPool.PooledEffect) fb.getUserData()).free();
                 EffectPools.FireTestPool.pooledEffects.removeValue((ParticleEffectPool.PooledEffect) fb.getBody().getUserData(), true);
+                fb.setUserData("explode");
 
             }
         }
@@ -36,12 +38,12 @@ public class MyContactListener implements ContactListener {
         //health stuff
         if(fa.getBody().getUserData()!= null && fa.getBody().getUserData() == healthDrop.healthSprite && fb.getBody().getUserData() == assetLoader.playerSprite){
             worldHandler.currentHealth++;
-            TestClass.toDestroy.add(fa.getBody());
+            fa.setUserData("destroyed");
         }
 
         if(fb.getBody().getUserData()!= null && fb.getBody().getUserData() == healthDrop.healthSprite && fa .getBody().getUserData() == assetLoader.playerSprite){
             worldHandler.currentHealth++;
-            TestClass.toDestroy.add(fb.getBody());
+            fb.setUserData("destroyed");
 
         }
     }

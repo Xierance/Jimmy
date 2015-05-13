@@ -27,10 +27,14 @@ public class rayCast {
 
     }
 
-    public static void clearBodies(Array<Body> toDestroy, World world) {
-        for (Body b : toDestroy)
+    public static void clearBodies( World world) {
+        Array<Body> bodies = new Array<Body>();
+        world.getBodies(bodies);
+
+        for(Body b: bodies) {
+            if(b.getUserData() instanceof String){
             if (world.isLocked() == false && b.getType() != BodyDef.BodyType.StaticBody && b.getUserData() != assetLoader.playerSprite) {
-                if (b.getUserData() instanceof ParticleEffectPool.PooledEffect){
+                if (b.getUserData() == "explode") {
                     projectiles.explode(b.getPosition());
                     projectiles.explode2(b.getPosition(), 36, world, 30);
                     ((ParticleEffectPool.PooledEffect) b.getUserData()).free();
@@ -41,14 +45,13 @@ public class rayCast {
                     world.destroyJoint(list.get(0).joint);
                 }
                 final Array<Fixture> fixtures = b.getFixtureList();
-                while(fixtures.size > 0){
+                while (fixtures.size > 0) {
                     b.destroyFixture(fixtures.get(0));
                 }
                 world.destroyBody(b);
 
             }
-        toDestroy.clear();
+            }
 
-    }
-
-}
+        }
+}}

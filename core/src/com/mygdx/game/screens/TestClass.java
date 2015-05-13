@@ -31,7 +31,6 @@ public class TestClass implements Screen {
 
     public static Vector2 temp = new Vector2();
     public static Body tempBody;
-    public static Array<Body> toDestroy = new Array<Body>();
     public static Array<ParticleEffect> flames = new Array<ParticleEffect>();
     public static Player player = new Player();
     public static  World world;
@@ -58,9 +57,6 @@ public class TestClass implements Screen {
     private Vector2 tmp2 = new Vector2();
     private boolean tempb = true;
 
-    public static Array<Body> getToDestroy() {
-        return toDestroy;
-    }
 
     public static void mapToBox2d(TiledMap map, World world) {
         map = new TmxMapLoader().load("maps/testMap.tmx");
@@ -240,7 +236,7 @@ public class TestClass implements Screen {
             world.getBodies(tmpBodies);
             for (Body body : tmpBodies) projectiles.clearShards(body, 3);
 
-            rayCast.clearBodies(toDestroy, world);
+            rayCast.clearBodies( world);
         }
 
     }
@@ -319,13 +315,9 @@ public class TestClass implements Screen {
 
     public void handleInput() {
 
-        if (inputHandler.Ctrl_right)
-            projectiles.shootDick(player.getPlayerBody().getPosition(), projectiles.angle2(player.getPlayerBody().getPosition(), new Vector2(tmp.x, tmp.y)), world);
-        if (inputHandler.Ctrl_left)
-            if (rayCast.rayFixture(world, player.getPlayerBody().getPosition(), new Vector2(getmouseCoords().x, getmouseCoords().y)) != null)
-                toDestroy.add(rayCast.rayFixture(world,
-                        player.getPlayerBody().getPosition(),
-                        new Vector2(getmouseCoords().x, getmouseCoords().y)).getBody());
+       // if (inputHandler.Ctrl_left)
+        //    if (rayCast.rayFixture(world, player.getPlayerBody().getPosition(), new Vector2(getmouseCoords().x, getmouseCoords().y)) != null && rayCast.rayFixture(world, player.getPlayerBody().getPosition(), new Vector2(getmouseCoords().x, getmouseCoords().y)).getBody().getUserData() != assetLoader.playerSprite)
+         //       rayCast.rayFixture(world, player.getPlayerBody().getPosition(), new Vector2(getmouseCoords().x, getmouseCoords().y)).getBody().setUserData("destroyed");
 
         //move
         if (inputHandler.Space && player.isPlayerGrounded(world, player)) {

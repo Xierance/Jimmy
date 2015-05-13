@@ -209,7 +209,7 @@ public class enemyPrototype {
             leftSensor.setSensor(false);
             leftSideSensor.setSensor(false);
             rightSensor.setSensor(false);
-            TestClass.toDestroy.add(enemyBody);
+            enemyBody.setUserData("destroyed");
         }
         if (fire){
             projectiles.shootFire(enemyBody.getPosition(), projectiles.angle2(enemyBody.getPosition(),TestClass.player.getPlayerBody().getPosition()), TestClass.world,2f);
