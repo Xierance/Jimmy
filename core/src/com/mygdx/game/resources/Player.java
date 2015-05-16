@@ -13,8 +13,6 @@ public class Player {
     private Vector2 startLocation;
     private Body playerBody;
     private Sprite playerSprite;
-    private Body playerWheelBody;
-    private WheelJoint wheelJoint;
     private Fixture playerSensorFixture;
 
 
@@ -42,30 +40,6 @@ public class Player {
 
     public void setPlayerSPrite(Sprite playerSPrite) {
         this.playerSprite = playerSPrite;
-    }
-
-    public Body getPlayerWheelBody() {
-        return playerWheelBody;
-    }
-
-    public void setPlayerWheelBody(Body playerWheelBody) {
-        this.playerWheelBody = playerWheelBody;
-    }
-
-    public WheelJoint getWheelJoint() {
-        return wheelJoint;
-    }
-
-    public void setWheelJoint(WheelJoint wheelJoint) {
-        this.wheelJoint = wheelJoint;
-    }
-
-    public Fixture getPlayerSensorFixture() {
-        return playerSensorFixture;
-    }
-
-    public void setPlayerSensorFixture(Fixture playerSensorFixture) {
-        this.playerSensorFixture = playerSensorFixture;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////
@@ -103,11 +77,13 @@ public class Player {
         fixtureDef.density = 0.5f;
         fixtureDef.friction = .25f;
         fixtureDef.restitution = 0f;
+        fixtureDef.filter.categoryBits = 0x0001;
 
         playerBody = world.createBody(bodyDef);
         playerBody.createFixture(fixtureDef);
         playerBody.setUserData(playerSprite);
         playerBody.setGravityScale(2);
+
 
         FixtureDef fDef = new FixtureDef();
 

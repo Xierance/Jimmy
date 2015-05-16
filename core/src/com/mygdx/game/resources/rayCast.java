@@ -27,31 +27,32 @@ public class rayCast {
 
     }
 
-    public static void clearBodies( World world) {
+    public static void clearBodies(World world) {
         Array<Body> bodies = new Array<Body>();
         world.getBodies(bodies);
 
-        for(Body b: bodies) {
-            if(b.getUserData() instanceof String){
-            if (world.isLocked() == false && b.getType() != BodyDef.BodyType.StaticBody && b.getUserData() != assetLoader.playerSprite) {
-                if (b.getUserData() == "explode") {
+        for (Body b : bodies) {
+            if (b.getUserData() instanceof String) {
+                if (world.isLocked() == false && b.getType() != BodyDef.BodyType.StaticBody && b.getUserData() != assetLoader.playerSprite) {
+
+                    world.destroyBody(b);
+
+                }
+            }
+
+            for(Fixture fixture:b.getFixtureList()) {
+                if (fixture.getFilterData().categoryBits == 0x0004) {
+                    if( b.getUserData() instanceof ParticleEffectPool.PooledEffect ) {
+                        ((ParticleEffectPool.PooledEffect) b.getUserData()).free();
+                        EffectPools.FireTestPool.pooledEffects.removeValue((ParticleEffectPool.PooledEffect) b.getUserData(), true);
+                    }
+                    b.setUserData(null);
+                    world.destroyBody(b);
                     projectiles.explode(b.getPosition());
                     projectiles.explode2(b.getPosition(), 36, world, 30);
-                    ((ParticleEffectPool.PooledEffect) b.getUserData()).free();
                 }
-
-                final Array<JointEdge> list = b.getJointList();
-                while (list.size > 0) {
-                    world.destroyJoint(list.get(0).joint);
-                }
-                final Array<Fixture> fixtures = b.getFixtureList();
-                while (fixtures.size > 0) {
-                    b.destroyFixture(fixtures.get(0));
-                }
-                world.destroyBody(b);
 
             }
-            }
-
         }
-}}
+    }
+}
