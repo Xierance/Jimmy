@@ -103,6 +103,7 @@ public class enemyPrototype {
         fixtureDef.restitution = .25f;
 
         enemyBody = world.createBody(bodyDef);
+        fixtureDef.filter.categoryBits = 0x0003;
         enemyBody.createFixture(fixtureDef);
         //enemyBody.setUserData(Sprite);
 

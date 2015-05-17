@@ -81,6 +81,7 @@ public class projectiles {
         fireBallBall.setRadius(.1f);
         FixtureDef fireBallFixDef = new FixtureDef();
         fireBallFixDef.shape = fireBallBall;
+        fireBallFixDef.filter.categoryBits = 0x0003;
         fireBallBody = world.createBody(fireBallDef);
         fireBallBody.createFixture(fireBallFixDef);
         fireBallBody.setTransform(location, 0);

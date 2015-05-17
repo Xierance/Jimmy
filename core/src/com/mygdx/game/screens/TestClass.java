@@ -99,7 +99,10 @@ public class TestClass implements Screen {
                         tileShape.setAsBox(.5f, .5f);
 
                         Body body = world.createBody(tileBodyDef);
-                        body.createFixture(tileShape, 0f);
+                        FixtureDef fixdef =  new FixtureDef();
+                        fixdef.shape  = tileShape;
+                        fixdef.filter.categoryBits  = 0x0003;
+                        body.createFixture(fixdef);
 
                         tileShape.dispose();
 
@@ -185,7 +188,7 @@ public class TestClass implements Screen {
         test = new enemyPrototype(new Vector2(60, -9));
         test.createEnemy(world, 1f, 2f,300);
         test2 = new enemyPrototype(new Vector2(20, 12));
-        test2.createEnemy(world, 2f, 2f,1000);
+        test2.createEnemy(world, 2f, 2f,100);
 
         test3 = new healthDrop();
         test3.createHealthDrop(world, new Vector2(10, 10));
