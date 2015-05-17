@@ -58,8 +58,8 @@ public class TestClass implements Screen {
     private boolean tempb = true;
 
 
-    public static void mapToBox2d(TiledMap map, World world) {
-        map = new TmxMapLoader().load("maps/testMap.tmx");
+    public static void mapToBox2d(String Map, World world) {
+        TiledMap map = new TmxMapLoader().load(Map);
         TiledMapTileLayer tileLayer = (TiledMapTileLayer) map.getLayers().get("butt");
         Sprite tileSprite = new Sprite(new Texture("jew.jpg"));
 
