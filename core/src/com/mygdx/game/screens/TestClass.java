@@ -140,7 +140,6 @@ public class TestClass implements Screen {
         batch = new SpriteBatch();
         secondBatch = new SpriteBatch();
 
-
         world = new World(new Vector2(0f, -9.8f), true);
         debugRenderer = new Box2DDebugRenderer();
 
@@ -150,14 +149,10 @@ public class TestClass implements Screen {
 
         //input
 
-
-
         inputHandler input = new inputHandler();
         InputMultiplexer inputMultiplexer = new InputMultiplexer();
         inputMultiplexer.addProcessor(input);
         Gdx.input.setInputProcessor(inputMultiplexer);
-
-
 
         //ground
         BodyDef tempdef = new BodyDef();
@@ -171,11 +166,6 @@ public class TestClass implements Screen {
         b2dStructures.castle2(new Vector2(5, -9), 12, 2, 3.5f, assetLoader.blocks, world);
         b2dStructures.castle2(new Vector2(30, -9), 30, 1, 9, assetLoader.blocks, world);
         b2dStructures.isosceles(new Vector2(30, 0), 1, 1.5f, 0.2f, 0.25f, world);
-
-        //////////////////////mouse joint
-        jointDef.bodyA = ground;
-        jointDef.collideConnected = true;
-        jointDef.maxForce = 50;
 
         mapToBox2d(new TiledMap(), world);///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -198,7 +188,6 @@ public class TestClass implements Screen {
         test5.createHealthDrop(world, new Vector2(11, 30));
         healthDrop test6 = new healthDrop();
         test6.createHealthDrop(world, new Vector2(12, 30));
-
 
     }
 

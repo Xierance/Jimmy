@@ -77,7 +77,7 @@ public class Player {
         fixtureDef.density = 0.5f;
         fixtureDef.friction = .25f;
         fixtureDef.restitution = 0f;
-        fixtureDef.filter.categoryBits = 0x0003;
+        fixtureDef.filter.categoryBits = 0x0005;
 
         playerBody = world.createBody(bodyDef);
         playerBody.createFixture(fixtureDef);
