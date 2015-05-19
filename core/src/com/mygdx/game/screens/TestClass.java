@@ -85,7 +85,7 @@ public class TestClass implements Screen {
 
                     if (tileCell.getTile().getProperties().get("enemy") != null) {
                         enemyPrototype test = new enemyPrototype(new Vector2(x, y));
-                        test.createEnemy(world, 32f, 32f,200);
+                        test.createEnemy(world, 32f, 32f, 30);
                     }
 
 
@@ -193,7 +193,6 @@ public class TestClass implements Screen {
 
     @Override
     public void render(float delta) {
-        System.out.println(worldHandler.currentHealth);
         enemyPrototype.updateenemies(world);
 
         Gdx.gl.glClearColor(0, 0, 0, 1);

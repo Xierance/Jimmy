@@ -14,6 +14,7 @@ import com.mygdx.game.worldHandler;
  * Created by for example John on 4/11/2015.
  */
 public class projectiles {
+    public static Body fireBallBody;
 
 
 
@@ -73,7 +74,7 @@ public class projectiles {
     }
 
     public static void fireBall(Vector2 location, Vector2 velocity, World world) {
-        Body fireBallBody;
+
         BodyDef fireBallDef = new BodyDef();
         fireBallDef.bullet = true;
         fireBallDef.type = BodyDef.BodyType.DynamicBody;

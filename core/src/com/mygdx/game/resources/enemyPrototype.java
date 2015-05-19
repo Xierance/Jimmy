@@ -11,6 +11,7 @@ import java.util.Random;
 /**
  * Created by for example John on 4/23/2015.
  */
+
 public class enemyPrototype {
     public static Array<enemyPrototype> enemies = new Array<enemyPrototype>();
     private static Random fireControl = new Random();
