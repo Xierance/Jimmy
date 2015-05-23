@@ -34,7 +34,7 @@ public class ui {
     private Sprite hotBar = assetLoader.hotBar;
     private Sprite hotBarSelected = assetLoader.hotBarSelected;
     private int gap = 4;
-    private Sprite[] spriteArray = {assetLoader.dickMenu,assetLoader.shrekMenu};
+    private Sprite[] spriteArray = {assetLoader.dickMenu,assetLoader.shrekMenu,assetLoader.tendy};
 
     public  void displayMax(SpriteBatch secondBatch){
        // worldHandler.currentHealth

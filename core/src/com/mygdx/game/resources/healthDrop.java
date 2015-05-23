@@ -29,6 +29,7 @@ public class healthDrop {
         public void createHealthDrop(World world,Vector2 position){
 
 
+            objectUserData userData  =new objectUserData();
             healthSprite.setSize(1,1);
 
             CircleShape shape = new CircleShape();
@@ -44,7 +45,9 @@ public class healthDrop {
             body.setTransform(position,0);
             shape.dispose();
 
-            body.setUserData(healthSprite);
+            userData.setSprite(healthSprite);
+            userData.setId("health");
+            body.setUserData(userData);
 
         }
 

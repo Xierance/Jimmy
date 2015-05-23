@@ -63,7 +63,9 @@ public class projectiles {
         dick.setSize(1.69f, .69f);
         dick.setOrigin((float) 1.69 / 2, (float) .69 / 2);
 
-        bulletBody.setUserData(dick);
+        objectUserData userData = new objectUserData();
+        userData.setSprite(dick);
+        bulletBody.setUserData(userData);
 
         //direction
         bulletBody.setTransform(bulletBody.getPosition().x, bulletBody.getPosition().y, (float) Math.atan2((double) (velocity.y), (double) (velocity.x)));
@@ -89,7 +91,11 @@ public class projectiles {
         fireBallBall.dispose();
 
         ParticleEffectPool.PooledEffect flame = EffectPools.FireTestPool.flamePoolTest.obtain();
-        fireBallBody.setUserData(flame);
+
+        objectUserData userData = new objectUserData();
+        userData.setEffect(flame);
+        userData.setId("fireBall");
+        fireBallBody.setUserData(userData);
         EffectPools.FireTestPool.pooledEffects.add(flame);
 
 
@@ -118,11 +124,11 @@ public class projectiles {
 
     public static void clearShards(Body body, float tolerance) {
 
-        if (body.getUserData() instanceof timer) {
-            if (((timer) body.getUserData()).getTime() > tolerance) {
-                body.setUserData("destroyed");
+        if (body.getUserData() instanceof objectUserData && ((objectUserData)body.getUserData()).shard) {
+            if (((objectUserData) body.getUserData()).getTimer() > tolerance) {
+                ((objectUserData)body.getUserData()).setId("destroyed");
             } else {
-                body.setUserData(new timer((((timer) body.getUserData()).getTime() + 1)));
+                ((objectUserData)(body.getUserData())).upTimer();
             }
         }
     }

@@ -139,7 +139,11 @@ public class enemyPrototype {
         blockShape.dispose();
 
         sprite.setSize(Width, Height);
-        enemyBody.setUserData(sprite);
+
+        objectUserData userData  =new objectUserData();
+        userData.setSprite(sprite);
+        userData.setId("enemy");
+        enemyBody.setUserData(userData);
 
         enemyPrototype.enemies.add(this);
 
