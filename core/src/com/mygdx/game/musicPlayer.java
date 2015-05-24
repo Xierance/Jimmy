@@ -8,10 +8,8 @@ import com.badlogic.gdx.audio.Music;
  */
 public class musicPlayer {
 
-
     public static Music menuMusic;
     public static Music secretMusic;
-
 
     public static void sdmInput() {
 
@@ -25,8 +23,7 @@ public class musicPlayer {
             if ((spaceCounter % 2) == 0) {
                 sdmPause();
                 menuMusicPlayer();
-            } else sdmPlayer();
-
+            } else sdmPlayer("Jimmy-theme");
         }
     }
 
@@ -38,9 +35,8 @@ public class musicPlayer {
 
     }
 
-
-    public static void sdmPlayer() {
-        secretMusic = new Gdx().audio.newMusic(Gdx.files.internal("music/dankMusic.mp3"));
+    public static void sdmPlayer(String song) {
+        secretMusic = new Gdx().audio.newMusic(Gdx.files.internal("music/"+song+".mp3"));
         menuMusic.pause();
         secretMusic.play();
 
@@ -53,6 +49,4 @@ public class musicPlayer {
     public static void menuMusicPause() {
         menuMusic.pause();
     }
-
-
 }

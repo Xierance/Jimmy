@@ -35,6 +35,7 @@ public class b2dStructures {
 
         objectUserData userData = new objectUserData();
         userData.setSprite(blockSprite);
+        userData.setId("block");
         body.setUserData(userData);
 
         blockShape.dispose();

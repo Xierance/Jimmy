@@ -154,4 +154,13 @@ public class projectiles {
         float angle = ((float) Math.atan2(vector2.y - vector1.y, vector2.x - vector1.x));
         return angle;
     }
+
+    public static void airStrike(Vector2 mouse,int num,World world){
+        while(num > 0){
+            fireBall(new Vector2(mouse.x - 2 + num*.1f,mouse.y + 5 + num * .1f),new Vector2(2,-4),world);
+            num--;
+        }
+
+
+    }
 }

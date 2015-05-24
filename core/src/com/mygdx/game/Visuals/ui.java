@@ -38,6 +38,7 @@ public class ui {
 
     public  void displayMax(SpriteBatch secondBatch){
        // worldHandler.currentHealth
+        if(worldHandler.currentHealth < 0)worldHandler.currentHealth = 0;
 
         for (int i = 0; i < worldHandler.maxHealth; i++) {
             tendysilhouette.setSize(32, 32);

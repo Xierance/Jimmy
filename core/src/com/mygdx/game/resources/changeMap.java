@@ -14,7 +14,7 @@ import com.mygdx.game.worldHandler;
 /**
  * Created by for example John on 5/10/2015.
  */
-public class changeScreen {
+public class changeMap {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////warning do not use/////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -25,8 +25,11 @@ public class changeScreen {
         Array<Body> bodies = new Array<Body>();
         world.getBodies(bodies);
         for (Body body : bodies) {
-            if (body.getUserData() != assetLoader.playerSprite && body.getType() != BodyDef.BodyType.StaticBody) {
-                body.setUserData("destroyed");
+            if (body.getUserData() instanceof objectUserData &&((objectUserData)body.getUserData()).getId() ==  "block" && body.getType() != BodyDef.BodyType.StaticBody) {
+                for(Fixture fixture:body.getFixtureList()){
+                    body.destroyFixture(fixture);
+                    body.setUserData(null);
+                }
             }
         }
     }
@@ -85,6 +88,7 @@ public class changeScreen {
                         tileShape.dispose();
 
                         objectUserData userData = new objectUserData();
+                        userData.setId("block");
                         if (tileCell.getTile().getProperties().get("left") != null) {
                             userData.setSprite(leftTile);
                         } else if (tileCell.getTile().getProperties().get("right") != null) {
