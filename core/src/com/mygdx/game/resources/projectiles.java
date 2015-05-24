@@ -157,10 +157,21 @@ public class projectiles {
 
     public static void airStrike(Vector2 mouse,int num,World world){
         while(num > 0){
+            if(TestClass.player.getPlayerBody().getPosition().x < mouse.x)
+            {
             fireBall(new Vector2(mouse.x - 2 + num*.1f,mouse.y + 5 + num * .1f),new Vector2(2,-4),world);
             num--;
+            }
+            if(TestClass.player.getPlayerBody().getPosition().x > mouse.x)
+            {
+                fireBall(new Vector2(mouse.x + 2 - num*.2f,mouse.y + 5 + num * .1f),new Vector2(-2,-4),world);
+                num--;
+            }
         }
+    }
 
+    public static void dickStone(Vector2 player,Vector2 mouse,World world){
+        shootDick(player,angle2(player,mouse),world);
 
     }
 }

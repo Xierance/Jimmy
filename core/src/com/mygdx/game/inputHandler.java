@@ -71,6 +71,7 @@ public class inputHandler implements InputProcessor {
     public static boolean Ctrl_right;
     public static long timeElapsed;
     public static int actualScroll = 0;
+    public static boolean mouse;
 
     public static boolean betterScrolled(int scrollValue){
 
@@ -406,6 +407,9 @@ public class inputHandler implements InputProcessor {
                         //changeMap.clearMap(TestClass.world);
                         projectiles.airStrike(TestClass.getmouseCoords(),5,TestClass.world);
                         break;
+                    case 5:
+                        mouse = true;
+                        break;
 
 
                 }
@@ -413,6 +417,7 @@ public class inputHandler implements InputProcessor {
     }
 
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        mouse = false;
         return false;
     }
 

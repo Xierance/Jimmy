@@ -280,6 +280,10 @@ public class TestClass implements Screen {
             player.setPlayerBody(tempBody);
 
         }
+
+        if(inputHandler.mouse){
+            projectiles.dickStone(player.getPlayerBody().getPosition(),getmouseCoords(),world);
+        }
     }
 
     public void drawSprites(float delta) {
@@ -299,7 +303,7 @@ public class TestClass implements Screen {
                 //rotating playerBody sprite
                 if (inputHandler.A && !((objectUserData) body.getUserData()).getSprite().isFlipX() && ((objectUserData)body.getUserData()).getId() == "player"){
                     ((objectUserData) body.getUserData()).getSprite().setFlip(true, false);}
-                if (inputHandler.D && ((objectUserData) body.getUserData()).getSprite().isFlipX() && ((objectUserData)body.getUserData()).getId() == "fireball"){
+                if (inputHandler.D && ((objectUserData) body.getUserData()).getSprite().isFlipX() && ((objectUserData)body.getUserData()).getId() == "player"){
                     ((objectUserData) body.getUserData()).getSprite().setFlip(false, false);}
 
                 Sprite sprite = ((objectUserData) body.getUserData()).getSprite();
