@@ -32,7 +32,11 @@ public class b2dStructures {
 
         Body body = world.createBody(bodyDef);
         body.createFixture(fixtureDef);
-        body.setUserData(blockSprite);
+
+        objectUserData userData = new objectUserData();
+        userData.setSprite(blockSprite);
+        userData.setId("block");
+        body.setUserData(userData);
 
         blockShape.dispose();
     }
@@ -139,8 +143,11 @@ public class b2dStructures {
 
             Body body = world.createBody(bodyDef);
             body.createFixture(fixtureDef);
-            timer time = new timer(0);
-            body.setUserData(time);
+            objectUserData userData = new objectUserData();
+            userData.setTimer(0);
+            userData.shard= true;
+
+            body.setUserData(userData);
             body.setGravityScale(0);
 
             body.setLinearVelocity(velocity);

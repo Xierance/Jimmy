@@ -3,20 +3,14 @@ package com.mygdx.game.screens;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.physics.box2d.joints.MouseJoint;
 import com.badlogic.gdx.physics.box2d.joints.MouseJointDef;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyContactListener;
-import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.Visuals.gameParticles.Explosion;
 import com.mygdx.game.Visuals.ui;
 import com.mygdx.game.inputHandler;
@@ -29,7 +23,6 @@ import com.mygdx.game.worldHandler;
 public class TestClass implements Screen {
 
 
-    public static Vector2 temp = new Vector2();
     public static Body tempBody;
     public static Array<ParticleEffect> flames = new Array<ParticleEffect>();
     public static Player player = new Player();
@@ -54,73 +47,7 @@ public class TestClass implements Screen {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private MyContactListener cl;
     private Array<Body> tmpBodies = new Array<Body>();
-    private Vector2 tmp2 = new Vector2();
     private boolean tempb = true;
-
-
-    public static void mapToBox2d(String Map, World world) {
-        TiledMap map = new TmxMapLoader().load(Map);
-        TiledMapTileLayer tileLayer = (TiledMapTileLayer) map.getLayers().get("butt");
-        Sprite tileSprite = new Sprite(new Texture("jew.jpg"));
-
-        Sprite leftTile = new Sprite(assetLoader.hellBlocks.createSprite("Left"));
-        leftTile.setSize(1f, 1f);
-        Sprite rightTile = new Sprite(assetLoader.hellBlocks.createSprite("Right"));
-        rightTile.setSize(1f, 1f);
-        Sprite centerTile = new Sprite(assetLoader.hellBlocks.createSprite("Center"));
-        centerTile.setSize(1f, 1f);
-        Sprite topTile = new Sprite(assetLoader.hellBlocks.createSprite("Top"));
-        topTile.setSize(1f, 1f);
-
-        tileSprite.setSize(1f, 1f);
-
-        for (int x = 0; x < tileLayer.getWidth(); x++) {
-            for (int y = 0; y < tileLayer.getHeight(); y++) {
-                TiledMapTileLayer.Cell tileCell = tileLayer.getCell(x, y);
-
-                if (tileCell != null && tileCell.getTile() != null) {
-                    if (tileCell.getTile().getProperties().get("playerBody") != null) {
-                        temp = new Vector2(x, y);
-                    }
-
-                    if (tileCell.getTile().getProperties().get("enemy") != null) {
-                        enemyPrototype test = new enemyPrototype(new Vector2(x, y));
-                        test.createEnemy(world, 32f, 32f, 30);
-                    }
-
-
-                    if (tileCell.getTile().getProperties().get("block") != null) {
-                        BodyDef tileBodyDef = new BodyDef();
-                        tileBodyDef.type = BodyDef.BodyType.KinematicBody;
-                        tileBodyDef.gravityScale = 0;
-                        tileBodyDef.position.set(x, y);
-
-                        PolygonShape tileShape = new PolygonShape();
-                        tileShape.setAsBox(.5f, .5f);
-
-                        Body body = world.createBody(tileBodyDef);
-                        FixtureDef fixdef =  new FixtureDef();
-                        fixdef.shape  = tileShape;
-                        fixdef.filter.categoryBits  = 0x0003;
-                        body.createFixture(fixdef);
-
-                        tileShape.dispose();
-
-
-                        if (tileCell.getTile().getProperties().get("left") != null) {
-                            body.setUserData(leftTile);
-                        } else if (tileCell.getTile().getProperties().get("right") != null) {
-                            body.setUserData(rightTile);
-                        } else if (tileCell.getTile().getProperties().get("center") != null) {
-                            body.setUserData(centerTile);
-                        } else if (tileCell.getTile().getProperties().get("top") != null) {
-                            body.setUserData(topTile);
-                        }
-                    }
-                }
-            }
-        }
-    }
 
     public static Vector2 getmouseCoords() {
         Vector3 temp = new Vector3();
@@ -167,9 +94,9 @@ public class TestClass implements Screen {
         b2dStructures.castle2(new Vector2(30, -9), 30, 1, 9, assetLoader.blocks, world);
         b2dStructures.isosceles(new Vector2(30, 0), 1, 1.5f, 0.2f, 0.25f, world);
 
-        mapToBox2d(new TiledMap(), world);///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        changeMap.mapToBox2d("maps/testMap.tmx", world);///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        player.createPLayer(world, temp, assetLoader.playerSprite);
+        player.createPLayer(world, worldHandler.temp, assetLoader.playerSprite);
 
         cl = new MyContactListener();
         world.setContactListener(cl);
@@ -193,6 +120,7 @@ public class TestClass implements Screen {
 
     @Override
     public void render(float delta) {
+        System.out.println(worldHandler.currentHealth);
         enemyPrototype.updateenemies(world);
 
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -352,31 +280,39 @@ public class TestClass implements Screen {
             player.setPlayerBody(tempBody);
 
         }
+
+        if(inputHandler.mouse){
+            projectiles.dickStone(player.getPlayerBody().getPosition(),getmouseCoords(),world);
+        }
     }
 
     public void drawSprites(float delta) {
         world.getBodies(tmpBodies);
         for (Body body : tmpBodies) {
 
-            if (body.getUserData() != null && body.getUserData() instanceof ParticleEffectPool.PooledEffect) {
-                ((ParticleEffectPool.PooledEffect) body.getUserData()).setPosition(body.getPosition().x, body.getPosition().y);
-                ((ParticleEffectPool.PooledEffect) body.getUserData()).draw(batch, delta);
+            if (body.getUserData() instanceof objectUserData){
+
+
+            if (body.getUserData() instanceof objectUserData && ((objectUserData)body.getUserData()).getEffect() != null) {
+                ((objectUserData) body.getUserData()).getEffect().setPosition(body.getPosition().x, body.getPosition().y);
+                ((objectUserData) body.getUserData()).getEffect().draw(batch, delta);
 
             }
 
-            if (body.getUserData() != null && body.getUserData() instanceof Sprite) {
+            if (((objectUserData)body.getUserData()).getSprite()!= null) {
                 //rotating playerBody sprite
-                if (inputHandler.A && !((Sprite) body.getUserData()).isFlipX() && (Sprite) body.getUserData() == player.getPlayerSPrite())
-                    ((Sprite) body.getUserData()).setFlip(true, false);
-                if (inputHandler.D && ((Sprite) body.getUserData()).isFlipX() && (Sprite) body.getUserData() == player.getPlayerSPrite())
-                    ((Sprite) body.getUserData()).setFlip(false, false);
+                if (inputHandler.A && !((objectUserData) body.getUserData()).getSprite().isFlipX() && ((objectUserData)body.getUserData()).getId() == "player"){
+                    ((objectUserData) body.getUserData()).getSprite().setFlip(true, false);}
+                if (inputHandler.D && ((objectUserData) body.getUserData()).getSprite().isFlipX() && ((objectUserData)body.getUserData()).getId() == "player"){
+                    ((objectUserData) body.getUserData()).getSprite().setFlip(false, false);}
 
-                Sprite sprite = (Sprite) body.getUserData();
+                Sprite sprite = ((objectUserData) body.getUserData()).getSprite();
                 sprite.setPosition(body.getPosition().x - sprite.getWidth() / 2, body.getPosition().y - sprite.getHeight() / 2);
                 sprite.setRotation(body.getAngle() * MathUtils.radiansToDegrees);
 
                 sprite.draw(batch);
             }
+        }
         }
     }
 }

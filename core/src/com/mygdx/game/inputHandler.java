@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.InputProcessor;
 import com.mygdx.game.Visuals.ui;
+import com.mygdx.game.resources.changeMap;
 import com.mygdx.game.resources.projectiles;
 import com.mygdx.game.screens.TestClass;
 
@@ -70,6 +71,7 @@ public class inputHandler implements InputProcessor {
     public static boolean Ctrl_right;
     public static long timeElapsed;
     public static int actualScroll = 0;
+    public static boolean mouse;
 
     public static boolean betterScrolled(int scrollValue){
 
@@ -398,12 +400,24 @@ public class inputHandler implements InputProcessor {
                     case 2:if (TestClass.player.getPlayerBody() != null)
                         projectiles.shootFire(TestClass.player.getPlayerBody().getPosition(), projectiles.angle2(TestClass.player.getPlayerBody().getPosition(), TestClass.getmouseCoords()), TestClass.world,1);
                         break;
+                    case 3:
+                        worldHandler.currentHealth--;
+                        break;
+                    case 4:
+                        //changeMap.clearMap(TestClass.world);
+                        projectiles.airStrike(TestClass.getmouseCoords(),5,TestClass.world);
+                        break;
+                    case 5:
+                        mouse = true;
+                        break;
+
 
                 }
         return false;
     }
 
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        mouse = false;
         return false;
     }
 

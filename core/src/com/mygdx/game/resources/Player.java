@@ -57,9 +57,13 @@ public class Player {
 
     public void createPLayer(World world, Vector2 startLocation, Sprite playerSprite) {
         //playerBody/////////////////////////////////
+        objectUserData userData = new objectUserData();
+        userData.setSprite(playerSprite);
+        userData.setId("player");
 
         //sprite
         this.setPlayerSPrite(playerSprite);
+
 
         playerSprite.setSize(1f, 2f);
         playerSprite.setOrigin(.5f, 1.5f);
@@ -81,7 +85,8 @@ public class Player {
 
         playerBody = world.createBody(bodyDef);
         playerBody.createFixture(fixtureDef);
-        playerBody.setUserData(playerSprite);
+
+        playerBody.setUserData(userData);
         playerBody.setGravityScale(2);
 
 

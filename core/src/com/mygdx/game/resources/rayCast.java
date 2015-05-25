@@ -32,8 +32,8 @@ public class rayCast {
         world.getBodies(bodies);
 
         for (Body b : bodies) {
-            if (b.getUserData() instanceof String) {
-                if (world.isLocked() == false && b.getType() != BodyDef.BodyType.StaticBody && b.getUserData() != assetLoader.playerSprite) {
+            if (b.getUserData()    instanceof objectUserData && ((objectUserData)b.getUserData()).getId() == "destroyed") {
+                if (world.isLocked() == false && b.getType() != BodyDef.BodyType.StaticBody) {
 
                     world.destroyBody(b);
 
@@ -42,14 +42,14 @@ public class rayCast {
 
             for(Fixture fixture:b.getFixtureList()) {
                 if (fixture.getFilterData().categoryBits == 0x0004) {
-                    if( b.getUserData() instanceof ParticleEffectPool.PooledEffect ) {
-                        ((ParticleEffectPool.PooledEffect) b.getUserData()).free();
-                        EffectPools.FireTestPool.pooledEffects.removeValue((ParticleEffectPool.PooledEffect) b.getUserData(), true);
+                    if( ((objectUserData)b.getUserData()).getId() == "fireBall" ) {
+                        ((objectUserData) b.getUserData()).getEffect().free();
+                        EffectPools.FireTestPool.pooledEffects.removeValue(((objectUserData)b.getUserData()).getEffect(), true);
                     }
                     b.setUserData(null);
                     world.destroyBody(b);
                     projectiles.explode(b.getPosition());
-                    projectiles.explode2(b.getPosition(), 36, world, 30);
+                    projectiles.explode2(b.getPosition(), 9, world, 30);
                 }
 
             }
