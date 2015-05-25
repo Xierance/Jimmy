@@ -3,8 +3,6 @@ package com.mygdx.game.resources;
 import com.badlogic.gdx.graphics.g2d.ParticleEffectPool;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
-import java.util.Timer;
-
 /**
  * Created by for example John on 5/22/2015.
  */
@@ -50,19 +48,19 @@ public class objectUserData {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    public void setTimer(int timer) {
-        this.timer = timer;
+    public void setTime(int time) {
+        this.time = time;
     }
 
-    public int getTimer() {
-        return timer;
+    public int getTime() {
+        return time;
     }
 
     public void upTimer() {
-        this.timer++;
+        this.time++;
     }
 
-    private int timer;
+    private int time;
 
     public boolean shard;
 
