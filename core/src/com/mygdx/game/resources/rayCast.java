@@ -35,6 +35,11 @@ public class rayCast {
             if (b.getUserData()    instanceof objectUserData && ((objectUserData)b.getUserData()).getId() == "destroyed") {
                 if (world.isLocked() == false && b.getType() != BodyDef.BodyType.StaticBody) {
 
+                    for(Fixture f : b.getFixtureList())
+                    {
+                        b.destroyFixture(f);
+                    }
+
                     world.destroyBody(b);
 
                 }
