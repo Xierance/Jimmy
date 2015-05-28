@@ -395,7 +395,7 @@ public class inputHandler implements InputProcessor {
 
                 switch(ui.scrollLocation) {
                     case 1:if (TestClass.player.getPlayerBody() != null)
-                        projectiles.shootDick(TestClass.player.getPlayerBody().getPosition(),projectiles.angle2(TestClass.player.getPlayerBody().getPosition(),TestClass.getmouseCoords()),TestClass.world);
+                        projectiles.shootDick(TestClass.player.getPlayerBody().getPosition(),projectiles.angle2(TestClass.player.getPlayerBody().getPosition(),TestClass.getmouseCoords()),TestClass.world,false);
                         break;
                     case 2:if (TestClass.player.getPlayerBody() != null)
                         projectiles.shootFire(TestClass.player.getPlayerBody().getPosition(), projectiles.angle2(TestClass.player.getPlayerBody().getPosition(), TestClass.getmouseCoords()), TestClass.world,1);

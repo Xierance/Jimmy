@@ -7,8 +7,6 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mygdx.game.screens.TestClass;
-import com.mygdx.game.Visuals.ui;
-import com.mygdx.game.worldHandler;
 
 /**
  * Created by for example John on 4/11/2015.
@@ -19,7 +17,7 @@ public class projectiles {
 
 
 
-    public static void dickBullet(Vector2 location, float density, float friction, Vector2 velocity, World world, Sprite dick) {
+    public static void dickBullet(Vector2 location, float density, float friction, Vector2 velocity, World world, Sprite dick,boolean timer) {
         //ball
 
         Body bulletBody;
@@ -66,6 +64,10 @@ public class projectiles {
 
         objectUserData userData = new objectUserData();
         userData.setSprite(dick);
+        if(timer){
+            userData.setTime(-10);
+            userData.shard = true;
+        }
         bulletBody.setUserData(userData);
 
         //direction
@@ -126,7 +128,7 @@ public class projectiles {
     public static void clearShards(Body body, float tolerance) {
 
         if (body.getUserData() instanceof objectUserData && ((objectUserData)body.getUserData()).shard) {
-            if (((objectUserData) body.getUserData()).getTimer() > tolerance) {
+            if (((objectUserData) body.getUserData()).getTime() > tolerance) {
                 ((objectUserData)body.getUserData()).setId("destroyed");
             } else {
                 ((objectUserData)(body.getUserData())).upTimer();
@@ -134,12 +136,12 @@ public class projectiles {
         }
     }
 
-    public static void shootDick(Vector2 location, float angleRad,World world) {
+    public static void shootDick(Vector2 location, float angleRad,World world,boolean timer) {
 
         float i = (float) Math.cos(angleRad);
         float j = (float) Math.sin(angleRad);
         Vector2 newLocation = new Vector2(location.x + i, location.y + j);
-        projectiles.dickBullet(newLocation, 10f, 0.75f, new Vector2(69 * i, 69 * j), world, new Sprite(new Texture("textures/dick.png")));
+        projectiles.dickBullet(newLocation, 10f, 0.75f, new Vector2(69 * i, 69 * j), world, new Sprite(new Texture("textures/dick.png")),timer);
 
     }
 
@@ -172,7 +174,7 @@ public class projectiles {
     }
 
     public static void dickStone(Vector2 player,Vector2 mouse,World world){
-        shootDick(player,angle2(player,mouse),world);
+        shootDick(player,angle2(player,mouse),world, true);
 
     }
 }

@@ -144,7 +144,7 @@ public class b2dStructures {
             Body body = world.createBody(bodyDef);
             body.createFixture(fixtureDef);
             objectUserData userData = new objectUserData();
-            userData.setTimer(0);
+            userData.setTime(0);
             userData.shard= true;
 
             body.setUserData(userData);
