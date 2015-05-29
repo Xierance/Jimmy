@@ -51,14 +51,13 @@ public class enemyPrototype {
         return randomNum;
     }
 
-    public static enemyPrototype getClosestEnemy(Array<enemyPrototype> enemies, Player player) {
+    public static enemyPrototype getClosestEnemy(Array<enemyPrototype> enemies, Vector2 origin) {
 
-        Array<enemyPrototype> newEnemies = new Array<enemyPrototype>();
         float[] enemyDistance = new float[enemies.size];
         int i = 0;
         for (enemyPrototype enemy : enemies) {
-            float x = enemy.getPosition().x - player.getPlayerBody().getPosition().x;
-            float y = enemy.getPosition().y - player.getPlayerBody().getPosition().y;
+            float x = enemy.enemyBody.getPosition().x - origin.x;
+            float y = enemy.enemyBody.getPosition().y - origin.y;
             enemyDistance[i] = (x * x + y * y);
             i++;
         }
@@ -144,6 +143,7 @@ public class enemyPrototype {
         objectUserData userData  =new objectUserData();
         userData.setSprite(sprite);
         userData.setId("enemy");
+        userData.setTarget(this);
         enemyBody.setUserData(userData);
 
         enemyPrototype.enemies.add(this);

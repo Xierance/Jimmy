@@ -155,15 +155,15 @@ public class projectiles {
 
     public static float angle2(Vector2 vector1, Vector2 vector2) {
         float angle = ((float) Math.atan2(vector2.y - vector1.y, vector2.x - vector1.x));
-        return angle;
-    }
+    return angle;
+}
 
     public static void airStrike(Vector2 mouse,int num,World world){
         while(num > 0){
             if(TestClass.player.getPlayerBody().getPosition().x < mouse.x)
             {
-            fireBall(new Vector2(mouse.x - 2 + num*.1f,mouse.y + 5 + num * .1f),new Vector2(2,-4),world);
-            num--;
+                fireBall(new Vector2(mouse.x - 2 + num*.1f,mouse.y + 5 + num * .1f),new Vector2(2,-4),world);
+                num--;
             }
             if(TestClass.player.getPlayerBody().getPosition().x > mouse.x)
             {
@@ -177,4 +177,14 @@ public class projectiles {
         shootDick(player,angle2(player,mouse),world, true);
 
     }
+
+    public static void shootScone(Vector2 location, float angleRad,World world){
+        float i = (float) Math.cos(angleRad);
+        float j = (float) Math.sin(angleRad);
+        scones scone = new scones();
+        scone.createScone(new Vector2(location.x + i,location.y + j),world);
+        scone.body.setLinearVelocity((float) (10 * i), (float) (10 * j));
+
+    }
+
 }

@@ -410,6 +410,9 @@ public class inputHandler implements InputProcessor {
                     case 5:
                         mouse = true;
                         break;
+                    case 6:
+                        projectiles.shootScone(TestClass.player.getPlayerBody().getPosition(),projectiles.angle2(TestClass.player.getPlayerBody().getPosition(),TestClass.getmouseCoords()),TestClass.world);
+                        break;
 
 
                 }

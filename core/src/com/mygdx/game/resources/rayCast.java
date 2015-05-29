@@ -12,6 +12,7 @@ import com.mygdx.game.worldHandler;
  */
 public class rayCast {
     static Fixture rayfixture;
+    static Array<enemyPrototype> enemies = new Array<enemyPrototype>();
 
     public static Fixture rayFixture(World world, Vector2 point1, Vector2 point2) {
 
@@ -58,6 +59,22 @@ public class rayCast {
                 }
 
             }
+            if(b.getUserData()    instanceof objectUserData && ((objectUserData)b.getUserData()).getId() == "enemy"){
+                enemies.add(((objectUserData)b.getUserData()).getTarget());
+
+            }
+
+            if(b.getUserData()    instanceof objectUserData && ((objectUserData)b.getUserData()).getId() == "scone"){
+                if(((objectUserData)b.getUserData()).getTime() > 0){
+                    ((objectUserData)b.getUserData()).setId("destroyed");
+                }
+                else((objectUserData)b.getUserData()).setTime(((objectUserData)b.getUserData()).getTime()+1);
+                float angle = projectiles.angle2(b.getPosition(),((objectUserData)b.getUserData()).getTarget().getPosition());
+
+                b.applyForceToCenter((float)(10f*(Math.cos(angle))),(float)(10f*(Math.sin(angle))),true);
+
+            }
+
         }
     }
 }

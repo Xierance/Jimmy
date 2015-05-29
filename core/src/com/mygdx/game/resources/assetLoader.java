@@ -23,6 +23,7 @@ public class assetLoader {
     public static Sprite dick;
     public static Sprite dickMenu;
     public static Sprite shrekMenu;
+    public static Sprite test;
 
     public static void loadAssets(){
 
@@ -35,6 +36,7 @@ public class assetLoader {
         hotBarSelected = new Sprite(new Texture("ui/hotbar.selected.png"));
         shrek = new Sprite(new Texture("img/Shrek.png"));
         dick = new Sprite(new Texture("textures/dick.png"));
+        test = new Sprite(new Texture("img/sean.png"));
 
         dickMenu = new Sprite(new Texture("textures/dick.png"));
         dickMenu.setSize(64,64);

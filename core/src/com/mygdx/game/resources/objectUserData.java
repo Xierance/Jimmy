@@ -7,9 +7,19 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
  * Created by for example John on 5/22/2015.
  */
 public class objectUserData {
+    public boolean shard;
+    public enemyPrototype target;
+    private Sprite sprite;
+    private String id;
+    private ParticleEffectPool.PooledEffect effect;
+    private int time;
+
     public objectUserData(){
 
     }
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Sprite getSprite() {
@@ -20,20 +30,16 @@ public class objectUserData {
         this.sprite = sprite;
     }
 
-    private Sprite sprite;
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public String getId() {
         return id;
     }
 
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     public void setId(String id) {
         this.id = id;
     }
-
-    private String id;
-
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public ParticleEffectPool.PooledEffect getEffect() {
         return effect;
@@ -43,26 +49,27 @@ public class objectUserData {
         this.effect = effect;
     }
 
-    private ParticleEffectPool.PooledEffect effect;
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+    public int getTime() {
+        return time;
+    }
 
     public void setTime(int time) {
         this.time = time;
-    }
-
-    public int getTime() {
-        return time;
     }
 
     public void upTimer() {
         this.time++;
     }
 
-    private int time;
+    public enemyPrototype getTarget() {
+        return target;
+    }
 
-    public boolean shard;
+    public void setTarget(enemyPrototype target) {
+        this.target = target;
+    }
+
+
 
 
 
