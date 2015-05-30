@@ -34,7 +34,9 @@ public class ui {
     private Sprite hotBar = assetLoader.hotBar;
     private Sprite hotBarSelected = assetLoader.hotBarSelected;
     private int gap = 4;
-    private Sprite[] spriteArray = {assetLoader.dickMenu,assetLoader.shrekMenu,assetLoader.tendy,assetLoader.tendysilhouette,new Sprite(new Texture("img/player.png"))};
+    private Sprite scone  = new Sprite(new Texture("img/sean.png"));
+
+    private Sprite[] spriteArray = {assetLoader.dickMenu,assetLoader.shrekMenu,assetLoader.tendy,assetLoader.tendysilhouette,new Sprite(new Texture("img/player.png")),scone};
 
     public  void displayMax(SpriteBatch secondBatch){
        // worldHandler.currentHealth
@@ -94,6 +96,7 @@ public class ui {
                 hotBarSelected.setCenter(-((hotBarNum.length*hotBar.getWidth()/2))+(i*hotBar.getWidth())+(gap*i)-(gap*hotBarNum.length),((-Gdx.graphics.getHeight()/2)+hotBar.getWidth()/1.5f));
                 hotBarSelected.draw(batch);
                 if(i <= spriteArray.length ){
+                    spriteArray[i-1].setSize(60,60);
                     spriteArray[i-1].setCenter(-((hotBarNum.length * hotBar.getWidth() / 2)) + (i * hotBar.getWidth()) + (gap * i) - (gap * hotBarNum.length), ((-Gdx.graphics.getHeight() / 2) + hotBar.getWidth() / 1.5f));
                     spriteArray[i-1].draw(batch);
                 }

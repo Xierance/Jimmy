@@ -64,6 +64,7 @@ public class projectiles {
 
         objectUserData userData = new objectUserData();
         userData.setSprite(dick);
+
         if(timer){
             userData.setTime(-10);
             userData.shard = true;
