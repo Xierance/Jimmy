@@ -142,7 +142,7 @@ public class projectiles {
         float i = (float) Math.cos(angleRad);
         float j = (float) Math.sin(angleRad);
         Vector2 newLocation = new Vector2(location.x + i, location.y + j);
-        projectiles.dickBullet(newLocation, 10f, 0.75f, new Vector2(69 * i, 69 * j), world, new Sprite(new Texture("textures/dick.png")),timer);
+        projectiles.dickBullet(newLocation, 10f, 0.75f, new Vector2(69 * i, 69 * j), world, assetLoader.dick,timer);
 
     }
 
