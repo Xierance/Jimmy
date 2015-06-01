@@ -18,8 +18,6 @@ public class changeMap {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////warning do not use/////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
     public static void clearMap(World world) {
         //do not use will crash game
         Array<Body> bodies = new Array<Body>();
@@ -62,13 +60,9 @@ public class changeMap {
         TiledMapTileLayer tileLayer = (TiledMapTileLayer) map.getLayers().get("butt");
         Sprite tileSprite = new Sprite(new Texture("jew.jpg"));
 
-        Sprite leftTile = new Sprite(assetLoader.hellBlocks.createSprite("Left"));
         leftTile.setSize(1f, 1f);
-        Sprite rightTile = new Sprite(assetLoader.hellBlocks.createSprite("Right"));
         rightTile.setSize(1f, 1f);
-        Sprite centerTile = new Sprite(assetLoader.hellBlocks.createSprite("Center"));
         centerTile.setSize(1f, 1f);
-        Sprite topTile = new Sprite(assetLoader.hellBlocks.createSprite("Top"));
         topTile.setSize(1f, 1f);
 
         tileSprite.setSize(1f, 1f);
@@ -129,19 +123,14 @@ public class changeMap {
         }
     }
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////warning do not use/////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public static Array<Body> Bodies = new Array<Body>();
+    public static Array<Body> Blocks = new Array<Body>();
+
     public static void rearrangeMap(String Map, World world) {
-        Array<Body> bodies = new Array<Body>();
-        Array<Body> freeBodies;
-        world.getBodies(bodies);
-        for (Body b : bodies) {
-            if (b.getUserData() instanceof objectUserData && ((objectUserData) b.getUserData()).getId() == "free") {
-                freeBodies = new Array<Body>();
-                freeBodies.add(b);
-            }
-
-        }
-
-        int i = 0;
 
         TiledMap map = new TmxMapLoader().load(Map);
         TiledMapTileLayer tileLayer = (TiledMapTileLayer) map.getLayers().get("butt");
@@ -151,11 +140,7 @@ public class changeMap {
         centerTile.setSize(1f, 1f);
         topTile.setSize(1f, 1f);
 
-
-
-        Array<Body> Bodies = new Array<Body>();
-        Array<Body> Blocks = new Array<Body>();
-        world.getBodies(bodies);
+        world.getBodies(Bodies);
 
         for (Body body : Bodies) {
             if (body.getUserData() instanceof objectUserData && ((objectUserData) body.getUserData()).getId() == "block" && body.getType() != BodyDef.BodyType.StaticBody) {
@@ -165,7 +150,6 @@ public class changeMap {
                 Blocks.add(body);
             }
         }
-
 
         int temp = 0;
 
@@ -196,9 +180,7 @@ public class changeMap {
                         FixtureDef fixdef = new FixtureDef();
                         fixdef.shape = tileShape;
                         fixdef.filter.categoryBits = 0x0003;
-                        if (bodies.get(i) != null) {
-                            i++;
-                        }
+
 
                         objectUserData userData = new objectUserData();
                         userData.setId("block");
@@ -230,13 +212,14 @@ public class changeMap {
 
                         Blocks.clear();
 
-
-
                     }
                 }
             }
         }
     }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////warning do not use/////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }
 
