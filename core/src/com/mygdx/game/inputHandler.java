@@ -401,7 +401,8 @@ public class inputHandler implements InputProcessor {
                         projectiles.shootFire(TestClass.player.getPlayerBody().getPosition(), projectiles.angle2(TestClass.player.getPlayerBody().getPosition(), TestClass.getmouseCoords()), TestClass.world,1);
                         break;
                     case 3:
-                        worldHandler.currentHealth--;
+//                        worldHandler.currentHealth--;
+                        changeMap.rearrangeMap("maps/testMap2.tmx", TestClass.world);
                         break;
                     case 4:
                         //changeMap.clearMap(TestClass.world);

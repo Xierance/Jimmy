@@ -101,8 +101,7 @@ public class projectiles {
         userData.setId("fireBall");
         fireBallBody.setUserData(userData);
         EffectPools.FireTestPool.pooledEffects.add(flame);
-
-
+        
     }
 
     public static void explode(Vector2 location) {
