@@ -196,5 +196,4 @@ public class projectiles {
         scone.body.setLinearVelocity((float) (10 * i), (float) (10 * j));
 
     }
-
 }

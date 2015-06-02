@@ -157,7 +157,6 @@ public class enemyPrototype {
             fire  = true;
         }
 
-        int randomFire = randInt(0, 60);
         if (alive) {
 
             leftGround = false;

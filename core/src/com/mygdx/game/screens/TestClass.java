@@ -94,7 +94,9 @@ public class TestClass implements Screen {
         b2dStructures.castle2(new Vector2(30, -9), 30, 1, 9, assetLoader.blocks, world);
         b2dStructures.isosceles(new Vector2(30, 0), 1, 1.5f, 0.2f, 0.25f, world);
 
-        changeMap.mapToBox2d("maps/testMap.tmx", world);///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //changeMap.mapToBox2d("maps/testMap.tmx", world);///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        changeMap.multipleMaps(new String[]{"maps/testMap.tmx","maps/testMap.tmx","maps/testMap.tmx"},world);
+
 
         player.createPLayer(world, worldHandler.temp, assetLoader.playerSprite);
 
@@ -120,7 +122,7 @@ public class TestClass implements Screen {
 
     @Override
     public void render(float delta) {
-        System.out.println(worldHandler.currentHealth);
+
         enemyPrototype.updateenemies(world);
 
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -129,8 +131,6 @@ public class TestClass implements Screen {
         debugRenderer.render(world, orthographicCamera.combined);
 
         batch.setProjectionMatrix(orthographicCamera.combined);
-
-
 
         batch.begin();
         drawSprites(delta);
@@ -142,7 +142,6 @@ public class TestClass implements Screen {
         secondBatch.begin();
         UI.displayMax(secondBatch);
         UI.displayFps(secondBatch);
-        //UI.hotBar(secondBatch);
         UI.testHotbar(secondBatch);
         secondBatch.end();
 
@@ -209,34 +208,24 @@ public class TestClass implements Screen {
             if (orthographicCamera.position.y != player.getPlayerBody().getPosition().y) {
                 orthographicCamera.position.y += (player.getPlayerBody().getPosition().y - orthographicCamera.position.y) * lerp;
             }
-            orthographicCamera.update();
         }
 
         if (inputHandler.Q) {
             orthographicCamera.zoom += .010f;
-            orthographicCamera.update();
         }
         if (inputHandler.E) {
             orthographicCamera.zoom -= .010f;
-            orthographicCamera.update();
         }
 
         if (inputHandler.Up) orthographicCamera.position.y += 0.5;
-        orthographicCamera.update();
         if (inputHandler.Left) orthographicCamera.position.x -= .5;
-        orthographicCamera.update();
         if (inputHandler.Down) orthographicCamera.position.y -= .5;
-        orthographicCamera.update();
         if (inputHandler.Right) orthographicCamera.position.x += .5;
         orthographicCamera.update();
 
     }
 
     public void handleInput() {
-
-       // if (inputHandler.Ctrl_left)
-        //    if (rayCast.rayFixture(world, player.getPlayerBody().getPosition(), new Vector2(getmouseCoords().x, getmouseCoords().y)) != null && rayCast.rayFixture(world, player.getPlayerBody().getPosition(), new Vector2(getmouseCoords().x, getmouseCoords().y)).getBody().getUserData() != assetLoader.playerSprite)
-         //       rayCast.rayFixture(world, player.getPlayerBody().getPosition(), new Vector2(getmouseCoords().x, getmouseCoords().y)).getBody().setUserData("destroyed");
 
         //move
         if (inputHandler.Space && player.isPlayerGrounded(world, player)) {
