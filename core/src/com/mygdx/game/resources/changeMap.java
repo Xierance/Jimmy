@@ -285,6 +285,13 @@ public class changeMap {
 
     }
 
+    public static void multipleMaps(String[] Maps,World world){
+        int xOffset = 0;
+        for(String Map : Maps){
+            addMap(xOffset,0,Map,world);
+            xOffset += getMapDimensions(Map).x;
+        }
+    }
 }
 
 
