@@ -208,6 +208,83 @@ public class changeMap {
 ///////////////////////////////////////////warning do not use/////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    public static void addMap(int xOffset,int yOffset, String Map, World world){
+
+        {
+
+
+            TiledMap map = new TmxMapLoader().load(Map);
+            TiledMapTileLayer tileLayer = (TiledMapTileLayer) map.getLayers().get("butt");
+
+            leftTile.setSize(1f, 1f);
+            rightTile.setSize(1f, 1f);
+            centerTile.setSize(1f, 1f);
+            topTile.setSize(1f, 1f);
+
+
+            for (int x = 0; x < tileLayer.getWidth(); x++) {
+                for (int y = 0; y < tileLayer.getHeight(); y++) {
+                    TiledMapTileLayer.Cell tileCell = tileLayer.getCell(x, y);
+
+                    if (tileCell != null && tileCell.getTile() != null) {
+                        if (tileCell.getTile().getProperties().get("playerBody") != null) {
+                            worldHandler.temp = new Vector2(x, y);
+                        }
+
+                        if (tileCell.getTile().getProperties().get("enemy") != null) {
+                            enemyPrototype test = new enemyPrototype(new Vector2(x, y));
+                            test.createEnemy(world, 32f, 32f, 200);
+                        }
+
+
+                        if (tileCell.getTile().getProperties().get("block") != null) {
+                            BodyDef tileBodyDef = new BodyDef();
+                            tileBodyDef.type = BodyDef.BodyType.KinematicBody;
+                            tileBodyDef.gravityScale = 0;
+                            tileBodyDef.position.set(x+xOffset, y+yOffset);
+
+                            PolygonShape tileShape = new PolygonShape();
+                            tileShape.setAsBox(.5f, .5f);
+
+                            FixtureDef fixdef = new FixtureDef();
+                            fixdef.shape = tileShape;
+                            fixdef.filter.categoryBits = 0x0003;
+                            Body body = world.createBody(tileBodyDef);
+
+                            body.createFixture(fixdef);
+
+                            tileShape.dispose();
+
+                            objectUserData userData = new objectUserData();
+                            userData.setId("block");
+                            if (tileCell.getTile().getProperties().get("left") != null) {
+                                userData.setSprite(leftTile);
+                            } else if (tileCell.getTile().getProperties().get("right") != null) {
+                                userData.setSprite(rightTile);
+                            } else if (tileCell.getTile().getProperties().get("center") != null) {
+                                userData.setSprite(centerTile);
+                            } else if (tileCell.getTile().getProperties().get("top") != null) {
+                                userData.setSprite(topTile);
+                            }
+
+
+                            body.setUserData(userData);
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+    public static Vector2 getMapDimensions(String Map){
+        TiledMap map = new TmxMapLoader().load(Map);
+        TiledMapTileLayer tileLayer = (TiledMapTileLayer) map.getLayers().get("butt");
+
+        return new Vector2(tileLayer.getWidth(),tileLayer.getHeight());
+
+    }
+
 }
 
 
