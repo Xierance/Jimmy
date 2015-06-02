@@ -12,7 +12,15 @@ import com.mygdx.game.screens.TestClass;
  * Created by for example John on 4/11/2015.
  */
 public class projectiles {
+    //fireballs
     public static Body fireBallBody;
+    public static BodyDef fireBallDef = new BodyDef();
+    public static FixtureDef fireBallFixDef = new FixtureDef();
+
+    //shards
+    public static BodyDef bodyDef = new BodyDef();
+    public static FixtureDef fixtureDef = new FixtureDef();
+
 
 
 
@@ -80,20 +88,21 @@ public class projectiles {
 
     public static void fireBall(Vector2 location, Vector2 velocity, World world) {
 
-        BodyDef fireBallDef = new BodyDef();
+
         fireBallDef.bullet = true;
         fireBallDef.type = BodyDef.BodyType.DynamicBody;
         CircleShape fireBallBall = new CircleShape();
         fireBallBall.setRadius(.1f);
-        FixtureDef fireBallFixDef = new FixtureDef();
+
         fireBallFixDef.shape = fireBallBall;
         fireBallFixDef.filter.categoryBits = 0x0002;
         fireBallBody = world.createBody(fireBallDef);
         fireBallBody.createFixture(fireBallFixDef);
+
         fireBallBody.setTransform(location, 0);
         fireBallBody.setLinearVelocity(velocity);
-        fireBallBall.dispose();
 
+        fireBallBall.dispose();
         ParticleEffectPool.PooledEffect flame = EffectPools.FireTestPool.flamePoolTest.obtain();
 
         objectUserData userData = new objectUserData();
@@ -113,14 +122,15 @@ public class projectiles {
     }
 
     public static void explode2(Vector2 location, int bits, World world, float speed) {
-        BodyDef bodyDef = new BodyDef();
-        FixtureDef fixtureDef = new FixtureDef();
+        Vector2 direction = new Vector2();
         CircleShape circleShape = new CircleShape();
+
         for (int i = 0; i <= bits; i++) {
             Vector2 velocity = new Vector2();
             velocity.x = speed * MathUtils.cosDeg((360 / bits) * i);
             velocity.y = speed * MathUtils.sinDeg((360 / bits) * i);
-            b2dStructures.explosionShard shard = new b2dStructures.explosionShard(new Vector2(MathUtils.cosDeg((360 / bits) * i) / 10 + location.x, MathUtils.sinDeg((360 / bits) * i) / 10 + location.y), 0.01f, 1000, world, velocity, bodyDef, fixtureDef, circleShape);
+            direction.set(MathUtils.cosDeg((360 / bits) * i) / 10 + location.x, MathUtils.sinDeg((360 / bits) * i) / 10 + location.y);
+            b2dStructures.explosionShard shard = new b2dStructures.explosionShard(direction, 0.01f, 1000, world, velocity, bodyDef, fixtureDef, circleShape);
         }
         circleShape.dispose();
     }

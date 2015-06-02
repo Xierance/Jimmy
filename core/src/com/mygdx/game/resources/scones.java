@@ -12,19 +12,16 @@ import com.sun.xml.internal.bind.v2.model.core.ID;
  */
 public class scones  {
     objectUserData userData;
-    Sprite sprite;
+    Sprite sprite = assetLoader.test;
     Body body;
-    BodyDef bodyDef;
-    FixtureDef fixDef;
+    BodyDef bodyDef = new BodyDef();
+    FixtureDef  fixDef = new FixtureDef();
     CircleShape shape;
     String ID = "scone";
 
     public scones() {
 
         shape = new CircleShape();
-        fixDef = new FixtureDef();
-        bodyDef = new BodyDef();
-        sprite = assetLoader.test;
         userData = new objectUserData();
 
     }
