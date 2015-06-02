@@ -95,7 +95,7 @@ public class TestClass implements Screen {
         b2dStructures.isosceles(new Vector2(30, 0), 1, 1.5f, 0.2f, 0.25f, world);
 
         //changeMap.mapToBox2d("maps/testMap.tmx", world);///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        changeMap.multipleMaps(new String[]{"maps/testMap.tmx","maps/testMap.tmx","maps/testMap.tmx"},world);
+        changeMap.multipleMaps(new String[]{"maps/testMap.tmx","maps/testMap2.tmx"},world);
 
 
         player.createPLayer(world, worldHandler.temp, assetLoader.playerSprite);
