@@ -43,18 +43,7 @@ public class changeMap {
 
 
     public static void mapToBox2d(String Map, World world) {
-        Array<Body> bodies = new Array<Body>();
-        Array<Body> freeBodies;
-        world.getBodies(bodies);
-        for (Body b : bodies) {
-            if (b.getUserData() instanceof objectUserData && ((objectUserData) b.getUserData()).getId() == "free") {
-                freeBodies = new Array<Body>();
-                freeBodies.add(b);
-            }
 
-        }
-
-        int i = 0;
 
         TiledMap map = new TmxMapLoader().load(Map);
         TiledMapTileLayer tileLayer = (TiledMapTileLayer) map.getLayers().get("butt");
@@ -94,9 +83,6 @@ public class changeMap {
                         FixtureDef fixdef = new FixtureDef();
                         fixdef.shape = tileShape;
                         fixdef.filter.categoryBits = 0x0003;
-                        if (bodies.get(i) != null) {
-                            i++;
-                        }
                         Body body = world.createBody(tileBodyDef);
 
                         body.createFixture(fixdef);
@@ -146,6 +132,7 @@ public class changeMap {
             if (body.getUserData() instanceof objectUserData && ((objectUserData) body.getUserData()).getId() == "block" && body.getType() != BodyDef.BodyType.StaticBody) {
                 for (Fixture fixture : body.getFixtureList()) {
                     body.destroyFixture(fixture);
+                    body.setUserData(null);
                 }
                 Blocks.add(body);
             }
