@@ -130,7 +130,7 @@ public class projectiles {
             velocity.x = speed * MathUtils.cosDeg((360 / bits) * i);
             velocity.y = speed * MathUtils.sinDeg((360 / bits) * i);
             direction.set(MathUtils.cosDeg((360 / bits) * i) / 10 + location.x, MathUtils.sinDeg((360 / bits) * i) / 10 + location.y);
-            b2dStructures.explosionShard shard = new b2dStructures.explosionShard(direction, 0.01f, 1000, world, velocity, bodyDef, fixtureDef, circleShape);
+            b2dStructures.explosionShard shard = new b2dStructures.explosionShard(direction, 0.01f, 5000, world, velocity, bodyDef, fixtureDef, circleShape);
         }
         circleShape.dispose();
     }

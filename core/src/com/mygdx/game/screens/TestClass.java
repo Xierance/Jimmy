@@ -152,7 +152,7 @@ public class TestClass implements Screen {
 
         if (world.isLocked() == false) {
             world.getBodies(tmpBodies);
-            for (Body body : tmpBodies) projectiles.clearShards(body, 3);
+            for (Body body : tmpBodies) projectiles.clearShards(body, 20);
 
             rayCast.clearBodies(world);
         }
