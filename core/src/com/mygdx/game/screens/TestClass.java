@@ -26,7 +26,7 @@ public class TestClass implements Screen {
     public static Body tempBody;
     public static Array<ParticleEffect> flames = new Array<ParticleEffect>();
     public static Player player = new Player();
-    public static  World world;
+    public static World world;
     public static OrthographicCamera orthographicCamera;
     public static Vector3 tmp = new Vector3();
     private static boolean Q;
@@ -95,7 +95,7 @@ public class TestClass implements Screen {
         b2dStructures.isosceles(new Vector2(30, 0), 1, 1.5f, 0.2f, 0.25f, world);
 
         //changeMap.mapToBox2d("maps/testMap.tmx", world);///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        changeMap.multipleMaps(new String[]{"maps/testMap.tmx","maps/testMap2.tmx"},world);
+        changeMap.multipleMaps(new String[]{"maps/testMap.tmx", "maps/testMap2.tmx"}, world);
 
 
         player.createPLayer(world, worldHandler.temp, assetLoader.playerSprite);
@@ -105,9 +105,9 @@ public class TestClass implements Screen {
 
         //test stuff
         test = new enemyPrototype(new Vector2(60, -9));
-        test.createEnemy(world, 1f, 2f,300);
+        test.createEnemy(world, 1f, 2f, 300);
         test2 = new enemyPrototype(new Vector2(20, 12));
-        test2.createEnemy(world, 2f, 2f,100);
+        test2.createEnemy(world, 2f, 2f, 100);
 
         test3 = new healthDrop();
         test3.createHealthDrop(world, new Vector2(10, 10));
@@ -154,7 +154,7 @@ public class TestClass implements Screen {
             world.getBodies(tmpBodies);
             for (Body body : tmpBodies) projectiles.clearShards(body, 3);
 
-            rayCast.clearBodies( world);
+            rayCast.clearBodies(world);
         }
 
     }
@@ -270,8 +270,8 @@ public class TestClass implements Screen {
 
         }
 
-        if(inputHandler.mouse){
-            projectiles.dickStone(player.getPlayerBody().getPosition(),getmouseCoords(),world);
+        if (inputHandler.mouse) {
+            projectiles.dickStone(player.getPlayerBody().getPosition(), getmouseCoords(), world);
         }
     }
 
@@ -279,29 +279,32 @@ public class TestClass implements Screen {
         world.getBodies(tmpBodies);
         for (Body body : tmpBodies) {
 
-            if (body.getUserData() instanceof objectUserData){
+            if (body.getUserData() instanceof objectUserData) {
 
 
-            if (body.getUserData() instanceof objectUserData && ((objectUserData)body.getUserData()).getEffect() != null) {
-                ((objectUserData) body.getUserData()).getEffect().setPosition(body.getPosition().x, body.getPosition().y);
-                ((objectUserData) body.getUserData()).getEffect().draw(batch, delta);
+                if (body.getUserData() instanceof objectUserData && ((objectUserData) body.getUserData()).getEffect() != null) {
+                    ((objectUserData) body.getUserData()).getEffect().setPosition(body.getPosition().x, body.getPosition().y);
+                    ((objectUserData) body.getUserData()).getEffect().draw(batch, delta);
 
+                }
+
+                if (((objectUserData) body.getUserData()).getSprite() != null) {
+                    //rotating playerBody sprite
+                    if (((objectUserData) body.getUserData()).getId() == "player") {
+                        if (inputHandler.A && !((objectUserData) body.getUserData()).getSprite().isFlipX()) {
+                            ((objectUserData) body.getUserData()).getSprite().setFlip(true, false);
+                        }
+                        if (inputHandler.D && ((objectUserData) body.getUserData()).getSprite().isFlipX()) {
+                            ((objectUserData) body.getUserData()).getSprite().setFlip(false, false);
+                        }
+                    }
+                    Sprite sprite = ((objectUserData) body.getUserData()).getSprite();
+                    sprite.setPosition(body.getPosition().x - sprite.getWidth() / 2, body.getPosition().y - sprite.getHeight() / 2);
+                    sprite.setRotation(body.getAngle() * MathUtils.radiansToDegrees);
+
+                    sprite.draw(batch);
+                }
             }
-
-            if (((objectUserData)body.getUserData()).getSprite()!= null) {
-                //rotating playerBody sprite
-                if (inputHandler.A && !((objectUserData) body.getUserData()).getSprite().isFlipX() && ((objectUserData)body.getUserData()).getId() == "player"){
-                    ((objectUserData) body.getUserData()).getSprite().setFlip(true, false);}
-                if (inputHandler.D && ((objectUserData) body.getUserData()).getSprite().isFlipX() && ((objectUserData)body.getUserData()).getId() == "player"){
-                    ((objectUserData) body.getUserData()).getSprite().setFlip(false, false);}
-
-                Sprite sprite = ((objectUserData) body.getUserData()).getSprite();
-                sprite.setPosition(body.getPosition().x - sprite.getWidth() / 2, body.getPosition().y - sprite.getHeight() / 2);
-                sprite.setRotation(body.getAngle() * MathUtils.radiansToDegrees);
-
-                sprite.draw(batch);
-            }
-        }
         }
     }
 }

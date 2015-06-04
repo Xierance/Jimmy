@@ -48,8 +48,9 @@ public class Player {
         Array<Contact> contactList = new Array<Contact>(world.getContactList());
 
         for (Contact contact : contactList) {
-            if (contact.isTouching() && (contact.getFixtureA() == player.playerSensorFixture || contact.getFixtureB() == playerSensorFixture))
+            if (contact.isTouching() && (contact.getFixtureA() == player.playerSensorFixture || contact.getFixtureB() == playerSensorFixture)) {
                 return true;
+            }
         }
         return false;
 
@@ -80,7 +81,7 @@ public class Player {
         fixtureDef.shape = blockShape;
         fixtureDef.density = 0.5f;
         fixtureDef.friction = .25f;
-        fixtureDef.restitution = 0f;
+        fixtureDef.restitution = 0.1f;
         fixtureDef.filter.categoryBits = 0x0005;
 
         playerBody = world.createBody(bodyDef);

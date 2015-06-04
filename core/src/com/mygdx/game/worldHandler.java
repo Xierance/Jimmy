@@ -11,6 +11,6 @@ import com.badlogic.gdx.utils.Array;
 public class worldHandler {
     public static int currentHealth = 2;
     public static int maxHealth = 3;
-    public static boolean fps = false;
+    public static boolean fps = true;
     public static Vector2 temp;
 }
