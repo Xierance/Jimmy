@@ -3,9 +3,6 @@ package com.mygdx.game.resources;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.Pool;
-import com.sun.xml.internal.bind.v2.model.core.ID;
 
 /**
  * Created by Cian on 28/05/2015.
