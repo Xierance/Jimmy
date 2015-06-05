@@ -1,5 +1,4 @@
 package com.mygdx.game;
-import com.badlogic.gdx.audio.Music;
 
 public class Secrets {
 
@@ -7,19 +6,19 @@ public class Secrets {
     static int countdown = 1200;
     static int index = 0;
 
-    public static void menuSecret(Music secretMusic) {
+    public static void menuSecret() {
 
         countdown--;
         if (index == keys.length) {
-            secretMusic.play();
+            musicPlayer.secretMusic.play();
+            musicPlayer.menuMusicPause();
         } else {
             if (countdown <= 0) {
-                countdown = 1200;
+                countdown = 120;
                 index = 0;
             }
             else if (inputHandler.currentKey == keys[index]) {
-                System.out.println("test");
-                countdown = 1200;
+                countdown = 120;
                 index++;
             }
         }

@@ -35,7 +35,6 @@ public class mainMenu implements Screen {
 
     public Music menuMusic;
     public Music secretDankMusic;
-    boolean spaceReset = true;
     private Stage stage;
     private Table table;
     private TextButton buttonPlay, buttonExit;
@@ -195,55 +194,8 @@ public class mainMenu implements Screen {
 
         boolean testBoolean = false;
 
-        Secrets.menuSecret(secretDankMusic);
-        int counter = 0;
-        int loopControl = 0;
+        Secrets.menuSecret();
 
-
-        if (inputHandler.Space && counter == 0) {
-            counter++;
-
-            while (loopControl < 1) {
-                playMusic();
-                loopControl++;
-            }
-        }
-      /*  if (inputHandler.Space && counter == 1){
-            counter++;
-
-            while (loopControl < 2){
-                restartMusic();
-            }
-       }
-
-        if (inputHandler.Space || testBoolean){
-            testBoolean = true;
-            playMusic();
-
-            if (inputHandler.Space){
-                restartMusic();
-
-            }
-        }
-
-        Gdx.app.log(MyGdxGame.title, String.valueOf(delta));
-
-        secretDankMusic.setOnCompletionListener(musicPlayer.menuMusicPlayer());
-*/
-
-    }
-
-    public void playMusic() {
-
-        musicPlayer.menuMusicPause();
-        secretDankMusic.play();
-        Gdx.app.log(MyGdxGame.title, "Music playing");
-    }
-
-    public void restartMusic() {
-        // musicPlayer.sdmPause();
-        musicPlayer.menuMusicPlayer();
-        Gdx.app.log(MyGdxGame.title, "Restarting menu music");
     }
 
     @Override

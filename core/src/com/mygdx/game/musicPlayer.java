@@ -9,23 +9,7 @@ import com.badlogic.gdx.audio.Music;
 public class musicPlayer {
 
     public static Music menuMusic;
-    public static Music secretMusic;
-
-    public static void sdmInput() {
-
-        int spaceCounter = 0;
-
-        if (inputHandler.Space) {
-
-            spaceCounter++;
-            Gdx.app.log(MyGdxGame.title, String.valueOf(spaceCounter));
-
-            if ((spaceCounter % 2) == 0) {
-                sdmPause();
-                menuMusicPlayer();
-            } else sdmPlayer("Jimmy-theme");
-        }
-    }
+    public static Music secretMusic = new Gdx().audio.newMusic(Gdx.files.internal("music/dankmusic.mp3"));
 
     public static void menuMusicPlayer() {
         menuMusic = new Gdx().audio.newMusic(Gdx.files.internal("music/Jimmy-theme.mp3"));
