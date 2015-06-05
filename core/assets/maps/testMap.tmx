@@ -9,7 +9,7 @@
   </tile>
   <tile id="1">
    <properties>
-    <property name="block" value=""/>
+    <property name="enemy" value="enemy"/>
    </properties>
   </tile>
  </tileset>
@@ -42,7 +42,7 @@
  </tileset>
  <layer name="butt" width="100" height="50">
   <data encoding="base64" compression="zlib">
-   eJztm9sOwiAQRDGt/v8nmz4QseGyiztlYuckvDTawh6WAuIrpfRSoSlb4oW5bgi2xN1m5rohkA8u5IML+eBCPriQDy7kgwv54ILdxx2RDy7u6mNP/X2k56J6RfrIbfylLaM4WQsinlF1Q+wntmIf6fduuVt7nz8qn/PE3hLDWj+r9ee7+rDkuTX2nhiOPhvho3S/6p1gZWuUVl+1jHXltXMeeMe26Pwo28DopuWj5aT2/dlre+P66HtRWNt4JT0flvrm/vY8Xcvk/LDmVu3+SNjeTyMfnjwp4xz1WzBbvNBYfHjzWvPdeaw+auNNbz2zem00i3UejkL7iWOs64GoZ8kHD/LBhXz8RvT+onxg8cyXyiKweH2w7Rv8M8oPTtA+Wu+2K3Ov935lHQMQPvJercbDOTRe8aH+y4fy4wPy7Ii1vzP6GP3Gi8ITB9SciM1HdlGC7pMZJh8s88OVfYPJB8saUT7i7h1xVlQ+OPIiIx88Lg7kA+/Cc0ZAPjjyIsNUlx7ysY5afjP4OOqFXpMw+qjB4OMKVtblvC/QQz6+Qfz3r/XsFeMVal9z5ryL51xMr0Q92/KsqBge93kDmnwOKQ==
+   eJztm9uugyAQRTm17f9/cuMDOcQwMOBs2a17JbwYq8BiuEnfKaW3Ek3aEi/MeUOwJe4yM+cNgXxwIR9cyAcX8sGFfHAhH1zIBxfsPu6IfFzDw3nfXX08U3sf6bUoX5E+chnPlKVXT96EqM+ovCH2E626j/R7t9itjed/lftG6t5Th7V2VmvPd/XhiXNv3Y/UYe/eCB+l+1VjgpfNSFZb9fR15bVjHIz2bdHxUZaB0Y3lw3JS+/3stadxvfe7KLxlvJKWD09+c3t7Ha5lcnx4Y6v2fCRs41PPx0iclPUc9S2Yrb7QeHyMxrXmu/N4fdT6m9Z6ZvXaaBbvPByF9hP7eNcDUe+Sj+ux9hblgwv5OEf0/qJ8YBmZL5VJYBn1wbZv8MsoPjhB+7DGtitjrzW+svYBCB95r1b94Rzqr/hQ++VD8fEP8uyIt71bPrxntxD0vvGiGGmXqDkRW3xkFyXoNplh8sEyP1zZNph8sKwR5SPu2RFnReWDIy4y8sHjYkc+8C5GzgjIB0dcZJjy0kI+1lGL7yt9WGvzPV/oNQmjjxrfEh9n91lW+jjuC7T4Fh9n8eYF8d8/690r+ivUvubMeZeRczGtFPVuz7ui6nB/zgegsw4z
   </data>
  </layer>
 </map>

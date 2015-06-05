@@ -29,11 +29,9 @@ public class TestClass implements Screen {
     public static World world;
     public static OrthographicCamera orthographicCamera;
     public static Vector3 tmp = new Vector3();
-    private static boolean Q;
     private final float TIMESTEP = 1 / 60f;
     private final int VELOCITYITERATIONS = 8;
     private final int POSITIONITERATIONS = 3;
-    enemyPrototype test2;
     healthDrop test3;
     healthDrop test4;
     private ui UI;
@@ -41,9 +39,6 @@ public class TestClass implements Screen {
     private OrthographicCamera secondCamera;
     private SpriteBatch batch;
     private SpriteBatch secondBatch;
-    private MouseJointDef jointDef;
-    private Sprite block1 = new Sprite();
-    private enemyPrototype test;
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private MyContactListener cl;
     private Array<Body> tmpBodies = new Array<Body>();
@@ -62,7 +57,6 @@ public class TestClass implements Screen {
 
         UI = new ui();
 
-        jointDef = new MouseJointDef();
 
         batch = new SpriteBatch();
         secondBatch = new SpriteBatch();
@@ -87,13 +81,6 @@ public class TestClass implements Screen {
         ground = b2dStructures.lineAlt(new Vector2(-300f, -10f), 0, 3000, 0.25f, ground, world);
         b2dStructures.line(new Vector2(-30, -10), 90, 100, 0.5f, world);
 
-        b2dStructures.castle(new Vector2(50, -9), 25, 5f, assetLoader.blocks, world);
-        b2dStructures.castle(new Vector2(20, -9), 25, 2, assetLoader.blocks, world);
-        b2dStructures.castle2(new Vector2(5, -9), 15, 1, 2, assetLoader.blocks, world);
-        b2dStructures.castle2(new Vector2(5, -9), 12, 2, 3.5f, assetLoader.blocks, world);
-        b2dStructures.castle2(new Vector2(30, -9), 30, 1, 9, assetLoader.blocks, world);
-        b2dStructures.isosceles(new Vector2(30, 0), 1, 1.5f, 0.2f, 0.25f, world);
-
         //changeMap.mapToBox2d("maps/testMap.tmx", world);///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         changeMap.multipleMaps(new String[]{"maps/testMap.tmx", "maps/testMap2.tmx"}, world);
 
@@ -103,11 +90,6 @@ public class TestClass implements Screen {
         cl = new MyContactListener();
         world.setContactListener(cl);
 
-        //test stuff
-        test = new enemyPrototype(new Vector2(60, -9));
-        test.createEnemy(world, 1f, 2f, 300);
-        test2 = new enemyPrototype(new Vector2(20, 12));
-        test2.createEnemy(world, 2f, 2f, 100);
 
         test3 = new healthDrop();
         test3.createHealthDrop(world, new Vector2(10, 10));
@@ -157,6 +139,10 @@ public class TestClass implements Screen {
             rayCast.clearBodies(world);
         }
 
+        if(worldHandler.currentHealth == 0 && !world.isLocked()){
+            world.clearForces();
+            ((Game) Gdx.app.getApplicationListener()).setScreen(new mainMenu());
+        }
     }
 
     @Override
@@ -187,9 +173,9 @@ public class TestClass implements Screen {
 
     @Override
     public void dispose() {
-
-        world.dispose();
         debugRenderer.dispose();
+        world.dispose();
+
         batch.dispose();
         secondBatch.dispose();
         player.getPlayerSPrite().getTexture().dispose();

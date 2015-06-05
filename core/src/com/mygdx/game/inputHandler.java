@@ -398,7 +398,7 @@ public class inputHandler implements InputProcessor {
                         projectiles.shootDick(TestClass.player.getPlayerBody().getPosition(),projectiles.angle2(TestClass.player.getPlayerBody().getPosition(),TestClass.getmouseCoords()),TestClass.world,false);
                         break;
                     case 2:if (TestClass.player.getPlayerBody() != null)
-                        projectiles.shootFire(TestClass.player.getPlayerBody().getPosition(), projectiles.angle2(TestClass.player.getPlayerBody().getPosition(), TestClass.getmouseCoords()), TestClass.world,1);
+                        projectiles.shootFire(TestClass.player.getPlayerBody().getPosition(), projectiles.angle2(TestClass.player.getPlayerBody().getPosition(), TestClass.getmouseCoords()), TestClass.world,1,false);
                         break;
                     case 3:
 //                        worldHandler.currentHealth--;
@@ -406,7 +406,7 @@ public class inputHandler implements InputProcessor {
                         break;
                     case 4:
                         //changeMap.clearMap(TestClass.world);
-                        projectiles.airStrike(TestClass.getmouseCoords(),5,TestClass.world);
+                        projectiles.airStrike(TestClass.getmouseCoords(),5,TestClass.world,false);
                         break;
                     case 5:
                         mouse = true;

@@ -69,6 +69,16 @@ public class objectUserData {
         this.target = target;
     }
 
+    public boolean isEnemy() {
+        return enemy;
+    }
+
+    public void setEnemy(boolean enemy) {
+        this.enemy = enemy;
+    }
+
+    public boolean enemy;
+
 
 
 

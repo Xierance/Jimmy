@@ -42,17 +42,10 @@ public class enemyPrototype {
     public static void updateenemies(World world) {
         Array<Contact> contactList = new Array<Contact>(world.getContactList());
         for (enemyPrototype enemy : enemies) {
-            for (Contact contact: contactList) {
-                enemy.updateBools(contact);
-            }
-            enemy.update();
+
+            enemy.update(world);
         }
 
-    }
-
-    public static int randInt(int min, int max) {
-        int randomNum = fireControl.nextInt((max - min) + 1) + min;
-        return randomNum;
     }
 
     public static enemyPrototype getClosestEnemy(Array<enemyPrototype> enemies, Vector2 origin) {
@@ -154,7 +147,10 @@ public class enemyPrototype {
 
     }
 
-    public void update() {
+    public void update(World world) {
+        Array<Contact> contactList = new Array<Contact>(world.getContactList());
+
+
         timer++;
         if (timer > frequency) {
             timer = 0;
@@ -168,6 +164,25 @@ public class enemyPrototype {
             rightSide = true;
             leftSide = true;
 
+            for (Contact contact: contactList) {
+
+
+                if (contact.isTouching() && (contact.getFixtureA() == leftSensor && contact.getFixtureB().getBody() != contact.getFixtureA().getBody() || contact.getFixtureB().getBody() != contact.getFixtureA().getBody() && contact.getFixtureB() == leftSensor)) {
+                    leftGround = true;
+                }
+
+                if (contact.isTouching() && (contact.getFixtureA() == rightSensor && contact.getFixtureB().getBody() != contact.getFixtureA().getBody() || contact.getFixtureB().getBody() != contact.getFixtureA().getBody() && contact.getFixtureB() == rightSensor)) {
+                    rightGround = true;
+                }
+
+                if (contact.isTouching() && (contact.getFixtureA() == leftSideSensor && contact.getFixtureB().getBody() != contact.getFixtureA().getBody() || contact.getFixtureB().getBody() != contact.getFixtureA().getBody() && contact.getFixtureB() == leftSideSensor)) {
+                    leftSide = false;
+                }
+
+                if (contact.isTouching() && (contact.getFixtureA() == rightSideSensor && contact.getFixtureB().getBody() != contact.getFixtureA().getBody() || contact.getFixtureB().getBody() != contact.getFixtureA().getBody() && contact.getFixtureB() == rightSideSensor)) {
+                    rightSide = false;
+                }
+            }
 
             if (direction && rightSide && rightGround) {
                 enemyBody.setLinearVelocity(5f, enemyBody.getLinearVelocity().y);
@@ -201,7 +216,7 @@ public class enemyPrototype {
             enemyBody.setUserData("destroyed");
         }
         if (fire) {
-            projectiles.shootFire(enemyBody.getPosition(), projectiles.angle2(enemyBody.getPosition(), TestClass.player.getPlayerBody().getPosition()), TestClass.world, 2f);
+            projectiles.shootFire(enemyBody.getPosition(), projectiles.angle2(enemyBody.getPosition(), TestClass.player.getPlayerBody().getPosition()), TestClass.world, 2f,true);
             fire = false;
         }
 

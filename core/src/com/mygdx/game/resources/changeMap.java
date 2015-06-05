@@ -67,7 +67,7 @@ public class changeMap {
 
                     if (tileCell.getTile().getProperties().get("enemy") != null) {
                         enemyPrototype test = new enemyPrototype(new Vector2(x, y));
-                        test.createEnemy(world, 32f, 32f, 200);
+                        test.createEnemy(world, 1f, 1f, 200);
                     }
 
 
@@ -233,7 +233,7 @@ public class changeMap {
 
                         if (tileCell.getTile().getProperties().get("enemy") != null) {
                             enemyPrototype test = new enemyPrototype(new Vector2(x, y));
-                            test.createEnemy(world, 32f, 32f, 200);
+                            test.createEnemy(world, 1f, 1f, 200);
                         }
 
 

@@ -86,7 +86,7 @@ public class projectiles {
         bulletHead.dispose();
     }
 
-    public static void fireBall(Vector2 location, Vector2 velocity, World world) {
+    public static void fireBall(Vector2 location, Vector2 velocity, World world,boolean enemy) {
 
 
         fireBallDef.bullet = true;
@@ -108,9 +108,10 @@ public class projectiles {
         objectUserData userData = new objectUserData();
         userData.setEffect(flame);
         userData.setId("fireBall");
+        userData.setEnemy(enemy);
         fireBallBody.setUserData(userData);
         EffectPools.FireTestPool.pooledEffects.add(flame);
-        
+
     }
 
     public static void explode(Vector2 location) {
@@ -155,12 +156,12 @@ public class projectiles {
 
     }
 
-    public static void shootFire(Vector2 location, float angleRad,World world,float offset) {
+    public static void shootFire(Vector2 location, float angleRad,World world,float offset,boolean enemy) {
 
             float i = (float) Math.cos(angleRad);
             float j = (float) Math.sin(angleRad);
             Vector2 newLocation = new Vector2(location.x + i*offset, location.y + j*offset);
-            projectiles.fireBall(newLocation, new Vector2(20 * i, 20 * j), world);
+            projectiles.fireBall(newLocation, new Vector2(20 * i, 20 * j), world,enemy);
     }
 
     public static float angle2(Vector2 vector1, Vector2 vector2) {
@@ -168,16 +169,16 @@ public class projectiles {
     return angle;
 }
 
-    public static void airStrike(Vector2 mouse,int num,World world){
+    public static void airStrike(Vector2 mouse,int num,World world,boolean enemy){
         while(num > 0){
             if(TestClass.player.getPlayerBody().getPosition().x < mouse.x)
             {
-                fireBall(new Vector2(mouse.x - 2 + num*.1f,mouse.y + 5 + num * .1f),new Vector2(2,-4),world);
+                fireBall(new Vector2(mouse.x - 2 + num*.1f,mouse.y + 5 + num * .1f),new Vector2(2,-4),world,enemy);
                 num--;
             }
             if(TestClass.player.getPlayerBody().getPosition().x > mouse.x)
             {
-                fireBall(new Vector2(mouse.x + 2 - num*.2f,mouse.y + 5 + num * .1f),new Vector2(-2,-4),world);
+                fireBall(new Vector2(mouse.x + 2 - num*.2f,mouse.y + 5 + num * .1f),new Vector2(-2,-4),world,enemy);
                 num--;
             }
         }
