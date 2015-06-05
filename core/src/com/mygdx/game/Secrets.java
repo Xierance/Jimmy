@@ -1,3 +1,30 @@
+package com.mygdx.game;
+import com.badlogic.gdx.audio.Music;
+
+public class Secrets {
+
+    static int[] keys = new int[]{41, 43, 46, 33, 47, 29, 42, 37, 31, 44, 40, 54};//moresanicplz
+    static int countdown = 1200;
+    static int index = 0;
+
+    public static void menuSecret(Music secretMusic) {
+
+        countdown--;
+        if (index == keys.length) {
+            secretMusic.play();
+        } else {
+            if (countdown <= 0) {
+                countdown = 1200;
+                index = 0;
+            }
+            else if (inputHandler.currentKey == keys[index]) {
+                System.out.println("test");
+                countdown = 1200;
+                index++;
+            }
+        }
+    }
+}
 //package com.mygdx.game;
 //
 //import com.badlogic.gdx.Gdx;

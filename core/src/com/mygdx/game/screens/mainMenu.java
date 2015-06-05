@@ -22,6 +22,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.mygdx.game.MyGdxGame;
 //import com.mygdx.game.Secrets;
+import com.mygdx.game.Secrets;
 import com.mygdx.game.inputHandler;
 import com.mygdx.game.musicPlayer;
 import com.mygdx.game.tween.ActorAccessor;
@@ -194,7 +195,7 @@ public class mainMenu implements Screen {
 
         boolean testBoolean = false;
 
-//        Secrets.menuSecret();
+        Secrets.menuSecret(secretDankMusic);
         int counter = 0;
         int loopControl = 0;
 
