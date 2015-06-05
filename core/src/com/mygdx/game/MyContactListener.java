@@ -75,9 +75,6 @@ public class MyContactListener implements ContactListener {
 
             }
         }
-
-        //health stuff
-
     }
 
     public void endContact(Contact c) {

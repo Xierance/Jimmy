@@ -142,6 +142,7 @@ public class TestClass implements Screen {
         if(worldHandler.currentHealth == 0 && !world.isLocked()){
             world.clearForces();
             ((Game) Gdx.app.getApplicationListener()).setScreen(new mainMenu());
+            worldHandler.currentHealth = 3;
         }
     }
 
