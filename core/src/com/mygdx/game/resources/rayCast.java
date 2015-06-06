@@ -15,7 +15,6 @@ public class rayCast {
     static Array<enemyPrototype> enemies = new Array<enemyPrototype>();
 
     public static Fixture rayFixture(World world, Vector2 point1, Vector2 point2) {
-
         RayCastCallback rayCastCallback = new RayCastCallback() {
             @Override
             public float reportRayFixture(Fixture fixture, Vector2 point, Vector2 normal, float fraction) {
@@ -41,9 +40,13 @@ public class rayCast {
                         b.destroyFixture(f);
                     }
 
+                    b.setUserData(null );
                     world.destroyBody(b);
 
                 }
+            }else if(b.getUserData()    instanceof objectUserData && ((objectUserData)b.getUserData()).getId() == "dead"){
+                ((objectUserData) b.getUserData()).getTarget().setAlive(false);
+                ((objectUserData)b.getUserData()).setId("destroyed");
             }
 
             for(Fixture fixture:b.getFixtureList()) {
@@ -51,14 +54,16 @@ public class rayCast {
                     if( ((objectUserData)b.getUserData()).getId() == "fireBall" ) {
                         ((objectUserData) b.getUserData()).getEffect().free();
                         EffectPools.FireTestPool.pooledEffects.removeValue(((objectUserData)b.getUserData()).getEffect(), true);
+
                     }
                     b.setUserData(null);
                     world.destroyBody(b);
                     projectiles.explode(b.getPosition());
                     projectiles.explode2(b.getPosition(), 9, world, 60);
-                }
 
+                }
             }
+
             if(b.getUserData()    instanceof objectUserData && ((objectUserData)b.getUserData()).getId() == "enemy"){
                 enemies.add(((objectUserData)b.getUserData()).getTarget());
 
@@ -74,7 +79,6 @@ public class rayCast {
                 b.applyForceToCenter((float)(10f*(Math.cos(angle))),(float)(10f*(Math.sin(angle))),true);
 
             }
-
         }
     }
 }

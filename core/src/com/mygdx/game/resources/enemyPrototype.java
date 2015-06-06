@@ -15,6 +15,11 @@ import java.util.Random;
 public class enemyPrototype {
     public static Array<enemyPrototype> enemies = new Array<enemyPrototype>();
     private static Random fireControl = new Random();
+
+    public void setAlive(boolean alive) {
+        this.alive = alive;
+    }
+
     public boolean alive;
     Body enemyBody;
     private Vector2 startlocation;
@@ -151,13 +156,15 @@ public class enemyPrototype {
         Array<Contact> contactList = new Array<Contact>(world.getContactList());
 
 
-        timer++;
-        if (timer > frequency) {
-            timer = 0;
-            fire = true;
-        }
+
 
         if (alive) {
+
+            timer++;
+            if (timer > frequency) {
+                timer = 0;
+                fire = true;
+            }
 
             leftGround = false;
             rightGround = false;
@@ -209,17 +216,17 @@ public class enemyPrototype {
 
             if (!leftGround && !rightGround) enemyBody.applyLinearImpulse(new Vector2(0, -5), new Vector2(), true);
 
+            if (fire) {
+                projectiles.shootFire(enemyBody.getPosition(), projectiles.angle2(enemyBody.getPosition(), TestClass.player.getPlayerBody().getPosition()), TestClass.world, 2f,true);
+                fire = false;
+            }
+
         } else {
             leftSensor.setSensor(false);
             leftSideSensor.setSensor(false);
             rightSensor.setSensor(false);
             enemyBody.setUserData("destroyed");
         }
-        if (fire) {
-            projectiles.shootFire(enemyBody.getPosition(), projectiles.angle2(enemyBody.getPosition(), TestClass.player.getPlayerBody().getPosition()), TestClass.world, 2f,true);
-            fire = false;
-        }
-
     }
 
     public void updateBools(Contact contact) {
