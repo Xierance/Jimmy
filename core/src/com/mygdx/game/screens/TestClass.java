@@ -31,6 +31,8 @@ public class TestClass implements Screen {
     public static World world;
     public static OrthographicCamera orthographicCamera;
     public static Vector3 tmp = new Vector3();
+    public static boolean justJumped = false;
+    public static Random randomGenerator;
     private final float TIMESTEP = 1 / 60f;
     private final int VELOCITYITERATIONS = 8;
     private final int POSITIONITERATIONS = 3;
@@ -45,7 +47,6 @@ public class TestClass implements Screen {
     private MyContactListener cl;
     private Array<Body> tmpBodies = new Array<Body>();
     private boolean tempb = true;
-    public static Random randomGenerator;
 
     public static Vector2 getmouseCoords() {
         Vector3 temp = new Vector3();
@@ -108,6 +109,7 @@ public class TestClass implements Screen {
 
     @Override
     public void render(float delta) {
+        System.out.println(String.valueOf(justJumped));
 
         enemyPrototype.updateenemies(world);
 
@@ -146,7 +148,6 @@ public class TestClass implements Screen {
         if(worldHandler.currentHealth == 0 && !world.isLocked()){
             world.clearForces();
             ((Game) Gdx.app.getApplicationListener()).setScreen(new mainMenu());
-            worldHandler.currentHealth = 3;
         }
     }
 
@@ -220,6 +221,11 @@ public class TestClass implements Screen {
 
         //move
         if (inputHandler.Space && player.isPlayerGrounded(world, player)) {
+            justJumped = true;
+            player.getPlayerBody().applyLinearImpulse(new Vector2(0, 5), new Vector2(), true);
+        }
+        if (inputHandler.Space && justJumped){
+            justJumped = false;
             player.getPlayerBody().applyLinearImpulse(new Vector2(0, 5), new Vector2(), true);
         }
 
