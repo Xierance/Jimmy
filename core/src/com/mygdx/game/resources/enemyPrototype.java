@@ -105,9 +105,10 @@ public class enemyPrototype {
 
     public void update() {
 
-        int movement = TestClass.randomGenerator.nextInt(2);
+
 
         if (alive) {
+            int movement = TestClass.randomGenerator.nextInt(2);
 
             timer++;
             if (timer > frequency) {
