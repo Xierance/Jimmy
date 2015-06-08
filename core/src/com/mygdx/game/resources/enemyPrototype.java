@@ -14,7 +14,6 @@ import java.util.Random;
 
 public class enemyPrototype {
     public static Array<enemyPrototype> enemies = new Array<enemyPrototype>();
-    private static Random fireControl = new Random();
 
     public void setAlive(boolean alive) {
         this.alive = alive;
@@ -22,35 +21,20 @@ public class enemyPrototype {
 
     public boolean alive;
     Body enemyBody;
-    private Vector2 startlocation;
-    private boolean direction;
-    private Fixture leftSensor;
-    private Fixture rightSensor;
-    private Fixture leftSideSensor;
-    private Fixture rightSideSensor;
-    private boolean leftGround = false;
-    private boolean rightGround = false;
-    private boolean leftSide = false;
-    private boolean rightSide = false;
     private Sprite sprite = new Sprite(assetLoader.shrek);
     private int timer;
-    private boolean fire;
     private int frequency;
-
-    public enemyPrototype(Vector2 startLocation) {
-        this.startlocation = startLocation;
-        direction = true;
-
-
-    }
+    Vector2 startLocation;
 
     public static void updateenemies(World world) {
-        Array<Contact> contactList = new Array<Contact>(world.getContactList());
         for (enemyPrototype enemy : enemies) {
 
-            enemy.update(world);
+            enemy.update();
         }
+    }
 
+    public enemyPrototype(Vector2 startlocation){
+        startLocation = startlocation;
     }
 
     public static enemyPrototype getClosestEnemy(Array<enemyPrototype> enemies, Vector2 origin) {
@@ -84,19 +68,17 @@ public class enemyPrototype {
     }
 
     public void createEnemy(World world, Float Width, float Height, int Frequency) {
+
         timer = 0;
-        fire = false;
         frequency = Frequency;
-        direction = true;
         alive = true;
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
-        bodyDef.position.set(startlocation.x, startlocation.y);
+        bodyDef.position.set(startLocation.x, startLocation.y);
         bodyDef.fixedRotation = true;
 
         PolygonShape blockShape = new PolygonShape();
         blockShape.setAsBox(Width / 2, Height / 2);
-
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = blockShape;
@@ -107,37 +89,6 @@ public class enemyPrototype {
         enemyBody = world.createBody(bodyDef);
         fixtureDef.filter.categoryBits = 0x0001;
         enemyBody.createFixture(fixtureDef);
-        //enemyBody.setUserData(Sprite);
-
-        //Sensor setup
-        PolygonShape baseRectangle = new PolygonShape();
-        baseRectangle.setAsBox((Width - 0.01f) / 4, .05f, new Vector2(-Width / 4 - 0.01f, -Height / 2 - 0.05f), 0);
-
-        fixtureDef.shape = baseRectangle;
-        leftSensor = enemyBody.createFixture(fixtureDef);
-        leftSensor.setSensor(true);
-
-        baseRectangle.setAsBox((Width - 0.01f) / 4, .05f, new Vector2(Width / 4 + 0.01f, -Height / 2 - 0.05f), 0);
-        fixtureDef.shape = baseRectangle;
-        rightSensor = enemyBody.createFixture(fixtureDef);
-        rightSensor.setSensor(true);
-
-        //side sensors
-        PolygonShape sideRectangle = new PolygonShape();
-
-        sideRectangle.setAsBox(.05f, Height / 2 - 0.05f, new Vector2(-Width / 2 - 0.02f, 0), 0);
-        fixtureDef.shape = sideRectangle;
-        leftSideSensor = enemyBody.createFixture(fixtureDef);
-        leftSideSensor.setSensor(true);
-
-        sideRectangle.setAsBox(.05f, Height / 2 - 0.05f, new Vector2(Width / 2 + 0.02f, -0), 0);
-        fixtureDef.shape = sideRectangle;
-        rightSideSensor = enemyBody.createFixture(fixtureDef);
-        rightSideSensor.setSensor(true);
-
-        //dispose
-        sideRectangle.dispose();
-        baseRectangle.dispose();
         blockShape.dispose();
 
         sprite.setSize(Width, Height);
@@ -152,101 +103,25 @@ public class enemyPrototype {
 
     }
 
-    public void update(World world) {
-        Array<Contact> contactList = new Array<Contact>(world.getContactList());
+    public void update() {
 
-
-
+        int movement = TestClass.randomGenerator.nextInt(2);
 
         if (alive) {
 
             timer++;
             if (timer > frequency) {
                 timer = 0;
-                fire = true;
-            }
 
-            leftGround = false;
-            rightGround = false;
-            rightSide = true;
-            leftSide = true;
-
-            for (Contact contact: contactList) {
-
-
-                if (contact.isTouching() && (contact.getFixtureA() == leftSensor && contact.getFixtureB().getBody() != contact.getFixtureA().getBody() || contact.getFixtureB().getBody() != contact.getFixtureA().getBody() && contact.getFixtureB() == leftSensor)) {
-                    leftGround = true;
-                }
-
-                if (contact.isTouching() && (contact.getFixtureA() == rightSensor && contact.getFixtureB().getBody() != contact.getFixtureA().getBody() || contact.getFixtureB().getBody() != contact.getFixtureA().getBody() && contact.getFixtureB() == rightSensor)) {
-                    rightGround = true;
-                }
-
-                if (contact.isTouching() && (contact.getFixtureA() == leftSideSensor && contact.getFixtureB().getBody() != contact.getFixtureA().getBody() || contact.getFixtureB().getBody() != contact.getFixtureA().getBody() && contact.getFixtureB() == leftSideSensor)) {
-                    leftSide = false;
-                }
-
-                if (contact.isTouching() && (contact.getFixtureA() == rightSideSensor && contact.getFixtureB().getBody() != contact.getFixtureA().getBody() || contact.getFixtureB().getBody() != contact.getFixtureA().getBody() && contact.getFixtureB() == rightSideSensor)) {
-                    rightSide = false;
+                switch (movement) {
+                    case 0:
+                        enemyBody.applyLinearImpulse(10,10,0,0,true);
+                        break;
+                    case 1:
+                        enemyBody.applyLinearImpulse(-10,12,0,0,true);
+                        break;
                 }
             }
-
-            if (direction && rightSide && rightGround) {
-                enemyBody.setLinearVelocity(5f, enemyBody.getLinearVelocity().y);
-
-            } else if (!direction && leftSide && leftGround) {
-                enemyBody.setLinearVelocity(-5f, enemyBody.getLinearVelocity().y);
-
-            } else if (rightSide && rightGround) {
-                direction = true;
-                enemyBody.setLinearVelocity(5f, enemyBody.getLinearVelocity().y);
-
-            } else if (leftSide && leftGround) {
-                direction = false;
-                enemyBody.setLinearVelocity(-5f, enemyBody.getLinearVelocity().y);
-
-            } else if (!rightSide || !rightGround) {
-                enemyBody.setLinearVelocity(new Vector2(-5f, enemyBody.getLinearVelocity().y));
-                direction = false;
-
-            } else if (!leftSide || !leftGround) {
-                enemyBody.setLinearVelocity(new Vector2(5f, enemyBody.getLinearVelocity().y));
-                direction = true;
-            }
-
-            if (!leftGround && !rightGround) enemyBody.applyLinearImpulse(new Vector2(0, -5), new Vector2(), true);
-
-            if (fire) {
-                projectiles.shootFire(enemyBody.getPosition(), projectiles.angle2(enemyBody.getPosition(), TestClass.player.getPlayerBody().getPosition()), TestClass.world, 2f,true);
-                fire = false;
-            }
-
-        } else {
-            leftSensor.setSensor(false);
-            leftSideSensor.setSensor(false);
-            rightSensor.setSensor(false);
-            enemyBody.setUserData("destroyed");
         }
     }
-
-    public void updateBools(Contact contact) {
-
-        if (contact.isTouching() && (contact.getFixtureA() == leftSensor && contact.getFixtureB().getBody() != contact.getFixtureA().getBody() || contact.getFixtureB().getBody() != contact.getFixtureA().getBody() && contact.getFixtureB() == leftSensor)) {
-            leftGround = true;
-        }
-
-        if (contact.isTouching() && (contact.getFixtureA() == rightSensor && contact.getFixtureB().getBody() != contact.getFixtureA().getBody() || contact.getFixtureB().getBody() != contact.getFixtureA().getBody() && contact.getFixtureB() == rightSensor)) {
-            rightGround = true;
-        }
-
-        if (contact.isTouching() && (contact.getFixtureA() == leftSideSensor && contact.getFixtureB().getBody() != contact.getFixtureA().getBody() || contact.getFixtureB().getBody() != contact.getFixtureA().getBody() && contact.getFixtureB() == leftSideSensor)) {
-            leftSide = false;
-        }
-
-        if (contact.isTouching() && (contact.getFixtureA() == rightSideSensor && contact.getFixtureB().getBody() != contact.getFixtureA().getBody() || contact.getFixtureB().getBody() != contact.getFixtureA().getBody() && contact.getFixtureB() == rightSideSensor)) {
-            rightSide = false;
-        }
-    }
-
-
 }

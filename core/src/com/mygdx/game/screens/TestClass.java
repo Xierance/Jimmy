@@ -17,6 +17,8 @@ import com.mygdx.game.inputHandler;
 import com.mygdx.game.resources.*;
 import com.mygdx.game.worldHandler;
 
+import java.util.Random;
+
 /**
  * Created by for example John on 3/14/2015.
  */
@@ -43,6 +45,7 @@ public class TestClass implements Screen {
     private MyContactListener cl;
     private Array<Body> tmpBodies = new Array<Body>();
     private boolean tempb = true;
+    public static Random randomGenerator;
 
     public static Vector2 getmouseCoords() {
         Vector3 temp = new Vector3();
@@ -52,6 +55,7 @@ public class TestClass implements Screen {
 
     @Override
     public void show() {
+        randomGenerator = new Random();
 
         assetLoader.loadAssets();
 
