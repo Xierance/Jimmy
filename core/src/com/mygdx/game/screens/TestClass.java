@@ -8,7 +8,6 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.physics.box2d.joints.MouseJointDef;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyContactListener;
 import com.mygdx.game.Visuals.gameParticles.Explosion;
@@ -31,7 +30,7 @@ public class TestClass implements Screen {
     public static World world;
     public static OrthographicCamera orthographicCamera;
     public static Vector3 tmp = new Vector3();
-    public static boolean justJumped = false;
+    public static boolean airJump;
     public static Random randomGenerator;
     private final float TIMESTEP = 1 / 60f;
     private final int VELOCITYITERATIONS = 8;
@@ -47,6 +46,7 @@ public class TestClass implements Screen {
     private MyContactListener cl;
     private Array<Body> tmpBodies = new Array<Body>();
     private boolean tempb = true;
+    int jumpTimer;
 
     public static Vector2 getmouseCoords() {
         Vector3 temp = new Vector3();
@@ -56,6 +56,7 @@ public class TestClass implements Screen {
 
     @Override
     public void show() {
+        jumpTimer = 0;
         randomGenerator = new Random();
 
         assetLoader.loadAssets();
@@ -109,7 +110,8 @@ public class TestClass implements Screen {
 
     @Override
     public void render(float delta) {
-        System.out.println(String.valueOf(justJumped));
+
+        if(airJump)jumpTimer++;
 
         enemyPrototype.updateenemies(world);
 
@@ -220,14 +222,18 @@ public class TestClass implements Screen {
     public void handleInput() {
 
         //move
+
+        if (inputHandler.Space && airJump && !player.isPlayerGrounded(world, player) && jumpTimer > 30){
+            airJump = false;
+            player.getPlayerBody().applyLinearImpulse(new Vector2(0, 15), new Vector2(), true);
+        }
+
         if (inputHandler.Space && player.isPlayerGrounded(world, player)) {
-            justJumped = true;
+            jumpTimer = 0;
+            airJump = true;
             player.getPlayerBody().applyLinearImpulse(new Vector2(0, 5), new Vector2(), true);
         }
-        if (inputHandler.Space && justJumped && !player.isPlayerGrounded(world, player)){
-            justJumped = false;
-            player.getPlayerBody().applyLinearImpulse(new Vector2(0, 5), new Vector2(), true);
-        }
+
 
         if (inputHandler.S) {
             player.getPlayerBody().applyForceToCenter(new Vector2(0, -20), true);

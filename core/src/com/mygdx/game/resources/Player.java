@@ -3,7 +3,6 @@ package com.mygdx.game.resources;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.physics.box2d.joints.WheelJoint;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.screens.TestClass;
 
@@ -50,12 +49,11 @@ public class Player {
 
         for (Contact contact : contactList) {
             if (contact.isTouching() && (contact.getFixtureA() == player.playerSensorFixture || contact.getFixtureB() == playerSensorFixture)) {
-                TestClass.justJumped = false;
+                //TestClass.airJump = true;
                 return true;
             }
         }
         return false;
-
     }
 
     public void createPLayer(World world, Vector2 startLocation, Sprite playerSprite) {
