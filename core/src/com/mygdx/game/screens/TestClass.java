@@ -224,7 +224,7 @@ public class TestClass implements Screen {
             justJumped = true;
             player.getPlayerBody().applyLinearImpulse(new Vector2(0, 5), new Vector2(), true);
         }
-        if (inputHandler.Space && justJumped){
+        if (inputHandler.Space && justJumped && !player.isPlayerGrounded(world, player)){
             justJumped = false;
             player.getPlayerBody().applyLinearImpulse(new Vector2(0, 5), new Vector2(), true);
         }
