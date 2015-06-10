@@ -16,7 +16,7 @@ public class MyGdxGame extends Game {
 
     @Override
     public void create() {
-        setScreen(new mainMenu());
+        setScreen(new Splash());
         // Do not have any other methods here as it "cant deal with that dank shit"
 
     }

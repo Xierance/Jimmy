@@ -9,7 +9,7 @@ import com.badlogic.gdx.audio.Music;
 public class musicPlayer {
 
     public static Music menuMusic;
-    public static Music secretMusic = new Gdx().audio.newMusic(Gdx.files.internal("music/dankmusic.mp3"));
+    public static Music secretMusic = new Gdx().audio.newMusic(Gdx.files.internal("music/dankMusic.mp3"));
 
     public static void menuMusicPlayer() {
         menuMusic = new Gdx().audio.newMusic(Gdx.files.internal("music/jimmyTheme.mp3"));

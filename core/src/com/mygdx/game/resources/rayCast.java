@@ -60,7 +60,7 @@ public class rayCast {
                     b.setUserData(null);
                     world.destroyBody(b);
                     projectiles.explode(b.getPosition());
-                    projectiles.explode2(b.getPosition(), 9, world, 60);
+                    projectiles.explode2(b.getPosition(), 9, world, 10);
 
                 }
             }
