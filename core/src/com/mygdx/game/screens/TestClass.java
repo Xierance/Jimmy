@@ -11,11 +11,11 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyContactListener;
 import com.mygdx.game.Visuals.gameParticles.Explosion;
+import com.mygdx.game.Visuals.gameParticles.deathEffect;
 import com.mygdx.game.Visuals.ui;
 import com.mygdx.game.inputHandler;
 import com.mygdx.game.resources.*;
 import com.mygdx.game.worldHandler;
-
 import java.util.Random;
 
 /**
@@ -23,30 +23,23 @@ import java.util.Random;
  */
 public class TestClass implements Screen {
 
-
     public static Body tempBody;
-    public static Array<ParticleEffect> flames = new Array<ParticleEffect>();
     public static Player player = new Player();
     public static World world;
     public static OrthographicCamera orthographicCamera;
-    public static Vector3 tmp = new Vector3();
-    public static boolean airJump;
+    public static Vector3 cameraTemp = new Vector3();
     public static Random randomGenerator;
     private final float TIMESTEP = 1 / 60f;
     private final int VELOCITYITERATIONS = 8;
     private final int POSITIONITERATIONS = 3;
-    healthDrop test3;
-    healthDrop test4;
+    int jumpTimer;
     private ui UI;
     private Box2DDebugRenderer debugRenderer;
     private OrthographicCamera secondCamera;
     private SpriteBatch batch;
     private SpriteBatch secondBatch;
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private MyContactListener cl;
     private Array<Body> tmpBodies = new Array<Body>();
-    private boolean tempb = true;
-    int jumpTimer;
 
     public static Vector2 getmouseCoords() {
         Vector3 temp = new Vector3();
@@ -57,25 +50,19 @@ public class TestClass implements Screen {
     @Override
     public void show() {
         jumpTimer = 0;
-        randomGenerator = new Random();
-
         assetLoader.loadAssets();
 
+        randomGenerator = new Random();
         UI = new ui();
-
-
+        cl = new MyContactListener();
         batch = new SpriteBatch();
         secondBatch = new SpriteBatch();
-
         world = new World(new Vector2(0f, -9.8f), true);
         debugRenderer = new Box2DDebugRenderer();
-
         orthographicCamera = new OrthographicCamera(Gdx.graphics.getWidth() / 32, Gdx.graphics.getHeight() / 32);
-        secondCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        //32:1
+        secondCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());       //32:1
 
         //input
-
         inputHandler input = new inputHandler();
         InputMultiplexer inputMultiplexer = new InputMultiplexer();
         inputMultiplexer.addProcessor(input);
@@ -87,44 +74,30 @@ public class TestClass implements Screen {
         ground = b2dStructures.lineAlt(new Vector2(-300f, -10f), 0, 3000, 0.25f, ground, world);
         b2dStructures.line(new Vector2(-30, -10), 90, 100, 0.5f, world);
 
-        //changeMap.mapToBox2d("maps/testMap.tmx", world);///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        changeMap.multipleMaps(new String[]{"maps/testMap.tmx", "maps/testMap2.tmx"}, world);
-
-
+        changeMap.multipleMaps(new String[]{"maps/testMap.tmx", "maps/testMap2.tmx", "maps/testMap.tmx", "maps/testMap2.tmx"}, world);
         player.createPLayer(world, worldHandler.temp, assetLoader.playerSprite);
-
-        cl = new MyContactListener();
         world.setContactListener(cl);
 
 
-        test3 = new healthDrop();
-        test3.createHealthDrop(world, new Vector2(10, 10));
-        test4 = new healthDrop();
-        test4.createHealthDrop(world, new Vector2(10, 30));
-        healthDrop test5 = new healthDrop();
-        test5.createHealthDrop(world, new Vector2(11, 30));
-        healthDrop test6 = new healthDrop();
-        test6.createHealthDrop(world, new Vector2(12, 30));
 
     }
 
     @Override
     public void render(float delta) {
 
-        if(airJump)jumpTimer++;
+        if(worldHandler.airJump)jumpTimer++;
 
         enemyPrototype.updateenemies(world);
-
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         debugRenderer.render(world, orthographicCamera.combined);
-
+        /////////////////////////////////////////////////////////////////////////////////The fuck?
         batch.setProjectionMatrix(orthographicCamera.combined);
 
         batch.begin();
         drawSprites(delta);
         Explosion.drawExplosions(batch, delta);
+        deathEffect.drawDeaths(batch,delta);
         batch.end();
 
         secondBatch.setProjectionMatrix(secondCamera.combined);
@@ -187,14 +160,14 @@ public class TestClass implements Screen {
         batch.dispose();
         secondBatch.dispose();
         player.getPlayerSPrite().getTexture().dispose();
-        for (ParticleEffect effect : flames) effect.dispose();
         for (ParticleEffectPool.PooledEffect effect : EffectPools.ExplosionTestPool.pooledEffects) effect.dispose();
         for (ParticleEffectPool.PooledEffect effect : EffectPools.FireTestPool.pooledEffects) effect.dispose();
+        for(ParticleEffectPool.PooledEffect effect : EffectPools.deathEffectPool.pooledEffects)effect.dispose();
 
     }
 
     public void cameraFollow() {
-        float lerp = .1f;
+        float lerp = .05f;
         if (!inputHandler.M) {
             if (orthographicCamera.position.x != player.getPlayerBody().getPosition().x) {
                 orthographicCamera.position.x += (player.getPlayerBody().getPosition().x - orthographicCamera.position.x) * lerp;
@@ -223,14 +196,14 @@ public class TestClass implements Screen {
 
         //move
 
-        if (inputHandler.Space && airJump && !player.isPlayerGrounded(world, player) && jumpTimer > 30){
-            airJump = false;
+        if (inputHandler.Space && worldHandler.airJump && !player.isPlayerGrounded(world, player) && jumpTimer > 30){
+            worldHandler.airJump = false;
             player.getPlayerBody().applyLinearImpulse(new Vector2(0, 15), new Vector2(), true);
         }
 
         if (inputHandler.Space && player.isPlayerGrounded(world, player)) {
             jumpTimer = 0;
-            airJump = true;
+            worldHandler.airJump = true;
             player.getPlayerBody().applyLinearImpulse(new Vector2(0, 5), new Vector2(), true);
         }
 
@@ -247,10 +220,12 @@ public class TestClass implements Screen {
         if (inputHandler.D) {
             player.getPlayerBody().applyForceToCenter(new Vector2(20, 0), true);
         }
-        if (inputHandler.Escape && tempb) {
+        if (inputHandler.Escape) {
             ((Game) Gdx.app.getApplicationListener()).setScreen(new levelMenu());
-            tempb = false;
         }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////warning do not use/////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if (player.getPlayerBody().getLinearVelocity().x > 12f) {
             tempBody = player.getPlayerBody();
             tempBody.setLinearVelocity(12, player.getPlayerBody().getLinearVelocity().y);

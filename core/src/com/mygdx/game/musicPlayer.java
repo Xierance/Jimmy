@@ -12,7 +12,7 @@ public class musicPlayer {
     public static Music secretMusic = new Gdx().audio.newMusic(Gdx.files.internal("music/dankmusic.mp3"));
 
     public static void menuMusicPlayer() {
-        menuMusic = new Gdx().audio.newMusic(Gdx.files.internal("music/Jimmy-theme.mp3"));
+        menuMusic = new Gdx().audio.newMusic(Gdx.files.internal("music/jimmyTheme.mp3"));
         menuMusic.play();
        // menuMusic.setLooping(true);
         menuMusic.isLooping();

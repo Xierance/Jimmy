@@ -13,4 +13,5 @@ public class worldHandler {
     public static int maxHealth = 3;
     public static boolean fps = true;
     public static Vector2 temp;
+    public static boolean airJump;
 }

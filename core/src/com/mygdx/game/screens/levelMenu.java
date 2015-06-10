@@ -53,7 +53,7 @@ public class levelMenu implements Screen {
                     ((Game) Gdx.app.getApplicationListener()).setScreen(new levelTest());
                 }
                 if (list.getSelected() == "three") {
-                    ((Game) Gdx.app.getApplicationListener()).setScreen(new levelOne());
+                    ((Game) Gdx.app.getApplicationListener()).setScreen(new levelTwo());
                 }
                 if (list.getSelected() == "four") {
                     ((Game) Gdx.app.getApplicationListener()).setScreen(new levelTwo());

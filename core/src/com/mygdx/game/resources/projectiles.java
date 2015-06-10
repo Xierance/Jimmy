@@ -122,6 +122,15 @@ public class projectiles {
 
     }
 
+    public static void bloodSpurt(Vector2 location) {
+        ParticleEffectPool.PooledEffect deathEffect = EffectPools.deathEffectPool.deathEffectPoolTest.obtain();
+        EffectPools.deathEffectPool.pooledEffects.add(deathEffect);
+        deathEffect.setPosition(location.x, location.y);
+        deathEffect.start();
+
+    }
+
+
     public static void explode2(Vector2 location, int bits, World world, float speed) {
         Vector2 direction = new Vector2();
         CircleShape circleShape = new CircleShape();

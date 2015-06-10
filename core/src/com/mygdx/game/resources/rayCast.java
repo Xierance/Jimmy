@@ -47,6 +47,7 @@ public class rayCast {
             }else if(b.getUserData()    instanceof objectUserData && ((objectUserData)b.getUserData()).getId() == "dead"){
                 ((objectUserData) b.getUserData()).getTarget().setAlive(false);
                 ((objectUserData)b.getUserData()).setId("destroyed");
+                projectiles.bloodSpurt(b.getPosition());
             }
 
             for(Fixture fixture:b.getFixtureList()) {

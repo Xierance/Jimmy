@@ -62,9 +62,8 @@ public class ui {
     }
     public void displayFps(SpriteBatch secondBatch) {
 
-        //GG 10/10 not silly way to do this \/
         if (worldHandler.fps) {
-            this.font.draw(secondBatch, "Fps" + Gdx.graphics.getFramesPerSecond(), Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+            this.font.draw(secondBatch, "FPS: " + Gdx.graphics.getFramesPerSecond(), (Gdx.graphics.getWidth()/2)-70, (Gdx.graphics.getHeight()/2)-20);
         }
 
     }

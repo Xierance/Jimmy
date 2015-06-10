@@ -389,7 +389,7 @@ public class inputHandler implements InputProcessor {
     }
 
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        if(TestClass.orthographicCamera != null)TestClass.orthographicCamera.unproject(TestClass.tmp.set(screenX, screenY, 0));
+        if(TestClass.orthographicCamera != null)TestClass.orthographicCamera.unproject(TestClass.cameraTemp.set(screenX, screenY, 0));
 
             if (!Ctrl_right)
 

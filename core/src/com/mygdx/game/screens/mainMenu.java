@@ -55,7 +55,6 @@ public class mainMenu implements Screen {
 
         //Stage and Table set up
         stage = new Stage();
-        // Gdx.inputHandler.setInputProcessor(stage);
         skin = new Skin(Gdx.files.internal("ui/menuSkin.json"), new TextureAtlas("ui/atlas.pack"));
         table = new Table(skin);
         table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -170,14 +169,11 @@ public class mainMenu implements Screen {
     @Override
     public void render(float delta) {
 
-
         Gdx.gl.glClearColor(0, 0, 0, 1); //Black background
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         tm.update(delta);
         stage.act(delta); //updates everything in the table
         stage.draw(); //Things are visibly rendered onto the screen
-
 
         if (Gdx.input.isKeyPressed(com.badlogic.gdx.Input.Keys.ESCAPE)) {
             ((Game) Gdx.app.getApplicationListener()).setScreen(new levelMenu());
@@ -189,10 +185,6 @@ public class mainMenu implements Screen {
             displayFps(batch, font);
         }
         batch.end();
-
-
-
-        boolean testBoolean = false;
 
         Secrets.menuSecret();
 

@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.Visuals.gameParticles.Explosion;
 import com.mygdx.game.Visuals.gameParticles.Flame;
+import com.mygdx.game.Visuals.gameParticles.deathEffect;
 
 /**
  * Created by for example John on 4/13/2015.
@@ -22,6 +23,14 @@ public class EffectPools {
         public static Array<ParticleEffectPool.PooledEffect> pooledEffects = new Array<ParticleEffectPool.PooledEffect>();
 
         public static ParticleEffectPool explosionPoolTest = new ParticleEffectPool(new Explosion().getExplosion(), 0, 300);
+
+    }
+
+    public static class deathEffectPool{
+
+        public static Array<ParticleEffectPool.PooledEffect> pooledEffects = new Array<ParticleEffectPool.PooledEffect>();
+
+        public static ParticleEffectPool deathEffectPoolTest = new ParticleEffectPool(new deathEffect().getDeathEffect(),0,30);
 
     }
 }
