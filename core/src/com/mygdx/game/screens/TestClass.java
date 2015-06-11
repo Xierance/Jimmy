@@ -199,6 +199,7 @@ public class TestClass implements Screen {
         if (inputHandler.Space && worldHandler.airJump && !player.isPlayerGrounded(world, player) && jumpTimer > 30){
             worldHandler.airJump = false;
             player.getPlayerBody().applyLinearImpulse(new Vector2(0, 15), new Vector2(), true);
+
         }
 
         if (inputHandler.Space && player.isPlayerGrounded(world, player)) {
@@ -227,24 +228,16 @@ public class TestClass implements Screen {
 ///////////////////////////////////////////warning do not use/////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if (player.getPlayerBody().getLinearVelocity().x > 12f) {
-            tempBody = player.getPlayerBody();
-            tempBody.setLinearVelocity(12, player.getPlayerBody().getLinearVelocity().y);
-            player.setPlayerBody(tempBody);
+            player.getPlayerBody().setLinearVelocity(12, player.getPlayerBody().getLinearVelocity().y);
         }
         if (player.getPlayerBody().getLinearVelocity().x < -12f) {
-            tempBody = player.getPlayerBody();
-            tempBody.setLinearVelocity(-12, player.getPlayerBody().getLinearVelocity().y);
-            player.setPlayerBody(tempBody);
+            player.getPlayerBody().setLinearVelocity(-12, player.getPlayerBody().getLinearVelocity().y);
         }
         if (player.getPlayerBody().getLinearVelocity().y > 12f) {
-            tempBody = player.getPlayerBody();
-            tempBody.setLinearVelocity(player.getPlayerBody().getLinearVelocity().x, 12);
-            player.setPlayerBody(tempBody);
+            player.getPlayerBody().setLinearVelocity(player.getPlayerBody().getLinearVelocity().x, 12);
         }
         if (player.getPlayerBody().getLinearVelocity().y > 12f) {
-            tempBody = player.getPlayerBody();
-            tempBody.setLinearVelocity(player.getPlayerBody().getLinearVelocity().x, -12f);
-            player.setPlayerBody(tempBody);
+            player.getPlayerBody().setLinearVelocity(player.getPlayerBody().getLinearVelocity().x, -12f);
 
         }
 
