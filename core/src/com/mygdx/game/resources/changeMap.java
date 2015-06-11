@@ -16,12 +16,11 @@ import com.mygdx.game.worldHandler;
  */
 public class changeMap {
     public static Sprite leftTile = new Sprite(assetLoader.hellBlocks.createSprite("Left"));
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////warning do not use/////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public static Sprite rightTile = new Sprite(assetLoader.hellBlocks.createSprite("Right"));
     public static Sprite centerTile = new Sprite(assetLoader.hellBlocks.createSprite("Center"));
     public static Sprite topTile = new Sprite(assetLoader.hellBlocks.createSprite("Top"));
+    public static Sprite block = new Sprite(assetLoader.block);
+
     public static Array<Body> Bodies = new Array<Body>();
     public static Array<Body> Blocks = new Array<Body>();
 
@@ -254,15 +253,20 @@ public class changeMap {
 
                             objectUserData userData = new objectUserData();
                             userData.setId("block");
-                            if (tileCell.getTile().getProperties().get("left") != null) {
-                                userData.setSprite(leftTile);
-                            } else if (tileCell.getTile().getProperties().get("right") != null) {
-                                userData.setSprite(rightTile);
-                            } else if (tileCell.getTile().getProperties().get("center") != null) {
-                                userData.setSprite(centerTile);
-                            } else if (tileCell.getTile().getProperties().get("top") != null) {
-                                userData.setSprite(topTile);
-                            }
+
+                            block.setSize(1,1);
+                            userData.setSprite(block);
+
+//
+//                            if (tileCell.getTile().getProperties().get("left") != null) {
+//                                userData.setSprite(leftTile);
+//                            } else if (tileCell.getTile().getProperties().get("right") != null) {
+//                                userData.setSprite(rightTile);
+//                            } else if (tileCell.getTile().getProperties().get("center") != null) {
+//                                userData.setSprite(centerTile);
+//                            } else if (tileCell.getTile().getProperties().get("top") != null) {
+//                                userData.setSprite(topTile);
+//                            }
 
 
                             body.setUserData(userData);

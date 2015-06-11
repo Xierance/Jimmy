@@ -24,9 +24,12 @@ public class assetLoader {
     public static Sprite dickMenu;
     public static Sprite shrekMenu;
     public static Sprite test;
+    public static Sprite block;
 
     public static void loadAssets(){
 
+
+        block = new Sprite(new Texture("img/block.png"));
         hellBlocks = new TextureAtlas("maps/hellBlocks.pack");
         blocks = new TextureAtlas("tiles/block_pack.pack");
         playerSprite = new Sprite(new Texture("img/player.png"));

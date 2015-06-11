@@ -2,9 +2,7 @@ package com.mygdx.game.Visuals.gameParticles;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.screens.TestClass;
 
 /**
  * Created by for example John on 4/9/2015.
