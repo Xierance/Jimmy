@@ -15,7 +15,7 @@ public class Flame {
 
     public Flame(Vector2 location) {
         flame = new ParticleEffect();
-        flame.load(Gdx.files.local("effects/Flame.p"), Gdx.files.local("effects"));
+        flame.load(Gdx.files.local("effects/BlueMagic.p"), Gdx.files.local("effects"));
         flame.scaleEffect(0.01f);
         flame.start();
     }
