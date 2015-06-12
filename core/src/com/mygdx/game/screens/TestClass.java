@@ -18,9 +18,6 @@ import com.mygdx.game.resources.*;
 import com.mygdx.game.worldHandler;
 import java.util.Random;
 
-/**
- * Created by for example John on 3/14/2015.
- */
 public class TestClass implements Screen {
 
     public static Player player = new Player();

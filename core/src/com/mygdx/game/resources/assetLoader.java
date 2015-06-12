@@ -8,9 +8,6 @@ import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.worldHandler;
 
-/**
- * Created by forexamplejohn on 03/05/15.
- */
 public class assetLoader {
     public static TextureAtlas hellBlocks;
     public static TextureAtlas blocks;
@@ -27,7 +24,6 @@ public class assetLoader {
     public static Sprite block;
 
     public static void loadAssets(){
-
 
         block = new Sprite(new Texture("img/block.png"));
         hellBlocks = new TextureAtlas("maps/hellBlocks.pack");
